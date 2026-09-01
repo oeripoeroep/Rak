@@ -1,0 +1,1549 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Seni Mengendalikan Uang Sebelum Ditindas Keadaan — Ruang Baca</title>
+<meta name="description" content="Blueprint keuangan, psikologi uang, dan kebebasan waktu — disintesis dari sembilan buku terbaik dunia tentang kekayaan dan perilaku.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,400;0,9..144,500;0,9..144,600;0,9..144,700;1,9..144,400;1,9..144,500&family=Literata:ital,opsz,wght@0,7..72,400;0,7..72,500;0,7..72,600;1,7..72,400&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+:root{
+  --paper:        #F7F3EA;
+  --paper-deep:   #EFE7D6;
+  --card:         #FFFDF7;
+  --ink:          #1B2430;
+  --ink-soft:     #3A4552;
+  --ink-faint:    #7C8592;
+  --accent-1:     #0B3D66;
+  --accent-1-deep:#062942;
+  --accent-1-pale:#DCE7F0;
+  --accent-2:     #B5502E;
+  --accent-2-soft:#F1DDCF;
+  --accent-3:     #8A6A3D;
+  --line:         rgba(27,36,48,0.14);
+  --shadow:       0 12px 40px rgba(27,36,48,0.10);
+  --maxw:         760px;
+}
+*{box-sizing:border-box;}
+html{scroll-behavior:smooth;}
+body{
+  margin:0; background:var(--paper); color:var(--ink-soft);
+  font-family:'Literata', serif; font-size:18px; line-height:1.75;
+  -webkit-font-smoothing:antialiased;
+}
+h1,h2,h3,h4{ font-family:'Fraunces', serif; color:var(--ink); font-weight:600; line-height:1.15; margin:0 0 .4em; }
+p{ margin:0 0 1.1em; }
+a{ color:var(--accent-1); }
+.eyebrow{ font-family:'IBM Plex Mono', monospace; font-size:12.5px; letter-spacing:.03em; color:var(--accent-2); font-weight:500; }
+.wrap{ max-width:var(--maxw); margin:0 auto; padding:0 24px; }
+hr.div{ border:none; border-top:1px solid var(--line); max-width:var(--maxw); margin:0 auto; }
+
+.loader {
+  --color-1: rgba(177, 194, 198, 0.5);
+  --color-2: #092565;
+  --color-3: rgba(161, 1, 1, 0.77);
+  --size: 0.75px;
+
+  position: relative;
+  width: calc(120 * var(--size));
+  height: calc(120 * var(--size));
+  border-radius: 50%;
+  box-shadow:
+    inset 0 0 calc(20 * var(--size)) calc(-5 * var(--size)) var(--color-1),
+    inset 0 calc(-40 * var(--size)) calc(40 * var(--size)) calc(-20 * var(--size)) var(--color-1);
+  background: linear-gradient(var(--color-2) calc(120 * var(--size)), transparent 0) no-repeat;
+  background-position: 0 calc(120 * var(--size));
+  animation: fillLq 10s linear infinite alternate;
+}
+.loader:before {
+  position: absolute;
+  content: '';
+  width: 40%;
+  height: 25%;
+  top: calc(20 * var(--size));
+  left: calc(10 * var(--size));
+  background: var(--color-3);
+  border-radius: 50%;
+  transform: rotate(-45deg);
+}
+
+@keyframes fillLq {
+  0%,
+  10% {
+    background-position: 0 calc(120 * var(--size));
+  }
+  90%,
+  100% {
+    background-position: 0 0;
+  }
+}
+
+/* progress bar */
+#progress{ position:fixed; top:0; left:0; height:3px; width:0%; background:var(--accent-2); z-index:999; transition:width .1s linear; }
+
+/* language bar — kept in normal document flow (not fixed), avoids iOS Safari fixed-position bugs */
+.lang-bar{ display:flex; justify-content:flex-end; align-items:center; gap:10px; padding:14px 24px 0; max-width:var(--maxw); margin:0 auto; }
+.lang-btn{
+  font-family:'IBM Plex Mono', monospace; font-size:12.5px; letter-spacing:.03em;
+  background:var(--card); border:1px solid var(--line); color:var(--ink-soft);
+  padding:7px 14px; border-radius:20px; cursor:pointer;
+}
+.lang-btn:hover{ border-color:var(--accent-1); color:var(--accent-1); }
+
+/* toc toggle + drawer */
+#toc-toggle{
+  position:fixed; right:18px; bottom:18px; z-index:998;
+  font-family:'IBM Plex Mono', monospace; font-size:13px;
+  background:var(--accent-1); color:var(--paper); border:none;
+  padding:12px 18px; border-radius:30px; box-shadow:var(--shadow); cursor:pointer;
+}
+#toc-panel{
+  position:fixed; right:0; top:0; bottom:0; width:min(320px, 86vw);
+  background:var(--card); border-left:1px solid var(--line);
+  transform:translateX(100%); transition:transform .3s ease; z-index:997;
+  overflow-y:auto; padding:70px 22px 40px;
+}
+#toc-panel.open{ transform:translateX(0); }
+#toc-panel h4{ font-size:13px; text-transform:none; color:var(--accent-2); font-family:'IBM Plex Mono',monospace; margin-top:22px; }
+#toc-panel h4:first-child{ margin-top:0; }
+#toc-panel a{ display:block; text-decoration:none; color:var(--ink-soft); font-size:15px; padding:6px 0; border-bottom:1px dotted var(--line); }
+#toc-panel a:hover{ color:var(--accent-1); }
+
+/* hero */
+.hero{ text-align:center; padding:50px 24px 40px; max-width:var(--maxw); margin:0 auto; }
+.orb-wrap{ display:flex; justify-content:center; margin:0 auto 22px; }
+.hero h1{ font-size:clamp(30px,6vw,44px); margin-top:6px; }
+.hero h1 .accent{ font-style:italic; color:var(--accent-2); font-weight:400; display:block; font-size:.62em; margin-top:.2em; }
+.subtitle{ color:var(--ink-faint); font-size:17px; max-width:520px; margin:14px auto 0; }
+.meta-row{ display:flex; gap:16px; justify-content:center; flex-wrap:wrap; margin-top:22px; font-family:'IBM Plex Mono', monospace; font-size:12.5px; color:var(--ink-faint); }
+.meta-row span{ padding:6px 12px; background:var(--card); border:1px solid var(--line); border-radius:20px; }
+.scroll-cue{ margin-top:34px; font-family:'IBM Plex Mono', monospace; font-size:12px; color:var(--ink-faint); letter-spacing:.03em; }
+.scroll-cue .line{ display:block; width:1px; height:26px; background:var(--line); margin:0 auto 10px; }
+.disclaimer{ max-width:var(--maxw); margin:0 auto 30px; padding:0 24px; text-align:center; font-size:14px; color:var(--ink-faint); font-style:italic; }
+
+/* toc section */
+.toc-section{ max-width:var(--maxw); margin:0 auto; padding:50px 24px 60px; }
+.toc-section h2{ font-size:26px; margin-bottom:22px; }
+.toc-part{ margin-bottom:22px; }
+.toc-part-title{ font-family:'IBM Plex Mono', monospace; font-size:12.5px; color:var(--accent-2); letter-spacing:.02em; margin-bottom:8px; }
+.toc-item{ display:flex; gap:12px; text-decoration:none; color:var(--ink-soft); padding:9px 0; border-bottom:1px dotted var(--line); align-items:baseline; }
+.toc-item:hover{ color:var(--accent-1); }
+.toc-num{ font-family:'IBM Plex Mono', monospace; color:var(--accent-1); font-size:13px; flex:0 0 26px; }
+.toc-title{ font-size:16px; }
+.toc-title small{ display:block; color:var(--ink-faint); font-size:13px; font-style:italic; }
+
+/* landasan / reference books */
+.landasan{ max-width:var(--maxw); margin:0 auto; padding:50px 24px 20px; }
+.landasan h2{ font-size:24px; }
+.book-grid{ display:grid; grid-template-columns:1fr 1fr; gap:14px; margin-top:20px; }
+@media(max-width:560px){ .book-grid{ grid-template-columns:1fr; } }
+.book-card{
+  background:var(--card); border:1px solid var(--line); border-radius:10px;
+  padding:16px 18px; box-shadow:var(--shadow);
+}
+.book-card-title{ font-family:'Fraunces', serif; font-weight:600; color:var(--ink); font-size:16px; margin:0 0 3px; }
+.book-card-author{ font-size:13.5px; color:var(--accent-2); font-style:italic; margin:0 0 8px; }
+.book-card p{ font-size:14.5px; color:var(--ink-faint); margin:0; }
+
+/* chapter */
+.chapter{ max-width:var(--maxw); margin:0 auto; padding:100px 24px 40px; opacity:0; transform:translateY(18px); transition:opacity .7s ease, transform .7s ease; }
+.chapter.visible{ opacity:1; transform:translateY(0); }
+.chapter-num-row{ display:flex; align-items:center; gap:10px; margin-bottom:10px; }
+.pulse-dot{ width:8px; height:8px; border-radius:50%; background:var(--accent-2); box-shadow:0 0 0 4px var(--accent-2-soft); }
+.chapter-title{ font-size:clamp(24px,4.6vw,32px); }
+.chapter-sub{ color:var(--ink-faint); font-size:16.5px; font-style:italic; margin-bottom:6px; }
+.experts{ font-family:'IBM Plex Mono', monospace; font-size:12px; color:var(--ink-faint); margin-top:10px; }
+.chapter-body{ margin-top:28px; }
+.chapter-body h3{ font-size:20px; margin-top:34px; }
+.chapter-body h3 .letter{ color:var(--accent-1); font-family:'IBM Plex Mono',monospace; font-size:14px; margin-right:8px; }
+p.dropcap:first-letter{ font-family:'Fraunces', serif; font-size:3.1em; float:left; line-height:.85; padding-right:10px; padding-top:4px; color:var(--accent-1); font-weight:600; }
+
+blockquote.pull{ border-left:3px solid var(--accent-2); margin:26px 0; padding:4px 0 4px 20px; font-family:'Fraunces', serif; font-size:19px; font-style:italic; color:var(--ink); }
+blockquote.pull cite{ display:block; font-family:'IBM Plex Mono',monospace; font-style:normal; font-size:12.5px; color:var(--accent-2); margin-top:8px; }
+blockquote.pull .note{ display:block; font-family:'Literata',serif; font-style:normal; font-size:14.5px; color:var(--ink-faint); margin-top:6px; }
+
+.callout{ background:var(--accent-1-pale); border:1px solid var(--line); border-radius:10px; padding:18px 20px; margin:24px 0; }
+.callout h4{ font-size:14px; font-family:'IBM Plex Mono',monospace; color:var(--accent-1-deep); text-transform:none; margin-bottom:6px; }
+.callout p{ font-size:15.5px; margin:0; }
+.callout.insight{ background:var(--accent-2-soft); }
+.callout.insight h4{ color:var(--accent-2); }
+
+.action-box{ border:1px solid var(--accent-1); border-radius:10px; padding:18px 20px; margin:26px 0; background:var(--card); }
+.action-box .eyebrow{ display:block; margin-bottom:6px; }
+.action-box p{ margin:0; font-size:15.5px; }
+
+ul.checklist{ list-style:none; margin:0 0 1.1em; padding:0; }
+ul.checklist li{ position:relative; padding-left:26px; margin-bottom:10px; font-size:16.5px; }
+ul.checklist li::before{ content:'—'; position:absolute; left:0; color:var(--accent-2); }
+
+.flow{ margin:26px 0; }
+.flow-title{ font-family:'IBM Plex Mono',monospace; font-size:12.5px; color:var(--ink-faint); margin-bottom:10px; }
+.flow-row{ display:flex; align-items:stretch; gap:10px; }
+@media(max-width:560px){ .flow-row{ flex-direction:column; } .flow-row > .flow-arrow{ transform:rotate(90deg); } }
+.flow-box{ flex:1; background:var(--card); border:1px solid var(--line); border-radius:8px; padding:12px 14px; font-size:14px; }
+.flow-box.alt{ border-color:var(--accent-2); }
+.flow-box b{ display:block; font-family:'Fraunces',serif; font-size:15px; color:var(--ink); margin-bottom:3px; }
+.flow-box span{ color:var(--ink-faint); font-size:13px; }
+.flow-arrow{ display:flex; align-items:center; justify-content:center; color:var(--accent-1); font-size:18px; }
+
+p.table-cap{ font-family:'IBM Plex Mono',monospace; font-size:12.5px; color:var(--ink-faint); margin-bottom:6px; }
+.matrix-wrap{ overflow-x:auto; margin:0 0 24px; }
+table.matrix{ border-collapse:collapse; width:100%; font-size:14.5px; }
+table.matrix th{ font-family:'IBM Plex Mono',monospace; font-size:12px; text-align:left; color:var(--accent-1-deep); background:var(--accent-1-pale); padding:9px 10px; white-space:nowrap; }
+table.matrix td{ padding:9px 10px; border-bottom:1px solid var(--line); vertical-align:top; }
+table.matrix tr:nth-child(even) td{ background:var(--paper-deep); }
+
+/* simulator */
+.sim{ background:var(--card); border:1px solid var(--line); border-radius:14px; padding:24px 22px; margin:30px 0; box-shadow:var(--shadow); }
+.sim h4{ font-family:'IBM Plex Mono',monospace; font-size:13px; color:var(--accent-1-deep); margin-bottom:16px; }
+.sim-controls{ display:grid; grid-template-columns:1fr 1fr; gap:16px 20px; margin-bottom:14px; }
+@media(max-width:560px){ .sim-controls{ grid-template-columns:1fr; } }
+.sim-field label{ display:flex; justify-content:space-between; font-family:'IBM Plex Mono',monospace; font-size:12.5px; color:var(--ink-soft); margin-bottom:6px; }
+.sim-field label b{ color:var(--accent-2); font-weight:600; }
+.sim-field input[type=range]{ width:100%; accent-color:var(--accent-1); }
+.sim-summary{ font-size:15.5px; background:var(--paper-deep); border-radius:8px; padding:14px 16px; margin:14px 0 18px; }
+.sim-summary b{ color:var(--accent-2); }
+.sim-canvas-wrap{ width:100%; overflow:hidden; border-radius:8px; background:var(--paper); border:1px solid var(--line); }
+canvas#simChart{ width:100%; height:auto; display:block; }
+.sim-legend{ display:flex; gap:18px; flex-wrap:wrap; margin-top:10px; font-family:'IBM Plex Mono',monospace; font-size:12px; color:var(--ink-faint); }
+.sim-legend span{ display:inline-flex; align-items:center; gap:6px; }
+.sim-legend i{ width:14px; height:3px; display:inline-block; border-radius:2px; }
+
+.takeaway{ margin:30px 0 6px; padding:16px 22px; border-left:3px solid var(--accent-2); background:var(--card); border-radius:0 10px 10px 0; box-shadow:var(--shadow); }
+.takeaway .eyebrow{ display:block; margin-bottom:6px; }
+.takeaway p{ margin:0; font-family:'Fraunces', serif; font-style:italic; font-weight:500; font-size:17px; color:var(--ink); line-height:1.5; }
+
+.pillar-block{ margin:34px 0; }
+.pillar-head{ display:flex; align-items:center; gap:10px; }
+.pillar-head .dot{ width:9px; height:9px; border-radius:50%; background:var(--accent-1); }
+.pillar-block.k2 .dot{ background:var(--accent-2); }
+.pillar-block.k3 .dot{ background:var(--accent-3); }
+.pillar-sub{ color:var(--ink-faint); font-size:14.5px; margin:4px 0 12px; }
+
+dl.glossary{ margin:0; }
+dl.glossary dt{ font-family:'Fraunces',serif; font-weight:600; color:var(--ink); margin-top:16px; }
+dl.glossary dd{ margin:2px 0 0; color:var(--ink-soft); font-size:15.5px; }
+ol.refs{ font-size:15px; padding-left:20px; }
+ol.refs li{ margin-bottom:8px; }
+
+/* epilog */
+.epilog{ max-width:var(--maxw); margin:0 auto; padding:100px 24px 60px; text-align:center; opacity:0; transform:translateY(18px); transition:opacity .7s ease, transform .7s ease; }
+.epilog.visible{ opacity:1; transform:translateY(0); }
+.epilog h2{ font-size:28px; }
+.epilog p{ max-width:520px; margin-left:auto; margin-right:auto; }
+.sign{ font-style:italic; color:var(--accent-2); margin-top:18px; }
+
+/* worksheet */
+.worksheet-form{ background:var(--paper-deep); border-radius:10px; padding:20px; font-family:'IBM Plex Mono',monospace; font-size:14px; }
+.worksheet-form .row{ display:flex; justify-content:space-between; gap:12px; padding:8px 0; border-bottom:1px dashed var(--line); }
+.worksheet-form .grp{ margin-top:18px; font-size:12.5px; color:var(--accent-2); }
+
+footer{ text-align:center; padding:50px 24px 70px; font-family:'IBM Plex Mono',monospace; font-size:12.5px; color:var(--ink-faint); }
+
+@media (prefers-reduced-motion: reduce){
+  .chapter, .epilog{ transition:none; }
+  .loader{ animation:none; }
+  .loader:before{ transform:none; }
+}
+</style>
+</head>
+<body>
+
+<div id="progress"></div>
+<div class="lang-bar"><button id="lang-toggle" class="lang-btn">EN</button></div>
+
+<button id="toc-toggle" aria-expanded="false">☰ Daftar Isi</button>
+<nav id="toc-panel">
+  <h4>Ruang Baca</h4>
+  <a href="#daftar-isi">Daftar Isi Lengkap</a>
+  <a href="#landasan">Landasan Pemikiran</a>
+  <h4>Bagian I</h4>
+  <a href="#bab1">1. Gaji Besar Itu Cuma Angka</a>
+  <a href="#bab2">2. Garis Finish Bernama Cukup</a>
+  <a href="#bab3">3. Membayar Pajak Realita</a>
+  <a href="#bab4">4. Ego, Penyedot Saldo</a>
+  <h4>Bagian II</h4>
+  <a href="#bab5">5. Tes Simpel 24 Jam</a>
+  <a href="#bab6">6. Jangan Beli Mewah Pakai Keringat</a>
+  <a href="#bab7">7. Beli Waktu</a>
+  <a href="#bab8">8. Freedom Fund</a>
+  <h4>Bagian III</h4>
+  <a href="#bab9">9. Rem 72 Jam</a>
+  <a href="#bab10">10. Automatic Money</a>
+  <a href="#bab11">11. Ritual Minggu Malam</a>
+  <a href="#bab12">12. Gagal di Luar</a>
+  <h4>Bagian IV</h4>
+  <a href="#bab13">13. Compounding + Simulator</a>
+  <a href="#bab14">14. Peta Alat Investasi</a>
+  <a href="#bab15">15. Strategi Alokasi Aset</a>
+  <a href="#bab16">16. Biaya Tersembunyi</a>
+  <h4>Bagian V</h4>
+  <a href="#bab17">17. Keunggulan Tak Adil</a>
+  <a href="#bab18">18. Kaya yang Tenang</a>
+  <h4>Penutup</h4>
+  <a href="#lembar-kerja">Lembar Kerja Mingguan</a>
+  <a href="#epilog">Epilog</a>
+  <a href="#glosarium">Glosarium</a>
+  <a href="#pustaka">Daftar Pustaka</a>
+</nav>
+
+<section class="hero">
+  <div class="orb-wrap"><div class="loader" style="--size:0.75px;"></div></div>
+  <span class="eyebrow"><span class="lang-id">Psikologi Uang & Kebebasan Waktu</span><span class="lang-en" hidden>Money Psychology & Time Freedom</span></span>
+  <h1>
+    <span class="lang-id">Seni Mengendalikan Uang<br><span class="accent">Sebelum Ditindas Keadaan</span></span>
+    <span class="lang-en" hidden>The Art of Mastering Money<br><span class="accent">Before Circumstance Masters You</span></span>
+  </h1>
+  <p class="subtitle lang-id">Sebuah blueprint keuangan, psikologi, dan kebebasan waktu — disintesis dari sembilan buku terbaik dunia tentang perilaku dan kekayaan, diperkaya dengan simulasi compounding yang bisa kamu utak-atik sendiri.</p>
+  <p class="subtitle lang-en" hidden>A blueprint for money, psychology, and time freedom — synthesized from nine of the world's best books on behavior and wealth, enriched with a compounding simulator you can play with yourself.</p>
+  <div class="meta-row">
+    <span class="lang-id">18 Bab · 5 Bagian</span><span class="lang-en" hidden>18 Chapters · 5 Parts</span>
+    <span class="lang-id">± 45 menit membaca</span><span class="lang-en" hidden>± 45 min read</span>
+    <span>Oleh Sangoeroep</span>
+  </div>
+  <div class="scroll-cue"><span class="line"></span><span class="lang-id">gulir untuk memulai</span><span class="lang-en" hidden>scroll to begin</span></div>
+</section>
+
+<p class="disclaimer lang-id">Buku ini adalah sintesis edukatif dari prinsip-prinsip populer psikologi keuangan. Bukan nasihat investasi personal — angka dan asumsi dalam simulator bersifat ilustratif.</p>
+<p class="disclaimer lang-en" hidden>This book is an educational synthesis of popular money-psychology principles. It is not personal investment advice — the figures and assumptions in the simulator are illustrative only.</p>
+
+<section class="toc-section" id="daftar-isi">
+  <h2 class="lang-id">Daftar Isi</h2>
+  <h2 class="lang-en" hidden>Table of Contents</h2>
+
+  <div class="toc-part">
+    <div class="toc-part-title lang-id">BAGIAN I — Psikologi dan Isi Kepala</div>
+    <div class="toc-part-title lang-en" hidden>PART I — Psychology and What's in Your Head</div>
+    <a class="toc-item" href="#bab1"><span class="toc-num">01</span><span class="toc-title"><span class="lang-id">Gaji Besar Itu Cuma Angka, Jaraknya yang Penting</span><span class="lang-en" hidden>A Big Paycheck Is Just a Number — the Gap Is What Matters</span></span></a>
+    <a class="toc-item" href="#bab2"><span class="toc-num">02</span><span class="toc-title"><span class="lang-id">Menemukan Garis Finish Bernama "Cukup"</span><span class="lang-en" hidden>Finding the Finish Line Called "Enough"</span></span></a>
+    <a class="toc-item" href="#bab3"><span class="toc-num">03</span><span class="toc-title"><span class="lang-id">Membayar Pajak Realita (Pasar Itu Liar)</span><span class="lang-en" hidden>Paying Reality's Tax (Markets Are Wild)</span></span></a>
+    <a class="toc-item" href="#bab4"><span class="toc-num">04</span><span class="toc-title"><span class="lang-id">Ego Adalah Penyedot Saldo Paling Kejam</span><span class="lang-en" hidden>Ego Is the Cruelest Drain on Your Balance</span></span></a>
+  </div>
+
+  <div class="toc-part">
+    <div class="toc-part-title lang-id">BAGIAN II — Logika Aset dan Beban</div>
+    <div class="toc-part-title lang-en" hidden>PART II — The Logic of Assets and Liabilities</div>
+    <a class="toc-item" href="#bab5"><span class="toc-num">05</span><span class="toc-title"><span class="lang-id">Tes Simpel 24 Jam: Dia Ngasih atau Minta Uang?</span><span class="lang-en" hidden>The Simple Test: Does It Feed You or Feed On You?</span></span></a>
+    <a class="toc-item" href="#bab6"><span class="toc-num">06</span><span class="toc-title"><span class="lang-id">Jangan Beli Barang Mewah Pakai Keringat Sendiri</span><span class="lang-en" hidden>Don't Buy Luxury With Your Own Sweat</span></span></a>
+    <a class="toc-item" href="#bab7"><span class="toc-num">07</span><span class="toc-title"><span class="lang-id">Beli Waktu, Bukan Cuma Beli Barang</span><span class="lang-en" hidden>Buy Time, Not Just Things</span></span></a>
+    <a class="toc-item" href="#bab8"><span class="toc-num">08</span><span class="toc-title"><span class="lang-id">Freedom Fund (Dana Pembeli Kebebasan)</span><span class="lang-en" hidden>The Freedom Fund (Cash That Buys Choices)</span></span></a>
+  </div>
+
+  <div class="toc-part">
+    <div class="toc-part-title lang-id">BAGIAN III — Sistem Eksekusi Harian</div>
+    <div class="toc-part-title lang-en" hidden>PART III — The Daily Execution System</div>
+    <a class="toc-item" href="#bab9"><span class="toc-num">09</span><span class="toc-title"><span class="lang-id">Rem 72 Jam Untuk Membunuh Belanja Impulsif</span><span class="lang-en" hidden>The 72-Hour Brake That Kills Impulse Spending</span></span></a>
+    <a class="toc-item" href="#bab10"><span class="toc-num">10</span><span class="toc-title"><span class="lang-id">Automatic Money (Sistem Mengalahkan Disiplin)</span><span class="lang-en" hidden>Automatic Money (Systems Beat Discipline)</span></span></a>
+    <a class="toc-item" href="#bab11"><span class="toc-num">11</span><span class="toc-title"><span class="lang-id">Ritual 15 Menit di Hari Minggu Malam</span><span class="lang-en" hidden>The 15-Minute Sunday Night Ritual</span></span></a>
+    <a class="toc-item" href="#bab12"><span class="toc-num">12</span><span class="toc-title"><span class="lang-id">Berani "Gagal di Luar" dan Membayar Uang Kursus</span><span class="lang-en" hidden>Daring to Fail Out Loud and Paying Tuition</span></span></a>
+  </div>
+
+  <div class="toc-part">
+    <div class="toc-part-title lang-id">BAGIAN IV — Mesin Pengganda dan Instrumen</div>
+    <div class="toc-part-title lang-en" hidden>PART IV — The Compounding Engine and Instruments</div>
+    <a class="toc-item" href="#bab13"><span class="toc-num">13</span><span class="toc-title"><span class="lang-id">Compounding (Efek Bola Salju) + Simulator Interaktif</span><span class="lang-en" hidden>Compounding (The Snowball Effect) + Interactive Simulator</span></span></a>
+    <a class="toc-item" href="#bab14"><span class="toc-num">14</span><span class="toc-title"><span class="lang-id">Peta Alat Investasi (Memilih Senjata yang Tepat)</span><span class="lang-en" hidden>The Instrument Map (Choosing the Right Weapon)</span></span></a>
+    <a class="toc-item" href="#bab15"><span class="toc-num">15</span><span class="toc-title"><span class="lang-id">Strategi Alokasi Aset (Tim Impianmu)</span><span class="lang-en" hidden>Asset Allocation Strategy (Your Dream Team)</span></span></a>
+    <a class="toc-item" href="#bab16"><span class="toc-num">16</span><span class="toc-title"><span class="lang-id">Mengurangi Biaya Tersembunyi</span><span class="lang-en" hidden>Reducing Hidden Costs</span></span></a>
+  </div>
+
+  <div class="toc-part">
+    <div class="toc-part-title lang-id">BAGIAN V — Permainan Jangka Panjang</div>
+    <div class="toc-part-title lang-en" hidden>PART V — The Long Game</div>
+    <a class="toc-item" href="#bab17"><span class="toc-num">17</span><span class="toc-title"><span class="lang-id">Merancang Keunggulan Tak Adil Milikmu</span><span class="lang-en" hidden>Designing Your Own Unfair Advantage</span></span></a>
+    <a class="toc-item" href="#bab18"><span class="toc-num">18</span><span class="toc-title"><span class="lang-id">Menjadi Kaya yang Tenang</span><span class="lang-en" hidden>Becoming Quietly Wealthy</span></span></a>
+  </div>
+
+  <div class="toc-part">
+    <a class="toc-item" href="#lembar-kerja"><span class="toc-num">＋</span><span class="toc-title"><span class="lang-id">Lembar Kerja Evaluasi Mingguan</span><span class="lang-en" hidden>Weekly Evaluation Worksheet</span></span></a>
+    <a class="toc-item" href="#glosarium"><span class="toc-num">＋</span><span class="toc-title"><span class="lang-id">Glosarium</span><span class="lang-en" hidden>Glossary</span></span></a>
+    <a class="toc-item" href="#pustaka"><span class="toc-num">＋</span><span class="toc-title"><span class="lang-id">Daftar Pustaka</span><span class="lang-en" hidden>Bibliography</span></span></a>
+  </div>
+</section>
+
+<hr class="div">
+
+<section class="landasan" id="landasan">
+  <h2 class="lang-id">Landasan Pemikiran</h2>
+  <h2 class="lang-en" hidden>Foundations</h2>
+  <p class="lang-id">Buku ini bukan teori baru — melainkan sintesis dari sembilan buku yang sudah teruji jutaan pembaca di seluruh dunia, dirajut ulang dalam register bahasa yang dekat dengan keseharian.</p>
+  <p class="lang-en" hidden>This book isn't a new theory — it is a synthesis of nine books already tested on millions of readers worldwide, rewoven here in language close to everyday life.</p>
+  <div class="book-grid">
+    <div class="book-card"><p class="book-card-title">The Psychology of Money</p><p class="book-card-author">Morgan Housel</p><p class="lang-id">Perilaku, kebiasaan, ego, dan peran waktu dalam mengelola uang.</p><p class="lang-en" hidden>Behavior, habit, ego, and the role of time in managing money.</p></div>
+    <div class="book-card"><p class="book-card-title">Same as Ever</p><p class="book-card-author">Morgan Housel</p><p class="lang-id">Pola psikologi manusia dan manajemen risiko yang tak pernah berubah lintas zaman.</p><p class="lang-en" hidden>Patterns of human psychology and risk management that never change across eras.</p></div>
+    <div class="book-card"><p class="book-card-title">Rich Dad Poor Dad</p><p class="book-card-author">Robert T. Kiyosaki</p><p class="lang-id">Perbedaan cara pandang aset vs. beban, dan pentingnya arus kas.</p><p class="lang-en" hidden>The difference between viewing assets vs. liabilities, and the importance of cash flow.</p></div>
+    <div class="book-card"><p class="book-card-title">Do Epic Shit</p><p class="book-card-author">Ankur Warikoo</p><p class="lang-id">Keberanian gagal, eksekusi harian, kebiasaan mikro, kejujuran pada diri sendiri.</p><p class="lang-en" hidden>The courage to fail, daily execution, micro-habits, honesty with yourself.</p></div>
+    <div class="book-card"><p class="book-card-title">Atomic Habits</p><p class="book-card-author">James Clear</p><p class="lang-id">Otomatisasi sistem harian dan efek akumulasi kebiasaan kecil.</p><p class="lang-en" hidden>Automating daily systems and the compounding effect of small habits.</p></div>
+    <div class="book-card"><p class="book-card-title">The Little Book of Common Sense Investing</p><p class="book-card-author">John C. Bogle</p><p class="lang-id">Reksa dana indeks, kekuatan compounding, dan bahaya biaya tersembunyi.</p><p class="lang-en" hidden>Index funds, the power of compounding, and the danger of hidden costs.</p></div>
+    <div class="book-card"><p class="book-card-title">Die with Zero</p><p class="book-card-author">Bill Perkins</p><p class="lang-id">Mengoptimalkan uang untuk pengalaman hidup dan waktu, bukan angka semata.</p><p class="lang-en" hidden>Optimizing money for life experiences and time, not just the number.</p></div>
+    <div class="book-card"><p class="book-card-title">The Almanack of Naval Ravikant</p><p class="book-card-author">Eric Jorgenson</p><p class="lang-id">Kebebasan waktu, leverage, keunggulan tak adil, kepemilikan aset.</p><p class="lang-en" hidden>Time freedom, leverage, unfair advantage, and asset ownership.</p></div>
+    <div class="book-card"><p class="book-card-title">I Will Teach You to Be Rich</p><p class="book-card-author">Ramit Sethi</p><p class="lang-id">Arsitektur keuangan otomatis dan filosofi belanja tanpa rasa bersalah.</p><p class="lang-en" hidden>Automated financial architecture and the philosophy of guilt-free spending.</p></div>
+  </div>
+</section>
+
+<hr class="div">
+
+<!-- ================= BAGIAN I ================= -->
+
+<section class="chapter" id="bab1">
+  <div class="chapter-head">
+    <div class="chapter-num-row"><span class="pulse-dot"></span><span class="eyebrow"><span class="lang-id">Bab 01 · Bagian I</span><span class="lang-en" hidden>Chapter 01 · Part I</span></span></div>
+    <div class="lang-id"><h2 class="chapter-title">Gaji Besar Itu Cuma Angka, Jaraknya yang Penting</h2><p class="chapter-sub">Kekayaan diukur dari jarak, bukan dari besar penghasilan.</p></div>
+    <div class="lang-en" hidden><h2 class="chapter-title">A Big Paycheck Is Just a Number — the Gap Is What Matters</h2><p class="chapter-sub">Wealth is measured by the gap, not the size of your income.</p></div>
+    <div class="experts">Morgan Housel · Ramit Sethi</div>
+  </div>
+  <div class="chapter-body">
+    <div class="lang-id">
+      <p class="dropcap">Kenaikan gaji sering dianggap sebagai satu-satunya obat untuk seluruh masalah keuangan. Padahal, angka di slip gaji hanyalah variabel setengah jalan. Kekayaan sejati tidak pernah diukur dari seberapa banyak uang yang masuk ke rekeningmu setiap bulan, melainkan dari seberapa lebar jarak yang berhasil kamu jaga antara penghasilan dan gengsimu.</p>
+      <p>Ketika penghasilanmu naik dari tingkat dasar ke tingkat menengah, namun standar hidupmu ikut meroket secara paralel, net worth-mu sebenarnya tetap nol. Kamu tidak bertambah kaya; kamu hanya memindahkan status dari pusing pas-pasan menjadi pusing kelas atas.</p>
+      <p>Morgan Housel menyebut kekayaan sebagai sesuatu yang tersembunyi — ia adalah pilihan yang tidak kamu ambil, mobil yang tidak kamu beli, upgrade yang kamu tolak. Karena kekayaan itu tak terlihat, orang cenderung meniru gaya hidup orang lain yang sebenarnya juga sedang berutang, bukan meniru neraca keuangan mereka yang sesungguhnya tidak terlihat.</p>
+      <div class="callout insight">
+        <h4>Wawasan Tambahan</h4>
+        <p>Ramit Sethi menambahkan sudut pandang praktis lewat konsep "money dial": daripada berhemat merata di semua hal, kenali 2–3 kategori yang benar-benar kamu cintai (misalnya traveling atau kopi enak) dan belanjakan di sana secara sadar dan lepas — sambil memangkas habis-habisan kategori yang tidak kamu pedulikan. Jarak antara penghasilan dan gaya hidup dijaga bukan dengan pelit di semua lini, tapi dengan sengaja memilih ke mana uang boleh mengalir bebas.</p>
+      </div>
+      <h3><span class="letter">1.1</span> Mengapa Jarak Lebih Penting dari Angka</h3>
+      <p>Dua orang dengan gaji yang identik bisa berakhir di titik finansial yang sangat berbeda satu dekade kemudian — bukan karena keberuntungan pasar, tapi karena satu dari mereka menjaga jarak dan yang lain membiarkan gaya hidupnya mengejar setiap kenaikan gaji.</p>
+    </div>
+    <div class="lang-en" hidden>
+      <p class="dropcap">A raise is often treated as the cure for every financial problem. But the number on your payslip is only half the equation. True wealth is never measured by how much money lands in your account each month, but by how wide a gap you manage to keep between your income and your ego.</p>
+      <p>When your income climbs from entry-level to mid-level, but your standard of living rockets up in parallel, your net worth is effectively still zero. You haven't gotten richer — you've just traded a cheaper kind of stress for a more expensive one.</p>
+      <p>Morgan Housel frames wealth as something hidden — it's the choice you didn't make, the car you didn't buy, the upgrade you declined. Because wealth is invisible, people tend to copy the lifestyle of others who are often also in debt, rather than copying their actual (unseen) balance sheet.</p>
+      <div class="callout insight">
+        <h4>Extra Insight</h4>
+        <p>Ramit Sethi adds a practical angle with his "money dial" idea: instead of trimming everything evenly, identify the 2–3 categories you truly love (travel, good coffee) and spend on those consciously and generously — while cutting ruthlessly everywhere you don't care. The gap between income and lifestyle isn't kept by being cheap across the board, but by deliberately choosing where money is allowed to flow freely.</p>
+      </div>
+      <h3><span class="letter">1.1</span> Why the Gap Matters More Than the Number</h3>
+      <p>Two people with identical salaries can end up in wildly different financial places a decade later — not because of market luck, but because one of them kept the gap while the other let their lifestyle chase every raise.</p>
+    </div>
+
+    <div class="lang-id"><div class="action-box"><span class="eyebrow">Konsep Kunci</span><p><em>Lifestyle Creep</em>, <em>Net Worth</em>, <em>Auto-Lock Rule</em>, <em>Money Dial</em>.</p></div></div>
+    <div class="lang-en" hidden><div class="action-box"><span class="eyebrow">Key Concepts</span><p><em>Lifestyle Creep</em>, <em>Net Worth</em>, <em>Auto-Lock Rule</em>, <em>Money Dial</em>.</p></div></div>
+
+    <div class="lang-id"><div class="action-box"><span class="eyebrow">Prinsip Aksi</span><p>Setiap kali mendapat kenaikan penghasilan, bonus, atau komisi, langsung kunci 50% dari selisih kenaikan tersebut ke instrumen investasi secara otomatis sebelum sempat mengendap di rekening operasional bulanan.</p></div></div>
+    <div class="lang-en" hidden><div class="action-box"><span class="eyebrow">Action Principle</span><p>Every time you get a raise, bonus, or commission, immediately lock 50% of that increase into an investment instrument automatically, before it has a chance to settle into your monthly spending account.</p></div></div>
+    <div class="lang-id"><div class="takeaway"><span class="eyebrow">Sari Pati Bab</span><p>&ldquo;Kekayaan bukan yang kamu pamerkan, tapi jarak yang berhasil kamu jaga antara penghasilan dan gengsimu.&rdquo;</p></div></div>
+    <div class="lang-en" hidden><div class="takeaway"><span class="eyebrow">Chapter Takeaway</span><p>&ldquo;Wealth isn't what you show off — it's the gap you manage to keep between your income and your ego.&rdquo;</p></div></div>
+  </div>
+</section>
+<hr class="div">
+
+<section class="chapter" id="bab2">
+  <div class="chapter-head">
+    <div class="chapter-num-row"><span class="pulse-dot"></span><span class="eyebrow"><span class="lang-id">Bab 02 · Bagian I</span><span class="lang-en" hidden>Chapter 02 · Part I</span></span></div>
+    <div class="lang-id"><h2 class="chapter-title">Menemukan Garis Finish Bernama "Cukup"</h2><p class="chapter-sub">Tanpa definisi cukup, kekayaan hanya memperbesar kecemasan.</p></div>
+    <div class="lang-en" hidden><h2 class="chapter-title">Finding the Finish Line Called "Enough"</h2><p class="chapter-sub">Without a definition of enough, wealth only magnifies anxiety.</p></div>
+    <div class="experts">Morgan Housel · Naval Ravikant</div>
+  </div>
+  <div class="chapter-body">
+    <div class="lang-id">
+      <p class="dropcap">Penyebab utama kecemasan finansial yang tak kunjung usai adalah garis finish yang terus bergeser. Begitu berhasil mencapai satu target materi, kamu mendadak merasa butuh target berikutnya yang lebih tinggi. Jika kamu tidak pernah menetapkan sendiri di mana garis finish-nya, kamu akan terus berlari di atas <em>hedonic treadmill</em> sampai kelelahan.</p>
+      <p>Orang kaya yang tidak memiliki ukuran "cukup" pada dasarnya adalah orang miskin yang memegang banyak uang. Mereka tetap diperbudak oleh rasa takut kehilangan status dan kecemasan akan masa depan.</p>
+      <p>Housel mengangkat kasus para eksekutif dan investor sukses yang justru terjerumus ke jalan pintas ilegal demi kekayaan yang jauh lebih besar dari yang sebenarnya mereka butuhkan — bukti bahwa "cukup" bukanlah angka objektif, melainkan keputusan psikologis yang harus diambil secara sadar, karena pasar dan masyarakat tidak akan pernah memberitahumu kapan harus berhenti.</p>
+      <div class="callout insight">
+        <h4>Wawasan Tambahan</h4>
+        <p>Naval Ravikant menambahkan lapisan lain: ketenangan bukan berasal dari akumulasi tanpa batas, melainkan dari titik di mana kamu berhenti membandingkan diri dengan orang lain di permainan yang tidak pernah kamu pilih sendiri. Baginya, kekayaan sejati adalah aset yang bekerja untukmu saat kamu tidur — namun kedamaian pikiran adalah ketika kamu berhenti menginginkan lebih hanya karena orang lain menginginkannya.</p>
+      </div>
+    </div>
+    <div class="lang-en" hidden>
+      <p class="dropcap">The main cause of never-ending financial anxiety is a finish line that keeps moving. The moment you hit one material target, you suddenly feel you need the next, higher one. If you never define your own finish line, you'll keep running on the hedonic treadmill until you're exhausted.</p>
+      <p>A wealthy person with no measure of "enough" is, at their core, a poor person holding a lot of money. They remain enslaved by fear of losing status and anxiety about the future.</p>
+      <p>Housel points to cases of successful executives and investors who took illegal shortcuts chasing wealth far beyond what they actually needed — proof that "enough" isn't an objective number but a psychological decision that has to be made consciously, because the market and society will never tell you when to stop.</p>
+      <div class="callout insight">
+        <h4>Extra Insight</h4>
+        <p>Naval Ravikant adds another layer: peace doesn't come from unlimited accumulation, but from the point where you stop comparing yourself to others in a game you never chose. For him, true wealth is assets working for you while you sleep — but peace of mind is when you stop wanting more just because someone else wants it.</p>
+      </div>
+    </div>
+
+    <div class="lang-id"><div class="action-box"><span class="eyebrow">Konsep Kunci</span><p><em>Hedonic Treadmill</em>, <em>Baseline Cost</em>, <em>Freedom Fund</em>.</p></div></div>
+    <div class="lang-en" hidden><div class="action-box"><span class="eyebrow">Key Concepts</span><p><em>Hedonic Treadmill</em>, <em>Baseline Cost</em>, <em>Freedom Fund</em>.</p></div></div>
+    <div class="lang-id"><div class="action-box"><span class="eyebrow">Prinsip Aksi</span><p>Hitung jujur biaya bulanan riil untuk hidup sehat, aman, dan bahagia tanpa perlu pamer. Ini biaya <em>baseline</em>-mu. Semua yang dihasilkan di atas angka ini bukan lagi bahan menaikkan gaya hidup, melainkan bahan bakar membeli kebebasan waktu.</p></div></div>
+    <div class="lang-en" hidden><div class="action-box"><span class="eyebrow">Action Principle</span><p>Honestly calculate the real monthly cost of living healthily, safely, and happily without needing to show off. That's your baseline cost. Everything you earn above that number is no longer fuel for a bigger lifestyle — it's fuel for buying back your time.</p></div></div>
+    <div class="lang-id"><div class="takeaway"><span class="eyebrow">Sari Pati Bab</span><p>&ldquo;Tanpa garis finish milikmu sendiri, kamu akan berlari selamanya di atas treadmill orang lain.&rdquo;</p></div></div>
+    <div class="lang-en" hidden><div class="takeaway"><span class="eyebrow">Chapter Takeaway</span><p>&ldquo;Without a finish line of your own, you'll run forever on someone else's treadmill.&rdquo;</p></div></div>
+  </div>
+</section>
+<hr class="div">
+
+<section class="chapter" id="bab3">
+  <div class="chapter-head">
+    <div class="chapter-num-row"><span class="pulse-dot"></span><span class="eyebrow"><span class="lang-id">Bab 03 · Bagian I</span><span class="lang-en" hidden>Chapter 03 · Part I</span></span></div>
+    <div class="lang-id"><h2 class="chapter-title">Membayar Pajak Realita (Pasar Itu Liar)</h2><p class="chapter-sub">Volatilitas bukan hukuman — ia harga tiket masuk.</p></div>
+    <div class="lang-en" hidden><h2 class="chapter-title">Paying Reality's Tax (Markets Are Wild)</h2><p class="chapter-sub">Volatility isn't punishment — it's the price of admission.</p></div>
+    <div class="experts">Morgan Housel · John C. Bogle</div>
+  </div>
+  <div class="chapter-body">
+    <div class="lang-id">
+      <p class="dropcap">Banyak investor pemula patah semangat saat portofolio mereka merah atau mengalami kerugian, dan menganggap penurunan pasar sebagai hukuman atau kesalahan fatal. Padahal, volatilitas dan risiko adalah biaya masuk (<em>cost of admission</em>) yang wajib dibayar untuk mendapatkan imbal hasil jangka panjang.</p>
+      <p>Memimpikan return tinggi tanpa mau menerima fluktuasi harga sama konyolnya dengan ingin menikmati liburan di luar negeri tanpa mau membayar tiket pesawat.</p>
+      <p>Dalam <em>Same as Ever</em>, Housel menekankan bahwa risiko yang paling menyakitkan bukanlah risiko yang sudah kamu perkirakan dan siapkan mitigasinya, melainkan risiko yang tidak pernah terpikirkan sama sekali. Karena itu, rencana finansial yang sehat selalu menyisakan ruang untuk kesalahan (<em>margin of safety</em>) — bukan karena kamu pesimis, tapi karena masa depan pada dasarnya tidak bisa diprediksi dengan presisi.</p>
+      <div class="callout insight">
+        <h4>Wawasan Tambahan</h4>
+        <p>John Bogle menambahkan data historis sebagai penguat: dalam rentang puluhan tahun, pasar modal global secara konsisten pulih dari setiap koreksi dan krisis — bukan karena setiap krisis kecil, melainkan karena ekonomi dan produktivitas manusia terus tumbuh dalam jangka panjang. Investor yang panik menjual saat harga turun justru mengubah kerugian di atas kertas menjadi kerugian permanen.</p>
+      </div>
+    </div>
+    <div class="lang-en" hidden>
+      <p class="dropcap">Many new investors lose heart when their portfolio turns red, treating a market downturn as punishment or a fatal mistake. But volatility and risk are the cost of admission you must pay to earn long-term returns.</p>
+      <p>Wanting high returns without accepting price swings is as absurd as wanting an overseas holiday without paying for the plane ticket.</p>
+      <p>In <em>Same as Ever</em>, Housel stresses that the most painful risk is never the one you anticipated and prepared for — it's the one you never saw coming at all. That's why a healthy financial plan always leaves room for error (a margin of safety) — not out of pessimism, but because the future simply can't be predicted with precision.</p>
+      <div class="callout insight">
+        <h4>Extra Insight</h4>
+        <p>John Bogle reinforces this with historical evidence: over decades, global capital markets have consistently recovered from every correction and crisis — not because each downturn was small, but because human economic productivity keeps growing over the long run. Investors who panic-sell during a dip are the ones who turn a paper loss into a permanent one.</p>
+      </div>
+    </div>
+
+    <div class="lang-id"><div class="action-box"><span class="eyebrow">Konsep Kunci</span><p><em>Market Volatility</em>, <em>Risk Premium</em>, <em>Cost of Admission</em>, <em>Margin of Safety</em>.</p></div></div>
+    <div class="lang-en" hidden><div class="action-box"><span class="eyebrow">Key Concepts</span><p><em>Market Volatility</em>, <em>Risk Premium</em>, <em>Cost of Admission</em>, <em>Margin of Safety</em>.</p></div></div>
+    <div class="lang-id"><div class="action-box"><span class="eyebrow">Prinsip Aksi</span><p>Kerugian sesaat bukan denda atas kesalahanmu, melainkan harga tiket untuk pertumbuhan di atas inflasi. Reframe setiap kerugian terukur sebagai "uang kursus" untuk mendewasakan navigasi investasimu.</p></div></div>
+    <div class="lang-en" hidden><div class="action-box"><span class="eyebrow">Action Principle</span><p>A temporary loss isn't a fine for your mistake — it's the ticket price for growth above inflation. Reframe every measured loss as "tuition" that matures your investing judgment.</p></div></div>
+    <div class="lang-id"><div class="takeaway"><span class="eyebrow">Sari Pati Bab</span><p>&ldquo;Volatilitas bukan hukuman atas kesalahanmu — ia harga tiket menuju hasil di atas inflasi.&rdquo;</p></div></div>
+    <div class="lang-en" hidden><div class="takeaway"><span class="eyebrow">Chapter Takeaway</span><p>&ldquo;Volatility isn't punishment for your mistakes — it's the ticket price to returns above inflation.&rdquo;</p></div></div>
+  </div>
+</section>
+<hr class="div">
+
+<section class="chapter" id="bab4">
+  <div class="chapter-head">
+    <div class="chapter-num-row"><span class="pulse-dot"></span><span class="eyebrow"><span class="lang-id">Bab 04 · Bagian I</span><span class="lang-en" hidden>Chapter 04 · Part I</span></span></div>
+    <div class="lang-id"><h2 class="chapter-title">Ego Adalah Penyedot Saldo Paling Kejam</h2><p class="chapter-sub">Kaya adalah yang terlihat. Makmur adalah yang tersembunyi.</p></div>
+    <div class="lang-en" hidden><h2 class="chapter-title">Ego Is the Cruelest Drain on Your Balance</h2><p class="chapter-sub">Rich is what's seen. Wealthy is what's hidden.</p></div>
+    <div class="experts">Morgan Housel · Robert T. Kiyosaki</div>
+  </div>
+  <div class="chapter-body">
+    <div class="lang-id">
+      <p class="dropcap">Sebagian besar barang mahal yang dibeli manusia sebenarnya tidak benar-benar dibutuhkan atau dinikmati secara fungsional. Barang-barang tersebut sering dibeli hanya untuk mengirimkan sinyal status (<em>signaling theory</em>) kepada orang-orang di sekitar — yang bahkan tidak terlalu peduli padamu — bahwa kamu telah mencapai tingkat keberhasilan tertentu.</p>
+      <p>Kaya (<em>rich</em>) adalah apa yang terlihat dari barang yang kamu pamerkan: mobil mewah, jam tangan mahal, pakaian bermerek. Namun, makmur (<em>wealthy</em>) adalah apa yang tidak terlihat: saham yang tidak dijual, dana kas yang mengendap, dan aset yang terus menghasilkan secara diam-diam.</p>
+      <p>Kiyosaki menambahkan lapisan mental lewat perbandingan reaksi "aku tidak mampu membelinya" versus "bagaimana caranya aku mampu membelinya?" Kalimat pertama menutup pikiran; kalimat kedua memaksa otak mencari solusi kreatif — entah lewat aset baru, keahlian baru, atau arus kas baru — daripada sekadar menyerah pada keterbatasan uang saat ini.</p>
+      <div class="callout insight">
+        <h4>Wawasan Tambahan</h4>
+        <p>Riset yang dikutip Housel menunjukkan pola berulang: orang yang bangkrut karena gaya hidup mewah jarang sekali dipicu oleh satu keputusan besar yang salah — melainkan akumulasi ribuan keputusan kecil bersinyal status yang masing-masing terasa "kecil dan wajar" saat diambil.</p>
+      </div>
+    </div>
+    <div class="lang-en" hidden>
+      <p class="dropcap">Most expensive items people buy aren't really needed or functionally enjoyed. They're often purchased purely to signal status to people around you — people who often don't care much about you anyway — that you've reached a certain level of success.</p>
+      <p>Rich is what's visible in the things you show off: the luxury car, the expensive watch, the branded clothes. Wealthy is what's invisible: the stock you didn't sell, the cash sitting quietly, the asset that keeps earning without announcing itself.</p>
+      <p>Kiyosaki adds a mental layer by contrasting "I can't afford it" with "how can I afford it?" The first sentence shuts thinking down; the second forces the brain to search for a creative solution — a new asset, a new skill, a new cash flow — instead of simply surrendering to today's limits.</p>
+      <div class="callout insight">
+        <h4>Extra Insight</h4>
+        <p>Research cited by Housel shows a recurring pattern: people who go broke chasing a lavish lifestyle are rarely undone by one big bad decision — it's the accumulation of thousands of small, status-signaling choices, each of which felt "small and reasonable" at the time.</p>
+      </div>
+    </div>
+
+    <div class="lang-id"><div class="action-box"><span class="eyebrow">Konsep Kunci</span><p><em>Signaling Theory</em>, <em>Rich vs. Wealthy</em>, <em>Stealth Wealth</em>.</p></div></div>
+    <div class="lang-en" hidden><div class="action-box"><span class="eyebrow">Key Concepts</span><p><em>Signaling Theory</em>, <em>Rich vs. Wealthy</em>, <em>Stealth Wealth</em>.</p></div></div>
+    <div class="lang-id"><div class="action-box"><span class="eyebrow">Prinsip Aksi</span><p>Sebelum membeli barang bernilai besar, tanyakan: "Apakah aku tetap akan membeli barang ini jika tidak ada seorang pun yang bisa melihatnya?" Jika jawabannya tidak, batalkan transaksi.</p></div></div>
+    <div class="lang-en" hidden><div class="action-box"><span class="eyebrow">Action Principle</span><p>Before a big purchase, ask: "Would I still buy this if no one else could ever see it?" If the answer is no, cancel the purchase.</p></div></div>
+    <div class="lang-id"><div class="takeaway"><span class="eyebrow">Sari Pati Bab</span><p>&ldquo;Barang yang kamu pamerkan jarang membuatmu kaya; ia hanya membuatmu terlihat kaya.&rdquo;</p></div></div>
+    <div class="lang-en" hidden><div class="takeaway"><span class="eyebrow">Chapter Takeaway</span><p>&ldquo;What you show off rarely makes you rich — it just makes you look rich.&rdquo;</p></div></div>
+  </div>
+</section>
+<hr class="div">
+
+<!-- ================= BAGIAN II ================= -->
+
+<section class="chapter" id="bab5">
+  <div class="chapter-head">
+    <div class="chapter-num-row"><span class="pulse-dot"></span><span class="eyebrow"><span class="lang-id">Bab 05 · Bagian II</span><span class="lang-en" hidden>Chapter 05 · Part II</span></span></div>
+    <div class="lang-id"><h2 class="chapter-title">Tes Simpel 24 Jam: Dia Ngasih atau Minta Uang?</h2><p class="chapter-sub">Satu kriteria diagnostik untuk setiap keputusan finansial.</p></div>
+    <div class="lang-en" hidden><h2 class="chapter-title">The Simple Test: Does It Feed You or Feed On You?</h2><p class="chapter-sub">One diagnostic question for every financial decision.</p></div>
+    <div class="experts">Robert T. Kiyosaki</div>
+  </div>
+  <div class="chapter-body">
+    <div class="lang-id">
+      <p class="dropcap">Lupakan definisi akuntansi yang rumit. Untuk mengelola keuangan sehari-hari, kamu hanya perlu satu kriteria diagnostik sederhana untuk menilai setiap barang atau keputusan finansial.</p>
+      <p class="table-cap">Aset vs. Beban</p>
+      <div class="matrix-wrap"><table class="matrix">
+        <thead><tr><th>Kategori</th><th>Sifat Utama</th><th>Contoh Kasus</th></tr></thead>
+        <tbody>
+          <tr><td><strong>Aset</strong></td><td>Memasukkan uang ke kantongmu, bahkan saat kamu tidur.</td><td>Dividen saham, sewa properti, bisnis tersistem, reksa dana indeks, obligasi.</td></tr>
+          <tr><td><strong>Beban</strong></td><td>Menyedot uang dari kantongmu secara berkala.</td><td>Cicilan kendaraan pribadi, langganan tak terpakai, barang mewah terikat pemeliharaan.</td></tr>
+        </tbody>
+      </table></div>
+      <p>Kiyosaki menekankan bahwa kekeliruan paling umum adalah menganggap rumah pribadi atau mobil pribadi sebagai "aset" karena nilainya besar di atas kertas — padahal keduanya terus menyedot uang lewat pajak, perawatan, dan penyusutan tanpa pernah mengalirkan uang balik ke kantongmu.</p>
+      <div class="callout insight">
+        <h4>Wawasan Tambahan</h4>
+        <p>Kiyosaki memperkenalkan kerangka <em>Cashflow Quadrant</em>: Employee (karyawan), Self-employed (pekerja mandiri), Business owner (pemilik sistem bisnis), dan Investor. Dua kuadran pertama menukar waktu dengan uang secara langsung; dua kuadran terakhir membangun sistem atau memiliki aset yang bekerja tanpa kehadiran fisikmu. Tujuan jangka panjang bukan berhenti bekerja, tapi bergeser posisi ke kuadran kanan.</p>
+      </div>
+    </div>
+    <div class="lang-en" hidden>
+      <p class="dropcap">Forget complicated accounting definitions. For everyday money management, you only need one simple diagnostic question to judge any item or financial decision.</p>
+      <p class="table-cap">Assets vs. Liabilities</p>
+      <div class="matrix-wrap"><table class="matrix">
+        <thead><tr><th>Category</th><th>Core Trait</th><th>Examples</th></tr></thead>
+        <tbody>
+          <tr><td><strong>Asset</strong></td><td>Puts money in your pocket, even while you sleep.</td><td>Stock dividends, rental property, systemized business, index funds, bonds.</td></tr>
+          <tr><td><strong>Liability</strong></td><td>Pulls money out of your pocket on a recurring basis.</td><td>Personal vehicle payments, unused subscriptions, high-maintenance luxury goods.</td></tr>
+        </tbody>
+      </table></div>
+      <p>Kiyosaki stresses that the most common mistake is treating a personal home or car as an "asset" because it looks valuable on paper — when both keep draining money through taxes, upkeep, and depreciation without ever sending cash back into your pocket.</p>
+      <div class="callout insight">
+        <h4>Extra Insight</h4>
+        <p>Kiyosaki's Cashflow Quadrant frames four positions: Employee, Self-employed, Business owner, and Investor. The first two trade time for money directly; the last two build systems or own assets that work without your physical presence. The long-term goal isn't to stop working — it's to shift toward the right-hand quadrants.</p>
+      </div>
+    </div>
+
+    <div class="lang-id"><div class="action-box"><span class="eyebrow">Konsep Kunci</span><p><em>Cash Flow</em>, <em>Liabilities</em>, <em>Depreciating Assets</em>, <em>Cashflow Quadrant</em>.</p></div></div>
+    <div class="lang-en" hidden><div class="action-box"><span class="eyebrow">Key Concepts</span><p><em>Cash Flow</em>, <em>Liabilities</em>, <em>Depreciating Assets</em>, <em>Cashflow Quadrant</em>.</p></div></div>
+    <div class="lang-id"><div class="action-box"><span class="eyebrow">Prinsip Aksi</span><p>Amati dampak arus kas barang dalam jangka panjang. Jika terus meminta uang tanpa menghasilkan return atau produktivitas riil, labeli sebagai beban dan batasi porsinya.</p></div></div>
+    <div class="lang-en" hidden><div class="action-box"><span class="eyebrow">Action Principle</span><p>Watch the long-term cash-flow impact of an item. If it keeps demanding money without generating real return or productivity, label it a liability and limit its share of your spending.</p></div></div>
+    <div class="lang-id"><div class="takeaway"><span class="eyebrow">Sari Pati Bab</span><p>&ldquo;Tanyakan satu hal pada setiap barang yang kamu miliki: ia memberi uang, atau meminta uang?&rdquo;</p></div></div>
+    <div class="lang-en" hidden><div class="takeaway"><span class="eyebrow">Chapter Takeaway</span><p>&ldquo;Ask one question of everything you own: does it feed you, or does it feed on you?&rdquo;</p></div></div>
+  </div>
+</section>
+<hr class="div">
+
+<section class="chapter" id="bab6">
+  <div class="chapter-head">
+    <div class="chapter-num-row"><span class="pulse-dot"></span><span class="eyebrow"><span class="lang-id">Bab 06 · Bagian II</span><span class="lang-en" hidden>Chapter 06 · Part II</span></span></div>
+    <div class="lang-id"><h2 class="chapter-title">Jangan Beli Barang Mewah Pakai Keringat Sendiri</h2><p class="chapter-sub">Biarkan uangmu yang berbelanja, bukan gajimu.</p></div>
+    <div class="lang-en" hidden><h2 class="chapter-title">Don't Buy Luxury With Your Own Sweat</h2><p class="chapter-sub">Let your money shop — not your salary.</p></div>
+    <div class="experts">Robert T. Kiyosaki · Morgan Housel</div>
+  </div>
+  <div class="chapter-body">
+    <div class="lang-id">
+      <p class="dropcap">Manusia memiliki kebutuhan alami untuk menikmati hidup dan mengapresiasi diri sendiri. Namun, memanjakan diri menggunakan gaji atau pendapatan aktif adalah jebakan yang akan mengikatmu pada roda pemutar kerja (<em>hamster wheel</em>) selamanya.</p>
+      <p>Setiap rupiah dari gaji utamamu adalah "prajurit" yang bertugas membangun mesin uang. Jika prajurit itu kamu habiskan untuk membeli liabilitas yang menyusut nilainya, kamu kehilangan kesempatan untuk membiarkan uang tersebut bekerja melipatgandakan dirinya sendiri.</p>
+      <div class="flow">
+        <div class="flow-title">Alur Uang yang Sehat</div>
+        <div class="flow-row">
+          <div class="flow-box"><b>Gaji Utama</b><span>Sumber modal awal</span></div>
+          <div class="flow-arrow">→</div>
+          <div class="flow-box alt"><b>Investasi Aset</b><span>Modal dibiarkan bekerja</span></div>
+          <div class="flow-arrow">→</div>
+          <div class="flow-box"><b>Arus Kas Pasif</b><span>Dividen, bunga, sewa</span></div>
+          <div class="flow-arrow">→</div>
+          <div class="flow-box alt"><b>Beli Barang Impian</b><span>Dibayar oleh aset, bukan gaji</span></div>
+        </div>
+      </div>
+      <p>Housel menyebut fenomena ini sebagai jebakan "found money" — uang hasil investasi terasa lebih ringan untuk dibelanjakan dibanding uang keringat sendiri, sehingga secara psikologis lebih mudah membiarkannya dibelanjakan pada kesenangan tanpa rasa bersalah yang berlebihan, justru karena ia lahir dari kesabaran, bukan dari jam kerja langsung.</p>
+      <div class="callout insight">
+        <h4>Wawasan Tambahan</h4>
+        <p>Prinsip ini bukan larangan menikmati hidup — ini soal urutan. Menunda kepuasan sesaat demi hasil yang jauh lebih besar di masa depan adalah salah satu prediktor terkuat kesejahteraan finansial jangka panjang, tapi hanya efektif ketika ditopang sistem otomatis (lihat Bab 10), bukan sekadar niat menahan diri.</p>
+      </div>
+    </div>
+    <div class="lang-en" hidden>
+      <p class="dropcap">Humans have a natural need to enjoy life and appreciate themselves. But indulging yourself using your salary or active income is a trap that ties you to the hamster wheel forever.</p>
+      <p>Every rupiah from your main salary is a "soldier" tasked with building your money machine. Spend that soldier on a depreciating liability, and you lose the chance to let that money compound on its own.</p>
+      <div class="flow">
+        <div class="flow-title">The Healthy Money Flow</div>
+        <div class="flow-row">
+          <div class="flow-box"><b>Main Salary</b><span>Initial capital source</span></div>
+          <div class="flow-arrow">→</div>
+          <div class="flow-box alt"><b>Asset Investment</b><span>Capital left to work</span></div>
+          <div class="flow-arrow">→</div>
+          <div class="flow-box"><b>Passive Cash Flow</b><span>Dividends, interest, rent</span></div>
+          <div class="flow-arrow">→</div>
+          <div class="flow-box alt"><b>Buy the Dream Item</b><span>Paid by assets, not salary</span></div>
+        </div>
+      </div>
+      <p>Housel calls this the "found money" trap — investment gains feel lighter to spend than sweat-earned money, which psychologically makes it easier to enjoy without excessive guilt, precisely because it was born from patience rather than direct working hours.</p>
+      <div class="callout insight">
+        <h4>Extra Insight</h4>
+        <p>This principle isn't a ban on enjoying life — it's about sequence. Delaying instant gratification for a much larger future payoff is one of the strongest predictors of long-term financial wellbeing, but it only works when backed by an automatic system (see Chapter 10), not sheer willpower alone.</p>
+      </div>
+    </div>
+
+    <div class="lang-id"><div class="action-box"><span class="eyebrow">Konsep Kunci</span><p><em>Passive Income</em>, <em>Asset-Backed Lifestyle</em>, <em>Capital Preservation</em>.</p></div></div>
+    <div class="lang-en" hidden><div class="action-box"><span class="eyebrow">Key Concepts</span><p><em>Passive Income</em>, <em>Asset-Backed Lifestyle</em>, <em>Capital Preservation</em>.</p></div></div>
+    <div class="lang-id"><div class="action-box"><span class="eyebrow">Prinsip Aksi</span><p>Tetapkan aturan keras: barang tersier atau gaya hidup mewah hanya dibeli dari dividen, imbal hasil investasi, atau keuntungan bisnis sampingan. Gaji pokok hanya untuk kebutuhan dasar dan pembangunan modal aset.</p></div></div>
+    <div class="lang-en" hidden><div class="action-box"><span class="eyebrow">Action Principle</span><p>Set a hard rule: tertiary or luxury purchases are funded only by dividends, investment returns, or side-business profit. Your base salary is only for basic needs and building asset capital.</p></div></div>
+    <div class="lang-id"><div class="takeaway"><span class="eyebrow">Sari Pati Bab</span><p>&ldquo;Biarkan uangmu berkeringat lebih dulu, baru izinkan ia yang berbelanja untukmu.&rdquo;</p></div></div>
+    <div class="lang-en" hidden><div class="takeaway"><span class="eyebrow">Chapter Takeaway</span><p>&ldquo;Let your money sweat first — only then let it do the shopping for you.&rdquo;</p></div></div>
+  </div>
+</section>
+<hr class="div">
+
+<section class="chapter" id="bab7">
+  <div class="chapter-head">
+    <div class="chapter-num-row"><span class="pulse-dot"></span><span class="eyebrow"><span class="lang-id">Bab 07 · Bagian II</span><span class="lang-en" hidden>Chapter 07 · Part II</span></span></div>
+    <div class="lang-id"><h2 class="chapter-title">Beli Waktu, Bukan Cuma Beli Barang</h2><p class="chapter-sub">Uang terbarukan. Waktu tidak.</p></div>
+    <div class="lang-en" hidden><h2 class="chapter-title">Buy Time, Not Just Things</h2><p class="chapter-sub">Money is renewable. Time is not.</p></div>
+    <div class="experts">Naval Ravikant</div>
+  </div>
+  <div class="chapter-body">
+    <div class="lang-id">
+      <p class="dropcap">Perbedaan mendasar antara pola pikir pekerja konvensional dan pembangun kekayaan terletak pada cara mereka memandang hubungan antara waktu dan uang. Orang yang belum paham finansial menggunakan <em>waktu</em> mereka untuk menghemat <em>uang</em>. Sebaliknya, orang yang paham finansial menggunakan <em>uang</em> mereka untuk membeli kembali <em>waktu</em>.</p>
+      <p>Uang adalah sumber daya yang terbarukan — kamu selalu bisa mencarinya lagi. Waktu dan energi adalah sumber daya yang tidak terbarukan; sekali habis, kamu tidak akan pernah bisa mendapatkannya kembali.</p>
+      <p>Naval Ravikant memperluas gagasan ini lewat konsep <em>leverage</em> — pengganda hasil kerja tanpa menambah jam kerja. Ia membagi leverage menjadi empat: tenaga kerja orang lain (butuh izin/modal), modal uang (butuh izin/modal), serta kode dan media (tanpa izin — siapa pun bisa membangunnya di waktu tidur mereka). Semakin besar porsi leverage tanpa izin dalam hidupmu, semakin lebar celah antara waktu kerja dan hasil yang kamu terima.</p>
+      <div class="callout insight">
+        <h4>Wawasan Tambahan</h4>
+        <p>Naval juga menekankan pentingnya <em>specific knowledge</em> — keahlian unik yang terasa seperti "main-main" bagimu tapi sulit ditiru orang lain karena lahir dari rasa ingin tahu dan pengalaman personal, bukan dari kredensial formal. Specific knowledge inilah yang memungkinkanmu dibayar berdasarkan hasil (leverage), bukan berdasarkan jam kerja (waktu).</p>
+      </div>
+    </div>
+    <div class="lang-en" hidden>
+      <p class="dropcap">The fundamental difference between a conventional worker's mindset and a wealth-builder's lies in how they view the relationship between time and money. The financially unaware use their time to save money. The financially aware use their money to buy back their time.</p>
+      <p>Money is a renewable resource — you can always earn more of it. Time and energy are non-renewable; once spent, they're gone for good.</p>
+      <p>Naval Ravikant extends this through the idea of leverage — multiplying the output of your work without adding more working hours. He splits leverage into four types: other people's labor (permissioned), financial capital (permissioned), and code and media (permissionless — anyone can build these while they sleep). The bigger the share of permissionless leverage in your life, the wider the gap between your working hours and what you earn.</p>
+      <div class="callout insight">
+        <h4>Extra Insight</h4>
+        <p>Naval also stresses "specific knowledge" — a unique skill that feels like play to you but is hard for others to copy, because it comes from curiosity and personal experience rather than formal credentials. Specific knowledge is what lets you get paid for output (leverage) instead of hours (time).</p>
+      </div>
+    </div>
+
+    <div class="lang-id"><div class="action-box"><span class="eyebrow">Konsep Kunci</span><p><em>Opportunity Cost</em>, <em>Leverage</em>, <em>Specific Knowledge</em>, <em>Delegation</em>.</p></div></div>
+    <div class="lang-en" hidden><div class="action-box"><span class="eyebrow">Key Concepts</span><p><em>Opportunity Cost</em>, <em>Leverage</em>, <em>Specific Knowledge</em>, <em>Delegation</em>.</p></div></div>
+    <div class="lang-id"><div class="action-box"><span class="eyebrow">Prinsip Aksi</span><p>Hitung tarif per jammu: Penghasilan Bersih Bulanan ÷ (Total Jam Kerja + Jam Perjalanan Bulanan). Jika ada pekerjaan yang bisa didelegasikan dengan biaya di bawah tarif per jammu, bayar orang lain untuk melakukannya. Gunakan waktu yang kamu dapatkan kembali untuk istirahat atau belajar keahlian tinggi.</p></div></div>
+    <div class="lang-en" hidden><div class="action-box"><span class="eyebrow">Action Principle</span><p>Calculate your true hourly rate: Net Monthly Income ÷ (Total Working Hours + Monthly Commute Hours). If a task can be delegated for less than your hourly rate, pay someone else to do it. Use the reclaimed time to rest or learn a high-value skill.</p></div></div>
+    <div class="lang-id"><div class="takeaway"><span class="eyebrow">Sari Pati Bab</span><p>&ldquo;Uang selalu bisa dicari lagi. Waktu yang sudah hilang, hilang untuk selamanya.&rdquo;</p></div></div>
+    <div class="lang-en" hidden><div class="takeaway"><span class="eyebrow">Chapter Takeaway</span><p>&ldquo;Money can always be earned again. Time once lost is gone forever.&rdquo;</p></div></div>
+  </div>
+</section>
+<hr class="div">
+
+<section class="chapter" id="bab8">
+  <div class="chapter-head">
+    <div class="chapter-num-row"><span class="pulse-dot"></span><span class="eyebrow"><span class="lang-id">Bab 08 · Bagian II</span><span class="lang-en" hidden>Chapter 08 · Part II</span></span></div>
+    <div class="lang-id"><h2 class="chapter-title">Freedom Fund (Dana Pembeli Kebebasan)</h2><p class="chapter-sub">Kas bukan sekadar jaring pengaman — ia posisi tawar.</p></div>
+    <div class="lang-en" hidden><h2 class="chapter-title">The Freedom Fund (Cash That Buys Choices)</h2><p class="chapter-sub">Cash isn't just a safety net — it's bargaining power.</p></div>
+    <div class="experts">Morgan Housel</div>
+  </div>
+  <div class="chapter-body">
+    <div class="lang-id">
+      <p class="dropcap">Sebagian besar orang memandang dana darurat hanya sebagai alat pasif untuk mengantisipasi musibah seperti sakit atau pemutusan hubungan kerja. Padahal, fungsi terbesar dari tumpukan uang tunai yang aman adalah memberikan keberanian posisi tawar dalam hidup.</p>
+      <p>Memiliki cadangan kas yang kuat memungkinkanmu untuk berani menolak perintah yang melanggar etika, keluar dari lingkungan kerja yang racun (<em>toxic</em>), atau mengambil jeda karier untuk menentukan arah hidup baru tanpa panik memikirkan tagihan bulan depan.</p>
+      <p>Housel menyebut kas sebagai bentuk <em>room for error</em> yang paling likuid — ruang gerak yang membuatmu bisa bertahan cukup lama untuk membiarkan probabilitas baik akhirnya terjadi, alih-alih terpaksa mengambil keputusan buruk karena kepepet secara finansial.</p>
+      <div class="callout insight">
+        <h4>Wawasan Tambahan</h4>
+        <p>Semakin tidak terprediksi jalur kariermu (misalnya wirausaha, pekerja kreatif, atau industri yang sedang bertransformasi cepat), semakin besar dana kebebasan yang perlu kamu siapkan — karena volatilitas pendapatan menuntut margin keamanan yang lebih lebar dibanding karyawan dengan gaji tetap.</p>
+      </div>
+    </div>
+    <div class="lang-en" hidden>
+      <p class="dropcap">Most people see an emergency fund only as a passive tool for misfortunes like illness or job loss. But the biggest function of a solid cash buffer is giving you the courage of bargaining power in life.</p>
+      <p>A strong cash reserve lets you dare to refuse an unethical order, walk away from a toxic workplace, or take a career pause to figure out a new direction — without panicking over next month's bills.</p>
+      <p>Housel calls cash the most liquid form of "room for error" — the buffer that lets you survive long enough for good probabilities to eventually play out, instead of being forced into a bad decision purely out of financial desperation.</p>
+      <div class="callout insight">
+        <h4>Extra Insight</h4>
+        <p>The less predictable your career path (entrepreneurship, creative work, or a fast-changing industry), the bigger your freedom fund needs to be — because income volatility demands a wider safety margin than a fixed salary requires.</p>
+      </div>
+    </div>
+
+    <div class="lang-id"><div class="action-box"><span class="eyebrow">Konsep Kunci</span><p><em>Emergency Fund</em>, <em>Runway Calculation</em>, <em>Bargaining Power</em>.</p></div></div>
+    <div class="lang-en" hidden><div class="action-box"><span class="eyebrow">Key Concepts</span><p><em>Emergency Fund</em>, <em>Runway Calculation</em>, <em>Bargaining Power</em>.</p></div></div>
+    <div class="lang-id"><div class="action-box"><span class="eyebrow">Prinsip Aksi</span><p>Hitung runway kebebasanmu: Total Aset Likuid ÷ Pengeluaran Minimal Bulanan. Targetkan minimal 6–12 bulan kebebasan mutlak sebelum mengambil risiko karier besar.</p></div></div>
+    <div class="lang-en" hidden><div class="action-box"><span class="eyebrow">Action Principle</span><p>Calculate your freedom runway: Total Liquid Assets ÷ Minimum Monthly Expenses. Target at least 6–12 months of absolute freedom before taking a major career risk.</p></div></div>
+    <div class="lang-id"><div class="takeaway"><span class="eyebrow">Sari Pati Bab</span><p>&ldquo;Dana darurat bukan sekadar soal rasa takut — ia soal keberanian untuk berkata tidak.&rdquo;</p></div></div>
+    <div class="lang-en" hidden><div class="takeaway"><span class="eyebrow">Chapter Takeaway</span><p>&ldquo;An emergency fund isn't just about fear — it's about the courage to say no.&rdquo;</p></div></div>
+  </div>
+</section>
+<hr class="div">
+
+<!-- ================= BAGIAN III ================= -->
+
+<section class="chapter" id="bab9">
+  <div class="chapter-head">
+    <div class="chapter-num-row"><span class="pulse-dot"></span><span class="eyebrow"><span class="lang-id">Bab 09 · Bagian III</span><span class="lang-en" hidden>Chapter 09 · Part III</span></span></div>
+    <div class="lang-id"><h2 class="chapter-title">Rem 72 Jam Untuk Membunuh Belanja Impulsif</h2><p class="chapter-sub">Berikan gesekan pada keputusan yang salah.</p></div>
+    <div class="lang-en" hidden><h2 class="chapter-title">The 72-Hour Brake That Kills Impulse Spending</h2><p class="chapter-sub">Add friction to the wrong decision.</p></div>
+    <div class="experts">James Clear</div>
+  </div>
+  <div class="chapter-body">
+    <div class="lang-id">
+      <p class="dropcap">Belanja impulsif jarang didorong oleh kebutuhan rasional atas fungsi suatu barang. Dorongan tersebut hampir selalu dipicu oleh pencarian dopamin singkat ketika otakmu merasa lelah, stres, atau terpapar strategi pemasaran digital yang dirancang memicu rasa takut ketinggalan (<em>FOMO</em>).</p>
+      <p>Ketika kamu langsung bertindak mengikuti dorongan emosi tersebut, kamu sedang membiarkan bagian otak primitifmu mengambil alih keputusan keuangan jangka panjang.</p>
+      <p>James Clear dalam <em>Atomic Habits</em> menjelaskan bahwa cara paling efektif menghentikan kebiasaan buruk bukanlah lewat kemauan (willpower), melainkan lewat menambah gesekan (<em>friction</em>) di antara dorongan dan tindakan. Semakin banyak langkah dan waktu jeda yang harus dilalui sebelum sebuah pembelian terjadi, semakin besar peluang dorongan emosional itu mereda dengan sendirinya.</p>
+      <div class="callout insight">
+        <h4>Wawasan Tambahan</h4>
+        <p>Clear juga menyarankan menghapus aplikasi belanja dari layar utama ponsel, logout otomatis dari akun e-commerce, dan menonaktifkan metode pembayaran tersimpan — bentuk-bentuk gesekan pasif yang bekerja bahkan saat kamu sedang lelah dan tidak punya energi untuk menahan diri secara aktif.</p>
+      </div>
+    </div>
+    <div class="lang-en" hidden>
+      <p class="dropcap">Impulse spending is rarely driven by rational need for an item's function. The urge is almost always triggered by a quick dopamine hit when your brain is tired, stressed, or exposed to digital marketing designed to trigger fear of missing out (FOMO).</p>
+      <p>When you act instantly on that emotional impulse, you're letting the primitive part of your brain hijack a long-term financial decision.</p>
+      <p>James Clear, in <em>Atomic Habits</em>, explains that the most effective way to break a bad habit isn't willpower — it's adding friction between the urge and the action. The more steps and delay required before a purchase happens, the more likely that emotional urge fades on its own.</p>
+      <div class="callout insight">
+        <h4>Extra Insight</h4>
+        <p>Clear also suggests removing shopping apps from your home screen, auto-logging-out of e-commerce accounts, and disabling saved payment methods — passive friction that works even when you're too tired to actively resist.</p>
+      </div>
+    </div>
+
+    <div class="lang-id"><div class="action-box"><span class="eyebrow">Konsep Kunci</span><p><em>Impulse Buying</em>, <em>Dopamine Loop</em>, <em>Friction Creation</em>.</p></div></div>
+    <div class="lang-en" hidden><div class="action-box"><span class="eyebrow">Key Concepts</span><p><em>Impulse Buying</em>, <em>Dopamine Loop</em>, <em>Friction Creation</em>.</p></div></div>
+    <div class="lang-id"><div class="action-box"><span class="eyebrow">Prinsip Aksi</span><p>Setiap kali ingin membeli barang non-esensial di atas nilai tertentu, berlakukan jeda wajib 72 jam. Masukkan ke keranjang atau catatan, tutup aplikasinya. Jika setelah 3 hari keinginan masih rasional, silakan beli.</p></div></div>
+    <div class="lang-en" hidden><div class="action-box"><span class="eyebrow">Action Principle</span><p>Whenever you want a non-essential item above a set value, enforce a mandatory 72-hour pause. Add it to a cart or note, close the app. If the desire is still rational after 3 days, go ahead and buy it.</p></div></div>
+    <div class="lang-id"><div class="takeaway"><span class="eyebrow">Sari Pati Bab</span><p>&ldquo;Beri jarak 72 jam antara keinginan dan keputusan, lalu lihat siapa yang sebenarnya menang.&rdquo;</p></div></div>
+    <div class="lang-en" hidden><div class="takeaway"><span class="eyebrow">Chapter Takeaway</span><p>&ldquo;Put 72 hours between wanting and deciding, then see who really wins.&rdquo;</p></div></div>
+  </div>
+</section>
+<hr class="div">
+
+<section class="chapter" id="bab10">
+  <div class="chapter-head">
+    <div class="chapter-num-row"><span class="pulse-dot"></span><span class="eyebrow"><span class="lang-id">Bab 10 · Bagian III</span><span class="lang-en" hidden>Chapter 10 · Part III</span></span></div>
+    <div class="lang-id"><h2 class="chapter-title">Automatic Money (Sistem Mengalahkan Disiplin)</h2><p class="chapter-sub">Bangun infrastruktur, bukan tekad.</p></div>
+    <div class="lang-en" hidden><h2 class="chapter-title">Automatic Money (Systems Beat Discipline)</h2><p class="chapter-sub">Build infrastructure, not willpower.</p></div>
+    <div class="experts">Ramit Sethi</div>
+  </div>
+  <div class="chapter-body">
+    <div class="lang-id">
+      <p class="dropcap">Mengandalkan niat dan disiplin diri untuk menabung setiap bulan adalah strategi yang gagal sejak awal. Kelelahan mengambil keputusan (<em>decision fatigue</em>) di akhir hari akan selalu merusak niat baik yang kamu susun di awal bulan.</p>
+      <p>Orang-orang dengan pengelolaan keuangan terbaik tidak memiliki kehendak bebas (<em>willpower</em>) yang lebih kuat dari orang lain; mereka hanya membangun sistem yang membuat keputusan buruk menjadi sulit dilakukan dan keputusan baik menjadi berjalan otomatis.</p>
+      <p>Ramit Sethi memformalkan ini lewat <em>Conscious Spending Plan</em> — kerangka alokasi penghasilan bulanan yang menyeimbangkan empat kebutuhan sekaligus: biaya tetap (kebutuhan pokok), investasi masa depan, target tabungan jangka pendek, dan belanja untuk kesenangan tanpa rasa bersalah. Bedanya dengan anggaran konvensional: alih-alih melarang semua kesenangan, rencana ini justru mengalokasikan porsi khusus untuknya secara sadar dan terbatas.</p>
+      <div class="callout insight">
+        <h4>Wawasan Tambahan</h4>
+        <p>Rentang alokasi umum yang disarankan Sethi: sekitar 50–60% untuk biaya tetap, 10% untuk investasi jangka panjang, 5–10% untuk tabungan tujuan (dana darurat, pernikahan, DP rumah), dan sisanya bebas dibelanjakan tanpa rasa bersalah — karena porsinya sudah dialokasikan secara sadar, bukan hasil kebocoran yang tidak terlacak.</p>
+      </div>
+    </div>
+    <div class="lang-en" hidden>
+      <p class="dropcap">Relying on intention and self-discipline to save every month is a strategy doomed from the start. Decision fatigue by the end of the day will always erode the good intentions you set at the start of the month.</p>
+      <p>People with the best money management don't have stronger willpower than anyone else — they simply build systems that make bad decisions hard to execute and good decisions run automatically.</p>
+      <p>Ramit Sethi formalizes this through the Conscious Spending Plan — a monthly income allocation framework balancing four needs at once: fixed costs, future investing, short-term savings goals, and guilt-free spending. Unlike a conventional budget, instead of banning all enjoyment, this plan deliberately sets aside a specific, limited portion for it.</p>
+      <div class="callout insight">
+        <h4>Extra Insight</h4>
+        <p>Sethi's general suggested ranges: roughly 50–60% for fixed costs, 10% for long-term investing, 5–10% for savings goals (emergency fund, wedding, house down payment), and the remainder spent guilt-free — because that portion was consciously allocated, not the result of untracked leakage.</p>
+      </div>
+    </div>
+
+    <div class="lang-id"><div class="action-box"><span class="eyebrow">Konsep Kunci</span><p><em>Pay Yourself First</em>, <em>Decision Fatigue</em>, <em>Conscious Spending Plan</em>.</p></div></div>
+    <div class="lang-en" hidden><div class="action-box"><span class="eyebrow">Key Concepts</span><p><em>Pay Yourself First</em>, <em>Decision Fatigue</em>, <em>Conscious Spending Plan</em>.</p></div></div>
+    <div class="lang-id"><div class="action-box"><span class="eyebrow">Prinsip Aksi</span><p>Atur autodebet di hari gajian: 20% ke Rekening Investasi/Aset, 10% ke Rekening Dana Kebebasan. Sisa 70% di Rekening Gaji adalah batas mutlak pengeluaran operasional dan gaya hidup bulan itu.</p></div></div>
+    <div class="lang-en" hidden><div class="action-box"><span class="eyebrow">Action Principle</span><p>Set up auto-debit on payday: 20% to your Investment Account, 10% to your Freedom Fund. The remaining 70% in your salary account is the absolute cap on that month's spending and lifestyle.</p></div></div>
+    <div class="lang-id"><div class="takeaway"><span class="eyebrow">Sari Pati Bab</span><p>&ldquo;Sistem yang baik membuat keputusan buruk jadi sulit, dan keputusan baik berjalan otomatis.&rdquo;</p></div></div>
+    <div class="lang-en" hidden><div class="takeaway"><span class="eyebrow">Chapter Takeaway</span><p>&ldquo;A good system makes bad decisions hard to make and good decisions run automatically.&rdquo;</p></div></div>
+  </div>
+</section>
+<hr class="div">
+
+<section class="chapter" id="bab11">
+  <div class="chapter-head">
+    <div class="chapter-num-row"><span class="pulse-dot"></span><span class="eyebrow"><span class="lang-id">Bab 11 · Bagian III</span><span class="lang-en" hidden>Chapter 11 · Part III</span></span></div>
+    <div class="lang-id"><h2 class="chapter-title">Ritual 15 Menit di Hari Minggu Malam</h2><p class="chapter-sub">Kamu tak bisa mengendalikan apa yang tidak kamu ukur.</p></div>
+    <div class="lang-en" hidden><h2 class="chapter-title">The 15-Minute Sunday Night Ritual</h2><p class="chapter-sub">You can't control what you don't measure.</p></div>
+    <div class="experts">James Clear</div>
+  </div>
+  <div class="chapter-body">
+    <div class="lang-id">
+      <p class="dropcap">Kamu tidak bisa mengendalikan apa yang tidak kamu ukur. Namun, melacak setiap rupiah pengeluaran hingga ke pembungkus permen adalah bentuk obsesi mikro yang melelahkan dan sering berakhir dengan keputusasaan.</p>
+      <p>Sistem monitoring keuangan yang efektif harus bersifat ringkas, berfokus pada gambaran besar, dan mudah dipertahankan sebagai kebiasaan mingguan yang konsisten.</p>
+      <p>Clear menyebut ini sebagai <em>habit stacking</em> — menempelkan kebiasaan baru pada rutinitas yang sudah mapan (misalnya "setelah makan malam Minggu, aku buka aplikasi keuangan selama 15 menit") sehingga kebiasaan baru tidak butuh keputusan tersendiri untuk dimulai. Ia juga mengingatkan bahwa kamu tidak naik ke level tujuanmu — kamu jatuh ke level sistemmu; artinya evaluasi rutin sekecil apa pun jauh lebih menentukan daripada resolusi finansial besar di awal tahun yang jarang ditindaklanjuti.</p>
+      <div class="callout insight">
+        <h4>Wawasan Tambahan</h4>
+        <p>Kunci keberlanjutan ritual ini bukan kelengkapan datanya, tapi konsistensi frekuensinya. Tiga angka besar yang dilacak setiap minggu selama satu tahun penuh memberi wawasan jauh lebih berharga dibanding satu laporan keuangan super-detail yang dibuat sekali lalu ditinggalkan.</p>
+      </div>
+    </div>
+    <div class="lang-en" hidden>
+      <p class="dropcap">You can't control what you don't measure. But tracking every rupiah down to the candy wrapper is an exhausting micro-obsession that often ends in giving up entirely.</p>
+      <p>An effective money-monitoring system needs to be lean, focused on the big picture, and easy to sustain as a consistent weekly habit.</p>
+      <p>Clear calls this habit stacking — attaching a new habit to an already-established routine (e.g., "after Sunday dinner, I open my finance app for 15 minutes") so the new habit doesn't require a separate decision to start. He also reminds us that you don't rise to the level of your goals — you fall to the level of your systems; meaning small, routine review matters far more than a big New Year's financial resolution that rarely gets followed through.</p>
+      <div class="callout insight">
+        <h4>Extra Insight</h4>
+        <p>The key to sustaining this ritual isn't data completeness — it's frequency consistency. Three big numbers tracked weekly for a full year deliver far more insight than one super-detailed financial report made once and then abandoned.</p>
+      </div>
+    </div>
+
+    <div class="lang-id"><div class="action-box"><span class="eyebrow">Konsep Kunci</span><p><em>Macro Tracking</em>, <em>Savings Rate</em>, <em>Habit Stacking</em>.</p></div></div>
+    <div class="lang-en" hidden><div class="action-box"><span class="eyebrow">Key Concepts</span><p><em>Macro Tracking</em>, <em>Savings Rate</em>, <em>Habit Stacking</em>.</p></div></div>
+    <div class="lang-id"><div class="action-box"><span class="eyebrow">Prinsip Aksi</span><p>Luangkan 15 menit tiap Minggu malam untuk memperbarui tiga angka: rasio tabungan mingguan, arah net worth (naik/turun), dan kualitas alokasi waktu (membangun vs impulsif).</p></div></div>
+    <div class="lang-en" hidden><div class="action-box"><span class="eyebrow">Action Principle</span><p>Spend 15 minutes every Sunday night updating three numbers: weekly savings ratio, net-worth direction (up/down), and quality of time allocation (building vs. impulsive).</p></div></div>
+    <div class="lang-id"><div class="takeaway"><span class="eyebrow">Sari Pati Bab</span><p>&ldquo;Lima belas menit setiap minggu selalu mengalahkan satu resolusi besar di awal tahun.&rdquo;</p></div></div>
+    <div class="lang-en" hidden><div class="takeaway"><span class="eyebrow">Chapter Takeaway</span><p>&ldquo;Fifteen minutes every week always beats one big resolution at the start of the year.&rdquo;</p></div></div>
+  </div>
+</section>
+<hr class="div">
+
+<section class="chapter" id="bab12">
+  <div class="chapter-head">
+    <div class="chapter-num-row"><span class="pulse-dot"></span><span class="eyebrow"><span class="lang-id">Bab 12 · Bagian III</span><span class="lang-en" hidden>Chapter 12 · Part III</span></span></div>
+    <div class="lang-id"><h2 class="chapter-title">Berani "Gagal di Luar" dan Membayar Uang Kursus</h2><p class="chapter-sub">Kerugian awal adalah biaya pendidikan, bukan aib.</p></div>
+    <div class="lang-en" hidden><h2 class="chapter-title">Daring to Fail Out Loud and Paying Tuition</h2><p class="chapter-sub">Early losses are tuition, not shame.</p></div>
+    <div class="experts">Ankur Warikoo</div>
+  </div>
+  <div class="chapter-body">
+    <div class="lang-id">
+      <p class="dropcap">Tidak ada investor atau pengusaha sukses yang melangkah tanpa pernah mengalami kerugian. Mencoba menghindari risiko secara mutlak adalah cara paling pasti untuk terjebak dalam stagnasi finansial akibat tergerus inflasi.</p>
+      <p>Bila kamu mengambil risiko yang terukur, kerugian finansial yang terjadi di masa-masa awal bukanlah sebuah kegagalan yang memalukan, melainkan biaya pendidikan (<em>tuition fee</em>) yang kamu bayarkan kepada pasar untuk memperoleh kearifan bernilai tinggi.</p>
+      <p>Ankur Warikoo dalam <em>Do Epic Shit</em> mendorong praktik menuliskan kegagalan secara terbuka dan jujur — bukan untuk meratapi, tapi untuk mengekstrak pelajaran konkret yang bisa diulang di masa depan. Baginya, orang yang paling berkembang secara finansial bukan yang paling jarang gagal, melainkan yang paling cepat mengubah kegagalan menjadi data yang bisa ditindaklanjuti.</p>
+      <div class="callout insight">
+        <h4>Wawasan Tambahan</h4>
+        <p>Warikoo membedakan antara risiko yang dihitung dan spekulasi buta: risiko yang dihitung punya batas kerugian maksimum yang sudah kamu tentukan sejak awal (misalnya maksimal 5% dari portofolio untuk instrumen berisiko tinggi), sedangkan spekulasi buta tidak punya batas sama sekali dan berpotensi menghancurkan seluruh fondasi finansial yang sudah dibangun.</p>
+      </div>
+    </div>
+    <div class="lang-en" hidden>
+      <p class="dropcap">No successful investor or entrepreneur ever moved forward without experiencing loss. Trying to avoid risk entirely is the surest way to get trapped in financial stagnation as inflation erodes your money.</p>
+      <p>When you take calculated risks, early financial losses aren't a shameful failure — they're the tuition fee you pay the market to earn high-value wisdom.</p>
+      <p>Ankur Warikoo, in <em>Do Epic Shit</em>, champions writing failures down openly and honestly — not to wallow, but to extract concrete lessons you can apply going forward. For him, the people who grow fastest financially aren't the ones who fail least, but the ones who turn failure into actionable data the quickest.</p>
+      <div class="callout insight">
+        <h4>Extra Insight</h4>
+        <p>Warikoo distinguishes calculated risk from blind speculation: calculated risk has a maximum loss you defined in advance (say, capping high-risk instruments at 5% of your portfolio), while blind speculation has no cap at all and can wipe out the entire financial foundation you've built.</p>
+      </div>
+    </div>
+
+    <div class="lang-id"><div class="action-box"><span class="eyebrow">Konsep Kunci</span><p><em>Calculated Risk</em>, <em>Risk Tolerance</em>, <em>Accountability</em>.</p></div></div>
+    <div class="lang-en" hidden><div class="action-box"><span class="eyebrow">Key Concepts</span><p><em>Calculated Risk</em>, <em>Risk Tolerance</em>, <em>Accountability</em>.</p></div></div>
+    <div class="lang-id"><div class="action-box"><span class="eyebrow">Prinsip Aksi</span><p>Dokumentasikan proses belajarmu, evaluasi kesalahan finansial secara transparan pada catatan pribadi, dan ambil pelajaran dari setiap kerugian tanpa perlu mencari kambing hitam di luar dirimu.</p></div></div>
+    <div class="lang-en" hidden><div class="action-box"><span class="eyebrow">Action Principle</span><p>Document your learning process, evaluate financial mistakes transparently in a personal log, and extract the lesson from every loss without looking for someone else to blame.</p></div></div>
+    <div class="lang-id"><div class="takeaway"><span class="eyebrow">Sari Pati Bab</span><p>&ldquo;Kerugian di masa awal bukan aib untuk disembunyikan — ia uang kuliah yang kau bayarkan ke pasar.&rdquo;</p></div></div>
+    <div class="lang-en" hidden><div class="takeaway"><span class="eyebrow">Chapter Takeaway</span><p>&ldquo;An early loss isn't a shame to hide — it's tuition you pay to the market.&rdquo;</p></div></div>
+  </div>
+</section>
+<hr class="div">
+
+<!-- ================= BAGIAN IV ================= -->
+
+<section class="chapter" id="bab13">
+  <div class="chapter-head">
+    <div class="chapter-num-row"><span class="pulse-dot"></span><span class="eyebrow"><span class="lang-id">Bab 13 · Bagian IV</span><span class="lang-en" hidden>Chapter 13 · Part IV</span></span></div>
+    <div class="lang-id"><h2 class="chapter-title">Compounding (Efek Bola Salju yang Mengubah Nasib)</h2><p class="chapter-sub">Yang memahaminya akan menghasilkannya. Yang tidak, akan membayarnya.</p></div>
+    <div class="lang-en" hidden><h2 class="chapter-title">Compounding (The Snowball Effect That Changes Destiny)</h2><p class="chapter-sub">Those who understand it earn it. Those who don't, pay for it.</p></div>
+    <div class="experts">John C. Bogle · Morgan Housel</div>
+  </div>
+  <div class="chapter-body">
+    <div class="lang-id">
+      <p class="dropcap">Banyak orang gagal menjadi kaya bukan karena tidak punya uang untuk diinvestasikan, melainkan karena tidak memiliki kesabaran untuk membiarkan hukum alam bekerja. Efek bunga bergulung (<em>compounding interest</em>) sering disebut sebagai keajaiban dunia kedelapan.</p>
+      <p>Di tahun-tahun awal, pertumbuhan investasi akan terasa sangat lambat dan membosankan, seperti bola salju kecil yang baru digulung di puncak gunung. Namun, jika kamu tidak menyentuhnya dan membiarkannya terus menggelinding, ukurannya akan membesar secara eksponensial.</p>
+      <p>Housel mencatat bahwa sebagian besar kekayaan Warren Buffett justru terbentuk setelah usia 60 tahun — bukan karena strategi investasinya berubah secara dramatis di usia senja, melainkan karena ia sudah berinvestasi sejak remaja, sehingga waktu memiliki puluhan tahun lebih untuk bekerja menggandakan modalnya berulang kali. Pelajarannya: dalam compounding, <em>lama waktu berinvestasi jauh lebih menentukan daripada besar return tahunan</em>.</p>
+      <div class="callout insight">
+        <h4>Wawasan Tambahan — Bogle</h4>
+        <p>John Bogle mengingatkan sisi gelap compounding: biaya kecil yang tampak sepele (1–2% expense ratio per tahun) ikut ber-compounding secara negatif, dan dalam rentang 30–40 tahun bisa menggerus lebih dari sepertiga total kekayaan akhirmu. Compounding bekerja dua arah — untuk keuntunganmu jika biaya rendah, dan melawanmu jika biaya tinggi dibiarkan menumpuk diam-diam.</p>
+      </div>
+    </div>
+    <div class="lang-en" hidden>
+      <p class="dropcap">Many people fail to get rich not because they lack money to invest, but because they lack the patience to let a law of nature do its work. Compounding interest is often called the eighth wonder of the world.</p>
+      <p>In the early years, investment growth feels painfully slow and boring — like a small snowball just starting to roll at the top of a mountain. But if you leave it untouched and let it keep rolling, its size grows exponentially.</p>
+      <p>Housel notes that most of Warren Buffett's wealth was actually built after age 60 — not because his investing strategy changed dramatically late in life, but because he'd been investing since his teens, giving time decades longer to work its multiplying magic. The lesson: in compounding, time invested matters far more than annual return rate.</p>
+      <div class="callout insight">
+        <h4>Extra Insight — Bogle</h4>
+        <p>John Bogle warns of compounding's dark side: small fees that look trivial (a 1–2% annual expense ratio) also compound negatively, and over 30–40 years can erode more than a third of your final wealth. Compounding cuts both ways — for you when costs are low, against you when high costs are left to quietly pile up.</p>
+      </div>
+    </div>
+
+    <div class="lang-id"><div class="action-box"><span class="eyebrow">Konsep Kunci</span><p><em>Compound Interest</em>, <em>Time in the Market</em>, <em>Auto-Reinvestment</em>.</p></div></div>
+    <div class="lang-en" hidden><div class="action-box"><span class="eyebrow">Key Concepts</span><p><em>Compound Interest</em>, <em>Time in the Market</em>, <em>Auto-Reinvestment</em>.</p></div></div>
+    <div class="lang-id"><div class="action-box"><span class="eyebrow">Prinsip Aksi</span><p>Jangan pernah mencairkan dividen, kupon, atau imbal hasil di masa-masa awal pembentukan aset. Pasang fitur <em>Auto-Reinvest</em> agar setiap hasil langsung diputar kembali menjadi modal utama.</p></div></div>
+    <div class="lang-en" hidden><div class="action-box"><span class="eyebrow">Action Principle</span><p>Never cash out dividends, coupons, or returns during the early years of building your assets. Enable Auto-Reinvest so every return is immediately rolled back into your core capital.</p></div></div>
+
+    <h3 class="lang-id"><span class="letter">13.1</span> Simulator: Compounding vs. Inflasi</h3>
+    <h3 class="lang-en" hidden style="display:block"><span class="letter">13.1</span> Simulator: Compounding vs. Inflation</h3>
+    <p class="lang-id">Coba sendiri: geser tiga slider di bawah ini untuk melihat bagaimana investasi bulanan rutin tumbuh selama 5–40 tahun — dan berapa <em>nilai riilnya</em> setelah dikoreksi inflasi. Angka bersifat ilustratif, bukan proyeksi jaminan.</p>
+    <p class="lang-en" hidden>Try it yourself: drag the three sliders below to see how a regular monthly investment grows over 5–40 years — and what its real value is once adjusted for inflation. Figures are illustrative, not guaranteed projections.</p>
+
+    <div class="sim">
+      <h4><span class="lang-id">Simulator Compounding Interaktif</span><span class="lang-en" hidden>Interactive Compounding Simulator</span></h4>
+      <div class="sim-controls">
+        <div class="sim-field">
+          <label><span><span class="lang-id">Investasi Bulanan</span><span class="lang-en" hidden>Monthly Investment</span></span><b id="pmtVal">Rp 1.000.000</b></label>
+          <input type="range" id="pmt" min="100000" max="10000000" step="100000" value="1000000">
+        </div>
+        <div class="sim-field">
+          <label><span><span class="lang-id">Return Tahunan</span><span class="lang-en" hidden>Annual Return</span></span><b id="retVal">10%</b></label>
+          <input type="range" id="ret" min="3" max="18" step="0.5" value="10">
+        </div>
+        <div class="sim-field">
+          <label><span><span class="lang-id">Inflasi Tahunan</span><span class="lang-en" hidden>Annual Inflation</span></span><b id="infVal">3.5%</b></label>
+          <input type="range" id="inf" min="0" max="10" step="0.5" value="3.5">
+        </div>
+      </div>
+
+      <div class="sim-summary" id="simSummary"></div>
+
+      <div class="sim-canvas-wrap"><canvas id="simChart" width="1200" height="520"></canvas></div>
+      <div class="sim-legend">
+        <span><i style="background:#0B3D66"></i><span class="lang-id">Nilai Nominal</span><span class="lang-en" hidden>Nominal Value</span></span>
+        <span><i style="background:#B5502E"></i><span class="lang-id">Nilai Riil (setelah inflasi)</span><span class="lang-en" hidden>Real Value (after inflation)</span></span>
+        <span><i style="background:#B7AE9A"></i><span class="lang-id">Total Modal Disetor</span><span class="lang-en" hidden>Total Contributed</span></span>
+      </div>
+
+      <p class="table-cap" style="margin-top:22px;"><span class="lang-id">Tabel Proyeksi per 5 Tahun</span><span class="lang-en" hidden>5-Year Projection Table</span></p>
+      <div class="matrix-wrap">
+        <table class="matrix" id="simTable">
+          <thead><tr>
+            <th><span class="lang-id">Tahun</span><span class="lang-en" hidden>Year</span></th>
+            <th><span class="lang-id">Modal Disetor</span><span class="lang-en" hidden>Contributed</span></th>
+            <th><span class="lang-id">Nilai Nominal</span><span class="lang-en" hidden>Nominal Value</span></th>
+            <th><span class="lang-id">Nilai Riil</span><span class="lang-en" hidden>Real Value</span></th>
+          </tr></thead>
+          <tbody id="simTableBody"></tbody>
+        </table>
+      </div>
+    </div>
+
+    <div class="lang-id">
+      <p>Perhatikan pola yang selalu muncul: garis nominal (biru) melesat menjauh dari garis modal disetor (abu-abu) setelah tahun ke-15—20 — inilah bukti visual compounding mulai "menyalip" kontribusi manualmu. Sementara itu, garis nilai riil (jingga) tetap tumbuh, tapi dengan kemiringan yang lebih landai, mengingatkan bahwa daya beli uang di masa depan tidak sama dengan angka nominalnya hari ini.</p>
+    </div>
+    <div class="lang-en" hidden>
+      <p>Notice the pattern that always appears: the nominal line (blue) pulls away from the contributed-capital line (grey) somewhere around year 15–20 — visual proof that compounding starts to "overtake" your manual contributions. Meanwhile the real-value line (rust) keeps growing too, but on a gentler slope, a reminder that future money's purchasing power isn't the same as today's face value.</p>
+    </div>
+    <div class="lang-id"><div class="takeaway"><span class="eyebrow">Sari Pati Bab</span><p>&ldquo;Waktu di dalam pasar selalu mengalahkan usaha menebak waktu yang tepat untuk masuk pasar.&rdquo;</p></div></div>
+    <div class="lang-en" hidden><div class="takeaway"><span class="eyebrow">Chapter Takeaway</span><p>&ldquo;Time in the market always beats trying to time the market.&rdquo;</p></div></div>
+  </div>
+</section>
+<hr class="div">
+
+<section class="chapter" id="bab14">
+  <div class="chapter-head">
+    <div class="chapter-num-row"><span class="pulse-dot"></span><span class="eyebrow"><span class="lang-id">Bab 14 · Bagian IV</span><span class="lang-en" hidden>Chapter 14 · Part IV</span></span></div>
+    <div class="lang-id"><h2 class="chapter-title">Peta Alat Investasi (Memilih Senjata yang Tepat)</h2><p class="chapter-sub">Bukan mencari yang paling untung, tapi yang membuatmu tidur nyenyak.</p></div>
+    <div class="lang-en" hidden><h2 class="chapter-title">The Instrument Map (Choosing the Right Weapon)</h2><p class="chapter-sub">Not the highest return — the one that lets you sleep at night.</p></div>
+    <div class="experts">John C. Bogle · Naval Ravikant</div>
+  </div>
+  <div class="chapter-body">
+    <div class="lang-id">
+      <p class="dropcap">Tidak ada satu instrumen investasi yang sempurna untuk semua orang. Setiap alat memiliki fungsi, tingkat risiko, dan karakter berbeda. Tugasmu bukan mencari instrumen yang "paling untung", melainkan menyusun portofolio yang membuatmu bisa tidur nyenyak sekaligus mencapai target finansialmu.</p>
+      <p class="table-cap">Peta Instrumen Investasi</p>
+      <div class="matrix-wrap"><table class="matrix">
+        <thead><tr><th>Instrumen</th><th>Risiko</th><th>Potensi Return</th><th>Fungsi Utama</th></tr></thead>
+        <tbody>
+          <tr><td><strong>Pasar Uang & Deposito</strong></td><td>Sangat Rendah</td><td>3%–5%</td><td>Likuiditas & dana darurat</td></tr>
+          <tr><td><strong>Surat Utang Negara / Obligasi</strong></td><td>Rendah–Sedang</td><td>5%–7%</td><td>Arus kas rutin, penjaga modal</td></tr>
+          <tr><td><strong>Reksa Dana Indeks / ETF</strong></td><td>Sedang</td><td>7%–10%</td><td>Mesin pertumbuhan utama</td></tr>
+          <tr><td><strong>Saham Individual</strong></td><td>Tinggi</td><td>Tak terbatas</td><td>Pendorong nilai modal</td></tr>
+          <tr><td><strong>Logam Mulia / Emas</strong></td><td>Rendah</td><td>Setara inflasi</td><td>Pelindung nilai</td></tr>
+          <tr><td><strong>Properti Sewa</strong></td><td>Sedang–Tinggi</td><td>Moderat–Tinggi</td><td>Arus kas nyata & aset fisik</td></tr>
+          <tr><td><strong>Aset Kripto / Digital</strong></td><td>Sangat Tinggi</td><td>Ekstrem</td><td>Spekulasi, maksimal 5–10% portofolio</td></tr>
+        </tbody>
+      </table></div>
+      <div class="callout insight">
+        <h4>Wawasan Tambahan — Bogle</h4>
+        <p>John Bogle secara konsisten menunjukkan bahwa mayoritas manajer investasi aktif gagal mengalahkan kinerja indeks pasar secara konsisten dalam jangka panjang, setelah biaya diperhitungkan. Baginya, membeli reksa dana indeks berbiaya rendah setara membeli "seluruh pasar" — kamu otomatis memiliki bagian dari setiap perusahaan pemenang tanpa harus menebak yang mana yang akan menang.</p>
+      </div>
+    </div>
+    <div class="lang-en" hidden>
+      <p class="dropcap">No single investment instrument is perfect for everyone. Each tool has its own function, risk level, and character. Your job isn't to find the "most profitable" instrument, but to build a portfolio that lets you sleep well while still hitting your financial targets.</p>
+      <p class="table-cap">The Instrument Map</p>
+      <div class="matrix-wrap"><table class="matrix">
+        <thead><tr><th>Instrument</th><th>Risk</th><th>Return Potential</th><th>Primary Function</th></tr></thead>
+        <tbody>
+          <tr><td><strong>Money Market & Deposits</strong></td><td>Very Low</td><td>3%–5%</td><td>Liquidity & emergency fund</td></tr>
+          <tr><td><strong>Government Bonds</strong></td><td>Low–Moderate</td><td>5%–7%</td><td>Regular cash flow, capital protection</td></tr>
+          <tr><td><strong>Index Funds / ETFs</strong></td><td>Moderate</td><td>7%–10%</td><td>Primary growth engine</td></tr>
+          <tr><td><strong>Individual Stocks</strong></td><td>High</td><td>Uncapped</td><td>Capital gain driver</td></tr>
+          <tr><td><strong>Precious Metals / Gold</strong></td><td>Low</td><td>Pegged to inflation</td><td>Value preservation</td></tr>
+          <tr><td><strong>Rental Property</strong></td><td>Moderate–High</td><td>Moderate–High</td><td>Real cash flow & physical asset</td></tr>
+          <tr><td><strong>Crypto / Digital Assets</strong></td><td>Very High</td><td>Extreme</td><td>Speculation, cap at 5–10% of portfolio</td></tr>
+        </tbody>
+      </table></div>
+      <div class="callout insight">
+        <h4>Extra Insight — Bogle</h4>
+        <p>John Bogle consistently showed that most active fund managers fail to beat the market index consistently over the long run, once fees are accounted for. For him, buying a low-cost index fund is like buying "the whole market" — you automatically own a piece of every winning company without having to guess which one wins.</p>
+      </div>
+    </div>
+
+    <div class="lang-id"><div class="action-box"><span class="eyebrow">Konsep Kunci</span><p><em>Diversification</em>, <em>Index Investing</em>, <em>Expense Ratio</em>.</p></div></div>
+    <div class="lang-en" hidden><div class="action-box"><span class="eyebrow">Key Concepts</span><p><em>Diversification</em>, <em>Index Investing</em>, <em>Expense Ratio</em>.</p></div></div>
+    <div class="lang-id"><div class="takeaway"><span class="eyebrow">Sari Pati Bab</span><p>&ldquo;Instrumen terbaik bukan yang paling untung di atas kertas, tapi yang membuatmu tetap berada di dalam permainan.&rdquo;</p></div></div>
+    <div class="lang-en" hidden><div class="takeaway"><span class="eyebrow">Chapter Takeaway</span><p>&ldquo;The best instrument isn't the most profitable one on paper — it's the one that keeps you in the game.&rdquo;</p></div></div>
+  </div>
+</section>
+<hr class="div">
+
+<section class="chapter" id="bab15">
+  <div class="chapter-head">
+    <div class="chapter-num-row"><span class="pulse-dot"></span><span class="eyebrow"><span class="lang-id">Bab 15 · Bagian IV</span><span class="lang-en" hidden>Chapter 15 · Part IV</span></span></div>
+    <div class="lang-id"><h2 class="chapter-title">Strategi Alokasi Aset (Menyusun Tim Impianmu)</h2><p class="chapter-sub">Portofolio yang sehat seperti tim olahraga.</p></div>
+    <div class="lang-en" hidden><h2 class="chapter-title">Asset Allocation Strategy (Building Your Dream Team)</h2><p class="chapter-sub">A healthy portfolio works like a sports team.</p></div>
+    <div class="experts">Modern Portfolio Theory (dipopulerkan lintas buku referensi)</div>
+  </div>
+  <div class="chapter-body">
+    <div class="lang-id">
+      <p class="dropcap">Menaruh seluruh uangmu di satu tempat adalah kecerobohan; membaginya ke terlalu banyak tempat tanpa arah adalah kebingungan. Portofolio investasi yang sehat seperti tim olahraga: ada pemain bertahan, gelandang pengendali ritme, dan penyerang agresif.</p>
+      <div class="flow">
+        <div class="flow-title">Formasi Tim Portofolio</div>
+        <div class="flow-row" style="flex-direction:column;">
+          <div class="flow-box"><b>Benteng Pertahanan</b><span>Kas + Pasar Uang + Emas — jaga likuiditas & krisis</span></div>
+          <div class="flow-arrow" style="transform:rotate(90deg);">→</div>
+          <div class="flow-box alt"><b>Gelandang Pengendali</b><span>Obligasi Negara + Reksa Dana Indeks — jaga stabilitas</span></div>
+          <div class="flow-arrow" style="transform:rotate(90deg);">→</div>
+          <div class="flow-box"><b>Penyerang Agresif</b><span>Saham Individual + Bisnis/Kripto — pencetak skor</span></div>
+        </div>
+      </div>
+      <p>Formula alokasi usia sederhana yang bisa dipakai sebagai titik awal:</p>
+      <ul class="checklist">
+        <li><strong>Porsi Aset Pertumbuhan (Saham/ETF):</strong> (100 − Usiamu)%</li>
+        <li><strong>Porsi Aset Stabil (Obligasi/Pasar Uang):</strong> Usiamu%</li>
+      </ul>
+      <div class="callout insight">
+        <h4>Wawasan Tambahan</h4>
+        <p>Alokasi bukan keputusan sekali jadi — lakukan <em>rebalancing</em> tahunan: jual sebagian aset yang porsinya sudah melebihi target (biasanya karena naik tajam) dan alihkan ke aset yang porsinya di bawah target. Disiplin ini secara otomatis memaksamu "jual tinggi, beli rendah" tanpa perlu menebak arah pasar.</p>
+      </div>
+    </div>
+    <div class="lang-en" hidden>
+      <p class="dropcap">Putting all your money in one place is careless; spreading it across too many places without direction is confusion. A healthy investment portfolio works like a sports team: defenders, a rhythm-controlling midfield, and aggressive strikers.</p>
+      <div class="flow">
+        <div class="flow-title">Portfolio Team Formation</div>
+        <div class="flow-row" style="flex-direction:column;">
+          <div class="flow-box"><b>Defensive Wall</b><span>Cash + Money Market + Gold — liquidity & crisis protection</span></div>
+          <div class="flow-arrow" style="transform:rotate(90deg);">→</div>
+          <div class="flow-box alt"><b>Controlling Midfield</b><span>Government Bonds + Index Funds — stability</span></div>
+          <div class="flow-arrow" style="transform:rotate(90deg);">→</div>
+          <div class="flow-box"><b>Aggressive Strikers</b><span>Individual Stocks + Business/Crypto — the scorers</span></div>
+        </div>
+      </div>
+      <p>A simple age-based allocation formula you can use as a starting point:</p>
+      <ul class="checklist">
+        <li><strong>Growth Assets (Stocks/ETFs):</strong> (100 − Your Age)%</li>
+        <li><strong>Stable Assets (Bonds/Money Market):</strong> Your Age%</li>
+      </ul>
+      <div class="callout insight">
+        <h4>Extra Insight</h4>
+        <p>Allocation isn't a one-time decision — rebalance annually: sell part of whatever asset has grown past its target share (usually because it rose sharply) and shift it into whichever is below target. This discipline automatically forces you to "sell high, buy low" without ever needing to predict the market's direction.</p>
+      </div>
+    </div>
+
+    <div class="lang-id"><div class="action-box"><span class="eyebrow">Konsep Kunci</span><p><em>Asset Allocation</em>, <em>Diversification</em>, <em>Rebalancing</em>.</p></div></div>
+    <div class="lang-en" hidden><div class="action-box"><span class="eyebrow">Key Concepts</span><p><em>Asset Allocation</em>, <em>Diversification</em>, <em>Rebalancing</em>.</p></div></div>
+    <div class="lang-id"><div class="takeaway"><span class="eyebrow">Sari Pati Bab</span><p>&ldquo;Portofolio yang sehat adalah tim yang saling menopang, bukan satu taruhan besar yang berdiri sendiri.&rdquo;</p></div></div>
+    <div class="lang-en" hidden><div class="takeaway"><span class="eyebrow">Chapter Takeaway</span><p>&ldquo;A healthy portfolio is a team that supports itself, not one big bet standing alone.&rdquo;</p></div></div>
+  </div>
+</section>
+<hr class="div">
+
+<section class="chapter" id="bab16">
+  <div class="chapter-head">
+    <div class="chapter-num-row"><span class="pulse-dot"></span><span class="eyebrow"><span class="lang-id">Bab 16 · Bagian IV</span><span class="lang-en" hidden>Chapter 16 · Part IV</span></span></div>
+    <div class="lang-id"><h2 class="chapter-title">Mengurangi Biaya Tersembunyi (Leakage Reduction)</h2><p class="chapter-sub">Apa yang tidak kamu bayar sama pentingnya dengan apa yang kamu hasilkan.</p></div>
+    <div class="lang-en" hidden><h2 class="chapter-title">Plugging the Leaks: Reducing Hidden Costs</h2><p class="chapter-sub">What you don't pay matters as much as what you earn.</p></div>
+    <div class="experts">John C. Bogle</div>
+  </div>
+  <div class="chapter-body">
+    <div class="lang-id">
+      <p class="dropcap">Dalam dunia investasi, apa yang tidak kamu bayarkan sama pentingnya dengan apa yang kamu hasilkan. Biaya transaksi, <em>expense ratio</em> manajer investasi, dan potongan pajak yang tinggi dapat menggerus hasil compounding puluhan persen dalam jangka panjang tanpa kamu sadari.</p>
+      <p>Bogle menyebut fenomena ini sebagai "tirani compounding biaya" — kebalikan dari compounding keuntungan. Selisih 1% biaya tahunan yang terlihat kecil di brosur produk investasi, jika dibiarkan bekerja selama 30 tahun, bisa berarti kamu kehilangan seperempat hingga sepertiga dari total kekayaan akhir yang seharusnya bisa kamu miliki.</p>
+      <div class="callout insight">
+        <h4>Wawasan Tambahan</h4>
+        <p>Selain expense ratio, waspadai juga biaya tersembunyi lain: biaya transaksi jual-beli yang sering (<em>trading friction</em>), pajak atas capital gain jangka pendek yang lebih tinggi dari jangka panjang, dan spread bid-ask pada instrumen yang kurang likuid. Semua biaya ini kumulatif — kecil terlihat per transaksi, besar dampaknya dalam skala dekade.</p>
+      </div>
+    </div>
+    <div class="lang-en" hidden>
+      <p class="dropcap">In investing, what you don't pay matters as much as what you earn. Transaction costs, fund manager expense ratios, and high taxes can quietly erode decades of compounding by tens of percentage points without you noticing.</p>
+      <p>Bogle calls this "the tyranny of compounding costs" — the mirror opposite of compounding gains. A 1% annual fee that looks tiny in a product brochure, left to work for 30 years, can mean losing a quarter to a third of the total wealth you'd otherwise have had.</p>
+      <div class="callout insight">
+        <h4>Extra Insight</h4>
+        <p>Beyond expense ratios, watch for other hidden costs too: frequent buy-sell trading friction, short-term capital gains taxes that run higher than long-term rates, and the bid-ask spread on less liquid instruments. All of these are cumulative — small per transaction, huge over a decade.</p>
+      </div>
+    </div>
+
+    <div class="lang-id"><div class="action-box"><span class="eyebrow">Konsep Kunci</span><p><em>Expense Ratio</em>, <em>Drag Fee</em>, <em>Tax Efficiency</em>.</p></div></div>
+    <div class="lang-en" hidden><div class="action-box"><span class="eyebrow">Key Concepts</span><p><em>Expense Ratio</em>, <em>Drag Fee</em>, <em>Tax Efficiency</em>.</p></div></div>
+    <div class="lang-id"><div class="action-box"><span class="eyebrow">Prinsip Aksi</span><p>Sebelum membeli instrumen apa pun, periksa nilai Expense Ratio atau biaya transaksi. Pilih platform dan instrumen berbiaya serendah mungkin yang menawarkan transparansi penuh.</p></div></div>
+    <div class="lang-en" hidden><div class="action-box"><span class="eyebrow">Action Principle</span><p>Before buying any instrument, check its Expense Ratio or transaction cost. Choose the lowest-cost platform and instrument that offers full transparency.</p></div></div>
+    <div class="lang-id"><div class="takeaway"><span class="eyebrow">Sari Pati Bab</span><p>&ldquo;Biaya kecil yang tak kau perhatikan hari ini diam-diam menggerogoti kekayaanmu bertahun-tahun ke depan.&rdquo;</p></div></div>
+    <div class="lang-en" hidden><div class="takeaway"><span class="eyebrow">Chapter Takeaway</span><p>&ldquo;The small fee you ignore today quietly erodes your wealth for years to come.&rdquo;</p></div></div>
+  </div>
+</section>
+<hr class="div">
+
+<!-- ================= BAGIAN V ================= -->
+
+<section class="chapter" id="bab17">
+  <div class="chapter-head">
+    <div class="chapter-num-row"><span class="pulse-dot"></span><span class="eyebrow"><span class="lang-id">Bab 17 · Bagian V</span><span class="lang-en" hidden>Chapter 17 · Part V</span></span></div>
+    <div class="lang-id"><h2 class="chapter-title">Merancang Keunggulan Tak Adil (Unfair Advantage) Milikmu</h2><p class="chapter-sub">Strategi terbaik bukan yang tertinggi returnnya di atas kertas.</p></div>
+    <div class="lang-en" hidden><h2 class="chapter-title">Designing Your Own Unfair Advantage</h2><p class="chapter-sub">The best strategy isn't the one with the highest return on paper.</p></div>
+    <div class="experts">Naval Ravikant</div>
+  </div>
+  <div class="chapter-body">
+    <div class="lang-id">
+      <p class="dropcap">Meniru strategi investasi atau bisnis orang lain secara mentah-mentah adalah resep menuju kegagalan. Setiap orang memiliki toleransi risiko, latar belakang psikologis, lingkaran kompetensi, dan akses sumber daya yang berbeda-beda.</p>
+      <p>Strategi finansial terbaik bukanlah strategi yang memiliki proyeksi return paling tinggi di atas kertas, melainkan strategi yang paling sesuai dengan kepribadianmu sehingga memungkinkanmu tidur nyenyak di malam hari dan bertahan dalam permainan untuk jangka waktu paling lama.</p>
+      <p>Naval Ravikant merangkum ini sebagai formula: <em>specific knowledge + accountability + leverage</em>. Keahlian unikmu memberi nilai tambah yang sulit ditiru; kesediaanmu memikul tanggung jawab dan risiko atas nama sendiri (bukan bersembunyi di balik gaji tetap) membuka pintu kompensasi yang jauh lebih besar; dan leverage menggandakan hasil dari kombinasi keduanya tanpa menuntut lebih banyak jam kerja.</p>
+      <div class="callout insight">
+        <h4>Wawasan Tambahan</h4>
+        <p>Naval menekankan bahwa keunggulan tak adil tidak harus dramatis — bisa berupa kombinasi sederhana dari latar belakang unikmu (misalnya, pengalaman kerja di industri infrastruktur telekomunikasi dikombinasikan dengan minat menulis) yang sulit ditiru orang lain justru karena kombinasi tersebut jarang ditemukan pada satu orang yang sama.</p>
+      </div>
+    </div>
+    <div class="lang-en" hidden>
+      <p class="dropcap">Blindly copying someone else's investment or business strategy is a recipe for failure. Everyone has a different risk tolerance, psychological background, circle of competence, and access to resources.</p>
+      <p>The best financial strategy isn't the one projecting the highest return on paper — it's the one that best fits your personality, letting you sleep soundly at night and stay in the game the longest.</p>
+      <p>Naval Ravikant sums this up in a formula: specific knowledge + accountability + leverage. Your unique skill provides value that's hard to copy; your willingness to take responsibility and risk in your own name (rather than hiding behind a fixed salary) opens the door to far greater compensation; and leverage multiplies the output of both without demanding more working hours.</p>
+      <div class="callout insight">
+        <h4>Extra Insight</h4>
+        <p>Naval stresses that an unfair advantage doesn't have to be dramatic — it can be a simple combination of your unique background (say, experience in telecom infrastructure work paired with a passion for writing) that's hard to copy precisely because that combination rarely shows up in the same person.</p>
+      </div>
+    </div>
+
+    <div class="lang-id"><div class="action-box"><span class="eyebrow">Konsep Kunci</span><p><em>Circle of Competence</em>, <em>Risk Profile</em>, <em>Leverage</em>.</p></div></div>
+    <div class="lang-en" hidden><div class="action-box"><span class="eyebrow">Key Concepts</span><p><em>Circle of Competence</em>, <em>Risk Profile</em>, <em>Leverage</em>.</p></div></div>
+    <div class="lang-id"><div class="action-box"><span class="eyebrow">Prinsip Aksi</span><p>Petakan tiga hal: (1) apa yang benar-benar kamu pahami lebih baik dari rata-rata orang; (2) gaya investasi apa yang tidak membuatmu panik saat pasar turun 30%; (3) keahlian atau leverage unik apa yang bisa kamu kombinasikan untuk menghasilkan nilai tambah.</p></div></div>
+    <div class="lang-en" hidden><div class="action-box"><span class="eyebrow">Action Principle</span><p>Map out three things: (1) what you genuinely understand better than the average person; (2) what investing style doesn't send you into a panic when the market drops 30%; (3) what unique skill or leverage you can combine to create added value.</p></div></div>
+    <div class="lang-id"><div class="takeaway"><span class="eyebrow">Sari Pati Bab</span><p>&ldquo;Keunggulanmu yang sesungguhnya bukan yang paling keras terdengar, tapi yang paling sulit ditiru orang lain.&rdquo;</p></div></div>
+    <div class="lang-en" hidden><div class="takeaway"><span class="eyebrow">Chapter Takeaway</span><p>&ldquo;Your real edge isn't the loudest one — it's the one that's hardest for anyone else to copy.&rdquo;</p></div></div>
+  </div>
+</section>
+<hr class="div">
+
+<section class="chapter" id="bab18">
+  <div class="chapter-head">
+    <div class="chapter-num-row"><span class="pulse-dot"></span><span class="eyebrow"><span class="lang-id">Bab 18 · Bagian V</span><span class="lang-en" hidden>Chapter 18 · Part V</span></span></div>
+    <div class="lang-id"><h2 class="chapter-title">Menjadi Kaya yang Tenang</h2><p class="chapter-sub">Tujuan akhirnya bukan angka — ketenangan pikiran.</p></div>
+    <div class="lang-en" hidden><h2 class="chapter-title">Becoming Quietly Wealthy</h2><p class="chapter-sub">The end goal isn't a number — it's peace of mind.</p></div>
+    <div class="experts">Bill Perkins · Morgan Housel</div>
+  </div>
+  <div class="chapter-body">
+    <div class="lang-id">
+      <p class="dropcap">Tujuan akhir dari pengelolaan keuangan bukanlah menjadi orang terkaya di pemakaman atau memiliki angka fantastis yang hanya dipamerkan di media sosial. Keberhasilan finansial tertinggi adalah tercapainya ketenangan pikiran (<em>peace of mind</em>).</p>
+      <p>Kaya yang sesungguhnya adalah ketika uang tidak lagi menjadi faktor utama dalam setiap keputusan hidup yang kamu buat. Kamu memiliki kendali penuh atas waktumu, dapat berkumpul dengan orang-orang yang kamu sayangi, dan bebas dari keharusan berpura-pura menjadi orang lain.</p>
+      <p>Bill Perkins dalam <em>Die with Zero</em> menantang gagasan bahwa menumpuk kekayaan sebanyak mungkin hingga akhir hayat adalah tujuan yang rasional. Ia memperkenalkan konsep "memory dividends" — pengalaman hidup yang dibeli di usia dan kondisi fisik yang tepat (misalnya mendaki gunung di usia 30-an, bukan menundanya sampai pensiun di usia 65) menghasilkan "dividen kenangan" yang terus dinikmati sepanjang sisa hidup, sesuatu yang tidak bisa dibeli oleh tumpukan uang yang baru dicairkan di usia senja.</p>
+      <div class="callout insight">
+        <h4>Wawasan Tambahan</h4>
+        <p>Perkins menyarankan menyusun "kurva pengeluaran ideal" yang justru menaik di usia pertengahan (saat energi fisik dan kesehatan masih prima) alih-alih menabung maksimal sampai usia lanjut dan baru membelanjakannya saat tubuh sudah tidak mampu menikmati banyak hal. Ini melengkapi pesan Housel bahwa kekayaan sejati adalah alat untuk membeli kendali atas waktu dan pengalaman — bukan tujuan akhir itu sendiri.</p>
+      </div>
+    </div>
+    <div class="lang-en" hidden>
+      <p class="dropcap">The ultimate goal of money management isn't to be the richest person in the graveyard, or to have a fantastic number that only gets shown off on social media. The highest form of financial success is achieving peace of mind.</p>
+      <p>True wealth is when money is no longer the dominant factor in every life decision you make. You have full control over your time, can gather with the people you love, and are free from the need to pretend to be someone else.</p>
+      <p>Bill Perkins, in <em>Die with Zero</em>, challenges the idea that stockpiling as much wealth as possible until the end of life is a rational goal. He introduces "memory dividends" — experiences bought at the right age and physical condition (climbing a mountain in your 30s, not putting it off until retirement at 65) that keep paying out "dividends of memory" for the rest of your life, something a pile of money only cashed out late in life can never buy.</p>
+      <div class="callout insight">
+        <h4>Extra Insight</h4>
+        <p>Perkins suggests building an "ideal spending curve" that actually rises in midlife (while physical energy and health are still strong), instead of saving maximally into old age and only spending once the body can no longer enjoy much. This complements Housel's message that true wealth is a tool for buying control over time and experience — not the end goal in itself.</p>
+      </div>
+    </div>
+
+    <div class="lang-id"><div class="action-box"><span class="eyebrow">Konsep Kunci</span><p><em>Financial Independence</em>, <em>Memory Dividends</em>, <em>Time Autonomy</em>.</p></div></div>
+    <div class="lang-en" hidden><div class="action-box"><span class="eyebrow">Key Concepts</span><p><em>Financial Independence</em>, <em>Memory Dividends</em>, <em>Time Autonomy</em>.</p></div></div>
+    <div class="lang-id"><div class="action-box"><span class="eyebrow">Prinsip Aksi</span><p>Tuliskan definisi keberhasilan hidupmu sendiri dalam satu lembar kertas tanpa melibatkan variabel pamer status. Gunakan tulisan itu sebagai kompas utama setiap kali kamu dihadapkan pada pilihan finansial besar.</p></div></div>
+    <div class="lang-en" hidden><div class="action-box"><span class="eyebrow">Action Principle</span><p>Write your own definition of a successful life on a single sheet of paper, with no status-signaling variables involved. Use it as your main compass whenever you face a major financial choice.</p></div></div>
+    <div class="lang-id"><div class="takeaway"><span class="eyebrow">Sari Pati Bab</span><p>&ldquo;Kaya yang sesungguhnya adalah saat uang berhenti menjadi tokoh utama dalam setiap keputusan hidupmu.&rdquo;</p></div></div>
+    <div class="lang-en" hidden><div class="takeaway"><span class="eyebrow">Chapter Takeaway</span><p>&ldquo;True wealth is when money stops being the main character in every decision you make.&rdquo;</p></div></div>
+  </div>
+</section>
+<hr class="div">
+
+<!-- ================= WORKSHEET ================= -->
+
+<section class="chapter" id="lembar-kerja">
+  <div class="chapter-head">
+    <div class="chapter-num-row"><span class="pulse-dot"></span><span class="eyebrow"><span class="lang-id">Lembar Kerja</span><span class="lang-en" hidden>Worksheet</span></span></div>
+    <div class="lang-id"><h2 class="chapter-title">Lembar Kerja Evaluasi Finansial (Weekly Check-in)</h2><p class="chapter-sub">Format audit 15 menit setiap Minggu malam.</p></div>
+    <div class="lang-en" hidden><h2 class="chapter-title">The Weekly Financial Evaluation Worksheet</h2><p class="chapter-sub">A 15-minute audit format for every Sunday night.</p></div>
+  </div>
+  <div class="chapter-body">
+    <div class="lang-id">
+      <div class="worksheet-form">
+        <div class="row"><span>Tanggal Audit</span><span>[ DD/MM/YYYY ]</span></div>
+        <div class="row"><span>Total Kas & Aset Likuid</span><span>Rp _______________</span></div>
+        <div class="row"><span>Estimasi Pengeluaran Bulanan</span><span>Rp _______________</span></div>
+        <div class="row"><span>Runway Kebebasan Saat Ini</span><span>_____ Bulan</span></div>
+        <div class="grp">1. METRIK UTAMA MINGGU INI</div>
+        <div class="row"><span>Rasio Tabungan/Investasi dari Penghasilan</span><span>_____ %</span></div>
+        <div class="row"><span>Alokasi dana untuk liabilitas tersier?</span><span>Ya / Tidak</span></div>
+        <div class="row"><span>Pelanggaran Aturan Rem 72 Jam?</span><span>Ya / Tidak</span></div>
+        <div class="grp">2. CATATAN EVALUASI & UANG KURSUS</div>
+        <div class="row"><span>Kesalahan/kebocoran finansial minggu ini</span><span>___________</span></div>
+        <div class="row"><span>Pelajaran yang dipetik</span><span>___________</span></div>
+        <div class="grp">3. FOKUS ASET & KEBIASAAN MINGGU DEPAN</div>
+        <div class="row"><span>Autodebet investasi sudah tersetel?</span><span>Ya / Tidak</span></div>
+        <div class="row"><span>Target belajar materi finansial</span><span>_____ Jam/Minggu</span></div>
+      </div>
+    </div>
+    <div class="lang-en" hidden>
+      <div class="worksheet-form">
+        <div class="row"><span>Audit Date</span><span>[ DD/MM/YYYY ]</span></div>
+        <div class="row"><span>Total Cash & Liquid Assets</span><span>Rp _______________</span></div>
+        <div class="row"><span>Estimated Monthly Expenses</span><span>Rp _______________</span></div>
+        <div class="row"><span>Current Freedom Runway</span><span>_____ Months</span></div>
+        <div class="grp">1. THIS WEEK'S KEY METRICS</div>
+        <div class="row"><span>Savings/Investment Ratio of Income</span><span>_____ %</span></div>
+        <div class="row"><span>Allocated funds for tertiary liabilities?</span><span>Yes / No</span></div>
+        <div class="row"><span>72-Hour Rule violated?</span><span>Yes / No</span></div>
+        <div class="grp">2. EVALUATION NOTES & TUITION PAID</div>
+        <div class="row"><span>This week's financial mistake/leak</span><span>___________</span></div>
+        <div class="row"><span>Lesson learned</span><span>___________</span></div>
+        <div class="grp">3. NEXT WEEK'S ASSET & HABIT FOCUS</div>
+        <div class="row"><span>Investment auto-debit set up?</span><span>Yes / No</span></div>
+        <div class="row"><span>Financial learning target</span><span>_____ Hrs/Week</span></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="epilog" id="epilog">
+  <div class="orb-wrap" style="margin:0 auto 24px;"><div class="loader" style="--size:0.62px;"></div></div>
+  <span class="eyebrow"><span class="lang-id">Penutup</span><span class="lang-en" hidden>Closing</span></span>
+  <div class="lang-id">
+    <h2>Uang yang Tenang, Hidup yang Utuh</h2>
+    <p>Delapan belas bab ini bukan resep instan, melainkan kompas. Tidak ada satu formula yang cocok untuk semua orang — tapi ada satu benang merah yang berulang di sembilan buku yang menjadi landasan buku ini: kekayaan sejati dibangun dari kesabaran, sistem yang otomatis, dan kejujuran pada diri sendiri tentang apa yang benar-benar kamu butuhkan.</p>
+    <p>Selamat menggulung bola saljumu sendiri.</p>
+    <p class="sign">— Sangoeroep</p>
+  </div>
+  <div class="lang-en" hidden>
+    <h2>Quiet Money, a Whole Life</h2>
+    <p>These eighteen chapters aren't an instant recipe — they're a compass. No single formula fits everyone, but one thread repeats across the nine books this book stands on: true wealth is built from patience, automatic systems, and honesty with yourself about what you actually need.</p>
+    <p>Happy rolling your own snowball.</p>
+    <p class="sign">— Sangoeroep</p>
+  </div>
+</section>
+<hr class="div">
+
+<section class="chapter" id="glosarium">
+  <div class="chapter-head">
+    <div class="chapter-num-row"><span class="pulse-dot"></span><span class="eyebrow"><span class="lang-id">Referensi</span><span class="lang-en" hidden>Reference</span></span></div>
+    <div class="lang-id"><h2 class="chapter-title">Glosarium</h2></div>
+    <div class="lang-en" hidden><h2 class="chapter-title">Glossary</h2></div>
+  </div>
+  <div class="chapter-body">
+    <div class="lang-id">
+      <dl class="glossary">
+        <dt>Lifestyle Creep</dt><dd>Kenaikan standar hidup yang mengikuti kenaikan penghasilan, sehingga net worth tidak pernah bertambah.</dd>
+        <dt>Hedonic Treadmill</dt><dd>Pola psikologis di mana target kebahagiaan materi terus bergeser lebih tinggi setelah tercapai.</dd>
+        <dt>Cost of Admission</dt><dd>Volatilitas dan risiko pasar yang wajib diterima untuk mendapat imbal hasil jangka panjang.</dd>
+        <dt>Stealth Wealth</dt><dd>Kekayaan yang tidak dipamerkan secara visual — tersimpan dalam aset yang terus bertumbuh diam-diam.</dd>
+        <dt>Cashflow Quadrant</dt><dd>Kerangka Kiyosaki: Employee, Self-employed, Business owner, Investor.</dd>
+        <dt>Leverage</dt><dd>Pengganda hasil kerja tanpa menambah jam kerja — tenaga orang lain, modal, kode, atau media.</dd>
+        <dt>Specific Knowledge</dt><dd>Keahlian unik yang sulit ditiru karena lahir dari rasa ingin tahu personal, bukan kredensial formal.</dd>
+        <dt>Conscious Spending Plan</dt><dd>Kerangka alokasi penghasilan Ramit Sethi: biaya tetap, investasi, tabungan tujuan, belanja bebas rasa bersalah.</dd>
+        <dt>Compound Interest</dt><dd>Bunga yang dihitung dari pokok plus akumulasi bunga sebelumnya, menghasilkan pertumbuhan eksponensial.</dd>
+        <dt>Expense Ratio</dt><dd>Persentase biaya tahunan yang dikenakan pengelola investasi terhadap dana yang dikelola.</dd>
+        <dt>Memory Dividends</dt><dd>Istilah Bill Perkins untuk manfaat berulang dari pengalaman hidup yang dibeli di waktu yang tepat.</dd>
+      </dl>
+    </div>
+    <div class="lang-en" hidden>
+      <dl class="glossary">
+        <dt>Lifestyle Creep</dt><dd>Living standards rising in step with income, so net worth never actually increases.</dd>
+        <dt>Hedonic Treadmill</dt><dd>The psychological pattern where the target for material happiness keeps shifting higher once reached.</dd>
+        <dt>Cost of Admission</dt><dd>The market volatility and risk you must accept to earn long-term returns.</dd>
+        <dt>Stealth Wealth</dt><dd>Wealth that isn't visually displayed — stored quietly in compounding assets.</dd>
+        <dt>Cashflow Quadrant</dt><dd>Kiyosaki's framework: Employee, Self-employed, Business owner, Investor.</dd>
+        <dt>Leverage</dt><dd>A multiplier on your work's output without adding hours — other people's labor, capital, code, or media.</dd>
+        <dt>Specific Knowledge</dt><dd>A unique skill that's hard to copy because it comes from personal curiosity, not formal credentials.</dd>
+        <dt>Conscious Spending Plan</dt><dd>Ramit Sethi's income-allocation framework: fixed costs, investing, savings goals, guilt-free spending.</dd>
+        <dt>Compound Interest</dt><dd>Interest calculated on principal plus previously accumulated interest, producing exponential growth.</dd>
+        <dt>Expense Ratio</dt><dd>The annual percentage fee a fund manager charges on assets under management.</dd>
+        <dt>Memory Dividends</dt><dd>Bill Perkins's term for the recurring benefit of a life experience bought at the right time.</dd>
+      </dl>
+    </div>
+  </div>
+</section>
+<hr class="div">
+
+<section class="chapter" id="pustaka">
+  <div class="chapter-head">
+    <div class="chapter-num-row"><span class="pulse-dot"></span><span class="eyebrow"><span class="lang-id">Referensi</span><span class="lang-en" hidden>Reference</span></span></div>
+    <div class="lang-id"><h2 class="chapter-title">Daftar Pustaka</h2></div>
+    <div class="lang-en" hidden><h2 class="chapter-title">Bibliography</h2></div>
+  </div>
+  <div class="chapter-body lang-id">
+    <ol class="refs">
+      <li>Housel, Morgan. <em>The Psychology of Money</em>. Harriman House, 2020.</li>
+      <li>Housel, Morgan. <em>Same as Ever: A Guide to What Never Changes</em>. Portfolio, 2023.</li>
+      <li>Kiyosaki, Robert T. <em>Rich Dad Poor Dad</em>. Plata Publishing, 1997.</li>
+      <li>Warikoo, Ankur. <em>Do Epic Shit</em>. Nine Squares Publishing, 2021.</li>
+      <li>Clear, James. <em>Atomic Habits</em>. Avery, 2018.</li>
+      <li>Bogle, John C. <em>The Little Book of Common Sense Investing</em>. Wiley, 2007.</li>
+      <li>Perkins, Bill. <em>Die with Zero</em>. Houghton Mifflin Harcourt, 2020.</li>
+      <li>Jorgenson, Eric. <em>The Almanack of Naval Ravikant</em>. Magrathea Publishing, 2020.</li>
+      <li>Sethi, Ramit. <em>I Will Teach You to Be Rich</em>. Workman Publishing, 2009.</li>
+    </ol>
+  </div>
+  <div class="chapter-body lang-en" hidden>
+    <ol class="refs">
+      <li>Housel, Morgan. <em>The Psychology of Money</em>. Harriman House, 2020.</li>
+      <li>Housel, Morgan. <em>Same as Ever: A Guide to What Never Changes</em>. Portfolio, 2023.</li>
+      <li>Kiyosaki, Robert T. <em>Rich Dad Poor Dad</em>. Plata Publishing, 1997.</li>
+      <li>Warikoo, Ankur. <em>Do Epic Shit</em>. Nine Squares Publishing, 2021.</li>
+      <li>Clear, James. <em>Atomic Habits</em>. Avery, 2018.</li>
+      <li>Bogle, John C. <em>The Little Book of Common Sense Investing</em>. Wiley, 2007.</li>
+      <li>Perkins, Bill. <em>Die with Zero</em>. Houghton Mifflin Harcourt, 2020.</li>
+      <li>Jorgenson, Eric. <em>The Almanack of Naval Ravikant</em>. Magrathea Publishing, 2020.</li>
+      <li>Sethi, Ramit. <em>I Will Teach You to Be Rich</em>. Workman Publishing, 2009.</li>
+    </ol>
+  </div>
+</section>
+
+<footer>
+  <p class="lang-id">Ruang Baca · Perpustakaan digital Sangoeroep.</p>
+  <p class="lang-en" hidden>Ruang Baca · A digital library by Sangoeroep.</p>
+</footer>
+
+<script>
+  // === bilingual toggle (block-level hidden attribute, avoids CSS specificity conflicts) ===
+  let currentLang = 'id';
+  function setLang(lang){
+    currentLang = lang;
+    document.querySelectorAll('.lang-id').forEach(el => { el.hidden = (lang !== 'id'); });
+    document.querySelectorAll('.lang-en').forEach(el => { el.hidden = (lang !== 'en'); });
+    document.getElementById('lang-toggle').textContent = (lang === 'id') ? 'EN' : 'ID';
+    document.documentElement.setAttribute('lang', lang);
+  }
+  document.getElementById('lang-toggle').addEventListener('click', () => setLang(currentLang === 'id' ? 'en' : 'id'));
+  setLang('id');
+
+  // === progress bar ===
+  const bar = document.getElementById('progress');
+  function updateProgress(){
+    const h = document.documentElement;
+    const scrolled = (h.scrollTop) / (h.scrollHeight - h.clientHeight) * 100;
+    bar.style.width = (isFinite(scrolled) ? scrolled : 0) + '%';
+  }
+  document.addEventListener('scroll', updateProgress, {passive:true});
+  updateProgress();
+
+  // === toc toggle ===
+  const tocBtn = document.getElementById('toc-toggle');
+  const tocPanel = document.getElementById('toc-panel');
+  tocBtn.addEventListener('click', () => {
+    const open = tocPanel.classList.toggle('open');
+    tocBtn.setAttribute('aria-expanded', open);
+  });
+  document.querySelectorAll('#toc-panel a').forEach(a => {
+    a.addEventListener('click', () => {
+      tocPanel.classList.remove('open');
+      tocBtn.setAttribute('aria-expanded', 'false');
+    });
+  });
+  document.addEventListener('click', (e) => {
+    if (!tocPanel.contains(e.target) && !tocBtn.contains(e.target)) {
+      tocPanel.classList.remove('open');
+      tocBtn.setAttribute('aria-expanded', 'false');
+    }
+  });
+
+  // === scroll reveal with safety net ===
+  const chapters = document.querySelectorAll('.chapter, .epilog');
+  if ('IntersectionObserver' in window) {
+    const io = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('visible');
+          io.unobserve(entry.target);
+        }
+      });
+    }, {threshold: 0.01, rootMargin: '0px 0px -20px 0px'});
+    chapters.forEach(c => io.observe(c));
+  } else {
+    chapters.forEach(c => c.classList.add('visible'));
+  }
+  window.addEventListener('load', () => {
+    setTimeout(() => chapters.forEach(c => c.classList.add('visible')), 1200);
+  });
+  document.querySelectorAll('#toc-panel a, .toc-item').forEach(a => {
+    a.addEventListener('click', () => {
+      setTimeout(() => chapters.forEach(c => c.classList.add('visible')), 50);
+    });
+  });
+
+  // === COMPOUNDING + INFLATION SIMULATOR ===
+  const pmtSlider = document.getElementById('pmt');
+  const retSlider = document.getElementById('ret');
+  const infSlider = document.getElementById('inf');
+  const pmtVal = document.getElementById('pmtVal');
+  const retVal = document.getElementById('retVal');
+  const infVal = document.getElementById('infVal');
+  const simSummary = document.getElementById('simSummary');
+  const simTableBody = document.getElementById('simTableBody');
+  const canvas = document.getElementById('simChart');
+  const ctx = canvas.getContext('2d');
+
+  function fmtRp(n){
+    n = Math.round(n);
+    return 'Rp ' + n.toLocaleString('id-ID');
+  }
+  function fmtRpShort(n){
+    if (n >= 1e9) return 'Rp ' + (n/1e9).toFixed(2).replace('.', ',') + ' M';
+    if (n >= 1e6) return 'Rp ' + (n/1e6).toFixed(1).replace('.', ',') + ' jt';
+    return fmtRp(n);
+  }
+
+  function computeSeries(pmt, annualRetPct, inflPct, maxYears){
+    const r = (annualRetPct/100)/12;
+    const series = [];
+    for (let y = 0; y <= maxYears; y++){
+      const months = y*12;
+      let fv;
+      if (months === 0) fv = 0;
+      else if (r === 0) fv = pmt*months;
+      else fv = pmt * ((Math.pow(1+r, months) - 1) / r);
+      const contributed = pmt*months;
+      const real = fv / Math.pow(1 + inflPct/100, y);
+      series.push({year:y, contributed, nominal:fv, real});
+    }
+    return series;
+  }
+
+  function drawChart(series){
+    const dpr = window.devicePixelRatio || 1;
+    const cssW = canvas.clientWidth || 1200;
+    const cssH = 340;
+    canvas.width = cssW*dpr; canvas.height = cssH*dpr;
+    canvas.style.height = cssH+'px';
+    ctx.setTransform(dpr,0,0,dpr,0,0);
+    ctx.clearRect(0,0,cssW,cssH);
+
+    const padL = 70, padR = 20, padT = 20, padB = 36;
+    const w = cssW - padL - padR, h = cssH - padT - padB;
+    const maxYear = series[series.length-1].year;
+    const maxVal = Math.max(...series.map(s => s.nominal)) * 1.08 || 1;
+
+    function xPix(year){ return padL + (year/maxYear)*w; }
+    function yPix(val){ return padT + h - (val/maxVal)*h; }
+
+    // grid + y labels
+    ctx.strokeStyle = 'rgba(27,36,48,0.10)';
+    ctx.fillStyle = '#7C8592';
+    ctx.font = '11px IBM Plex Mono, monospace';
+    ctx.textAlign = 'right';
+    const steps = 5;
+    for (let i=0; i<=steps; i++){
+      const val = (maxVal/steps)*i;
+      const y = yPix(val);
+      ctx.beginPath(); ctx.moveTo(padL, y); ctx.lineTo(padL+w, y); ctx.stroke();
+      ctx.fillText(fmtRpShort(val), padL-8, y+4);
+    }
+    // x labels
+    ctx.textAlign = 'center';
+    for (let yr=0; yr<=maxYear; yr+=5){
+      const x = xPix(yr);
+      ctx.fillText(yr+'th', x, padT+h+20);
+    }
+
+    function drawLine(key, color, dashed){
+      ctx.beginPath();
+      ctx.strokeStyle = color;
+      ctx.lineWidth = 2.4;
+      if (dashed) ctx.setLineDash([5,4]); else ctx.setLineDash([]);
+      series.forEach((s,i) => {
+        const x = xPix(s.year), y = yPix(s[key]);
+        if (i===0) ctx.moveTo(x,y); else ctx.lineTo(x,y);
+      });
+      ctx.stroke();
+      ctx.setLineDash([]);
+    }
+
+    // contributed (dashed grey) first
+    drawLine('contributed', '#B7AE9A', true);
+    // real value (rust)
+    drawLine('real', '#B5502E', false);
+    // nominal (navy) drawn last, on top
+    drawLine('nominal', '#0B3D66', false);
+  }
+
+  function renderTable(pmt, annualRetPct, inflPct){
+    const years = [5,10,15,20,25,30,35,40];
+    simTableBody.innerHTML = '';
+    years.forEach(y => {
+      const s = computeSeries(pmt, annualRetPct, inflPct, y);
+      const last = s[s.length-1];
+      const tr = document.createElement('tr');
+      tr.innerHTML = `<td>${y}</td><td>${fmtRp(last.contributed)}</td><td>${fmtRp(last.nominal)}</td><td>${fmtRp(last.real)}</td>`;
+      simTableBody.appendChild(tr);
+    });
+  }
+
+  function renderSummary(pmt, annualRetPct, inflPct){
+    const s30 = computeSeries(pmt, annualRetPct, inflPct, 30)[30];
+    simSummary.innerHTML =
+      '<span class="lang-id">Contoh: dengan setoran ' + fmtRp(pmt) + '/bulan selama <b>30 tahun</b> pada return ' + annualRetPct + '%/tahun, total modal yang kamu setor sendiri adalah ' + fmtRp(s30.contributed) + '. Compounding mengubahnya menjadi <b>' + fmtRp(s30.nominal) + '</b> secara nominal — tapi setelah dikoreksi inflasi ' + inflPct + '%/tahun, daya belinya setara dengan <b>' + fmtRp(s30.real) + '</b> uang hari ini.</span>' +
+      '<span class="lang-en" hidden>Example: contributing ' + fmtRp(pmt) + '/month for <b>30 years</b> at a ' + annualRetPct + '%/yr return, your total self-funded contribution is ' + fmtRp(s30.contributed) + '. Compounding turns that into <b>' + fmtRp(s30.nominal) + '</b> nominally — but adjusted for ' + inflPct + '%/yr inflation, its purchasing power equals <b>' + fmtRp(s30.real) + '</b> in today\u2019s money.</span>';
+    setLang(currentLang);
+  }
+
+  function refreshSim(){
+    const pmt = parseInt(pmtSlider.value, 10);
+    const ret = parseFloat(retSlider.value);
+    const inf = parseFloat(infSlider.value);
+    pmtVal.textContent = fmtRp(pmt);
+    retVal.textContent = ret + '%';
+    infVal.textContent = inf + '%';
+    const series40 = computeSeries(pmt, ret, inf, 40);
+    drawChart(series40);
+    renderTable(pmt, ret, inf);
+    renderSummary(pmt, ret, inf);
+  }
+
+  [pmtSlider, retSlider, infSlider].forEach(el => el.addEventListener('input', refreshSim));
+  window.addEventListener('resize', refreshSim);
+  window.addEventListener('load', refreshSim);
+  refreshSim();
+</script>
+
+</body>
+</html>
