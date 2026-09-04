@@ -1,0 +1,791 @@
+<!DOCTYPE html>
+<html lang="id" data-lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Mengapa Kita Jatuh Cinta pada Orang yang Tepat (atau Salah) — Ruang Baca</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,400;0,9..144,500;0,9..144,600;1,9..144,400;1,9..144,500&family=Literata:ital,opsz,wght@0,7..72,400;0,7..72,500;0,7..72,600;1,7..72,400&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+:root{
+  --paper:        #FBF3EC;
+  --paper-deep:   #F3E4D6;
+  --card:         #FFFCF8;
+  --ink:          #2B211D;
+  --ink-soft:     #4A3B34;
+  --ink-faint:    #8A7368;
+  --accent-1:     #C1502E;
+  --accent-1-deep:#96391E;
+  --accent-1-pale:#F0D9CC;
+  --accent-2:     #1F6F6B;
+  --accent-2-soft:#CFE8E6;
+  --accent-3:     #8A5A44;
+  --line:         rgba(43,33,29,0.14);
+  --shadow:       0 12px 40px rgba(43,33,29,0.10);
+  --maxw:         760px;
+}
+*{box-sizing:border-box;}
+html{scroll-behavior:smooth;}
+body{
+  margin:0; background:var(--paper); color:var(--ink-soft);
+  font-family:'Literata', serif; font-size:18px; line-height:1.75;
+  -webkit-font-smoothing:antialiased;
+}
+h1,h2,h3,h4,.chapter-title{font-family:'Fraunces', serif; color:var(--ink); font-weight:500; margin:0;}
+.eyebrow, .meta-row, table th, .badge, .yr{font-family:'IBM Plex Mono', monospace;}
+p{margin:0 0 20px;}
+a{color:var(--accent-2);}
+
+/* ===== loader (hero visual) ===== */
+.loader {
+  --color-1: #2F2D2D; --color-2: #615757; --color-3: rgba(78, 63, 63, 0.2);
+  --color-4: #0002; --color-5: #fff; --color-6: #fff6;
+  --color-7: #ffc400; --color-8: #ffae00; --color-9: #784814;
+  --color-10: rgba(195, 83, 83, 0.13); --size: 1.4px;
+  width: calc(100 * var(--size)); height: calc(100 * var(--size));
+  display: block; margin: auto; position: relative; background: var(--color-1);
+  border-radius: 50%; box-sizing: border-box;
+  transform-origin: calc(170 * var(--size)) calc(50 * var(--size));
+  border: calc(4 * var(--size)) solid var(--color-2);
+  box-shadow: calc(3 * var(--size)) calc(4 * var(--size)) var(--color-3) inset,
+    0 0 calc(6 * var(--size)) var(--color-4) inset;
+  animation: panmov 0.4s ease-in-out infinite alternate;
+}
+.loader::before {
+  content: ''; position: absolute; left: 50%; top: 50%;
+  transform: translate(-50%, -50%) skew(-15deg, 15deg) rotate(-15deg);
+  width: calc(55 * var(--size)); height: calc(53 * var(--size)); background: var(--color-5);
+  background-image:
+    radial-gradient(circle calc(3 * var(--size)), var(--color-6) 90%, transparent 10%),
+    radial-gradient(circle calc(12 * var(--size)), var(--color-7) 90%, transparent 10%),
+    radial-gradient(circle calc(12 * var(--size)), var(--color-8) 100%, transparent 0);
+  background-repeat: no-repeat;
+  background-position: calc(-4 * var(--size)) calc(-6 * var(--size)),
+    calc(-2 * var(--size)) calc(-2 * var(--size)), calc(-1 * var(--size)) calc(-1 * var(--size));
+  box-shadow: calc(-2 * var(--size)) calc(-3 * var(--size)) var(--color-4) inset,
+    0 0 calc(4 * var(--size)) var(--color-3) inset;
+  border-radius: 47% 36% 50% 50% / 49% 45% 42% 44%;
+  animation: ylmov 0.6s ease-in-out infinite alternate;
+}
+.loader::after {
+  content: ''; position: absolute; left: 100%; top: calc(48 * var(--size));
+  height: calc(15 * var(--size)); width: calc(70 * var(--size)); background: var(--color-9);
+  border-radius: 0 calc(8 * var(--size)) calc(8 * var(--size)) 0;
+  box-shadow: calc(3 * var(--size)) 0 calc(3 * var(--size)) var(--color-10) inset;
+  transform: rotate(5deg) translateX(calc(3 * var(--size)));
+}
+@keyframes panmov{0%,10%{transform:rotate(5deg);}90%,100%{transform:rotate(-5deg);}}
+@keyframes ylmov{to{border-radius:50% 36% 50% 50% / 49% 50% 45% 45%;
+  background-position: calc(-2 * var(--size)) calc(-4 * var(--size)),
+    calc(2 * var(--size)) calc(2 * var(--size)), calc(1 * var(--size)) calc(1 * var(--size));}}
+
+/* ===== progress + toc ===== */
+#progress{position:fixed; top:0; left:0; height:3px; width:0%; background:var(--accent-1); z-index:1000; transition:width 0.1s linear;}
+#toc-toggle{
+  position:fixed; bottom:22px; right:20px; z-index:900;
+  background:var(--ink); color:var(--paper); border:none; border-radius:30px;
+  padding:12px 18px; font-family:'IBM Plex Mono',monospace; font-size:13px;
+  box-shadow:var(--shadow); cursor:pointer;
+}
+#lang-toggle{
+  position:fixed; bottom:22px; left:20px; z-index:900;
+  background:var(--card); color:var(--ink); border:1.5px solid var(--ink);
+  border-radius:30px; padding:12px 18px; font-family:'IBM Plex Mono',monospace;
+  font-size:13px; box-shadow:var(--shadow); cursor:pointer;
+}
+#toc-panel{
+  position:fixed; bottom:70px; right:20px; z-index:899; width:min(300px, 82vw);
+  max-height:60vh; overflow-y:auto; background:var(--card); border-radius:16px;
+  box-shadow:var(--shadow); padding:18px 20px; transform:translateY(12px) scale(0.97);
+  opacity:0; pointer-events:none; transition:all 0.25s ease; border:1px solid var(--line);
+}
+#toc-panel.open{opacity:1; transform:translateY(0) scale(1); pointer-events:auto;}
+#toc-panel a{display:block; padding:7px 0; color:var(--ink-soft); text-decoration:none;
+  font-size:14.5px; border-bottom:1px dotted var(--line);}
+#toc-panel a:last-child{border-bottom:none;}
+#toc-panel .toc-heading{font-family:'IBM Plex Mono',monospace; font-size:11px; letter-spacing:0.1em;
+  text-transform:uppercase; color:var(--accent-1); margin:14px 0 4px;}
+#toc-panel .toc-heading:first-child{margin-top:0;}
+
+/* ===== hero ===== */
+.hero{max-width:var(--maxw); margin:0 auto; padding:70px 24px 50px; text-align:center;}
+.hero-loader{width:130px; height:130px; margin:0 auto 28px; display:flex; align-items:center; justify-content:center;}
+.eyebrow{font-size:12.5px; letter-spacing:0.14em; text-transform:uppercase; color:var(--accent-2);}
+.hero h1{font-size:clamp(30px,7vw,46px); line-height:1.15; margin-top:14px;}
+.hero h1 .accent{font-style:italic; color:var(--accent-1); font-weight:400;}
+.subtitle{font-size:17px; color:var(--ink-faint); margin-top:18px; max-width:520px; margin-left:auto; margin-right:auto;}
+.meta-row{display:flex; justify-content:center; gap:16px; flex-wrap:wrap; font-size:12px;
+  color:var(--ink-faint); margin-top:22px; letter-spacing:0.03em;}
+.meta-row span:not(:last-child)::after{content:'·'; margin-left:16px; color:var(--line);}
+.scroll-cue{margin-top:46px; font-size:12px; color:var(--ink-faint); letter-spacing:0.05em;}
+.scroll-cue .line{display:block; width:1px; height:34px; background:var(--line); margin:0 auto 10px; position:relative; overflow:hidden;}
+.scroll-cue .line::after{content:''; position:absolute; top:-100%; left:0; width:100%; height:100%;
+  background:var(--accent-1); animation:cue 2s ease-in-out infinite;}
+@keyframes cue{50%{top:100%;}100%{top:100%;}}
+
+.disclaimer{max-width:var(--maxw); margin:0 auto 10px; padding:0 24px; text-align:center;
+  font-size:13.5px; color:var(--ink-faint); font-style:italic;}
+
+/* ===== toc section ===== */
+.toc-section{max-width:var(--maxw); margin:60px auto; padding:0 24px;}
+.toc-section h2{font-size:22px; margin-bottom:22px;}
+.toc-list{list-style:none; padding:0; margin:0;}
+.toc-list li{border-bottom:1px solid var(--line);}
+.toc-list a{display:flex; justify-content:space-between; gap:14px; padding:16px 4px;
+  text-decoration:none; color:var(--ink); font-size:16px;}
+.toc-list a span.tn{font-family:'IBM Plex Mono',monospace; color:var(--accent-1); font-size:13px; min-width:26px;}
+.toc-list .part-label{font-family:'IBM Plex Mono',monospace; font-size:11px; letter-spacing:0.1em;
+  text-transform:uppercase; color:var(--accent-2); margin:26px 0 6px;}
+.toc-list .part-label:first-child{margin-top:0;}
+
+hr.div{border:none; border-top:1px solid var(--line); max-width:var(--maxw); margin:0 auto;}
+
+/* ===== chapter ===== */
+.chapter{max-width:var(--maxw); margin:0 auto; padding:110px 24px 40px;
+  opacity:0; transform:translateY(18px); transition:opacity 0.7s ease, transform 0.7s ease;}
+.chapter.visible{opacity:1; transform:translateY(0);}
+.chapter-num-row{display:flex; align-items:center; gap:10px;}
+.pulse-dot{width:8px; height:8px; border-radius:50%; background:var(--accent-1); flex:none;
+  box-shadow:0 0 0 0 rgba(193,80,46,0.5); animation:pulse 2.2s ease-in-out infinite;}
+@keyframes pulse{0%{box-shadow:0 0 0 0 rgba(193,80,46,0.45);}70%{box-shadow:0 0 0 9px rgba(193,80,46,0);}100%{box-shadow:0 0 0 0 rgba(193,80,46,0);}}
+.chapter-title{font-size:clamp(26px,5.5vw,36px); margin-top:12px; line-height:1.2;}
+.chapter-sub{color:var(--ink-faint); font-size:16px; margin-top:12px;}
+.experts{font-family:'IBM Plex Mono',monospace; font-size:12px; color:var(--accent-2); margin-top:14px;}
+.chapter-body{margin-top:36px;}
+.chapter-body h3{font-size:21px; margin-top:44px; margin-bottom:16px; display:flex; align-items:baseline; gap:10px;}
+.chapter-body h3 .letter{font-family:'IBM Plex Mono',monospace; font-size:13px; color:var(--accent-1); font-weight:600;}
+.substep{font-family:'Fraunces',serif; font-size:17px; color:var(--accent-2); margin:26px 0 10px; font-style:italic; font-weight:500;}
+p.dropcap:first-letter{font-family:'Fraunces',serif; font-size:3.4em; float:left; line-height:0.85;
+  padding:6px 10px 0 0; color:var(--accent-1);}
+
+.pull{border-left:3px solid var(--accent-1); padding:6px 0 6px 22px; margin:34px 0; font-family:'Fraunces',serif;
+  font-style:italic; font-size:19px; color:var(--ink); line-height:1.5;}
+.pull cite{display:block; font-family:'IBM Plex Mono',monospace; font-style:normal; font-size:12px;
+  color:var(--accent-2); margin-top:10px;}
+.pull .note{display:block; font-family:'Literata',serif; font-style:normal; font-size:14.5px;
+  color:var(--ink-faint); margin-top:6px;}
+
+.callout{background:var(--card); border:1px solid var(--line); border-radius:14px; padding:22px 24px;
+  margin:30px 0; box-shadow:var(--shadow);}
+.callout h4{font-size:14px; text-transform:uppercase; letter-spacing:0.06em; color:var(--accent-1);
+  font-family:'IBM Plex Mono',monospace; margin-bottom:10px;}
+.callout p:last-child{margin-bottom:0;}
+
+ul.checklist{list-style:none; padding:0; margin:26px 0;}
+ul.checklist li{padding:12px 0 12px 30px; position:relative; border-bottom:1px dashed var(--line);}
+ul.checklist li:last-child{border-bottom:none;}
+ul.checklist li::before{content:'✓'; position:absolute; left:0; top:12px; color:var(--accent-2); font-weight:700;}
+
+.flow{margin:32px 0;}
+.flow-title{font-family:'IBM Plex Mono',monospace; font-size:12px; text-transform:uppercase;
+  letter-spacing:0.08em; color:var(--ink-faint); margin-bottom:14px;}
+.flow-row{display:flex; align-items:stretch; gap:12px;}
+.flow-box{flex:1; background:var(--card); border:1px solid var(--line); border-radius:12px;
+  padding:16px; text-align:center;}
+.flow-box.alt{background:var(--accent-2-soft); border-color:var(--accent-2);}
+.flow-box b{display:block; font-family:'Fraunces',serif; font-size:15.5px; color:var(--ink); margin-bottom:4px;}
+.flow-box span{font-size:13px; color:var(--ink-faint);}
+.flow-arrow{display:flex; align-items:center; justify-content:center; color:var(--accent-1); font-size:20px;}
+@media(max-width:560px){.flow-row{flex-direction:column;} .flow-row > .flow-arrow{transform:rotate(90deg);}}
+
+.table-cap{font-family:'IBM Plex Mono',monospace; font-size:12px; text-transform:uppercase;
+  letter-spacing:0.06em; color:var(--ink-faint); margin-bottom:10px;}
+.matrix-wrap{overflow-x:auto; margin:0 0 30px; border-radius:12px; border:1px solid var(--line);}
+table.matrix{width:100%; border-collapse:collapse; font-size:15px; background:var(--card);}
+table.matrix th{background:var(--accent-1-pale); color:var(--accent-1-deep); text-align:left;
+  padding:12px 16px; font-size:12px; text-transform:uppercase; letter-spacing:0.04em;}
+table.matrix td{padding:13px 16px; border-top:1px solid var(--line); vertical-align:top;}
+
+/* ===== epilog ===== */
+.epilog{max-width:var(--maxw); margin:0 auto; padding:110px 24px 60px; text-align:center;
+  opacity:0; transform:translateY(18px); transition:opacity 0.7s ease, transform 0.7s ease;}
+.epilog.visible{opacity:1; transform:translateY(0);}
+.epilog h2{font-size:clamp(24px,5vw,32px); margin:14px 0 22px;}
+.sign{font-family:'Fraunces',serif; font-style:italic; color:var(--accent-1); margin-top:24px; font-size:17px;}
+
+.refs{padding-left:20px; font-size:15px; color:var(--ink-faint);}
+.refs li{margin-bottom:10px;}
+
+footer{max-width:var(--maxw); margin:0 auto; padding:50px 24px 90px; text-align:center;
+  font-size:12.5px; color:var(--ink-faint); font-family:'IBM Plex Mono',monospace;}
+
+/* ===== bilingual toggle ===== */
+[data-lang="id"] .lang-en{display:none;}
+[data-lang="en"] .lang-id{display:none;}
+
+@media (prefers-reduced-motion: reduce){
+  .chapter, .epilog{transition:none;}
+  .loader, .pulse-dot, .scroll-cue .line::after{animation:none;}
+}
+</style>
+</head>
+<body>
+
+<div id="progress"></div>
+<button id="toc-toggle" aria-expanded="false">
+  <span class="lang-id">☰ Daftar Isi</span><span class="lang-en">☰ Contents</span>
+</button>
+<button id="lang-toggle">
+  <span class="lang-id">EN</span><span class="lang-en">ID</span>
+</button>
+
+<nav id="toc-panel">
+  <div class="toc-heading"><span class="lang-id">Bagian I</span><span class="lang-en">Part I</span></div>
+  <a href="#bab1"><span class="lang-id">Bab 1 — Neurobiologi Ketertarikan</span><span class="lang-en">Ch.1 — The Neurobiology of Attraction</span></a>
+  <a href="#bab2"><span class="lang-id">Bab 2 — Teori Matching Wound</span><span class="lang-en">Ch.2 — The Matching Wound Theory</span></a>
+  <div class="toc-heading"><span class="lang-id">Bagian II</span><span class="lang-en">Part II</span></div>
+  <a href="#bab3"><span class="lang-id">Bab 3 — Gaya Keikatan</span><span class="lang-en">Ch.3 — Attachment Styles</span></a>
+  <a href="#bab4"><span class="lang-id">Bab 4 — Biologi Pertengkaran</span><span class="lang-en">Ch.4 — The Biology of Fighting</span></a>
+  <div class="toc-heading"><span class="lang-id">Bagian III</span><span class="lang-en">Part III</span></div>
+  <a href="#bab5"><span class="lang-id">Bab 5 — Protokol De-eskalasi</span><span class="lang-en">Ch.5 — De-escalation Protocol</span></a>
+  <a href="#bab6"><span class="lang-id">Bab 6 — Rewiring the Heart</span><span class="lang-en">Ch.6 — Rewiring the Heart</span></a>
+  <a href="#bab7"><span class="lang-id">Bab 7 — Growth Partnership</span><span class="lang-en">Ch.7 — Growth Partnership</span></a>
+  <a href="#cheatsheet"><span class="lang-id">Cheat-Sheet Konflik</span><span class="lang-en">Conflict Cheat-Sheet</span></a>
+  <a href="#epilog"><span class="lang-id">Epilog</span><span class="lang-en">Epilogue</span></a>
+  <a href="#pustaka"><span class="lang-id">Daftar Pustaka</span><span class="lang-en">References</span></a>
+</nav>
+
+<section class="hero">
+  <div class="hero-loader"><span class="loader" style="--size:1.3px;"></span></div>
+  <span class="eyebrow"><span class="lang-id">Psikologi Relasi · Neurobiologi Cinta</span><span class="lang-en">Relationship Psychology · Love Neurobiology</span></span>
+  <h1>
+    <span class="lang-id">Mengapa Kita Jatuh Cinta<br><span class="accent">pada Orang yang Tepat (atau Salah)</span></span>
+    <span class="lang-en">Why We Fall in Love<br><span class="accent">with the Right Person (or the Wrong One)</span></span>
+  </h1>
+  <p class="subtitle">
+    <span class="lang-id">Navigasi biologi ketertarikan, trauma masa lalu, dan seni menjaga hubungan tetap hidup.</span>
+    <span class="lang-en">Navigating the biology of attraction, old trauma, and the art of keeping a relationship alive.</span>
+  </p>
+  <div class="meta-row">
+    <span><span class="lang-id">7 Bab</span><span class="lang-en">7 Chapters</span></span>
+    <span><span class="lang-id">± 34 menit membaca</span><span class="lang-en">± 34 min read</span></span>
+    <span>Oleh Sangoeroep</span>
+  </div>
+  <div class="scroll-cue"><span class="line"></span>
+    <span class="lang-id">gulir untuk memulai perjalanan</span><span class="lang-en">scroll to begin the journey</span>
+  </div>
+</section>
+
+<p class="disclaimer">
+  <span class="lang-id">Buku ini menggabungkan sains populer dengan psikologi relasional yang teruji secara klinis — ditulis sebagai peta, bukan diagnosis.</span>
+  <span class="lang-en">This book blends popular science with clinically-tested relational psychology — written as a map, not a diagnosis.</span>
+</p>
+
+<section class="toc-section" id="daftar-isi">
+  <h2><span class="lang-id">Daftar Isi</span><span class="lang-en">Table of Contents</span></h2>
+  <ul class="toc-list">
+    <li class="part-label"><span class="lang-id">Bagian I — Magnetisme Biologis & Misteri Chemistry</span><span class="lang-en">Part I — Biological Magnetism & the Mystery of Chemistry</span></li>
+    <li><a href="#bab1"><span><span class="lang-id">Neurobiologi Ketertarikan</span><span class="lang-en">The Neurobiology of Attraction</span></span><span class="tn">01</span></a></li>
+    <li><a href="#bab2"><span><span class="lang-id">Teori Matching Wound</span><span class="lang-en">The Matching Wound Theory</span></span><span class="tn">02</span></a></li>
+    <li class="part-label"><span class="lang-id">Bagian II — Anatomi Konflik & Pemicu Trauma</span><span class="lang-en">Part II — The Anatomy of Conflict & Trauma Triggers</span></li>
+    <li><a href="#bab3"><span><span class="lang-id">Peta Emosi & Gaya Keikatan</span><span class="lang-en">Emotional Maps & Attachment Styles</span></span><span class="tn">03</span></a></li>
+    <li><a href="#bab4"><span><span class="lang-id">Biologi Pertengkaran</span><span class="lang-en">The Biology of Fighting</span></span><span class="tn">04</span></a></li>
+    <li class="part-label"><span class="lang-id">Bagian III — Solusi, Adaptasi & Protokol Pemulihan</span><span class="lang-en">Part III — Solutions, Adaptation & Recovery Protocols</span></li>
+    <li><a href="#bab5"><span><span class="lang-id">Pertolongan Pertama Saat Konflik</span><span class="lang-en">First Aid in Conflict</span></span><span class="tn">05</span></a></li>
+    <li><a href="#bab6"><span><span class="lang-id">Rewiring the Heart</span><span class="lang-en">Rewiring the Heart</span></span><span class="tn">06</span></a></li>
+    <li><a href="#bab7"><span><span class="lang-id">Adaptasi Berkelanjutan & Growth Partnership</span><span class="lang-en">Sustained Adaptation & Growth Partnership</span></span><span class="tn">07</span></a></li>
+    <li><a href="#cheatsheet"><span><span class="lang-id">Cheat-Sheet Resolusi Konflik</span><span class="lang-en">Conflict Resolution Cheat-Sheet</span></span><span class="tn">＋</span></a></li>
+    <li><a href="#epilog"><span><span class="lang-id">Epilog</span><span class="lang-en">Epilogue</span></span><span class="tn">－</span></a></li>
+    <li><a href="#pustaka"><span><span class="lang-id">Daftar Pustaka</span><span class="lang-en">References</span></span><span class="tn">↷</span></a></li>
+  </ul>
+</section>
+
+<hr class="div">
+
+<!-- ============ BAGIAN I ============ -->
+
+<section class="chapter" id="bab1">
+  <div class="chapter-head">
+    <div class="chapter-num-row"><span class="pulse-dot"></span>
+      <span class="eyebrow"><span class="lang-id">Bab 01</span><span class="lang-en">Chapter 01</span></span>
+    </div>
+    <h2 class="chapter-title">
+      <span class="lang-id">Neurobiologi Ketertarikan — Ketika Otak Mengambil Alih Hati</span>
+      <span class="lang-en">The Neurobiology of Attraction — When the Brain Hijacks the Heart</span>
+    </h2>
+    <p class="chapter-sub">
+      <span class="lang-id">Cinta bukan pilihan bebas. Ia adalah koktail kimiawi yang, jika dilihat lewat pemindai otak, nyaris tak bisa dibedakan dari adiksi.</span>
+      <span class="lang-en">Love is not a free choice. It is a chemical cocktail that, seen through a brain scanner, is nearly indistinguishable from addiction.</span>
+    </p>
+    <div class="experts">Helen Fisher · Stephen Porges · Neuroscience of Bonding</div>
+  </div>
+
+  <div class="chapter-body">
+    <h3 id="b1-1"><span class="letter">1.1</span>
+      <span class="lang-id">Koktail Kimiawi Jatuh Cinta</span><span class="lang-en">The Chemical Cocktail of Falling in Love</span>
+    </h3>
+    <p class="dropcap lang-id">Ketika seseorang merasakan "chemistry" yang intens, otak sebenarnya sedang mengalami serangkaian reaksi neurokimiawi masif. Ventral Tegmental Area, wilayah kecil di otak tengah, mulai memompa dopamin ke nucleus accumbens — pusat hasrat dan motivasi. Inilah yang membuat seseorang yang baru jatuh cinta bisa menatap layar ponsel berjam-jam menunggu satu pesan: bukan karena ia lemah, tapi karena secara kimiawi ia berada dalam kondisi yang serupa dengan pecandu menunggu dosis berikutnya.</p>
+    <p class="dropcap lang-en">When someone feels intense "chemistry," the brain is actually undergoing a massive neurochemical cascade. The Ventral Tegmental Area, a small region deep in the midbrain, begins pumping dopamine into the nucleus accumbens — the seat of desire and motivation. This is why someone newly in love can stare at their phone for an hour waiting for one message: not because they're weak, but because chemically, they're in a state resembling an addict awaiting the next dose.</p>
+
+    <p class="lang-id">Bersamaan dengan itu, oksitosin dan vasopresin bekerja diam-diam menjahit rasa percaya dan keterikatan — molekul yang sama yang mengikat ibu pada bayinya, kini bekerja mengikat dua orang dewasa yang baru saling mengenal. Dan yang paling mengejutkan: serotonin, hormon penstabil mood, justru anjlok di fase awal jatuh cinta — turun ke level yang setara penderita gangguan obsesif-kompulsif. Inilah penjelasan ilmiah di balik pikiran yang berputar tanpa henti memikirkan satu orang: limerence, sebuah kondisi neurokimiawi yang punya nama dan mekanisme sendiri.</p>
+    <p class="lang-en">Meanwhile, oxytocin and vasopressin quietly stitch together trust and attachment — the same molecules that bond a mother to her infant now work to bind two adults who barely know each other. And most surprising of all: serotonin, the mood-stabilizing hormone, actually plummets in early-stage love — dropping to levels comparable to patients with obsessive-compulsive disorder. This is the scientific explanation behind the mind that circles endlessly around one person: limerence, a neurochemical condition with its own name and mechanism.</p>
+
+    <h3 id="b1-2"><span class="letter">1.2</span>
+      <span class="lang-id">Debaran vs. Ketenangan: Chemistry atau Alarm Bahaya?</span>
+      <span class="lang-en">Racing Heart vs. Calm: Chemistry or Danger Alarm?</span>
+    </h3>
+    <p class="lang-id">Budaya populer mengajarkan bahwa jantung berdebar kencang dan kecemasan tinggi adalah bukti "cinta sejati". Tapi tubuh tidak selalu sejujur itu. Debaran hebat sering kali adalah sinyal sistem saraf simpatik — respons fight-or-flight yang sama yang muncul saat menghadapi ancaman. Dan yang lebih menggelisahkan: debaran itu paling sering muncul justru ketika seseorang bertemu pola yang sudah dikenalnya sejak kecil — kasih sayang yang datang-pergi tanpa bisa diprediksi.</p>
+    <p class="lang-en">Popular culture teaches us that a racing heart and high anxiety are proof of "true love." But the body isn't always that honest. Intense heart-pounding is often a sympathetic nervous system signal — the same fight-or-flight response triggered by threat. More unsettling still: this racing is most common precisely when someone encounters a pattern already familiar since childhood — affection that came and went unpredictably.</p>
+
+    <blockquote class="pull">
+      <span class="lang-id">Cinta yang sehat justru sering terasa sunyi di awal. Ia memicu keadaan ventral vagal — napas melambat, bahu turun, tubuh terasa tenang. Bagi yang terbiasa gejolak, ketenangan itu terasa asing, bahkan membosankan.</span>
+      <span class="lang-en">Healthy love often feels quiet at first. It triggers a ventral vagal state — breath slows, shoulders drop, the body feels calm. For someone used to turbulence, that calm feels foreign, even boring.</span>
+      <span class="note"><span class="lang-id">Salah satu jebakan terbesar dalam memilih pasangan: mengira kedamaian sebagai tanda absennya chemistry.</span><span class="lang-en">One of the biggest traps in choosing a partner: mistaking peace for the absence of chemistry.</span></span>
+    </blockquote>
+
+    <h3 id="b1-3"><span class="letter">1.3</span>
+      <span class="lang-id">Sinyal yang Tak Terlihat: Feromon, MHC & Bahasa Tubuh</span>
+      <span class="lang-en">Invisible Signals: Pheromones, MHC & Body Language</span>
+    </h3>
+    <p class="lang-id">Jauh sebelum logika sempat bicara, tubuh sudah membaca calon pasangan lewat sinyal tak kasat mata. Riset menunjukkan manusia tertarik pada aroma tubuh seseorang dengan kombinasi gen imunitas — Major Histocompatibility Complex — yang berbeda dari dirinya sendiri, strategi purba memperkaya keberagaman genetik keturunan. Sistem saraf kita juga membaca mikro-ekspresi wajah, ritme napas, dan nada suara — pemindaian cepat terhadap tingkat stres dan regulasi emosi calon pasangan, jauh sebelum otak sadar sempat menyimpulkan apa pun.</p>
+    <p class="lang-en">Long before logic can speak, the body already reads a potential partner through invisible signals. Research shows humans are drawn to body scent tied to Major Histocompatibility Complex genes different from their own — an ancient strategy for genetic diversity in offspring. Our nervous system also reads micro-expressions, breathing rhythm, and vocal tone — a rapid scan of a potential partner's stress level and emotional regulation, long before the conscious brain reaches any conclusion.</p>
+  </div>
+</section>
+
+<hr class="div">
+
+<section class="chapter" id="bab2">
+  <div class="chapter-head">
+    <div class="chapter-num-row"><span class="pulse-dot"></span>
+      <span class="eyebrow"><span class="lang-id">Bab 02</span><span class="lang-en">Chapter 02</span></span>
+    </div>
+    <h2 class="chapter-title">
+      <span class="lang-id">Teori Matching Wound — Kita Menarik Orang yang Setara Lukanya</span>
+      <span class="lang-en">The Matching Wound Theory — We Attract Wounds Equal to Our Own</span>
+    </h2>
+    <p class="chapter-sub">
+      <span class="lang-id">Otak bawah sadar tidak mencari siapa yang membuat kita bahagia. Ia mencari siapa yang familier.</span>
+      <span class="lang-en">The unconscious brain doesn't search for who makes us happy. It searches for who is familiar.</span>
+    </p>
+    <div class="experts">Dr. Tara Swart · Harville Hendrix · Imago Theory</div>
+  </div>
+  <div class="chapter-body">
+    <h3 id="b2-1"><span class="letter">2.1</span>
+      <span class="lang-id">Cetak Biru yang Diwariskan Tanpa Sadar</span><span class="lang-en">A Blueprint Inherited Unconsciously</span>
+    </h3>
+    <p class="dropcap lang-id">Dr. Tara Swart menyampaikan premis yang mengguncang: dalam memilih pasangan, manusia tidak tertarik pada apa yang secara sadar mereka inginkan, melainkan pada sesuatu yang setara kedalaman lukanya dengan diri mereka sendiri. Ini bersambung dengan konsep Imago dari Harville Hendrix — bahwa otak bawah sadar menyimpan cetak biru pengasuh masa kecil, lengkap sisi baik maupun menyakitkannya. Tanpa sadar kita mencari pasangan dengan kelemahan serupa pengasuh awal, berharap mendapat "kesempatan kedua" menyelesaikan luka yang dulu tak pernah selesai.</p>
+    <p class="dropcap lang-en">Dr. Tara Swart offers a startling premise: in choosing a partner, humans aren't drawn to what they consciously want, but to something matching the depth of their own wound. This connects to Harville Hendrix's Imago concept — that the unconscious mind stores a blueprint of our childhood caregiver, both its kindness and its pain. Without realizing it, we seek a partner with similar flaws to our earliest caregiver, hoping for a "second chance" to resolve a wound that was never finished.</p>
+
+    <p class="lang-id">Dua orang bisa tampak sangat berbeda di permukaan — satu agresif dan menuntut, satu lagi pendiam dan menarik diri — namun kedalaman penyangkalan diri mereka berada di level yang persis sama. Luka tidak selalu berwajah sama. Tapi kedalamannya sering kali kembar.</p>
+    <p class="lang-en">Two people can look very different on the surface — one aggressive and demanding, the other quiet and withdrawn — yet the depth of their self-denial sits at exactly the same level. Wounds don't always wear the same face. But their depth is often identical twins.</p>
+
+    <h3 id="b2-2"><span class="letter">2.2</span>
+      <span class="lang-id">Tarian Anxious dan Avoidant</span><span class="lang-en">The Anxious-Avoidant Dance</span>
+    </h3>
+    <p class="lang-id">Si Anxious tumbuh dengan pengasuhan yang tidak konsisten secara emosional; ia belajar bahwa kasih sayang harus dikejar, kadang dengan cemas dan waspada berlebih. Si Avoidant tumbuh dengan pengasuh yang menerobos batas dirinya atau menolak emosinya; ia belajar cara paling aman untuk bertahan adalah mematikan kebutuhan itu sendiri.</p>
+    <p class="lang-en">The Anxious one grows up with emotionally inconsistent caregiving; they learn that affection must be chased, sometimes with anxiety and hyper-vigilance. The Avoidant one grows up with a caregiver who invaded their boundaries or rejected their emotions; they learn the safest way to survive is to shut the need off entirely.</p>
+
+    <div class="flow">
+      <div class="flow-title"><span class="lang-id">Lingkaran Eskalasi</span><span class="lang-en">The Escalation Loop</span></div>
+      <div class="flow-row">
+        <div class="flow-box"><b><span class="lang-id">Si Anxious mengejar</span><span class="lang-en">Anxious pursues</span></b><span><span class="lang-id">takut ditinggalkan</span><span class="lang-en">fears abandonment</span></span></div>
+        <div class="flow-arrow">→</div>
+        <div class="flow-box alt"><b><span class="lang-id">Si Avoidant menjauh</span><span class="lang-en">Avoidant withdraws</span></b><span><span class="lang-id">takut tercekik/diatur</span><span class="lang-en">fears being smothered</span></span></div>
+        <div class="flow-arrow">→</div>
+        <div class="flow-box"><b><span class="lang-id">Panik meningkat</span><span class="lang-en">Panic escalates</span></b><span><span class="lang-id">siklus berulang</span><span class="lang-en">cycle repeats</span></span></div>
+      </div>
+    </div>
+
+    <p class="lang-id">Si Anxious melihat kepasifan si Avoidant sebagai tantangan untuk "diselamatkan"; si Avoidant melihat perhatian si Anxious sebagai bukti dirinya diinginkan — sampai keintiman terasa terlalu dekat, dan ia mulai merasa tercekik. Semakin satu pihak mengejar, semakin pihak lain menjauh — sebuah tarian yang bisa berputar bertahun-tahun tanpa disadari sebagai pola.</p>
+    <p class="lang-en">Anxious sees Avoidant's passivity as a challenge to "rescue"; Avoidant sees Anxious's attention as proof of being wanted — until intimacy feels too close, and they begin to feel smothered. The more one chases, the more the other retreats — a dance that can spin for years without ever being recognized as a pattern.</p>
+
+    <h3 id="b2-3"><span class="letter">2.3</span>
+      <span class="lang-id">Jebakan Familiaritas</span><span class="lang-en">The Familiarity Trap</span>
+    </h3>
+    <p class="lang-id">Amigdala mendefinisikan "aman" bukan sebagai sesuatu yang membahagiakan, melainkan sesuatu yang bisa diprediksi. Ketika seseorang dengan luka kekecewaan bertemu pasangan yang penuh kasih dan stabil, otak bawah sadarnya bisa menyalakan alarm bahaya — bukan karena hubungan itu buruk, tapi karena ia asing bagi sistem sarafnya. Dari situ muncul dorongan self-sabotage: menjauhkan diri dari sesuatu yang justru baik, karena baik itu terasa seperti ancaman.</p>
+    <p class="lang-en">The amygdala defines "safe" not as something that makes us happy, but something predictable. When someone carrying old disappointment meets a loving, stable partner, their subconscious can trigger a danger alarm — not because the relationship is bad, but because it's alien to their nervous system. From this comes self-sabotage: pushing away something genuinely good, because good feels like a threat.</p>
+  </div>
+</section>
+
+<hr class="div">
+
+<!-- ============ BAGIAN II ============ -->
+
+<section class="chapter" id="bab3">
+  <div class="chapter-head">
+    <div class="chapter-num-row"><span class="pulse-dot"></span>
+      <span class="eyebrow"><span class="lang-id">Bab 03</span><span class="lang-en">Chapter 03</span></span>
+    </div>
+    <h2 class="chapter-title">
+      <span class="lang-id">Peta Emosi & Gaya Keikatan (Attachment Styles)</span>
+      <span class="lang-en">Emotional Maps & Attachment Styles</span>
+    </h2>
+    <p class="chapter-sub">
+      <span class="lang-id">Sebagian besar pertengkaran pasangan bukan tentang piring kotor. Itu tentang attachment panic.</span>
+      <span class="lang-en">Most couple fights aren't about dirty dishes. They're about attachment panic.</span>
+    </p>
+    <div class="experts">Bartholomew & Horowitz</div>
+  </div>
+  <div class="chapter-body">
+    <h3 id="b3-1"><span class="letter">3.1</span>
+      <span class="lang-id">Empat Spektrum Attachment</span><span class="lang-en">The Four Attachment Spectrums</span>
+    </h3>
+    <p class="dropcap lang-id">Bartholomew dan Horowitz memetakan empat pola keikatan yang membentuk cara manusia dewasa menjalani relasi — masing-masing lahir dari pengalaman pengasuhan yang berbeda, dan masing-masing membawa logikanya sendiri tentang apa artinya aman.</p>
+    <p class="dropcap lang-en">Bartholomew and Horowitz mapped four attachment patterns that shape how adults navigate relationships — each born from different caregiving experiences, each carrying its own logic about what safety means.</p>
+
+    <p class="table-cap"><span class="lang-id">Empat Gaya Keikatan</span><span class="lang-en">The Four Attachment Styles</span></p>
+    <div class="matrix-wrap">
+      <table class="matrix">
+        <thead><tr>
+          <th><span class="lang-id">Gaya</span><span class="lang-en">Style</span></th>
+          <th><span class="lang-id">Ciri Utama</span><span class="lang-en">Core Trait</span></th>
+        </tr></thead>
+        <tbody>
+          <tr><td><span class="lang-id">Secure (Aman)</span><span class="lang-en">Secure</span></td><td><span class="lang-id">Regulasi emosi fleksibel, tak takut keintiman maupun kemandirian</span><span class="lang-en">Flexible emotional regulation, unafraid of intimacy or independence</span></td></tr>
+          <tr><td><span class="lang-id">Anxious-Preoccupied</span><span class="lang-en">Anxious-Preoccupied</span></td><td><span class="lang-id">Butuh konfirmasi berulang, mudah terpicu jarak emosional kecil</span><span class="lang-en">Needs repeated reassurance, easily triggered by small emotional distance</span></td></tr>
+          <tr><td><span class="lang-id">Dismissive-Avoidant</span><span class="lang-en">Dismissive-Avoidant</span></td><td><span class="lang-id">Mengagungkan kemandirian ekstrem, menekan kebutuhan emosional</span><span class="lang-en">Glorifies extreme independence, suppresses emotional needs</span></td></tr>
+          <tr><td><span class="lang-id">Fearful-Avoidant</span><span class="lang-en">Fearful-Avoidant</span></td><td><span class="lang-id">Ingin keintiman tapi takut penolakan; pola push-pull</span><span class="lang-en">Wants intimacy but fears rejection; push-pull pattern</span></td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <h3 id="b3-2"><span class="letter">3.2</span>
+      <span class="lang-id">Siklus Pertengkaran Berulang</span><span class="lang-en">The Infinity Loop of Conflict</span>
+    </h3>
+    <p class="lang-id">Pemicu permukaan sering sesederhana pesan singkat yang tak dibalas selama dua jam. Yang Anxious memprosesnya sebagai "aku tidak penting bagimu" → menyerang atau menuntut. Yang Avoidant memproses serangan itu sebagai "aku selalu salah" → menarik diri, mengunci diri, membisu. Semakin Avoidant menarik diri, semakin Anxious panik dan meningkatkan serangannya — lingkaran tanpa ujung yang berjalan bukan karena kedua pihak jahat, tapi karena sistem saraf mereka saling memicu tanpa ada yang benar-benar didengar.</p>
+    <p class="lang-en">The surface trigger is often as simple as a text left unanswered for two hours. The Anxious partner processes it as "I don't matter to you" → attacks or demands. The Avoidant partner processes the attack as "I'm always wrong" → withdraws, shuts down, goes silent. The more Avoidant withdraws, the more Anxious panics and escalates — an endless loop that runs not because either person is cruel, but because their nervous systems keep triggering each other without either being truly heard.</p>
+  </div>
+</section>
+
+<hr class="div">
+
+<section class="chapter" id="bab4">
+  <div class="chapter-head">
+    <div class="chapter-num-row"><span class="pulse-dot"></span>
+      <span class="eyebrow"><span class="lang-id">Bab 04</span><span class="lang-en">Chapter 04</span></span>
+    </div>
+    <h2 class="chapter-title">
+      <span class="lang-id">Biologi Pertengkaran — Saat Amigdala Membajak Hubungan</span>
+      <span class="lang-en">The Biology of Fighting — When the Amygdala Hijacks the Relationship</span>
+    </h2>
+    <p class="chapter-sub">
+      <span class="lang-id">Pada titik tertentu, kita tidak lagi bertengkar dengan pasangan. Kita bertengkar dengan sistem saraf kita sendiri.</span>
+      <span class="lang-en">At a certain point, we're no longer fighting our partner. We're fighting our own nervous system.</span>
+    </p>
+    <div class="experts">John Gottman · Stephen Porges</div>
+  </div>
+  <div class="chapter-body">
+    <h3 id="b4-1"><span class="letter">4.1</span>
+      <span class="lang-id">Amigdala Hijack & Detak Jantung</span><span class="lang-en">Amygdala Hijack & Heart Rate</span>
+    </h3>
+    <p class="dropcap lang-id">John Gottman menemukan bahwa begitu detak jantung seseorang melampaui 100 denyut per menit dalam interaksi dengan pasangan, prefrontal cortex — pusat logika, empati, dan pemecahan masalah — mulai kehilangan kendali. Persepsi menyempit menjadi tunnel vision. Pendengaran mulai memprioritaskan nada suara yang terdengar mengancam, sehingga kata-kata netral bisa terdengar seperti serangan.</p>
+    <p class="dropcap lang-en">John Gottman found that once someone's heart rate exceeds 100 beats per minute during a partner interaction, the prefrontal cortex — the seat of logic, empathy, and problem-solving — begins losing control. Perception narrows into tunnel vision. Hearing starts prioritizing threatening-sounding tones, so neutral words can register as attacks.</p>
+
+    <h3 id="b4-2"><span class="letter">4.2</span>
+      <span class="lang-id">Teori Polivagal dalam Relasi</span><span class="lang-en">Polyvagal Theory in Relationships</span>
+    </h3>
+    <p class="lang-id">Stephen Porges menjelaskan tiga keadaan hierarkis sistem saraf otonom: ventral vagal — tenang, terhubung, penuh empati; sympathetic — waspada, cemas, siap menyerang atau lari; dan dorsal vagal — mati rasa, hampa, membeku. Pasangan yang bertengkar sering berada di dua keadaan berbeda pada saat bersamaan — satu menyerang, satu membeku — dan keduanya berbicara dalam bahasa sistem saraf yang tak saling mengerti.</p>
+    <p class="lang-en">Stephen Porges explains three hierarchical states of the autonomic nervous system: ventral vagal — calm, connected, deeply empathic; sympathetic — alert, anxious, ready to fight or flee; and dorsal vagal — numb, hollow, frozen. Fighting couples are often in two different states simultaneously — one attacking, one frozen — each speaking a nervous-system language the other can't understand.</p>
+
+    <div class="callout">
+      <h4><span class="lang-id">Allostatic Load</span><span class="lang-en">Allostatic Load</span></h4>
+      <p><span class="lang-id">Kritik tajam, sarkasme, atau penghinaan halus yang berulang memicu peningkatan allostatic load — akumulasi stres kronis yang menaikkan kortisol basal, menurunkan imunitas, dan bisa memicu gangguan kesehatan somatik jangka panjang. Pertengkaran bukan hanya melukai hati. Ia melukai tubuh.</span>
+      <span class="lang-en">Repeated sharp criticism, sarcasm, or subtle contempt drives up allostatic load — chronic stress accumulation that raises baseline cortisol, lowers immunity, and can trigger long-term somatic health problems. Fighting doesn't just wound the heart. It wounds the body.</span></p>
+    </div>
+  </div>
+</section>
+
+<hr class="div">
+
+<!-- ============ BAGIAN III ============ -->
+
+<section class="chapter" id="bab5">
+  <div class="chapter-head">
+    <div class="chapter-num-row"><span class="pulse-dot"></span>
+      <span class="eyebrow"><span class="lang-id">Bab 05</span><span class="lang-en">Chapter 05</span></span>
+    </div>
+    <h2 class="chapter-title">
+      <span class="lang-id">Pertolongan Pertama Saat Konflik</span><span class="lang-en">First Aid in Conflict</span>
+    </h2>
+    <p class="chapter-sub">
+      <span class="lang-id">Hal paling rasional yang bisa dilakukan saat amigdala membajak percakapan justru tampak paling tidak romantis: berhenti bicara.</span>
+      <span class="lang-en">The most rational thing to do once the amygdala hijacks the conversation looks the least romantic: stop talking.</span>
+    </p>
+    <div class="experts">NVC Framework · Gottman Soft Startup</div>
+  </div>
+  <div class="chapter-body">
+    <h4 class="substep"><span class="lang-id">Tahap 1: Jeda 20 Menit</span><span class="lang-en">Stage 1: The 20-Minute Pause</span></h4>
+    <p class="lang-id">Salah satu pihak memberi sinyal yang sudah disepakati — misalnya "sistem sarafku penuh, kita butuh jeda". Keduanya berpisah ruang minimal 20–30 menit, durasi biologis minimum untuk membersihkan adrenalin dan kortisol dari aliran darah. Selama jeda, dilarang merenungi kesalahan pasangan — yang boleh hanyalah menenangkan tubuh: jalan kaki, napas lambat, musik.</p>
+    <p class="lang-en">One partner gives a pre-agreed signal — something like "my nervous system is full, we need a pause." Both separate rooms for at least 20–30 minutes, the minimum biological time needed to clear adrenaline and cortisol from the bloodstream. During the pause, dwelling on the partner's mistakes is off-limits — the only task is calming the body: walking, slow breathing, music.</p>
+
+    <h4 class="substep"><span class="lang-id">Tahap 2: Bahasa yang Tidak Menyerang</span><span class="lang-en">Stage 2: Non-Attacking Language</span></h4>
+    <p class="lang-id">Formulanya sederhana: buka dengan ketenangan, fakta objektif, perasaan diri sendiri, lalu kebutuhan konkret.</p>
+    <p class="lang-en">The formula is simple: open with calm, an objective fact, your own feeling, then a concrete need.</p>
+
+    <ul class="checklist">
+      <li><strong><span class="lang-id">Salah (menyerang):</span><span class="lang-en">Wrong (attacking):</span></strong> <span class="lang-id">"Kamu selalu cuek dan tidak pernah peduli!"</span><span class="lang-en">"You're always distant and never care!"</span></li>
+      <li><strong><span class="lang-id">Benar (non-defensif):</span><span class="lang-en">Right (non-defensive):</span></strong> <span class="lang-id">"Ketika kamu belum mengabari saat pulang terlambat, aku merasa cemas. Bisakah lain kali kirim pesan singkat?"</span><span class="lang-en">"When you don't message me when you're running late, I feel anxious. Could you send a quick text next time?"</span></li>
+    </ul>
+
+    <h4 class="substep"><span class="lang-id">Tahap 3: Mendengar Somatik</span><span class="lang-en">Stage 3: Somatic Listening</span></h4>
+    <p class="lang-id">Mendengarkan bukan untuk menyusun argumen balasan, melainkan menurunkan arousal sistem saraf pasangan — kontak mata lembut, nada suara rendah dan hangat, validasi emosi sebelum menjawab fakta: "Aku bisa dengar betapa lelah dan kecewanya kamu saat itu."</p>
+    <p class="lang-en">Listening isn't for building a counter-argument, but for lowering the partner's nervous-system arousal — soft eye contact, a low warm tone, validating emotion before answering the facts: "I can hear how exhausted and let down you felt."</p>
+  </div>
+</section>
+
+<hr class="div">
+
+<section class="chapter" id="bab6">
+  <div class="chapter-head">
+    <div class="chapter-num-row"><span class="pulse-dot"></span>
+      <span class="eyebrow"><span class="lang-id">Bab 06</span><span class="lang-en">Chapter 06</span></span>
+    </div>
+    <h2 class="chapter-title">
+      <span class="lang-id">Rewiring the Heart — Neuroplastisitas Relasional</span>
+      <span class="lang-en">Rewiring the Heart — Relational Neuroplasticity</span>
+    </h2>
+    <p class="chapter-sub">
+      <span class="lang-id">Memutus siklus trauma bonding berarti melatih ulang amigdala untuk mengenali bahwa kedamaian bukan kebosanan.</span>
+      <span class="lang-en">Breaking the trauma-bonding cycle means retraining the amygdala to recognize that peace isn't boredom.</span>
+    </p>
+    <div class="experts">Barbara Fredrickson · Vagus Nerve Stimulation</div>
+  </div>
+  <div class="chapter-body">
+    <h3 id="b6-1"><span class="letter">6.1</span>
+      <span class="lang-id">Mengedukasi Ulang Amigdala</span><span class="lang-en">Re-educating the Amygdala</span>
+    </h3>
+    <p class="dropcap lang-id">Kesadaran kognitif dimulai dengan mengenali saat diri merindukan "drama" sebagai tanda ketagihan dopamin, bukan tanda hubungan kurang hidup. Toleransi ketenangan berarti secara sadar bertahan dalam hubungan yang jujur dan konsisten, meski amigdala berbisik bahwa semua ini "terlalu tenang untuk jadi nyata".</p>
+    <p class="dropcap lang-en">Cognitive awareness begins with recognizing when we crave "drama" as a sign of dopamine addiction, not a sign the relationship lacks life. Tolerating calm means consciously staying in a relationship that's honest and consistent, even as the amygdala whispers that it's "too calm to be real."</p>
+
+    <h3 id="b6-2"><span class="letter">6.2</span>
+      <span class="lang-id">Latihan Co-Regulation Harian</span><span class="lang-en">Daily Co-Regulation Practices</span>
+    </h3>
+    <ul class="checklist">
+      <li><strong><span class="lang-id">Pelukan 20 Detik.</span><span class="lang-en">The 20-Second Hug.</span></strong> <span class="lang-id">Dada-ke-dada tanpa bicara hingga napas kedua pihak tersinkronisasi — menurunkan kortisol, memicu oksitosin.</span><span class="lang-en">Chest-to-chest, no talking, until both breaths sync — lowers cortisol, triggers oxytocin.</span></li>
+      <li><strong><span class="lang-id">Pernapasan Tersinkronisasi.</span><span class="lang-en">Synchronized Breathing.</span></strong> <span class="lang-id">Duduk berhadapan, tangan di dada pasangan, inhale 4 detik, exhale 6 detik.</span><span class="lang-en">Sit facing each other, hand on the partner's chest, inhale 4 seconds, exhale 6 seconds.</span></li>
+      <li><strong><span class="lang-id">Micro-Moments of Connectivity.</span><span class="lang-en">Micro-Moments of Connectivity.</span></strong> <span class="lang-id">Lima menit tiap pagi untuk kontak mata penuh dan satu apresiasi spesifik (Barbara Fredrickson).</span><span class="lang-en">Five minutes each morning of full eye contact and one specific appreciation (Barbara Fredrickson).</span></li>
+    </ul>
+  </div>
+</section>
+
+<hr class="div">
+
+<section class="chapter" id="bab7">
+  <div class="chapter-head">
+    <div class="chapter-num-row"><span class="pulse-dot"></span>
+      <span class="eyebrow"><span class="lang-id">Bab 07</span><span class="lang-en">Chapter 07</span></span>
+    </div>
+    <h2 class="chapter-title">
+      <span class="lang-id">Adaptasi Berkelanjutan & Growth Partnership</span>
+      <span class="lang-en">Sustained Adaptation & Growth Partnership</span>
+    </h2>
+    <p class="chapter-sub">
+      <span class="lang-id">Keintiman menginginkan kedekatan. Hasrat membutuhkan jarak. Menjaga keduanya hidup sekaligus adalah seni yang harus dipelajari.</span>
+      <span class="lang-en">Intimacy wants closeness. Desire needs distance. Keeping both alive at once is a learned art.</span>
+    </p>
+    <div class="experts">Esther Perel · John & Julie Gottman · Andrew Huberman · Jordan Peterson</div>
+  </div>
+  <div class="chapter-body">
+    <h3 id="b7-1"><span class="letter">7.1</span>
+      <span class="lang-id">Dinamika Pertumbuhan Tak Seimbang</span><span class="lang-en">Uneven Growth Dynamics</span>
+    </h3>
+    <p class="dropcap lang-id">Ketika satu pihak mulai menjalani pemulihan luka masa kecilnya, sementara pasangannya masih bertahan pada pola lama, sistem relasi yang sudah terbiasa akan goyah. Di titik ini penting untuk tidak jatuh ke peran terapis bagi pasangan sendiri — tugasnya adalah menjaga batas diri yang sehat sembari mengundang, bukan memaksa, pasangan untuk ikut tumbuh.</p>
+    <p class="dropcap lang-en">When one partner begins healing their childhood wounds while the other still clings to old patterns, the familiar relational system starts to wobble. Here it's crucial not to fall into the role of therapist for one's own partner — the task is to hold healthy boundaries while inviting, not forcing, the partner to grow alongside.</p>
+
+    <p class="table-cap"><span class="lang-id">Boundaries vs. Ultimatum</span><span class="lang-en">Boundaries vs. Ultimatum</span></p>
+    <div class="matrix-wrap">
+      <table class="matrix">
+        <thead><tr><th><span class="lang-id">Ultimatum</span><span class="lang-en">Ultimatum</span></th><th><span class="lang-id">Boundaries</span><span class="lang-en">Boundaries</span></th></tr></thead>
+        <tbody><tr>
+          <td><span class="lang-id">"Kalau kamu tidak berubah, aku pergi!" — mengontrol perilaku orang lain lewat ancaman.</span><span class="lang-en">"If you don't change, I'm leaving!" — controls someone else's behavior through threat.</span></td>
+          <td><span class="lang-id">"Jika nada suaramu meninggi, aku akan meninggalkan ruangan, dan kita bicara lagi saat tenang." — melindungi diri sendiri.</span><span class="lang-en">"If your voice rises, I'll leave the room, and we'll talk again once things are calm." — protects one's own self.</span></td>
+        </tr></tbody>
+      </table>
+    </div>
+
+    <h3 id="b7-2"><span class="letter">7.2</span>
+      <span class="lang-id">Esther Perel dan Paradoks Cinta Modern</span><span class="lang-en">Esther Perel and the Paradox of Modern Love</span>
+    </h3>
+    <p class="lang-id">Dalam <em>Mating in Captivity</em>, Perel menunjukkan bahwa rasa aman yang kita cari dalam cinta adalah persis hal yang bisa membunuh gairah di dalamnya, jika tak dikelola sadar. Dalam <em>The State of Affairs</em>, ia membaca perselingkuhan bukan sekadar pengkhianatan moral, melainkan kerinduan seseorang akan bagian dirinya yang lama hilang.</p>
+    <p class="lang-en">In <em>Mating in Captivity</em>, Perel shows that the safety we seek in love is exactly what can kill its desire, if left unmanaged. In <em>The State of Affairs</em>, she reads infidelity not merely as moral betrayal, but often as a longing for a long-lost part of oneself.</p>
+
+    <div class="callout">
+      <h4><span class="lang-id">Beban Ekspektasi Modern</span><span class="lang-en">The Burden of Modern Expectation</span></h4>
+      <p><span class="lang-id">Dulu, satu desa menopang kebutuhan rasa aman, komunitas, dan status. Hari ini, satu pasangan dituntut menjadi kekasih, sahabat, mitra finansial, terapis, dan co-parent sekaligus. Tak ada satu manusia pun sanggup memikul seluruh kebutuhan eksistensial orang lain sendirian.</span>
+      <span class="lang-en">A village once carried the need for safety, community, and status. Today, one partner is expected to be lover, best friend, financial partner, therapist, and co-parent all at once. No single human can carry another's entire existential needs alone.</span></p>
+    </div>
+
+    <blockquote class="pull">
+      <span class="lang-id">Cinta menginginkan kedekatan. Hasrat membutuhkan jarak, misteri, sesuatu yang belum sepenuhnya diketahui.</span>
+      <span class="lang-en">Love wants closeness. Desire needs distance, mystery, something not yet fully known.</span>
+      <cite>Esther Perel</cite>
+      <span class="note"><span class="lang-id">Pasangan perlu memelihara otonomi pribadi agar tetap punya sisi yang mengundang rasa penasaran satu sama lain.</span><span class="lang-en">Partners need to preserve personal autonomy so each keeps a side that invites the other's curiosity.</span></span>
+    </blockquote>
+
+    <p class="lang-id">Gagasan Perel yang paling membebaskan: dalam hubungan jangka panjang, kita akan menjalani beberapa "pernikahan" — kadang dengan orang yang sama. Manusia bertumbuh dan berubah; setiap sepuluh hingga lima belas tahun, versi lama pernikahan berakhir. Pertanyaannya bukan bagaimana mencegah perubahan, melainkan apakah kita bersedia menikahi ulang orang yang sudah berubah itu.</p>
+    <p class="lang-en">Perel's most liberating idea: over a long relationship, we will live through several "marriages" — sometimes with the same person. People grow and change; every ten to fifteen years, an old version of the marriage ends. The question isn't how to prevent change, but whether we're willing to remarry the person who has already become someone new.</p>
+
+    <h3 id="b7-3"><span class="letter">7.3</span>
+      <span class="lang-id">Tiga Suara Lain dari Lex Fridman Podcast</span><span class="lang-en">Three More Voices from the Lex Fridman Podcast</span>
+    </h3>
+    <p class="lang-id">John dan Julie Gottman menegaskan bahwa keberhasilan pernikahan ditentukan oleh rasio apresiasi dibanding kritik — 5:1 saat konflik, 20:1 dalam keseharian — serta kemampuan "berbalik menghadap" saat pasangan melempar emotional bid. Mereka menandai empat kuda penunggang kiamat: kritik karakter, penghinaan (prediktor terkuat perceraian), sikap defensif, dan membisu total.</p>
+    <p class="lang-en">John and Julie Gottman affirm that marital success is shaped by the ratio of appreciation to criticism — 5:1 during conflict, 20:1 in daily life — plus the ability to "turn towards" when a partner throws out an emotional bid. They flag four horsemen of the apocalypse: character criticism, contempt (the strongest divorce predictor), defensiveness, and total stonewalling.</p>
+
+    <p class="lang-id">Andrew Huberman menjelaskan bagaimana pasangan stabil berfungsi sebagai regulator eksternal bagi sistem saraf satu sama lain — neuroception of safety. Aktivitas fisik berdampingan, seperti jalan kaki tanpa ponsel, menurunkan aktivasi amigdala sekaligus memicu dopamin bersama.</p>
+    <p class="lang-en">Andrew Huberman explains how stable couples act as external regulators for each other's nervous systems — neuroception of safety. Side-by-side physical activity, like walking without phones, lowers amygdala activation while triggering shared dopamine.</p>
+
+    <p class="lang-id">Jordan Peterson memandang pernikahan sebagai kontrak untuk tetap berada dalam satu ruangan sampai masalah terselesaikan — menghilangkan opsi "lari" saat ego terancam — dan menekankan bahwa kebahagiaan pernikahan dibangun dari ratusan negosiasi kecil yang dijalani jujur setiap hari.</p>
+    <p class="lang-en">Jordan Peterson views marriage as a contract to stay in one room until the problem is resolved — removing the option to "flee" whenever the ego feels threatened — and stresses that marital happiness is built from hundreds of small, honestly-negotiated daily terms.</p>
+
+    <h3 id="b7-4"><span class="letter">7.4</span>
+      <span class="lang-id">Dari Trauma Bonding Menuju Growth Partnership</span>
+      <span class="lang-en">From Trauma Bonding to Growth Partnership</span>
+    </h3>
+    <div class="flow">
+      <div class="flow-title"><span class="lang-id">Dua Fondasi Relasi</span><span class="lang-en">Two Relational Foundations</span></div>
+      <div class="flow-row">
+        <div class="flow-box"><b><span class="lang-id">Trauma Bonding</span><span class="lang-en">Trauma Bonding</span></b><span><span class="lang-id">Ketakutan, saling memicu luka lama, fiksasi pada drama</span><span class="lang-en">Fear, mutual re-triggering of old wounds, fixation on drama</span></span></div>
+        <div class="flow-arrow">→</div>
+        <div class="flow-box alt"><b><span class="lang-id">Growth Partnership</span><span class="lang-en">Growth Partnership</span></b><span><span class="lang-id">Nilai bersama, saling membantu regulasi, fiksasi pada stabilitas</span><span class="lang-en">Shared values, mutual co-regulation, fixation on stability</span></span></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<hr class="div">
+
+<section class="chapter" id="cheatsheet">
+  <div class="chapter-head">
+    <div class="chapter-num-row"><span class="pulse-dot"></span>
+      <span class="eyebrow"><span class="lang-id">Panduan Cepat</span><span class="lang-en">Quick Guide</span></span>
+    </div>
+    <h2 class="chapter-title"><span class="lang-id">Cheat-Sheet Resolusi Konflik Pasangan</span><span class="lang-en">Couple Conflict Resolution Cheat-Sheet</span></h2>
+  </div>
+  <div class="chapter-body">
+    <div class="callout">
+      <h4><span class="lang-id">1 · Pasangan tiba-tiba diam</span><span class="lang-en">1 · Partner suddenly goes silent</span></h4>
+      <p><span class="lang-id">Alih-alih membanjiri pesan, ambil jeda dan katakan: "Aku lihat kamu butuh ruang. Aku ada di sini saat kamu siap bicara."</span><span class="lang-en">Instead of flooding them with messages, pause and say: "I see you need space. I'm here when you're ready to talk."</span></p>
+    </div>
+    <div class="callout">
+      <h4><span class="lang-id">2 · Pasangan menuntut komunikasi intensif</span><span class="lang-en">2 · Partner demands intense communication</span></h4>
+      <p><span class="lang-id">Alih-alih mengunci diri, sampaikan batas waktu konkret: "Aku ingin membahas ini, tapi saat ini aku overwhelmed. Beri aku 30 menit."</span><span class="lang-en">Instead of shutting down, give a concrete timeframe: "I want to talk about this, but I'm overwhelmed right now. Give me 30 minutes."</span></p>
+    </div>
+    <div class="callout">
+      <h4><span class="lang-id">3 · Pasangan mengkritik tindakan</span><span class="lang-en">3 · Partner criticizes an action</span></h4>
+      <p><span class="lang-id">Alih-alih membalas menyerang, lakukan validasi sebagian: "Aku paham kamu kecewa. Bisakah kita bahas satu per satu?"</span><span class="lang-en">Instead of counter-attacking, offer partial validation: "I understand you're disappointed. Can we go through this one at a time?"</span></p>
+    </div>
+    <div class="callout">
+      <h4><span class="lang-id">4 · Merasa tidak diapresiasi</span><span class="lang-en">4 · Feeling unappreciated</span></h4>
+      <p><span class="lang-id">Alih-alih memendam kepahitan, utarakan kebutuhan langsung: "Aku merasa lelah akhir-akhir ini. Bisakah kamu bantu malam ini?"</span><span class="lang-en">Instead of quietly resenting, state the need directly: "I've been feeling tired lately. Could you help out tonight?"</span></p>
+    </div>
+  </div>
+</section>
+
+<hr class="div">
+
+<section class="epilog" id="epilog">
+  <div class="hero-loader" style="width:100px;height:100px;margin:0 auto 24px;"><span class="loader" style="--size:1px;"></span></div>
+  <span class="eyebrow"><span class="lang-id">Penutup</span><span class="lang-en">Closing</span></span>
+  <h2><span class="lang-id">Cinta sebagai Latihan, Bukan Nasib</span><span class="lang-en">Love as Practice, Not Fate</span></h2>
+  <p><span class="lang-id">Barangkali kesimpulan paling membebaskan dari seluruh riset ini adalah: cinta bukan sesuatu yang menimpa kita begitu saja, lalu selesai atau gagal begitu saja. Ia adalah keterampilan yang bisa dipelajari, seperti bahasa, seperti musik. Attachment style yang terbentuk di masa kecil bukan hukuman seumur hidup — ia adalah titik berangkat, bukan titik akhir.</span>
+  <span class="lang-en">Perhaps the most liberating conclusion from all this research is: love isn't something that simply happens to us, then succeeds or fails on its own. It's a skill that can be learned, like a language, like music. The attachment style formed in childhood isn't a life sentence — it's a starting point, not an ending.</span></p>
+  <p><span class="lang-id">Yang membedakan hubungan yang bertahan dari yang runtuh bukanlah ketiadaan konflik, sebab konflik akan selalu ada di mana pun dua sistem saraf berbeda mencoba hidup berdampingan. Yang membedakannya adalah apakah kedua pihak tahu cara kembali — kembali ke tubuh yang tenang, ke bahasa yang tidak menyerang, saling menghadap setelah badai reda.</span>
+  <span class="lang-en">What separates relationships that endure from those that collapse isn't the absence of conflict — conflict will always exist wherever two different nervous systems try to live side by side. What separates them is whether both people know how to return — to a calm body, to non-attacking language, to facing each other again once the storm passes.</span></p>
+  <p><span class="lang-id">Cinta yang matang bukan cinta yang tak pernah terguncang. Ia adalah cinta yang tahu caranya pulih.</span>
+  <span class="lang-en">Mature love isn't love that's never shaken. It's love that knows how to heal.</span></p>
+  <p class="sign">— Sangoeroep</p>
+</section>
+
+<hr class="div">
+
+<section class="chapter" id="pustaka">
+  <div class="chapter-head">
+    <div class="chapter-num-row"><span class="pulse-dot"></span>
+      <span class="eyebrow"><span class="lang-id">Referensi</span><span class="lang-en">References</span></span>
+    </div>
+    <h2 class="chapter-title"><span class="lang-id">Daftar Pustaka & Referensi Ilmiah</span><span class="lang-en">Bibliography & Scientific References</span></h2>
+  </div>
+  <div class="chapter-body">
+    <ol class="refs">
+      <li>Swart, T. (2019). <em>The Source: The Secrets of the Universe, the Science of the Brain</em>. HarperWave.</li>
+      <li>Hendrix, H., & Hunt, H. L. (2019). <em>Getting the Love You Want</em> (30th Anniversary Ed.). St. Martin's Griffin.</li>
+      <li>Perel, E. (2006). <em>Mating in Captivity: Unlocking Erotic Intelligence</em>. Harper Paperbacks.</li>
+      <li>Perel, E. (2017). <em>The State of Affairs: Rethinking Infidelity</em>. Harper.</li>
+      <li>Porges, S. W. (2011). <em>The Polyvagal Theory</em>. W. W. Norton & Company.</li>
+      <li>Levine, A., & Heller, R. (2010). <em>Attached: The New Science of Adult Attachment</em>. TarcherPerigee.</li>
+      <li>Gottman, J. M., & Silver, N. (2015). <em>The Seven Principles for Making Marriage Work</em>. Harmony.</li>
+      <li>LePera, N. (2021). <em>How to Do the Work</em>. Harper Wave.</li>
+      <li>Maté, G. (2019). <em>When the Body Says No</em>. Citadel Press.</li>
+      <li>Van der Kolk, B. (2014). <em>The Body Keeps the Score</em>. Viking.</li>
+      <li>Young, J. E., Klosko, J. S., & Weishaar, M. E. (2003). <em>Schema Therapy: A Practitioner's Guide</em>. Guilford Press.</li>
+      <li>Fisher, H. (2004). <em>Why We Love</em>. Henry Holt and Co.</li>
+      <li>Gottman, J., & Gottman, J. (2022). <em>The Lex Fridman Podcast</em>, Episode 278.</li>
+      <li>Perel, E. (2022). <em>The Lex Fridman Podcast</em>, Episode 311.</li>
+      <li>Huberman, A. (2022). <em>The Lex Fridman Podcast</em>, Episode 168 & 333.</li>
+      <li>Peterson, J. (2021). <em>The Lex Fridman Podcast</em>, Episode 223.</li>
+    </ol>
+  </div>
+</section>
+
+<footer>
+  <span class="lang-id">Ruang Baca · Sebuah perpustakaan digital pribadi</span>
+  <span class="lang-en">Ruang Baca · A personal digital library</span>
+</footer>
+
+<script>
+  // ===== progress bar =====
+  const bar = document.getElementById('progress');
+  function updateProgress(){
+    const h = document.documentElement;
+    const scrolled = (h.scrollTop) / (h.scrollHeight - h.clientHeight) * 100;
+    bar.style.width = (isFinite(scrolled) ? scrolled : 0) + '%';
+  }
+  document.addEventListener('scroll', updateProgress, {passive:true});
+  updateProgress();
+
+  // ===== toc toggle =====
+  const tocBtn = document.getElementById('toc-toggle');
+  const tocPanel = document.getElementById('toc-panel');
+  tocBtn.addEventListener('click', () => {
+    const open = tocPanel.classList.toggle('open');
+    tocBtn.setAttribute('aria-expanded', open);
+  });
+  document.querySelectorAll('#toc-panel a').forEach(a => {
+    a.addEventListener('click', () => {
+      tocPanel.classList.remove('open');
+      tocBtn.setAttribute('aria-expanded', 'false');
+    });
+  });
+  document.addEventListener('click', (e) => {
+    if (!tocPanel.contains(e.target) && !tocBtn.contains(e.target)) {
+      tocPanel.classList.remove('open');
+      tocBtn.setAttribute('aria-expanded', 'false');
+    }
+  });
+
+  // ===== language toggle =====
+  const langBtn = document.getElementById('lang-toggle');
+  const htmlEl = document.documentElement;
+  langBtn.addEventListener('click', () => {
+    const next = htmlEl.getAttribute('data-lang') === 'id' ? 'en' : 'id';
+    htmlEl.setAttribute('data-lang', next);
+    htmlEl.setAttribute('lang', next);
+  });
+
+  // ===== scroll-reveal with safety net =====
+  const chapters = document.querySelectorAll('.chapter, .epilog');
+  if ('IntersectionObserver' in window) {
+    const io = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('visible');
+          io.unobserve(entry.target);
+        }
+      });
+    }, {threshold: 0.01, rootMargin: '0px 0px -20px 0px'});
+    chapters.forEach(c => io.observe(c));
+  } else {
+    chapters.forEach(c => c.classList.add('visible'));
+  }
+  window.addEventListener('load', () => {
+    setTimeout(() => chapters.forEach(c => c.classList.add('visible')), 1200);
+  });
+  document.querySelectorAll('#toc-panel a, .toc-list a').forEach(a => {
+    a.addEventListener('click', () => {
+      setTimeout(() => chapters.forEach(c => c.classList.add('visible')), 50);
+    });
+  });
+</script>
+</body>
+</html>
