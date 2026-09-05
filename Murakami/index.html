@@ -1,0 +1,1580 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>The Beauty of Nothing — Haruki Murakami | Ruang Baca</title>
+<meta name="description" content="Mengapa cerita tentang kesepian, rutinitas, musik, seks, hujan, kucing, dan dunia yang tiba-tiba menjadi aneh dapat begitu memikat jutaan pembaca?">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,400;0,9..144,500;0,9..144,600;1,9..144,400;1,9..144,500&family=Literata:ital,opsz,wght@0,7..72,400;0,7..72,500;1,7..72,400&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+
+:root{
+  --bg: #14171c;
+  --bg-deep: #0f1216;
+  --bg-panel: #1a1e26;
+  --bg-panel-2: #20252e;
+  --text: #e9e4d6;
+  --text-dim: #9a9a94;
+  --text-faint: #656760;
+  --accent: #c9974f;
+  --accent-soft: #c9974f66;
+  --accent-2: #5c7c92;
+  --rule: #2b2f38;
+  --rule-soft: #2b2f3855;
+  --serif-display: 'Fraunces', serif;
+  --serif-body: 'Literata', Georgia, serif;
+  --mono: 'IBM Plex Mono', monospace;
+  --measure: 640px;
+}
+
+*{ box-sizing: border-box; }
+
+@media (prefers-reduced-motion: reduce){
+  *{ animation-duration: 0.01ms !important; animation-iteration-count: 1 !important; transition-duration: 0.01ms !important; scroll-behavior: auto !important; }
+}
+
+html{ scroll-behavior: smooth; }
+
+body{
+  margin:0;
+  background: var(--bg);
+  color: var(--text);
+  font-family: var(--serif-body);
+  line-height: 1.75;
+  -webkit-font-smoothing: antialiased;
+}
+
+::selection{ background: var(--accent-soft); color: var(--bg-deep); }
+
+a{ color: var(--accent); }
+
+/* ---------- HERO ---------- */
+
+.hero{
+  position: relative;
+  min-height: 100svh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding: 8vh 6vw 10vh;
+  overflow: hidden;
+  background:
+    radial-gradient(ellipse 90% 60% at 50% 0%, #1d222b 0%, var(--bg-deep) 70%);
+  text-align: center;
+}
+
+.hero-rain{
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  opacity: 0.35;
+}
+
+.hero-rain span{
+  position: absolute;
+  top: -10%;
+  width: 1px;
+  height: 14vh;
+  background: linear-gradient(to bottom, transparent, var(--accent-2), transparent);
+  animation: fall linear infinite;
+}
+
+@keyframes fall{
+  to{ transform: translateY(120vh); }
+}
+
+.hero-vinyl{
+  position: absolute;
+  right: -120px;
+  bottom: -120px;
+  width: 380px;
+  height: 380px;
+  border-radius: 50%;
+  border: 1px solid var(--rule);
+  opacity: 0.5;
+}
+.hero-vinyl::before, .hero-vinyl::after{
+  content: "";
+  position: absolute;
+  border-radius: 50%;
+  border: 1px solid var(--rule);
+}
+.hero-vinyl::before{ inset: 60px; }
+.hero-vinyl::after{ inset: 150px; background: var(--accent); opacity: 0.5; }
+
+.hero-eyebrow{
+  font-family: var(--mono);
+  font-size: 12px;
+  letter-spacing: 0.14em;
+  color: var(--accent);
+  margin-bottom: 28px;
+  position: relative;
+  z-index: 2;
+}
+
+.hero h1{
+  font-family: var(--serif-display);
+  font-optical-sizing: auto;
+  font-weight: 350;
+  font-size: clamp(2.6rem, 8vw, 5.2rem);
+  line-height: 1.05;
+  margin: 0 0 6px;
+  max-width: 16ch;
+  position: relative;
+  z-index: 2;
+}
+
+.hero .by{
+  font-family: var(--serif-display);
+  font-style: italic;
+  font-weight: 400;
+  color: var(--text-dim);
+  font-size: clamp(1.05rem, 2.4vw, 1.4rem);
+  margin: 10px 0 34px;
+  position: relative;
+  z-index: 2;
+}
+
+.hero .tagline{
+  font-family: var(--serif-body);
+  font-style: italic;
+  color: var(--text-dim);
+  font-size: clamp(0.98rem, 2vw, 1.15rem);
+  max-width: 46ch;
+  line-height: 1.65;
+  position: relative;
+  z-index: 2;
+}
+
+.hero .scrolldown{
+  margin-top: 56px;
+  font-family: var(--mono);
+  font-size: 11px;
+  letter-spacing: 0.12em;
+  color: var(--text-faint);
+  position: relative;
+  z-index: 2;
+}
+
+/* ---------- MAIN CONTENT ---------- */
+
+main{
+  max-width: var(--measure);
+  margin: 0 auto;
+  padding: 4vh 6vw 14vh;
+}
+
+.prologue, .epilogue{
+  padding: 6vh 0 8vh;
+  border-bottom: 1px solid var(--rule);
+}
+.epilogue{ border-bottom: none; }
+
+.section-label{
+  font-family: var(--mono);
+  font-size: 11px;
+  letter-spacing: 0.14em;
+  color: var(--accent-2);
+  margin-bottom: 22px;
+}
+
+p{
+  margin: 0 0 1.35em;
+  font-size: 1.05rem;
+  color: var(--text);
+}
+
+.chapter{
+  padding: 9vh 0;
+  border-bottom: 1px solid var(--rule);
+}
+.chapter:last-of-type{ border-bottom: none; }
+
+.chapter-head{
+  display: flex;
+  align-items: baseline;
+  gap: 18px;
+  margin-bottom: 34px;
+}
+
+.chapter-num{
+  font-family: var(--mono);
+  font-size: 13px;
+  color: var(--accent);
+  letter-spacing: 0.06em;
+  white-space: nowrap;
+  padding-top: 4px;
+}
+
+.chapter-title{
+  font-family: var(--serif-display);
+  font-weight: 450;
+  font-size: clamp(1.5rem, 3.4vw, 2.1rem);
+  line-height: 1.2;
+  margin: 0;
+  color: var(--text);
+}
+
+/* scroll reveal */
+.reveal{
+  opacity: 0;
+  transform: translateY(14px);
+  transition: opacity 0.7s ease, transform 0.7s ease;
+}
+.reveal.visible{
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* ---------- FLOATING TOC ---------- */
+
+.toc-toggle{
+  position: fixed;
+  right: 22px;
+  bottom: 22px;
+  z-index: 50;
+  width: 52px;
+  height: 52px;
+  border-radius: 50%;
+  background: var(--bg-panel);
+  border: 1px solid var(--rule);
+  color: var(--accent);
+  font-family: var(--mono);
+  font-size: 11px;
+  letter-spacing: 0.05em;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 8px 24px rgba(0,0,0,0.35);
+}
+.toc-toggle:hover{ border-color: var(--accent); }
+
+.toc-drawer{
+  position: fixed;
+  right: 22px;
+  bottom: 86px;
+  z-index: 49;
+  width: min(340px, 82vw);
+  max-height: 66vh;
+  overflow-y: auto;
+  background: var(--bg-panel);
+  border: 1px solid var(--rule);
+  border-radius: 12px;
+  padding: 10px;
+  box-shadow: 0 20px 48px rgba(0,0,0,0.45);
+  transform: translateY(12px) scale(0.98);
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.2s ease, transform 0.2s ease;
+}
+.toc-drawer.open{
+  opacity: 1;
+  transform: translateY(0) scale(1);
+  pointer-events: auto;
+}
+
+.toc-heading{
+  font-family: var(--mono);
+  font-size: 10px;
+  letter-spacing: 0.14em;
+  color: var(--text-faint);
+  padding: 8px 10px 10px;
+}
+
+.toc-item{
+  display: flex;
+  gap: 10px;
+  width: 100%;
+  text-align: left;
+  background: none;
+  border: none;
+  color: var(--text-dim);
+  font-family: var(--serif-body);
+  font-size: 0.88rem;
+  padding: 8px 10px;
+  border-radius: 7px;
+  cursor: pointer;
+  line-height: 1.35;
+}
+.toc-item:hover{ background: var(--bg-panel-2); color: var(--text); }
+.toc-num{ font-family: var(--mono); color: var(--accent); font-size: 0.78rem; flex-shrink: 0; width: 2.4em; }
+
+/* ---------- FOOTER ---------- */
+
+footer{
+  padding: 6vh 6vw 8vh;
+  text-align: center;
+  font-family: var(--mono);
+  font-size: 11px;
+  letter-spacing: 0.08em;
+  color: var(--text-faint);
+}
+
+@media (max-width: 560px){
+  .chapter-head{ gap: 12px; }
+  main{ padding-left: 7vw; padding-right: 7vw; }
+}
+
+</style>
+</head>
+<body>
+
+<div class="hero">
+  <div class="hero-rain" id="rain"></div>
+  <div class="hero-vinyl"></div>
+  <div class="hero-eyebrow">RUANG BACA — ESAI SASTRA</div>
+  <h1>The Beauty of Nothing</h1>
+  <div class="by">Haruki Murakami</div>
+  <p class="tagline">Mengapa cerita tentang kesepian, rutinitas, musik, seks, hujan, kucing, dan dunia yang tiba-tiba menjadi aneh dapat begitu memikat jutaan pembaca?</p>
+  <div class="scrolldown">GULIR UNTUK MEMBACA ↓</div>
+</div>
+
+<main>
+
+  <section class="prologue" id="prolog">
+    <div class="section-label reveal">PROLOG — ADA SESUATU YANG ANEH TENTANG MURAKAMI</div>
+    <div class="chapter-body">
+<div class="reveal"><p>Bayangkan seorang pria bangun pagi.</p>
+<p>Ia membuat kopi.</p>
+<p>Memasak sesuatu yang sederhana.</p></div>
+<div class="reveal"><p>Mendengarkan musik.</p>
+<p>Mungkin membaca koran.</p>
+<p>Tidak ada pembunuhan.</p></div>
+<div class="reveal"><p>Tidak ada ledakan.</p>
+<p>Tidak ada kerajaan yang sedang runtuh.</p>
+<p>Tidak ada pahlawan yang harus menyelamatkan dunia.</p></div>
+<div class="reveal"><p>Lalu, entah bagaimana, kita terus membaca.</p>
+<p>Ini salah satu keanehan terbesar dalam karya Haruki Murakami.</p>
+<p>Ia mampu membuat ketiadaan peristiwa terasa seperti sebuah peristiwa.</p></div>
+<div class="reveal"><p>Yang menarik bukan hanya apa yang terjadi, tetapi apa yang terasa ketika hampir tidak ada yang terjadi.</p>
+<p>Seorang pria memasak spaghetti.</p>
+<p>Seorang perempuan menyetir mobil.</p></div>
+<div class="reveal"><p>Seseorang mendengarkan musik.</p>
+<p>Seseorang berjalan sendirian di Tokyo.</p>
+<p>Seseorang mencari kucing.</p></div>
+<div class="reveal"><p>Seseorang turun ke sebuah sumur.</p>
+<p>Dan tiba-tiba dunia yang kita kenal mulai bergeser beberapa milimeter.</p>
+<p>Bukan berubah total.</p></div>
+<div class="reveal"><p>Hanya sedikit.</p>
+<p>Cukup sedikit sehingga kita masih mengenalinya.</p>
+<p>Tetapi cukup banyak untuk membuat kita bertanya: apakah dunia ini masih dunia yang sama?</p></div>
+<div class="reveal"><p>Di situlah Murakami bekerja.</p>
+<p>Ia tidak selalu membawa pembaca keluar dari realitas.</p>
+<p>Kadang ia hanya membuat realitas terasa sedikit asing.</p></div>
+<div class="reveal"><p>Dan mungkin justru karena itulah ia terasa begitu dekat.</p>
+<p>Selama lebih dari empat dekade, sejak sebuah novel tipis tentang seorang pemuda tak bernama yang duduk di bar sambil mengingat musim panas, Murakami telah menulis dalam berbagai skala: dari cerita pendek delapan halaman sampai trilogi tiga jilid, dari realisme Tokyo yang hampir dokumenter sampai dunia dengan dua bulan di langit.</p>
+<p>Namun di balik semua skala itu, mesin yang sama terus bekerja.</p></div>
+<div class="reveal"><p>Buku ini adalah usaha untuk membongkar mesin tersebut, satu bagian pada satu waktu, sambil tetap membiarkan keajaibannya utuh.</p>
+<p>Karena membedah sesuatu tidak selalu berarti membunuhnya.</p>
+<p>Kadang itu satu-satunya cara untuk benar-benar mencintainya.</p></div>
+    </div>
+  </section>
+
+
+<section class="chapter" id="bab-1" data-toc-title="I. PAGI YANG TIDAK TERJADI APA-APA">
+  <div class="chapter-head reveal">
+    <span class="chapter-num">I</span>
+    <h2 class="chapter-title">PAGI YANG TIDAK TERJADI APA-APA</h2>
+  </div>
+  <div class="chapter-body">
+<div class="reveal"><p>Dalam banyak novel, pagi adalah awal dari aksi.</p>
+<p>Dalam Murakami, pagi sering kali hanya menjadi pagi.</p>
+<p>Ada kopi.</p></div>
+<div class="reveal"><p>Ada roti.</p>
+<p>Ada musik.</p>
+<p>Ada pekerjaan rumah.</p></div>
+<div class="reveal"><p>Ada seseorang yang sedang sendirian.</p>
+<p>Tidak ada yang istimewa.</p>
+<p>Tetapi justru di situlah ia menemukan pintu masuk ke cerita.</p></div>
+<div class="reveal"><p>Kehidupan manusia sebagian besar memang terdiri dari hal-hal semacam itu.</p>
+<p>Kita tidak sedang mengalami revelation setiap pagi.</p>
+<p>Sebagian besar waktu kita hanya mencuci gelas, mengisi bensin, membuka laptop, menjawab pesan, mandi, bekerja, pulang, makan, lalu tidur.</p></div>
+<div class="reveal"><p>Namun di antara semua rutinitas itu, kadang muncul sesuatu yang kecil.</p>
+<p>Sebuah lagu.</p>
+<p>Sebuah bau.</p></div>
+<div class="reveal"><p>Seseorang yang kita lihat dari jendela.</p>
+<p>Sebuah ingatan yang tiba-tiba muncul.</p>
+<p>Dan selama beberapa detik, kehidupan sehari-hari terasa memiliki kedalaman yang tidak kita sadari sebelumnya.</p></div>
+<div class="reveal"><p>Murakami sangat peka terhadap momen semacam itu.</p>
+<p>Rutinitas bukan filler.</p>
+<p>Rutinitas adalah permukaan air.</p></div>
+<div class="reveal"><p>Di bawahnya mungkin ada sesuatu yang jauh lebih dalam.</p>
+<p>Ada alasan teknis mengapa cara ini bekerja begitu baik.</p>
+<p>Ketika seorang penulis menghabiskan satu halaman penuh untuk menjelaskan cara menyetrika kemeja, ia sedang melatih perhatian pembaca untuk bergerak lebih lambat dari kecepatan normal membaca novel.</p></div>
+<div class="reveal"><p>Dan begitu kecepatan itu melambat, hal-hal kecil mulai terlihat.</p>
+<p>Sebuah keheningan di rumah terasa lebih berat.</p>
+<p>Sebuah telepon yang tidak berdering terasa lebih mencolok daripada telepon yang berdering.</p></div>
+<div class="reveal"><p>Murakami tahu bahwa ketegangan tidak selalu datang dari peristiwa besar.</p>
+<p>Kadang ketegangan datang dari seberapa lama kita dibiarkan berada di dalam sebuah ruangan yang sunyi.</p></div>
+  </div>
+</section>
+
+
+<section class="chapter" id="bab-2" data-toc-title="II. SPAGHETTI">
+  <div class="chapter-head reveal">
+    <span class="chapter-num">II</span>
+    <h2 class="chapter-title">SPAGHETTI</h2>
+  </div>
+  <div class="chapter-body">
+<div class="reveal"><p>Salah satu keindahan Murakami adalah cara makanan dapat menjadi bagian dari psikologi karakter.</p>
+<p>Spaghetti bukan hanya spaghetti.</p>
+<p>Memasak bukan hanya memasak.</p></div>
+<div class="reveal"><p>Seorang tokoh yang memasak sendirian sedang melakukan sesuatu terhadap dirinya sendiri.</p>
+<p>Ia sedang mengatur dunia kecil yang masih bisa ia kendalikan.</p>
+<p>Air mendidih.</p></div>
+<div class="reveal"><p>Panci dipanaskan.</p>
+<p>Bawang dipotong.</p>
+<p>Radio menyala.</p></div>
+<div class="reveal"><p>Di luar, kehidupan tetap kacau.</p>
+<p>Tetapi di dapur, setidaknya ada urutan.</p>
+<p>Ini penting karena banyak tokoh Murakami hidup dalam keadaan batin yang tidak memiliki urutan.</p></div>
+<div class="reveal"><p>Mereka tidak selalu tahu apa yang mereka inginkan.</p>
+<p>Tidak selalu tahu mengapa hubungan mereka gagal.</p>
+<p>Tidak selalu memahami mengapa seseorang pergi.</p></div>
+<div class="reveal"><p>Tetapi mereka tahu bagaimana memasak pasta.</p>
+<p>Ada semacam humor kecil di sana.</p>
+<p>Manusia mungkin tidak mampu memahami hidupnya sendiri, tetapi masih bisa menentukan berapa menit spaghetti harus direbus.</p></div>
+<div class="reveal"><p>Dan mungkin itu bukan sesuatu yang menyedihkan.</p>
+<p>Mungkin justru itulah cara manusia bertahan.</p>
+<p>Kita tidak selalu menyelesaikan persoalan besar.</p></div>
+<div class="reveal"><p>Kadang kita hanya membuat makan malam.</p>
+<p>Dan untuk sementara, itu cukup.</p>
+<p>Dalam salah satu cerita pendeknya yang paling sering dikutip, seorang pria menerima telepon aneh saat sedang merebus spaghetti, dan si penelepon menuntut agar ia berhenti merebusnya lebih dulu sebelum bicara.</p></div>
+<div class="reveal"><p>Ia menolak.</p>
+<p>Ia terus mengaduk pastanya sambil mendengarkan ancaman di ujung telepon.</p>
+<p>Ini bukan sekadar lelucon absurd.</p></div>
+<div class="reveal"><p>Ini adalah pernyataan sikap: bahwa ritual kecil, betapapun remehnya terlihat, kadang menjadi satu-satunya hal yang layak dipertahankan ketika dunia mulai berbicara omong kosong kepada kita.</p>
+<p>Menyelesaikan apa yang sedang kita masak bisa menjadi bentuk martabat yang paling sunyi.</p></div>
+  </div>
+</section>
+
+
+<section class="chapter" id="bab-3" data-toc-title="III. KAMAR">
+  <div class="chapter-head reveal">
+    <span class="chapter-num">III</span>
+    <h2 class="chapter-title">KAMAR</h2>
+  </div>
+  <div class="chapter-body">
+<div class="reveal"><p>Kamar-kamar dalam karya Murakami jarang terasa seperti sekadar tempat tinggal.</p>
+<p>Kamar adalah keadaan mental yang diberi bentuk fisik.</p>
+<p>Meja.</p></div>
+<div class="reveal"><p>Rak buku.</p>
+<p>Tempat tidur.</p>
+<p>Stereo.</p></div>
+<div class="reveal"><p>Kulkas.</p>
+<p>Jendela.</p>
+<p>Botol bir.</p></div>
+<div class="reveal"><p>Telepon.</p>
+<p>Semua benda tersebut seolah menjadi bagian dari consciousness tokohnya.</p>
+<p>Ketika seseorang hidup sendirian cukup lama, benda-benda di sekelilingnya mulai memperoleh fungsi psikologis.</p></div>
+<div class="reveal"><p>Kursi tertentu menjadi tempat berpikir.</p>
+<p>Lagu tertentu menjadi pintu menuju masa lalu.</p>
+<p>Jendela menjadi batas antara diri dan dunia.</p></div>
+<div class="reveal"><p>Kulkas menjadi sesuatu yang selalu ada ketika manusia lain tidak ada.</p>
+<p>Karena itu Murakami dapat menghabiskan cukup banyak waktu menjelaskan benda-benda sederhana.</p>
+<p>Ia sedang membangun psychological architecture.</p></div>
+<div class="reveal"><p>Tokoh tidak hanya tinggal di sebuah ruangan.</p>
+<p>Ia perlahan menjadi ruangan itu.</p>
+<p>Ada pola yang berulang: pintu masuk ke sebuah misteri besar hampir selalu dimulai dari sesuatu yang sangat domestik.</p></div>
+<div class="reveal"><p>Sebuah sumur di halaman belakang.</p>
+<p>Sebuah kamar tambahan yang jarang dimasuki.</p>
+<p>Sebuah lorong sempit di antara dua rumah, yang dalam salah satu novelnya disebut sebagai gang tanpa nama, tempat kucing-kucing lewat dan tak seorang pun benar-benar tahu ke mana ujungnya.</p></div>
+<div class="reveal"><p>Rumah, bagi Murakami, tidak pernah sepenuhnya aman.</p>
+<p>Ia selalu punya satu sudut yang belum sepenuhnya dipetakan.</p>
+<p>Dan di sudut itulah, biasanya, cerita yang sebenarnya dimulai.</p></div>
+  </div>
+</section>
+
+
+<section class="chapter" id="bab-4" data-toc-title="IV. 100% PERFECT GIRL">
+  <div class="chapter-head reveal">
+    <span class="chapter-num">IV</span>
+    <h2 class="chapter-title">100% PERFECT GIRL</h2>
+  </div>
+  <div class="chapter-body">
+<div class="reveal"><p>Ada sebuah cerita Murakami yang sangat sederhana.</p>
+<p>Seorang pria berjalan pada suatu pagi di Tokyo dan melihat seorang perempuan.</p>
+<p>Ia langsung merasa bahwa perempuan itu adalah seorang gadis seratus persen sempurna baginya.</p></div>
+<div class="reveal"><p>Bukan karena ia mengetahui perempuan itu.</p>
+<p>Justru sebaliknya.</p>
+<p>Ia tidak tahu apa-apa tentangnya.</p></div>
+<div class="reveal"><p>Ia hanya melihatnya berjalan.</p>
+<p>Dalam pikirannya, kemungkinan kehidupan mereka berkembang.</p>
+<p>Mungkin mereka pernah saling mencintai.</p></div>
+<div class="reveal"><p>Mungkin mereka adalah pasangan yang seharusnya bertemu.</p>
+<p>Mungkin hidup telah membuat mereka terpisah.</p>
+<p>Tetapi ia tidak menghentikannya.</p></div>
+<div class="reveal"><p>Perempuan itu terus berjalan.</p>
+<p>Dan kesempatan itu hilang.</p>
+<p>Sederhana.</p></div>
+<div class="reveal"><p>Hampir tidak ada plot.</p>
+<p>Namun setelah cerita selesai, muncul pertanyaan yang jauh lebih besar: bagaimana kita bisa merasa mengenal seseorang yang bahkan tidak kita kenal?</p>
+<p>Di sinilah Murakami sangat kuat.</p></div>
+<div class="reveal"><p>Cinta tidak selalu dimulai dari pengetahuan.</p>
+<p>Kadang ia dimulai dari projection.</p>
+<p>Kita melihat seseorang, lalu mengisi kekosongan informasi dengan seluruh kemungkinan yang ada di kepala kita.</p></div>
+<div class="reveal"><p>Kita tidak mencintai orang itu sepenuhnya.</p>
+<p>Kita mencintai kemungkinan tentang orang itu.</p>
+<p>Dan mungkin karena itu cinta selalu memiliki sedikit unsur absurd.</p></div>
+<div class="reveal"><p>Kita jatuh cinta kepada seseorang yang tidak pernah bisa kita ketahui sepenuhnya.</p>
+<p>Yang membuat cerita ini bertahan lama di kepala pembaca bukan kesedihannya, melainkan kejujurannya.</p>
+<p>Sebagian besar dari kita pernah melakukan hal yang sama: menciptakan seseorang di kepala kita dari bahan yang sangat sedikit, lalu berduka atas orang yang sebenarnya tidak pernah benar-benar ada.</p></div>
+  </div>
+</section>
+
+
+<section class="chapter" id="bab-5" data-toc-title="V. EKSPERIMEN MEMORY">
+  <div class="chapter-head reveal">
+    <span class="chapter-num">V</span>
+    <h2 class="chapter-title">EKSPERIMEN MEMORY</h2>
+  </div>
+  <div class="chapter-body">
+<div class="reveal"><p>Dari gagasan itu kita bisa melakukan sebuah thought experiment.</p>
+<p>Bayangkan dua orang yang benar-benar saling mencintai.</p>
+<p>Mereka ingin menguji apakah cinta mereka benar-benar sesuatu yang lebih dalam daripada memory.</p></div>
+<div class="reveal"><p>Maka mereka melakukan sesuatu yang ekstrem: mereka menghapus seluruh memory satu sama lain.</p>
+<p>Tidak ada nama.</p>
+<p>Tidak ada wajah yang diingat.</p></div>
+<div class="reveal"><p>Tidak ada percakapan.</p>
+<p>Tidak ada foto.</p>
+<p>Tidak ada sejarah.</p></div>
+<div class="reveal"><p>Tidak ada alasan untuk mencintai.</p>
+<p>Lalu mereka dilepaskan kembali ke dunia.</p>
+<p>Pertanyaannya sederhana: jika mereka bertemu lagi, apakah mereka akan saling memilih?</p></div>
+<div class="reveal"><p>Ini bukan plot cerita Murakami yang sebenarnya.</p>
+<p>Ini adalah pengembangan filosofis dari gagasan gadis seratus persen sempurna tadi.</p>
+<p>Tetapi thought experiment ini membawa kita ke tempat yang menarik.</p></div>
+<div class="reveal"><p>Jika cinta sepenuhnya merupakan memory, maka setelah memory hilang cinta juga hilang.</p>
+<p>Tetapi jika ada sesuatu yang lebih dalam, cara seseorang membuat kita merasa aman, cara ia memandang dunia, ritme kehadirannya, mungkin sesuatu itu masih tersisa.</p>
+<p>Bukan sebagai memory.</p></div>
+<div class="reveal"><p>Melainkan sebagai recognition tanpa pengetahuan.</p>
+<p>Dan mungkin inilah salah satu alasan kisah-kisah Murakami terasa begitu emosional.</p>
+<p>Ia terus kembali kepada kemungkinan bahwa ada bagian dari diri manusia yang tidak dapat dijelaskan sepenuhnya oleh bahasa.</p></div>
+  </div>
+</section>
+
+
+<section class="chapter" id="bab-6" data-toc-title="VI. MEMORY BUKAN ARSIP">
+  <div class="chapter-head reveal">
+    <span class="chapter-num">VI</span>
+    <h2 class="chapter-title">MEMORY BUKAN ARSIP</h2>
+  </div>
+  <div class="chapter-body">
+<div class="reveal"><p>Kita sering membayangkan memory seperti hard disk.</p>
+<p>Sesuatu terjadi.</p>
+<p>Otak menyimpannya.</p></div>
+<div class="reveal"><p>Kemudian kita membukanya kembali.</p>
+<p>Tetapi pengalaman manusia tidak bekerja sesederhana itu.</p>
+<p>Ketika kita mengingat masa lalu, kita sebenarnya sedang membangun kembali masa lalu dari posisi kita sekarang.</p></div>
+<div class="reveal"><p>Karena itu sebuah lagu dapat tiba-tiba membuat seseorang kembali menjadi dirinya yang berusia dua puluh tahun.</p>
+<p>Bukan hanya mengingat usia dua puluh.</p>
+<p>Tetapi merasakan kembali usia itu.</p></div>
+<div class="reveal"><p>Murakami memahami mekanisme ini secara intuitif.</p>
+<p>Dalam Norwegian Wood, musik menjadi pintu menuju memory.</p>
+<p>Toru Watanabe mendengar sebuah lagu lama milik The Beatles dan masa lalu tiba-tiba muncul.</p></div>
+<div class="reveal"><p>Naoko.</p>
+<p>Kizuki.</p>
+<p>Kematian.</p></div>
+<div class="reveal"><p>Masa muda.</p>
+<p>Rasa bersalah.</p>
+<p>Hal-hal yang sudah lama lewat tetapi ternyata belum benar-benar pergi.</p></div>
+<div class="reveal"><p>Memory di sini bukan flashback dekoratif.</p>
+<p>Memory adalah ruang yang masih dihuni.</p>
+<p>Masa lalu tidak benar-benar selesai hanya karena waktu berjalan.</p></div>
+<div class="reveal"><p>Kadang masa lalu menunggu sebuah lagu untuk membuka pintunya.</p>
+<p>Ini juga menjelaskan mengapa Murakami begitu jarang menulis dengan struktur flashback konvensional, kotak rapi bertanda tahun yang menyisipkan masa lalu ke dalam masa kini.</p>
+<p>Ia lebih suka membiarkan masa lalu meresap masuk tanpa pengumuman, sama seperti cara memory benar-benar bekerja di kepala manusia: tiba-tiba, tidak diundang, dan lebih hidup daripada yang seharusnya.</p></div>
+  </div>
+</section>
+
+
+<section class="chapter" id="bab-7" data-toc-title="VII. ORANG YANG TIDAK ADA">
+  <div class="chapter-head reveal">
+    <span class="chapter-num">VII</span>
+    <h2 class="chapter-title">ORANG YANG TIDAK ADA</h2>
+  </div>
+  <div class="chapter-body">
+<div class="reveal"><p>Salah satu bentuk kehilangan paling kuat dalam Murakami bukanlah kematian.</p>
+<p>Melainkan seseorang yang tidak bisa lagi dijangkau.</p>
+<p>Orang itu mungkin masih hidup.</p></div>
+<div class="reveal"><p>Tetapi hubungan dengannya sudah tidak dapat dipulihkan.</p>
+<p>Ini jauh lebih sulit daripada kematian dalam satu pengertian.</p>
+<p>Kematian memberikan finality.</p></div>
+<div class="reveal"><p>Kehilangan memberikan ruang kosong.</p>
+<p>Dan ruang kosong jauh lebih mudah dipenuhi oleh imajinasi.</p>
+<p>Kita mulai bertanya: apa yang sebenarnya terjadi?</p></div>
+<div class="reveal"><p>Apakah dia masih mengingat saya?</p>
+<p>Apakah saya salah?</p>
+<p>Apakah semuanya bisa diperbaiki?</p></div>
+<div class="reveal"><p>Inilah mengapa disappearance begitu sering muncul dalam karya Murakami.</p>
+<p>Orang yang hilang meninggalkan lubang.</p>
+<p>Dan lubang itu menjadi tempat cerita berkembang.</p></div>
+<div class="reveal"><p>Perhatikan bagaimana pola ini berulang di hampir setiap skala karyanya: seekor kucing yang hilang membuka novel tiga jilid, seorang istri yang menghilang tanpa penjelasan menjadi pusat gravitasi novel lain, seorang sahabat masa kecil yang tiba-tiba memutus semua kontak tanpa alasan menjadi luka yang membentuk seluruh kepribadian tokoh dewasa.</p>
+<p>Yang hilang tidak harus besar untuk meninggalkan lubang yang besar.</p>
+<p>Kadang justru semakin kecil dan sepele hal yang hilang, semakin sulit kita membenarkan kepada diri sendiri betapa dalam kita merasakannya, dan justru rasa malu karena berduka atas hal kecil itulah yang membuat lukanya bertahan lebih lama.</p></div>
+  </div>
+</section>
+
+
+<section class="chapter" id="bab-8" data-toc-title="VIII. TUBUH">
+  <div class="chapter-head reveal">
+    <span class="chapter-num">VIII</span>
+    <h2 class="chapter-title">TUBUH</h2>
+  </div>
+  <div class="chapter-body">
+<div class="reveal"><p>Murakami tidak pernah sepenuhnya memisahkan tubuh dari consciousness.</p>
+<p>Seks dalam ceritanya sering kali bukan sekadar erotisme.</p>
+<p>Ia berkaitan dengan intimacy.</p></div>
+<div class="reveal"><p>Dengan kebutuhan untuk disentuh.</p>
+<p>Dengan kebutuhan untuk merasa ada.</p>
+<p>Dengan loneliness yang tidak bisa diselesaikan oleh percakapan.</p></div>
+<div class="reveal"><p>Tubuh kadang mengatakan sesuatu yang tidak dapat dikatakan bahasa.</p>
+<p>Tetapi tubuh juga tidak menjamin kedekatan.</p>
+<p>Dua orang bisa tidur dalam ranjang yang sama dan tetap hidup dalam dua alam psikologis yang berbeda.</p></div>
+<div class="reveal"><p>Ini salah satu paradoks Murakami: physical intimacy tidak selalu menghasilkan emotional intimacy.</p>
+<p>Bahkan kadang justru memperjelas jaraknya.</p>
+<p>Ada juga sisi lain yang jarang dibicarakan: tubuh dalam Murakami kadang menjadi tempat sesuatu yang tidak sepenuhnya rasional terjadi, mimpi yang terasa fisik, pertemuan di alam bawah sadar yang meninggalkan bekas nyata di dunia terjaga.</p></div>
+<div class="reveal"><p>Batas antara tubuh dan jiwa, seperti batas antara realitas dan mimpi dalam karyanya, jarang tegas.</p>
+<p>Seseorang bisa terluka oleh sesuatu yang terjadi di dalam mimpi orang lain.</p>
+<p>Seseorang bisa hamil tanpa hubungan fisik yang jelas.</p></div>
+<div class="reveal"><p>Ini bukan gimmick supernatural semata.</p>
+<p>Ini adalah cara Murakami menyatakan bahwa keintiman manusia selalu beroperasi di lebih dari satu lapisan, dan bahasa sehari-hari kita untuk membicarakan seks dan cinta terlalu sempit untuk menampung semua yang sebenarnya terjadi di antara dua orang.</p></div>
+  </div>
+</section>
+
+
+<section class="chapter" id="bab-9" data-toc-title="IX. MUSIK">
+  <div class="chapter-head reveal">
+    <span class="chapter-num">IX</span>
+    <h2 class="chapter-title">MUSIK</h2>
+  </div>
+  <div class="chapter-body">
+<div class="reveal"><p>Musik adalah salah satu bahasa paling penting dalam dunia Murakami.</p>
+<p>Jazz.</p>
+<p>Classical.</p></div>
+<div class="reveal"><p>The Beatles.</p>
+<p>Opera.</p>
+<p>Musik pop.</p></div>
+<div class="reveal"><p>Lagu-lagu lama.</p>
+<p>Mengapa?</p>
+<p>Karena musik dapat melakukan sesuatu yang sulit dilakukan narasi.</p></div>
+<div class="reveal"><p>Ia dapat menghubungkan dua waktu sekaligus.</p>
+<p>Satu lagu dapat membuat kita berada di kamar hari ini dan kembali menjadi seseorang sepuluh tahun lalu.</p>
+<p>Musik tidak menjelaskan memory.</p></div>
+<div class="reveal"><p>Ia mengaktifkannya.</p>
+<p>Karena itu musik dalam Murakami sering berfungsi sebagai emotional navigation system.</p>
+<p>Tokoh tidak selalu tahu ke mana hidupnya bergerak.</p></div>
+<div class="reveal"><p>Tetapi sebuah lagu dapat memberi arah.</p>
+<p>Bukan arah geografis.</p>
+<p>Arah batin.</p></div>
+<div class="reveal"><p>Sebelum menjadi penulis, Murakami menjalankan sebuah kelab jazz kecil di Tokyo selama bertahun-tahun, menuang wiski dan memutar piringan hitam sampai dini hari.</p>
+<p>Kebiasaan itu tidak pernah benar-benar hilang dari prosanya.</p>
+<p>Ia menulis kalimat seperti seorang pemain jazz menyusun improvisasi: motif kecil diulang, dibiarkan berkembang, lalu dilepaskan begitu saja tanpa resolusi yang rapi.</p></div>
+<div class="reveal"><p>Sinfonietta karya Leos Janacek, misalnya, muncul di salah satu novelnya bukan sekadar sebagai referensi budaya tinggi, melainkan sebagai jangkar akustik yang menandai momen ketika dua dunia mulai bertumpang tindih.</p>
+<p>Bagi Murakami, sebuah komposisi musik bisa menjadi lebih dapat dipercaya daripada dialog, karena musik tidak berbohong tentang perasaan yang sedang ia bawa.</p></div>
+  </div>
+</section>
+
+
+<section class="chapter" id="bab-10" data-toc-title="X. KETIKA KUCING BERBICARA">
+  <div class="chapter-head reveal">
+    <span class="chapter-num">X</span>
+    <h2 class="chapter-title">KETIKA KUCING BERBICARA</h2>
+  </div>
+  <div class="chapter-body">
+<div class="reveal"><p>Lalu datanglah kucing.</p>
+<p>Dan tentu saja, dalam dunia Murakami, kucing bisa berbicara.</p>
+<p>Masalahnya adalah Murakami tidak memperlakukan kejadian itu seperti dunia baru saja runtuh.</p></div>
+<div class="reveal"><p>Nakata dalam Kafka on the Shore, misalnya, dapat berbicara dengan kucing.</p>
+<p>Ia tidak memahami dunia dengan cara biasa.</p>
+<p>Namun ia memiliki bentuk kecerdasan dan kepolosannya sendiri.</p></div>
+<div class="reveal"><p>Di tangan penulis lain, kemampuan berbicara dengan kucing mungkin menjadi pusat cerita.</p>
+<p>Di Murakami, ia hampir seperti fakta kehidupan.</p>
+<p>Dan justru karena tokoh-tokohnya menerima absurditas tersebut, pembaca ikut menerimanya.</p></div>
+<div class="reveal"><p>Inilah teknik penting: jangan berdebat dengan keanehan.</p>
+<p>Terima.</p>
+<p>Amati.</p></div>
+<div class="reveal"><p>Lanjutkan.</p>
+<p>Akibatnya, sesuatu yang mustahil menjadi terasa normal.</p>
+<p>Dan ketika yang mustahil sudah terasa normal, pembaca mulai mempertanyakan hal yang lebih menarik: mungkin dunia memang selalu seperti ini.</p></div>
+<div class="reveal"><p>Mungkin hanya kita yang terlalu terbiasa menganggapnya masuk akal.</p>
+<p>Kucing sendiri, di luar kemampuannya berbicara, memiliki tempat khusus dalam kosmologi pribadi Murakami.</p>
+<p>Kucing sering menjadi barometer bagi kesehatan sebuah rumah tangga: ketika kucing menghilang, itu tanda bahwa sesuatu yang lebih besar sedang retak.</p></div>
+<div class="reveal"><p>Kucing tidak pernah berbohong tentang atmosfer sebuah rumah, karena kucing, tidak seperti manusia, tidak punya alasan untuk berpura-pura baik-baik saja.</p></div>
+  </div>
+</section>
+
+
+<section class="chapter" id="bab-11" data-toc-title="XI. DUNIA YANG SEDIKIT BERGESER">
+  <div class="chapter-head reveal">
+    <span class="chapter-num">XI</span>
+    <h2 class="chapter-title">DUNIA YANG SEDIKIT BERGESER</h2>
+  </div>
+  <div class="chapter-body">
+<div class="reveal"><p>Murakami jarang berkata, sekarang kita memasuki dunia supernatural.</p>
+<p>Peralihannya biasanya lebih halus.</p>
+<p>Sebuah sumur.</p></div>
+<div class="reveal"><p>Sebuah tangga.</p>
+<p>Sebuah kamar.</p>
+<p>Sebuah mimpi.</p></div>
+<div class="reveal"><p>Sebuah telepon.</p>
+<p>Sebuah lagu.</p>
+<p>Sebuah jalan yang salah.</p></div>
+<div class="reveal"><p>Lalu tiba-tiba aturan dunia berubah.</p>
+<p>Dalam 1Q84, Aomame turun dari tangga darurat di jalan tol dan perlahan menyadari bahwa ada sesuatu yang tidak sama.</p>
+<p>Ada dua bulan.</p></div>
+<div class="reveal"><p>Ada perubahan kecil pada realitas.</p>
+<p>Tidak cukup untuk membuat dunia benar-benar asing.</p>
+<p>Justru hanya sekitar satu persen berbeda.</p></div>
+<div class="reveal"><p>Dan satu persen itu cukup.</p>
+<p>Ini adalah salah satu konsep terkuat dalam estetika Murakami: reality does not have to collapse.</p>
+<p>Ia hanya perlu bergeser sedikit.</p></div>
+<div class="reveal"><p>Karena manusia lebih takut pada dunia yang hampir normal daripada dunia yang sepenuhnya tidak masuk akal.</p>
+<p>Dunia yang sepenuhnya fantastis memberi kita izin untuk berjarak, karena kita tahu itu bukan dunia kita.</p>
+<p>Tetapi dunia yang hampir sama persis dengan dunia kita, hanya berbeda satu detail kecil, memaksa kita bertanya sesuatu yang jauh lebih mengganggu: bagaimana jika pergeseran semacam itu sudah terjadi pada dunia kita sendiri, dan kita hanya belum menyadarinya?</p></div>
+  </div>
+</section>
+
+
+<section class="chapter" id="bab-12" data-toc-title="XII. BAHASA ASING DI RUMAH SENDIRI">
+  <div class="chapter-head reveal">
+    <span class="chapter-num">XII</span>
+    <h2 class="chapter-title">BAHASA ASING DI RUMAH SENDIRI</h2>
+  </div>
+  <div class="chapter-body">
+<div class="reveal"><p>Ada sebuah fakta biografis yang jarang diketahui pembaca awam, tetapi menjelaskan banyak hal tentang suara khas Murakami.</p>
+<p>Ketika menulis novel pertamanya, seorang pemuda yang menjalankan kelab jazz dan merasa buntu setiap kali mencoba menulis dalam bahasa Jepang, Murakami melakukan sesuatu yang tidak lazim.</p>
+<p>Ia menulis beberapa bab pertama dalam bahasa Inggris, bahasa yang ia kuasai secara terbatas, lalu menerjemahkannya kembali ke bahasa Jepang.</p></div>
+<div class="reveal"><p>Hasilnya bukan terjemahan yang lancar.</p>
+<p>Hasilnya adalah sesuatu yang baru: bahasa Jepang yang terdengar seperti diterjemahkan, meskipun aslinya bukan.</p>
+<p>Kalimat menjadi lebih pendek.</p></div>
+<div class="reveal"><p>Subjek yang biasanya bisa dilesapkan dalam bahasa Jepang dimunculkan kembali.</p>
+<p>Ornamen sopan-santun linguistik yang berlapis-lapis, yang menjadi ciri prosa Jepang klasik, dipangkas habis.</p>
+<p>Yang tersisa adalah suara yang terasa asing di rumahnya sendiri, seperti seseorang yang berbicara dalam bahasa ibunya tetapi dengan aksen yang tidak bisa dijelaskan.</p></div>
+<div class="reveal"><p>Inilah yang membuat kritikus sastra Jepang yang lebih tua awalnya menolaknya.</p>
+<p>Bagi mereka, prosa itu terasa dangkal, kehilangan kedalaman estetika bahasa Jepang tradisional.</p>
+<p>Tetapi bagi pembaca muda, justru itulah daya tariknya.</p></div>
+<div class="reveal"><p>Suara itu terasa jujur karena tidak berusaha terdengar sastrawi.</p>
+<p>Dan yang menarik, ketika karya-karya itu kemudian diterjemahkan ke bahasa Inggris oleh penerjemah seperti Alfred Birnbaum dan kemudian Jay Rubin, sebagian pembaca berbahasa Inggris merasa membaca sesuatu yang sangat alami, seolah Murakami memang menulis untuk mereka sejak awal.</p>
+<p>Ironinya sempurna: sebuah gaya yang lahir dari usaha menjauh dari bahasa Jepang, pada akhirnya justru terasa paling nyaman ketika kembali diterjemahkan ke bahasa asing tempat ia pernah lahir.</p></div>
+  </div>
+</section>
+
+
+<section class="chapter" id="bab-13" data-toc-title="XIII. TRILOGI TIKUS: BOKU DAN SANG TIKUS">
+  <div class="chapter-head reveal">
+    <span class="chapter-num">XIII</span>
+    <h2 class="chapter-title">TRILOGI TIKUS: BOKU DAN SANG TIKUS</h2>
+  </div>
+  <div class="chapter-body">
+<div class="reveal"><p>Sebelum sumur, sebelum dua bulan, sebelum kucing yang bisa bicara, ada tiga novel kecil yang jarang dibaca pembaca baru, padahal di situlah seluruh mesin Murakami pertama kali dinyalakan.</p>
+<p>Hear the Wind Sing, Pinball 1973, dan A Wild Sheep Chase, yang kemudian dikenal sebagai Trilogi Tikus.</p>
+<p>Tokoh utamanya tidak bernama.</p></div>
+<div class="reveal"><p>Ia hanya disebut Boku, kata ganti orang pertama yang santai dalam bahasa Jepang, sesuatu di antara saya dan aku.</p>
+<p>Sahabatnya disebut Sang Tikus, seorang anak orang kaya yang memilih menjauh dari kemakmuran keluarganya dan berakhir di sebuah kota kecil yang sepi.</p>
+<p>Dua novel pertama nyaris tanpa plot.</p></div>
+<div class="reveal"><p>Musim panas.</p>
+<p>Bar.</p>
+<p>Bir.</p></div>
+<div class="reveal"><p>Percakapan yang tidak ke mana-mana.</p>
+<p>Seorang gadis dengan sembilan jari yang muncul lalu menghilang.</p>
+<p>Tetapi di novel ketiga, A Wild Sheep Chase, sesuatu berubah.</p></div>
+<div class="reveal"><p>Boku menerima sebuah foto domba biasa dari seorang teman, lalu tiba-tiba diseret ke dalam pencarian nyaris mistis oleh seorang pria misterius yang bekerja untuk kekuatan politik yang tidak pernah dijelaskan sepenuhnya, mencari seekor domba tunggal dengan tanda bintang di punggungnya, domba yang diyakini bisa merasuki manusia dan mengendalikan sejarah dari balik layar.</p>
+<p>Di sinilah untuk pertama kalinya realisme domestik Murakami bertemu dengan sesuatu yang benar-benar aneh, dan bertemu tanpa gesekan.</p>
+<p>Boku mengemudi ke Hokkaido utara, sampai ke sebuah rumah peternakan di tengah salju, dan di sanalah ia bertemu seorang pria berkostum domba yang duduk menunggunya, seolah sudah tahu ia akan datang.</p></div>
+<div class="reveal"><p>Sang Tikus, yang selama ini dicari, ternyata sudah lama mati, dan yang berbicara kepada Boku di rumah itu adalah hantu sekaligus penjelasan.</p>
+<p>Trilogi ini penting bukan karena plotnya rumit, tetapi karena di sinilah Murakami menemukan rumusnya: pria biasa, kehilangan yang tak terjelaskan, perjalanan ke tempat terpencil, dan sebuah entitas ganjil yang menjadi kunci untuk memahami semuanya.</p>
+<p>Rumus itu akan ia tulis ulang berkali-kali selama empat puluh tahun berikutnya, tetapi tidak pernah lagi seaneh dan semuram versi pertamanya.</p></div>
+  </div>
+</section>
+
+
+<section class="chapter" id="bab-14" data-toc-title="XIV. DANCE DANCE DANCE">
+  <div class="chapter-head reveal">
+    <span class="chapter-num">XIV</span>
+    <h2 class="chapter-title">DANCE DANCE DANCE</h2>
+  </div>
+  <div class="chapter-body">
+<div class="reveal"><p>Beberapa tahun setelah perburuan domba berakhir, Murakami menulis kelanjutannya, dan hasilnya adalah salah satu novelnya yang paling gelap sekaligus paling lucu.</p>
+<p>Boku, kini berusia tiga puluhan, bekerja sebagai penulis lepas yang menyebut pekerjaannya sendiri sebagai membersihkan salju budaya, menulis artikel dangkal untuk majalah dengan bayaran layak sambil diam-diam membenci setiap kalimat yang ia ketik.</p>
+<p>Ia kembali ke Dolphin Hotel, tempat kisah sebelumnya berakhir, dan menemukan bahwa hotel tua yang penuh kenangan itu sudah dirobohkan, digantikan oleh menara kaca korporat dengan nama yang sama, dikelola oleh rantai bisnis multinasional yang tidak tahu apa-apa tentang sejarah tempat itu.</p></div>
+<div class="reveal"><p>Di sinilah Murakami untuk pertama kalinya menulis secara eksplisit tentang kapitalisme akhir dekade 1980-an di Jepang, gelembung ekonomi yang membuat segala sesuatu terasa bisa dibeli, termasuk kenangan.</p>
+<p>Namun di tengah bangunan baru yang dingin itu, masih ada satu lantai yang tidak sepenuhnya nyata, tempat seorang pria berkostum domba dari novel sebelumnya kembali muncul, memberi tahu Boku bahwa ia harus terus menari selama musik masih diputar, karena berhenti menari berarti kehilangan jalan kembali.</p>
+<p>Dance Dance Dance adalah novel tentang bertahan hidup di dunia yang telah dikomodifikasi habis-habisan, tempat bahkan kesedihan pun bisa dikemas ulang menjadi produk.</p></div>
+<div class="reveal"><p>Kematian seorang gadis remaja bernama Kiki menjadi pusat misteri, tetapi yang lebih mengganggu adalah cara dunia di sekitarnya terus bergerak seolah tidak terjadi apa-apa, menyerap kehilangan itu ke dalam arus bisnis dan hiburan tanpa jeda.</p>
+<p>Perintah untuk terus menari, di akhir novel, terdengar seperti nasihat sekaligus ancaman: satu-satunya cara bertahan dalam dunia yang begitu cepat berubah adalah terus bergerak, meskipun kita tidak lagi yakin musik apa yang sedang kita ikuti.</p></div>
+  </div>
+</section>
+
+
+<section class="chapter" id="bab-15" data-toc-title="XV. NORWEGIAN WOOD">
+  <div class="chapter-head reveal">
+    <span class="chapter-num">XV</span>
+    <h2 class="chapter-title">NORWEGIAN WOOD</h2>
+  </div>
+  <div class="chapter-body">
+<div class="reveal"><p>Kemudian Murakami melakukan sesuatu yang menarik.</p>
+<p>Ia meninggalkan dunia supernatural.</p>
+<p>Norwegian Wood hampir sepenuhnya realistis.</p></div>
+<div class="reveal"><p>Toru Watanabe hidup dalam dunia mahasiswa Tokyo akhir 1960-an, ketika kampus-kampus dipenuhi demonstrasi mahasiswa yang, dalam novel ini, sengaja ia gambarkan sebagai latar belakang yang hampa dan penuh slogan kosong, sesuatu yang ia jaga jarak darinya secara sinis.</p>
+<p>Ia bertemu Naoko, kekasih dari sahabat masa kecilnya, Kizuki, yang mengakhiri hidupnya sendiri tanpa peringatan di usia tujuh belas tahun.</p>
+<p>Ia membawa memory tentang Kizuki ke mana pun ia pergi.</p></div>
+<div class="reveal"><p>Ia bertemu Midori, seorang perempuan yang sepenuhnya berlawanan dengan Naoko: hidup, blak-blakan, lapar akan dunia.</p>
+<p>Ada cinta.</p>
+<p>Ada seks.</p></div>
+<div class="reveal"><p>Ada persahabatan.</p>
+<p>Ada kematian.</p>
+<p>Tidak ada kucing yang berbicara.</p></div>
+<div class="reveal"><p>Tidak ada dunia paralel.</p>
+<p>Tidak ada sumur supernatural.</p>
+<p>Tetapi dunia batin Toru sendiri sudah cukup aneh.</p></div>
+<div class="reveal"><p>Ia hidup dengan orang-orang yang ia cintai tetapi tidak pernah bisa sepenuhnya menyelamatkan mereka.</p>
+<p>Naoko membawa luka yang sangat dalam setelah kematian Kizuki, dan berlindung di sebuah sanatorium terpencil di pegunungan bernama Ami Hostel, tempat ia tinggal bersama Reiko, seorang perempuan lebih tua yang juga membawa sejarah keretakan jiwanya sendiri.</p>
+<p>Reiko, dengan gitarnya, menjadi semacam penerjemah antara dunia Naoko yang tertutup dan dunia luar yang terlalu berisik untuk Naoko tanggung.</p></div>
+<div class="reveal"><p>Midori menawarkan kemungkinan kehidupan yang lebih terbuka dan hidup.</p>
+<p>Toru berada di antara keduanya, terjepit antara kesetiaan pada masa lalu yang perlahan sekarat dan tarikan menuju masa depan yang masih mungkin diselamatkan.</p>
+<p>Dan ketika Naoko akhirnya tidak dapat bertahan, cinta berubah menjadi memory.</p></div>
+<div class="reveal"><p>Di halaman terakhir novel ini, Toru menelepon Midori dari sebuah bilik telepon entah di mana, dan ketika Midori bertanya di mana ia sekarang, Toru sendiri tidak bisa menjawabnya, karena ia sendiri tidak yakin.</p>
+<p>Di sinilah Murakami menunjukkan sesuatu yang penting: surrealism tidak selalu membutuhkan supernatural.</p>
+<p>Kesedihan manusia sendiri sudah cukup surreal.</p></div>
+<div class="reveal"><p>Kita bisa duduk di sebuah kamar yang sama selama bertahun-tahun dan tetap tidak benar-benar memahami orang yang kita cintai.</p></div>
+  </div>
+</section>
+
+
+<section class="chapter" id="bab-16" data-toc-title="XVI. SOUTH OF THE BORDER, WEST OF THE SUN">
+  <div class="chapter-head reveal">
+    <span class="chapter-num">XVI</span>
+    <h2 class="chapter-title">SOUTH OF THE BORDER, WEST OF THE SUN</h2>
+  </div>
+  <div class="chapter-body">
+<div class="reveal"><p>Jika Norwegian Wood adalah versi besar dari kesedihan masa muda, South of the Border, West of the Sun adalah versi kecilnya, dan justru karena skalanya yang kecil, novel ini terasa hampir menyakitkan untuk dibaca oleh siapa pun yang pernah kehilangan cinta pertama.</p>
+<p>Hajime, seorang pemilik jazz bar yang mapan secara finansial, menikah dengan baik, memiliki dua anak perempuan yang ia sayangi, tiba-tiba bertemu kembali dengan Shimamoto, teman masa kecilnya yang menghilang tanpa jejak bertahun-tahun lalu.</p>
+<p>Tidak ada elemen fantastis di sini.</p></div>
+<div class="reveal"><p>Tidak ada dunia paralel.</p>
+<p>Hanya seorang pria dewasa yang menyadari bahwa kehidupan yang telah ia bangun dengan hati-hati bisa runtuh hanya karena satu wajah dari masa lalu muncul kembali di depan pintunya.</p>
+<p>Yang membuat novel ini begitu jujur adalah keengganan Murakami untuk menghakimi Hajime.</p></div>
+<div class="reveal"><p>Ia tidak digambarkan sebagai pengkhianat murni, juga bukan korban murni.</p>
+<p>Ia hanya seorang manusia yang menyadari bahwa ada bagian dari dirinya, yang berhubungan dengan masa kecil dan kemungkinan hidup yang tidak pernah ia jalani, yang tidak pernah benar-benar mati meski telah dikubur selama puluhan tahun di bawah rutinitas dan kesuksesan.</p>
+<p>Shimamoto sendiri tetap menjadi misteri sampai akhir, tidak pernah sepenuhnya dijelaskan, dan justru itulah yang membuatnya begitu meresahkan: ia adalah proyeksi dari kemungkinan yang hilang, bukan seseorang yang benar-benar bisa dimiliki kembali.</p></div>
+<div class="reveal"><p>Novel ini mengajukan pertanyaan yang lebih menyakitkan daripada pertanyaan tentang perselingkuhan: bukan apakah kita setia kepada orang yang kita cintai sekarang, melainkan apakah kita pernah benar-benar berhasil menutup pintu menuju kehidupan lain yang mungkin pernah kita jalani.</p></div>
+  </div>
+</section>
+
+
+<section class="chapter" id="bab-17" data-toc-title="XVII. HARD-BOILED WONDERLAND AND THE END OF THE WORLD">
+  <div class="chapter-head reveal">
+    <span class="chapter-num">XVII</span>
+    <h2 class="chapter-title">HARD-BOILED WONDERLAND AND THE END OF THE WORLD</h2>
+  </div>
+  <div class="chapter-body">
+<div class="reveal"><p>Di antara Trilogi Tikus dan Norwegian Wood, Murakami menulis salah satu novelnya yang paling ambisius secara struktural, sebuah eksperimen yang di kemudian hari akan menjadi cetak biru bagi 1Q84.</p>
+<p>Novel ini terdiri dari dua narasi yang berselang-seling bab demi bab, dua dunia yang tampak sama sekali terpisah.</p>
+<p>Yang pertama, Hard-Boiled Wonderland, mengikuti seorang Calcutec, semacam prosesor data manusia, yang bekerja dalam jaringan mata-mata bawah tanah Tokyo, dikejar oleh makhluk-makhluk mirip lintah raksasa yang hidup di gorong-gorong di bawah kota, dalam gaya narasi yang meminjam banyak dari fiksi detektif keras dan cyberpunk.</p></div>
+<div class="reveal"><p>Yang kedua, End of the World, mengikuti seorang penjaga gerbang di sebuah kota bertembok yang tenang dan tanpa waktu, tempat penduduknya kehilangan bayangan mereka saat memasuki gerbang, dan tempat unicorn-unicorn tua berkeliaran memikul beban ingatan kolektif kota itu di tengkorak mereka.</p>
+<p>Selama berbab-bab, pembaca tidak diberi tahu bagaimana dua dunia ini terhubung.</p>
+<p>Baru menjelang akhir terungkap bahwa End of the World bukanlah dunia lain, melainkan alam bawah sadar sang Calcutec sendiri, sebuah dunia yang diciptakan oleh pikirannya sendiri sebagai tempat perlindungan permanen, dan bahwa pikirannya sedang menuju titik tak bisa kembali menuju dunia batin itu.</p></div>
+<div class="reveal"><p>Ia diberi pilihan mustahil: menerima nasib itu, atau mencoba melarikan diri dari kepalanya sendiri.</p>
+<p>Yang mengejutkan, ia memilih tinggal.</p>
+<p>Ia memilih dunia batinnya, meninggalkan tubuh fisiknya di dunia luar, karena di dalam kota bertembok itu, meski sunyi dan tanpa emosi, setidaknya ada semacam kedamaian yang tidak pernah bisa ia temukan di dunia nyata.</p></div>
+<div class="reveal"><p>Novel ini adalah pernyataan paling terang-terangan Murakami tentang gagasan yang akan terus ia ulangi: bahwa dunia batin manusia bukan sekadar metafora, melainkan sebuah tempat yang nyata, dengan geografinya sendiri, aturannya sendiri, dan kadang, pintu keluarnya sendiri yang sengaja dikunci dari dalam.</p></div>
+  </div>
+</section>
+
+
+<section class="chapter" id="bab-18" data-toc-title="XVIII. THE WIND-UP BIRD CHRONICLE">
+  <div class="chapter-head reveal">
+    <span class="chapter-num">XVIII</span>
+    <h2 class="chapter-title">THE WIND-UP BIRD CHRONICLE</h2>
+  </div>
+  <div class="chapter-body">
+<div class="reveal"><p>Jika ingin memahami Murakami dalam bentuk paling lengkap, The Wind-Up Bird Chronicle adalah salah satu tempat terbaik untuk mulai.</p>
+<p>Toru Okada menjalani kehidupan rumah tangga yang tampak biasa.</p>
+<p>Lalu kucingnya hilang.</p></div>
+<div class="reveal"><p>Kemudian istrinya, Kumiko, pergi.</p>
+<p>Dari pencarian sederhana itu, cerita mulai membuka lapisan demi lapisan.</p>
+<p>Ada May Kasahara, seorang remaja tetangga yang mengajaknya berbicara jujur tentang kematian sambil berjemur di halaman kosong.</p></div>
+<div class="reveal"><p>Ada telepon misterius dari seorang perempuan yang mengaku mengenalnya secara intim tanpa pernah bertemu.</p>
+<p>Ada sumur kering di halaman rumah kosong, tempat Toru mulai menghabiskan waktu berjam-jam dalam gelap total.</p>
+<p>Ada Lieutenant Mamiya, seorang veteran perang tua yang mengunjungi Toru untuk menyampaikan sebuah kotak warisan, dan yang ceritanya membuka salah satu bagian paling brutal dalam seluruh karya Murakami: kisah kekerasan tentara Jepang di perbatasan Manchuria dan Mongolia menjelang Perang Dunia Kedua, termasuk adegan seorang tentara dikuliti hidup-hidup oleh tentara Rusia di tepi sungai, dan sebuah sumur lain, di padang gurun Mongolia, tempat Mamiya sendiri pernah dibuang dan ditinggalkan sekarat.</p></div>
+<div class="reveal"><p>Ada Noboru Wataya, kakak ipar Toru, seorang politisi ambisius dengan karisma publik yang meyakinkan tetapi menyembunyikan sesuatu yang jahat dan tidak terjelaskan di baliknya.</p>
+<p>Ada pengalaman yang semakin sulit dibedakan antara mimpi dan realitas.</p>
+<p>Toru bahkan turun ke dalam sumur.</p></div>
+<div class="reveal"><p>Secara fisik ia turun ke tempat yang gelap dan sempit.</p>
+<p>Secara psikologis, ia juga sedang turun.</p>
+<p>Ke dalam memory.</p></div>
+<div class="reveal"><p>Ke dalam kekerasan.</p>
+<p>Ke dalam ketakutan.</p>
+<p>Ke dalam bagian dirinya yang tidak pernah ia pahami.</p></div>
+<div class="reveal"><p>Kehadiran Mamiya dan kisah Manchuria bukan sekadar tempelan sejarah untuk memberi bobot pada novel domestik.</p>
+<p>Murakami sedang menyatakan sesuatu yang lebih tajam: bahwa kekerasan sejarah yang dibungkam oleh Jepang pasca perang tidak pernah benar-benar hilang, ia hanya masuk ke bawah tanah, seperti sumur, dan tetap memengaruhi kehidupan pribadi generasi yang bahkan tidak mengalaminya secara langsung.</p>
+<p>Inilah yang dilakukan Murakami dengan sangat efektif: plot eksternal dan perjalanan internal bergerak di jalur yang sama, dan sejarah kolektif bergerak diam-diam di bawah keduanya.</p></div>
+<div class="reveal"><p>Kucing yang hilang adalah masalah.</p>
+<p>Tetapi yang sebenarnya hilang jauh lebih besar: hubungan, identitas, kontrol, sejarah yang dibungkam, dan mungkin dirinya sendiri.</p></div>
+  </div>
+</section>
+
+
+<section class="chapter" id="bab-19" data-toc-title="XIX. SPUTNIK SWEETHEART">
+  <div class="chapter-head reveal">
+    <span class="chapter-num">XIX</span>
+    <h2 class="chapter-title">SPUTNIK SWEETHEART</h2>
+  </div>
+  <div class="chapter-body">
+<div class="reveal"><p>Sumire ingin menjadi novelis, tetapi setiap kali mencoba menulis, ia merasa ada sesuatu yang salah, sesuatu yang tidak bisa ia rumuskan.</p>
+<p>Ia jatuh cinta, untuk pertama kalinya dalam hidupnya dengan intensitas penuh, kepada seorang perempuan bernama Miu, tujuh belas tahun lebih tua darinya, seorang pengusaha impor anggur yang elegan dan tertutup.</p>
+<p>Cinta Sumire tidak berbalas secara fisik, karena Miu, akibat sebuah insiden traumatis bertahun-tahun sebelumnya di sebuah kincir angin di kota kecil Swiss, kehilangan seluruh hasrat seksualnya, terbelah menjadi dua versi dirinya sendiri: satu di dunia nyata, satu lagi yang terperangkap selamanya di sisi lain cermin.</p></div>
+<div class="reveal"><p>Narator novel ini, seorang guru sekolah dasar yang disebut hanya sebagai K, mencintai Sumire tanpa harapan, sementara Sumire mencintai Miu tanpa harapan, membentuk rantai kerinduan yang masing-masing ujungnya tidak pernah bertemu.</p>
+<p>Ketika Sumire dan Miu bepergian ke sebuah pulau kecil di Yunani, Sumire menghilang dalam semalam, seolah menguap tanpa jejak, meninggalkan hanya sepotong tulisan aneh di komputernya.</p>
+<p>K terbang ke Yunani untuk mencarinya, dan di sanalah novel ini mencapai momen paling ganjil dan paling menyentuhnya: sebuah dugaan bahwa Sumire mungkin telah menyeberang ke sisi lain, ke dunia tempat versi lain dari Miu terperangkap, sebuah dunia yang hanya bisa dicapai oleh mereka yang cintanya cukup murni dan cukup putus asa untuk menemukan pintunya.</p></div>
+<div class="reveal"><p>Judul novel ini merujuk pada Sputnik, satelit pertama manusia, dan sebuah kesalahpahaman kecil dalam percakapan Sumire dan Miu tentang kata beatnik yang salah dengar menjadi Sputnik, lalu berkembang menjadi metafora inti buku: bahwa manusia yang saling mencintai kadang hanyalah dua satelit yang mengorbit dengan kesepian masing-masing, saling terlihat dari kejauhan, tetapi ditakdirkan tidak pernah benar-benar bertumbukan.</p></div>
+  </div>
+</section>
+
+
+<section class="chapter" id="bab-20" data-toc-title="XX. KAFKA ON THE SHORE">
+  <div class="chapter-head reveal">
+    <span class="chapter-num">XX</span>
+    <h2 class="chapter-title">KAFKA ON THE SHORE</h2>
+  </div>
+  <div class="chapter-body">
+<div class="reveal"><p>Dalam Kafka on the Shore, Murakami memperlebar dunia menjadi semacam puzzle consciousness.</p>
+<p>Kafka Tamura, seorang remaja lima belas tahun, melarikan diri dari rumah ayahnya di Tokyo, membawa kutukan mirip Oedipus yang diramalkan sang ayah: bahwa ia akan membunuh ayahnya sendiri dan tidur dengan ibu serta kakak perempuannya, dua orang yang meninggalkannya sejak kecil dan tidak pernah ia kenal wajahnya.</p>
+<p>Nakata, seorang pria tua, hidup dengan cara yang sangat berbeda.</p></div>
+<div class="reveal"><p>Ia dapat berbicara dengan kucing, tetapi memiliki bagian memory yang hilang sejak sebuah kejadian masa kecil pada masa perang, ketika seluruh kelasnya pingsan misterius di sebuah bukit dan hanya Nakata yang tidak pernah sepenuhnya siuman, kehilangan kemampuan membaca dan menulis, tetapi memperoleh kemampuan lain yang jauh lebih aneh.</p>
+<p>Dua tokoh ini berjalan melalui dunia yang berbeda.</p>
+<p>Namun cerita perlahan memperlihatkan bahwa kedua jalur tersebut saling berhubungan.</p></div>
+<div class="reveal"><p>Ada perpustakaan swasta di Takamatsu tempat Kafka berlindung.</p>
+<p>Ada Miss Saeki, pengelola perpustakaan yang membawa kesedihan dari masa mudanya sendiri, seorang perempuan yang mungkin, dalam logika ganjil novel ini, adalah ibu Kafka yang hilang.</p>
+<p>Ada Oshima, asisten perpustakaan yang interseks dan menjadi pemandu filosofis Kafka melalui labirin mitos Yunani dan cerita rakyat Jepang.</p></div>
+<div class="reveal"><p>Ada hutan lebat di luar kota tempat dua tentara dari masa Perang Dunia Kedua masih berjaga tanpa menua, menunggu di ambang antara dunia hidup dan mati.</p>
+<p>Ada Colonel Sanders yang muncul seperti tokoh dari mimpi, bertindak sebagai germo metafisik yang membantu Nakata menemukan sebuah batu pintu masuk.</p>
+<p>Ada pintu antara dunia.</p></div>
+<div class="reveal"><p>Dan ada pertanyaan tentang takdir, identitas, memory, dan kemungkinan bahwa manusia hidup dalam lebih dari satu lapisan reality.</p>
+<p>Yang menarik bukan apakah semua misteri tersebut dapat dijelaskan.</p>
+<p>Yang menarik adalah pengalaman membacanya.</p></div>
+<div class="reveal"><p>Kita perlahan berhenti bertanya, apa sebenarnya yang terjadi.</p>
+<p>Dan mulai bertanya, apa arti pengalaman ini bagi manusia yang mengalaminya.</p>
+<p>Itulah perubahan posisi pembaca yang sangat penting.</p></div>
+  </div>
+</section>
+
+
+<section class="chapter" id="bab-21" data-toc-title="XXI. AFTER DARK">
+  <div class="chapter-head reveal">
+    <span class="chapter-num">XXI</span>
+    <h2 class="chapter-title">AFTER DARK</h2>
+  </div>
+  <div class="chapter-body">
+<div class="reveal"><p>After Dark adalah salah satu eksperimen paling ketat Murakami dalam hal skala waktu: seluruh novel berlangsung dalam satu malam, dari sebelum tengah malam hingga fajar, di Tokyo yang jarang tidur sepenuhnya.</p>
+<p>Mari, seorang mahasiswi yang memilih menghabiskan malam di sebuah restoran cepat saji daripada pulang ke rumah, bertemu Takahashi, seorang pemain trombon yang mengenalnya secara samar melalui kakaknya, Eri, seorang model cantik yang sedang tertidur dalam koma yang aneh di rumah, tidur yang begitu dalam sehingga hampir menyerupai kematian.</p>
+<p>Novel ini bergerak dengan gaya kamera, narator yang mengaku sebagai mata kolektif kita, para pembaca, yang mengamati kota dari sudut pandang mirip lensa film, berpindah dari restoran ke hotel kapsul, dari jalan sepi ke sebuah kantor tempat seorang perempuan bekerja lembur menerjemahkan dokumen hukum.</p></div>
+<div class="reveal"><p>Di rumah, Eri yang tidur menjadi jangkar cerita yang lain: dalam kamarnya, layar televisi yang mati tiba-tiba menyala sendiri, memperlihatkan sebuah ruangan asing tempat seorang pria tanpa wajah duduk mengawasi, seolah televisi telah menjadi jendela menuju dimensi lain yang mengawasi balik.</p>
+<p>After Dark tidak pernah menjelaskan apa yang sebenarnya terjadi pada Eri, atau siapa pria di dalam layar itu.</p>
+<p>Yang ditawarkan Murakami justru sebuah gagasan tentang kota itu sendiri sebagai organisme yang punya kesadaran ganda, satu untuk siang yang produktif dan rapi, satu lagi untuk malam yang menampung semua orang yang tidak punya tempat di siang hari, insomniak, pekerja shift, orang-orang yang melarikan diri dari rumah tangga mereka sendiri.</p></div>
+<div class="reveal"><p>Jam setelah tengah malam, dalam novel ini, bukan sekadar waktu, melainkan sebuah dunia tersendiri dengan hukumnya sendiri, tempat batas antara yang nyata dan yang tidak menjadi lebih tipis daripada biasanya, sesuatu yang dipahami betul oleh siapa pun yang pernah terjaga sendirian pukul tiga pagi dan merasa dunia berubah aturan tanpa pemberitahuan.</p></div>
+  </div>
+</section>
+
+
+<section class="chapter" id="bab-22" data-toc-title="XXII. 1Q84">
+  <div class="chapter-head reveal">
+    <span class="chapter-num">XXII</span>
+    <h2 class="chapter-title">1Q84</h2>
+  </div>
+  <div class="chapter-body">
+<div class="reveal"><p>1Q84 mengambil gagasan dunia yang bergeser dan memperbesar skalanya menjadi epik tiga jilid.</p>
+<p>Aomame, seorang instruktur kebugaran yang secara diam-diam juga seorang pembunuh bayaran yang menghukum pria-pria pelaku kekerasan terhadap perempuan, turun dari tangga darurat jalan tol dalam kemacetan dan memasuki sebuah dunia yang hampir sama dengan dunia yang ia kenal.</p>
+<p>Hampir.</p></div>
+<div class="reveal"><p>Tetapi ada dua bulan di langit.</p>
+<p>Ada Little People, makhluk-makhluk kecil misterius yang keluar dari mulut seekor kambing mati dan mulai menenun sesuatu yang disebut Air Chrysalis, kepompong udara yang menjadi pusat ritual sebuah sekte bernama Sakigake.</p>
+<p>Sekte itu, dengan kepemimpinan seorang tokoh yang hanya disebut sebagai Sang Pemimpin, seorang pria bertubuh raksasa yang mengklaim menjadi penyalur suara Little People sekaligus pelaku kekerasan seksual terhadap gadis-gadis di bawah umur atas nama ritual keagamaan, jelas menggemakan Aum Shinrikyo, sekte nyata yang melancarkan serangan gas sarin di kereta bawah tanah Tokyo tahun 1995, sebuah peristiwa yang secara langsung diteliti Murakami dalam karya nonfiksinya sebelum ia menulis novel ini.</p></div>
+<div class="reveal"><p>Ada Tengo, seorang guru les matematika dan penulis lepas yang tanpa sengaja terseret ke dalam dunia yang sama ketika ia menulis ulang naskah seorang gadis remaja bernama Fuka-Eri, mantan anggota Sakigake yang melarikan diri.</p>
+<p>Dan hubungan antara dua manusia, Aomame dan Tengo, yang saling mencintai sejak masa kecil tanpa pernah benar-benar berbicara satu sama lain selama dua puluh tahun, menjadi pusat gravitasi cerita.</p>
+<p>Yang menarik bukan hanya alternate reality-nya.</p></div>
+<div class="reveal"><p>Tetapi gagasan bahwa identitas manusia mungkin bergantung pada dunia yang kita percaya benar.</p>
+<p>Jika dunia berubah satu persen, apakah kita masih menjadi orang yang sama?</p>
+<p>Jika memory kita berbeda sedikit saja, apakah kehidupan kita juga akan berbeda?</p></div>
+<div class="reveal"><p>Murakami sering bermain dengan pertanyaan semacam ini tanpa harus menjawabnya.</p>
+<p>Karena mungkin jawabannya memang tidak tersedia.</p>
+<p>Yang jelas, dengan menempatkan kekerasan sekte keagamaan nyata sebagai bayangan gelap di balik fantasi dua bulannya, Murakami menegaskan sesuatu yang konsisten dengan seluruh karyanya: dunia yang aneh bukan pelarian dari dunia nyata yang kejam, melainkan cara lain untuk menatapnya lebih lama.</p></div>
+  </div>
+</section>
+
+
+<section class="chapter" id="bab-23" data-toc-title="XXIII. COLORLESS TSUKURU TAZAKI DAN TAHUN-TAHUN ZIARAHNYA">
+  <div class="chapter-head reveal">
+    <span class="chapter-num">XXIII</span>
+    <h2 class="chapter-title">COLORLESS TSUKURU TAZAKI DAN TAHUN-TAHUN ZIARAHNYA</h2>
+  </div>
+  <div class="chapter-body">
+<div class="reveal"><p>Tsukuru Tazaki memiliki empat sahabat karib semasa SMA di Nagoya, masing-masing dengan nama yang mengandung warna, merah, biru, putih, hitam, sementara namanya sendiri berarti pembangun, tanpa warna, tanpa keistimewaan.</p>
+<p>Suatu hari, tanpa penjelasan apa pun, keempat sahabatnya memutuskan seluruh kontak dengannya sekaligus.</p>
+<p>Tidak ada pertengkaran.</p></div>
+<div class="reveal"><p>Tidak ada surat penjelasan.</p>
+<p>Hanya keheningan total yang tiba-tiba dan menyeluruh.</p>
+<p>Tsukuru, yang tidak pernah tahu apa kesalahannya, membawa luka itu diam-diam selama enam belas tahun, hampir bunuh diri di masa-masa awal setelah kejadian itu, dan tumbuh menjadi pria dewasa yang secara fungsional baik-baik saja tetapi meyakini jauh di dalam dirinya bahwa ia adalah manusia kosong yang tidak layak dicintai secara penuh.</p></div>
+<div class="reveal"><p>Ketika seorang perempuan bernama Sara mendorongnya untuk akhirnya menghadapi masa lalunya, Tsukuru melakukan perjalanan, secara harfiah sebuah ziarah, menemui satu per satu mantan sahabatnya yang tersisa untuk menanyakan alasan sebenarnya.</p>
+<p>Jawaban yang ia temukan jauh lebih menyakitkan dan lebih manusiawi daripada dugaan awalnya: sebuah tuduhan palsu, sebuah kebohongan yang lahir dari trauma salah satu temannya sendiri, dan kematian tragis satu dari mereka yang tidak pernah sempat menjelaskan apa pun.</p>
+<p>Novel ini adalah salah satu yang paling sedikit unsur fantastisnya di antara karya-karya Murakami, hampir sepenuhnya realistis, dan justru karena itu terasa begitu tajam sebagai studi tentang bagaimana penolakan tanpa penjelasan bisa membentuk seluruh arsitektur jiwa seseorang selama bertahun-tahun.</p></div>
+<div class="reveal"><p>Pesan yang ditinggalkannya sederhana dan berat: kadang kita tidak perlu memahami mengapa kita disakiti untuk mulai sembuh darinya, kita hanya perlu berhenti berasumsi bahwa penyebabnya selalu ada pada diri kita sendiri.</p></div>
+  </div>
+</section>
+
+
+<section class="chapter" id="bab-24" data-toc-title="XXIV. KILLING COMMENDATORE">
+  <div class="chapter-head reveal">
+    <span class="chapter-num">XXIV</span>
+    <h2 class="chapter-title">KILLING COMMENDATORE</h2>
+  </div>
+  <div class="chapter-body">
+<div class="reveal"><p>Seorang pelukis potret, ditinggalkan istrinya tanpa penjelasan yang memuaskan, menyewa sebuah rumah terpencil di pegunungan yang dulunya milik seorang pelukis tua terkenal bernama Tomohiko Amada.</p>
+<p>Di loteng rumah itu, ia menemukan sebuah lukisan tersembunyi berjudul Killing Commendatore, terinspirasi dari opera Don Giovanni karya Mozart, tetapi digambar ulang dalam gaya lukisan Jepang klasik, menggambarkan adegan pembunuhan yang mengerikan dan indah sekaligus.</p>
+<p>Begitu lukisan itu ditemukan dan dibuka dari bungkusnya, sesuatu di rumah itu berubah.</p></div>
+<div class="reveal"><p>Seorang sosok kecil yang mengaku sebagai Sang Idea, mengambil wujud persis seperti karakter Commendatore dalam lukisan tersebut, muncul di halaman rumah pada malam hari dan mulai berbicara kepada sang pelukis, memaksanya menghadapi sebuah pilihan yang menyangkut nyawa seorang gadis muda bernama Mariye yang mungkin, atau mungkin tidak, adalah anak kandungnya sendiri dari masa lalu yang terlupakan.</p>
+<p>Novel ini adalah salah satu yang paling terang-terangan menjadikan seni sebagai kekuatan metafisik yang literal: gagasan dapat mengambil wujud fisik, metafora dapat berjalan dan berbicara, dan sebuah lukisan yang disembunyikan selama puluhan tahun bisa menjadi portal menuju dunia bawah tanah yang mengingatkan pada mitos Jepang tentang Izanagi turun ke negeri kematian mencari istrinya.</p>
+<p>Yang sering luput dari pembaca sekilas adalah bagaimana novel ini juga menyelipkan kembali sejarah kelam Jepang, kali ini pembantaian Nanjing yang dilakukan tentara Jepang di Tiongkak, disebut secara singkat namun jelas melalui masa lalu Tomohiko Amada semasa muda di Wina menjelang Perang Dunia Kedua.</p></div>
+<div class="reveal"><p>Sekali lagi, pola yang sama muncul: kekerasan sejarah yang tidak pernah dituntaskan secara terbuka di Jepang muncul kembali sebagai bayangan yang menghantui ruang paling privat, kali ini di dalam sebuah kanvas yang dibungkus dan disembunyikan selama puluhan tahun, seolah bungkusan itu sendiri adalah metafora bagi cara sebuah bangsa membungkus masa lalunya.</p></div>
+  </div>
+</section>
+
+
+<section class="chapter" id="bab-25" data-toc-title="XXV. MEN WITHOUT WOMEN">
+  <div class="chapter-head reveal">
+    <span class="chapter-num">XXV</span>
+    <h2 class="chapter-title">MEN WITHOUT WOMEN</h2>
+  </div>
+  <div class="chapter-body">
+<div class="reveal"><p>Dalam Men Without Women, Murakami mengecilkan skalanya.</p>
+<p>Tidak ada kebutuhan untuk membangun dunia besar.</p>
+<p>Tujuh cerita.</p></div>
+<div class="reveal"><p>Tujuh bentuk kehilangan.</p>
+<p>Pria-pria yang berada setelah sebuah hubungan berakhir, setelah seseorang pergi, atau setelah mereka menyadari bahwa mereka tidak pernah benar-benar memahami perempuan yang mereka cintai.</p>
+<p>Dalam Drive My Car, Kafuku adalah seorang aktor yang mempekerjakan Misaki sebagai pengemudi setelah kondisi matanya tak lagi mengizinkannya menyetir sendiri.</p></div>
+<div class="reveal"><p>Ia membawa memory tentang istrinya yang telah meninggal dan tentang perselingkuhan yang baru ia pahami setelah terlambat, sebuah perselingkuhan yang justru ia gali sendiri dengan mendekati salah satu pria yang pernah tidur dengan istrinya, seolah ingin memahami sesuatu tentang istrinya yang tak pernah sempat ia tanyakan langsung.</p>
+<p>Mobil menjadi ruang yang menarik.</p>
+<p>Dua orang duduk berdampingan.</p></div>
+<div class="reveal"><p>Mereka tidak harus saling menatap.</p>
+<p>Jalan terus bergerak.</p>
+<p>Percakapan muncul perlahan.</p></div>
+<div class="reveal"><p>Dan justru dalam ruang sempit itu, sesuatu yang sangat manusiawi terjadi: orang asing kadang dapat mendengar bagian diri kita yang tidak bisa kita ceritakan kepada orang terdekat.</p>
+<p>Dalam cerita berjudul Yesterday, dua sahabat berbagi kebingungan yang sama tentang seorang perempuan, dalam gaya yang lebih ringan dan penuh humor kikuk khas masa muda, sementara dalam Scheherazade, seorang pria yang terjebak di rumah karena alasan yang tidak sepenuhnya dijelaskan menemukan hiburan sekaligus candu pada cerita-cerita yang diceritakan seorang perempuan setiap kali mereka bercinta, cerita yang selalu berhenti di titik paling menegangkan, membuatnya kecanduan bukan pada tubuhnya melainkan pada kelanjutan ceritanya.</p>
+<p>Drive My Car kemudian diadaptasi Ryusuke Hamaguchi menjadi film yang memperluas beberapa lapisan cerita, termasuk teater dan pementasan Uncle Vanya karya Chekhov sebagai cermin bagi luka batin Kafuku, dan meraih pengakuan internasional luas termasuk Oscar untuk film berbahasa asing terbaik.</p></div>
+<div class="reveal"><p>Tetapi inti Murakamianya tetap: kadang perjalanan paling jauh terjadi ketika mobil hampir tidak bergerak secara emosional.</p></div>
+  </div>
+</section>
+
+
+<section class="chapter" id="bab-26" data-toc-title="XXVI. BURNING">
+  <div class="chapter-head reveal">
+    <span class="chapter-num">XXVI</span>
+    <h2 class="chapter-title">BURNING</h2>
+  </div>
+  <div class="chapter-body">
+<div class="reveal"><p>Barn Burning adalah salah satu cerita Murakami yang kemudian berkembang menjadi film Burning karya sutradara Korea Selatan, Lee Chang-dong.</p>
+<p>Dalam versi film, Jong-su bertemu Hae-mi dan Ben.</p>
+<p>Hae-mi kemudian menghilang.</p></div>
+<div class="reveal"><p>Ben mengatakan sesuatu yang sederhana tetapi mengganggu: ia membakar greenhouse.</p>
+<p>Tidak ada bukti yang cukup.</p>
+<p>Tidak ada kepastian.</p></div>
+<div class="reveal"><p>Tidak ada jawaban yang memuaskan.</p>
+<p>Tetapi justru karena itu, pikiran kita mulai bekerja.</p>
+<p>Apakah Ben benar-benar melakukan sesuatu?</p></div>
+<div class="reveal"><p>Apakah Hae-mi mati?</p>
+<p>Apakah Jong-su melihat sesuatu yang memang ada?</p>
+<p>Atau ia hanya membangun cerita dari rasa cemburu, kelas sosial, dan kehilangan?</p></div>
+<div class="reveal"><p>Di sini ketidakpastian bukan kelemahan plot.</p>
+<p>Ketidakpastian adalah plot.</p>
+<p>Menariknya, dalam memindahkan cerita pendek delapan halaman Murakami menjadi film berdurasi dua setengah jam, Lee Chang-dong tidak menambahkan kepastian, ia justru menambahkan lapisan kesenjangan kelas sosial Korea Selatan kontemporer ke dalam ambiguitas yang sudah ada, membuktikan bahwa struktur kekosongan Murakami cukup kuat untuk menampung konteks budaya yang sama sekali berbeda tanpa kehilangan kekuatannya.</p></div>
+  </div>
+</section>
+
+
+<section class="chapter" id="bab-27" data-toc-title="XXVII. FIRST PERSON SINGULAR">
+  <div class="chapter-head reveal">
+    <span class="chapter-num">XXVII</span>
+    <h2 class="chapter-title">FIRST PERSON SINGULAR</h2>
+  </div>
+  <div class="chapter-body">
+<div class="reveal"><p>Di usia tujuh puluhan, Murakami menerbitkan First Person Singular, kumpulan delapan cerita pendek yang, tidak seperti karya-karya awalnya, sengaja mengaburkan batas antara narator fiksi dan Murakami sendiri.</p>
+<p>Beberapa cerita bahkan menyebut nama Murakami secara langsung, membicarakan kegemarannya pada baseball dan jazz dengan nada yang terasa seperti memoar, sebelum perlahan bergeser ke wilayah yang jelas rekaan: seorang kera yang bisa berbicara dan mencuri nama-nama perempuan, seorang pria yang menerima surat puisi aneh dari seorang perempuan yang pernah menolaknya bertahun-tahun sebelumnya, seekor monyet Shinagawa yang mencuri identitas.</p>
+<p>Nada keseluruhan buku ini adalah nada seorang penulis di usia senja yang melihat kembali hidupnya sendiri dan tidak lagi sepenuhnya yakin mana bagian yang benar-benar terjadi dan mana yang telah ia ubah menjadi cerita selama bertahun-tahun menceritakannya kembali.</p></div>
+<div class="reveal"><p>Ini adalah gaya akhir yang jarang dimiliki penulis: bukan pengulangan formula yang sudah terbukti berhasil, melainkan sebuah kejujuran baru tentang betapa tidak stabilnya batas antara memory dan fiksi, bahkan bagi orang yang menciptakan fiksi seumur hidupnya.</p>
+<p>Jika di awal kariernya Murakami menulis tentang kaum muda yang belum tahu siapa mereka, di buku ini ia menulis sebagai seorang tua yang menyadari bahwa pertanyaan itu tidak pernah benar-benar selesai dijawab, hanya berubah bentuk seiring waktu.</p></div>
+  </div>
+</section>
+
+
+<section class="chapter" id="bab-28" data-toc-title="XXVIII. DUNIA NYATA YANG MENGGANGGU: UNDERGROUND DAN LARI SEJAUH MUNGKIN">
+  <div class="chapter-head reveal">
+    <span class="chapter-num">XXVIII</span>
+    <h2 class="chapter-title">DUNIA NYATA YANG MENGGANGGU: UNDERGROUND DAN LARI SEJAUH MUNGKIN</h2>
+  </div>
+  <div class="chapter-body">
+<div class="reveal"><p>Di luar fiksinya, Murakami menulis dua karya nonfiksi yang, meski jarang dibahas sejajar dengan novel-novelnya, sebenarnya menjadi kunci untuk memahami etika di balik seluruh proyek fiksinya.</p>
+<p>Yang pertama, Underground, lahir dari keputusannya mewawancarai puluhan korban selamat serangan gas sarin di kereta bawah tanah Tokyo tahun 1995 yang dilakukan sekte Aum Shinrikyo, serta beberapa mantan anggota sekte itu sendiri.</p>
+<p>Murakami sengaja menghindari analisis psikologis yang mencolok atau teori besar tentang mengapa orang bergabung dengan sekte kekerasan.</p></div>
+<div class="reveal"><p>Ia justru membiarkan para korban, kebanyakan pekerja kantoran biasa yang sedang menuju kantor pada pagi hari seperti biasa, menceritakan detail paling sepele: sepatu yang mereka pakai, jenis kopi yang mereka minum sebelumnya, alasan mereka naik gerbong itu dan bukan gerbong sebelahnya.</p>
+<p>Justru dari detail-detail sepele itulah kengerian sesungguhnya muncul, karena pembaca menyadari bahwa korban-korban itu adalah gambaran paling telanjang dari tokoh-tokoh fiksi Murakami sendiri: orang biasa yang menjalani rutinitas paling sederhana, sampai dunia tiba-tiba bergeser secara mengerikan tanpa peringatan.</p>
+<p>Buku kedua, What I Talk About When I Talk About Running, jauh lebih ringan nadanya, tetapi sama pentingnya.</p></div>
+<div class="reveal"><p>Di sana Murakami menjelaskan bagaimana ia mulai berlari maraton setiap hari sejak memutuskan menjadi penulis penuh waktu, menutup jazz barnya, dan bagaimana disiplin fisik itu menjadi metafora sekaligus metode literal bagi disiplin menulis novel panjang: bangun pukul empat pagi, menulis selama beberapa jam dengan kecepatan tetap, berhenti bahkan ketika sedang mengalir lancar, agar esok hari ada sesuatu yang tersisa untuk dilanjutkan.</p>
+<p>Dibaca berdampingan, dua buku ini memperlihatkan dua sisi dari kesabaran yang sama, kesabaran untuk mendengarkan orang lain tanpa buru-buru menyimpulkan, dan kesabaran untuk menjaga tubuh serta pikiran tetap mampu menampung kegelapan yang harus ia selami setiap kali menulis tentang sumur, kehilangan, dan kekerasan sejarah.</p></div>
+  </div>
+</section>
+
+
+<section class="chapter" id="bab-29" data-toc-title="XXIX. SEJARAH YANG MENYUSUP">
+  <div class="chapter-head reveal">
+    <span class="chapter-num">XXIX</span>
+    <h2 class="chapter-title">SEJARAH YANG MENYUSUP</h2>
+  </div>
+  <div class="chapter-body">
+<div class="reveal"><p>Ada satu benang yang, jika ditarik lurus melintasi seluruh karya Murakami, akan mengejutkan pembaca yang mengenalnya hanya sebagai penulis kesepian perkotaan: kegigihannya menyelipkan kekerasan sejarah Jepang yang belum tuntas dibicarakan secara terbuka di negaranya sendiri.</p>
+<p>Lieutenant Mamiya dan kekejaman di perbatasan Manchuria dalam The Wind-Up Bird Chronicle.</p>
+<p>Sekte kekerasan yang menggemakan Aum Shinrikyo dalam 1Q84, ditulis setelah penelitian langsungnya untuk Underground.</p></div>
+<div class="reveal"><p>Jejak pembantaian Nanjing yang disebut sepintas namun jelas dalam Killing Commendatore.</p>
+<p>Bahkan latar belakang demonstrasi mahasiswa 1968 dalam Norwegian Wood, meski digambarkan dengan sinisme, tetap menempatkan novel itu dalam konteks politik yang nyata.</p>
+<p>Ini menarik karena secara umum masyarakat sastra Jepang, terutama generasi lebih tua, cenderung menghindari pembahasan langsung tentang kekejaman militer Jepang di Asia sebelum dan selama Perang Dunia Kedua, sebuah keheningan kolektif yang sering disebut sebagai amnesia sejarah pascaperang.</p></div>
+<div class="reveal"><p>Murakami, yang lahir tahun 1949, hanya beberapa tahun setelah perang berakhir, dari sebuah keluarga yang ayahnya sendiri pernah menjadi tentara di front Tiongkok dan tidak pernah sepenuhnya menceritakan apa yang ia lakukan atau saksikan di sana, tampak menggunakan fiksinya sebagai ruang untuk menggali kembali apa yang sengaja dikubur oleh generasi ayahnya.</p>
+<p>Ia tidak menulis novel sejarah dalam pengertian konvensional.</p>
+<p>Ia menyelipkan sejarah itu sebagai sumur di bawah rumah tangga yang tampak biasa, mengisyaratkan bahwa trauma kolektif sebuah bangsa tidak pernah benar-benar tinggal di buku pelajaran, ia menetes turun ke kehidupan personal generasi yang bahkan tidak mengalaminya secara langsung, muncul sebagai mimpi buruk, sebagai kekerasan yang tak terjelaskan dalam rumah tangga, sebagai warisan yang diwariskan tanpa pernah diberi nama.</p></div>
+  </div>
+</section>
+
+
+<section class="chapter" id="bab-30" data-toc-title="XXX. MENGAPA KITA MEMBENCI KEKOSONGAN?">
+  <div class="chapter-head reveal">
+    <span class="chapter-num">XXX</span>
+    <h2 class="chapter-title">MENGAPA KITA MEMBENCI KEKOSONGAN?</h2>
+  </div>
+  <div class="chapter-body">
+<div class="reveal"><p>Manusia tidak nyaman dengan ruang kosong.</p>
+<p>Jika sebuah cerita memberikan kita lubang, kita akan mengisinya.</p>
+<p>Jika seseorang menghilang, kita mencari alasan.</p></div>
+<div class="reveal"><p>Jika seseorang diam, kita menginterpretasikannya.</p>
+<p>Jika sebuah cerita berakhir tanpa jawaban, kita membuat jawaban sendiri.</p>
+<p>Otak manusia adalah mesin pattern recognition.</p></div>
+<div class="reveal"><p>Murakami memanfaatkan kecenderungan itu.</p>
+<p>Ia memberikan cukup informasi agar kita yakin bahwa ada pola.</p>
+<p>Tetapi tidak cukup informasi untuk memastikan pola tersebut.</p></div>
+<div class="reveal"><p>Akibatnya, pembaca ikut bekerja.</p>
+<p>Kita menjadi detektif.</p>
+<p>Bukan karena penulis memberi kita kasus.</p></div>
+<div class="reveal"><p>Tetapi karena otak kita tidak tahan dengan kekosongan.</p>
+<p>Ini menjelaskan mengapa forum-forum daring pembaca Murakami di seluruh dunia dipenuhi teori: siapa sebenarnya Sang Pemimpin di 1Q84, apa yang sebenarnya terjadi pada Sumire di Yunani, apakah Kafka benar-benar tidur dengan ibunya sendiri.</p>
+<p>Murakami sendiri, dalam berbagai wawancara, menolak memberi jawaban pasti untuk sebagian besar pertanyaan ini, bukan karena ia tidak tahu, tetapi karena ia percaya bahwa jawaban pasti akan membunuh sesuatu yang lebih berharga: ruang bagi pembaca untuk terus memikirkannya lama setelah buku ditutup.</p></div>
+  </div>
+</section>
+
+
+<section class="chapter" id="bab-31" data-toc-title="XXXI. FILSAFAT TANPA PANGGUNG">
+  <div class="chapter-head reveal">
+    <span class="chapter-num">XXXI</span>
+    <h2 class="chapter-title">FILSAFAT TANPA PANGGUNG</h2>
+  </div>
+  <div class="chapter-body">
+<div class="reveal"><p>Murakami jarang membuat tokohnya duduk dan mengatakan, sekarang mari kita membahas eksistensialisme.</p>
+<p>Ia tidak perlu.</p>
+<p>Seseorang memasak.</p></div>
+<div class="reveal"><p>Seseorang kehilangan istrinya.</p>
+<p>Seseorang turun ke sumur.</p>
+<p>Seseorang mengingat seorang perempuan.</p></div>
+<div class="reveal"><p>Seseorang berjalan sendirian setelah tengah malam.</p>
+<p>Dari situ pertanyaan filosofis muncul sendiri.</p>
+<p>Siapa saya?</p></div>
+<div class="reveal"><p>Apa yang membuat saya menjadi saya?</p>
+<p>Apakah manusia benar-benar mengenal orang lain?</p>
+<p>Apakah memory menentukan identitas?</p></div>
+<div class="reveal"><p>Apakah kebebasan berarti sendirian?</p>
+<p>Apakah cinta dapat bertahan tanpa possession?</p>
+<p>Apa yang terjadi ketika dunia yang kita percaya ternyata tidak sepenuhnya benar?</p></div>
+<div class="reveal"><p>Filsafat menjadi pengalaman.</p>
+<p>Bukan kuliah.</p></div>
+  </div>
+</section>
+
+
+<section class="chapter" id="bab-32" data-toc-title="XXXII. POLA YANG BERULANG">
+  <div class="chapter-head reveal">
+    <span class="chapter-num">XXXII</span>
+    <h2 class="chapter-title">POLA YANG BERULANG</h2>
+  </div>
+  <div class="chapter-body">
+<div class="reveal"><p>Jika seluruh mesin itu kita perhatikan lebih dekat, kita menemukan pola yang berulang di hampir setiap novel panjang Murakami, sebuah lintasan yang bergerak dari rutinitas menuju sesuatu yang jauh lebih dalam.</p>
+<p>Semuanya biasanya dimulai dari seorang tokoh yang menjalani kehidupan biasa, seringkali sedikit di luar arus sosial utama, seorang penulis lepas, pengangguran sementara, pemilik jazz bar, guru les.</p>
+<p>Dari posisi solitude semacam itu, ia mulai memperhatikan hal-hal kecil yang biasanya luput dari orang yang terlalu sibuk untuk melihat, dan di tengah perhatian itulah sebuah anomali muncul, sesuatu yang tidak seharusnya terjadi: kucing hilang, telepon aneh, foto seekor domba.</p></div>
+<div class="reveal"><p>Tokoh itu tidak bisa mengabaikannya, dan rasa penasaran itu menariknya lebih dalam, kadang secara literal turun ke sumur atau menyeberang ke dunia lain, kadang hanya secara psikologis menyelami memory yang telah lama ia kubur.</p>
+<p>Di titik terdalam itu, masa lalu mulai muncul kembali, membawa serta keinginan yang sebenarnya selama ini ia cari tanpa sadar, namun jawaban yang ia temukan hampir tidak pernah lengkap.</p>
+<p>Tokoh itu keluar dari perjalanannya bukan sebagai orang yang sepenuhnya baru, tetapi sebagai orang yang melihat dirinya sendiri secara berbeda, sementara dunia di sekitarnya tetap terbuka, tidak pernah benar-benar ditutup dengan simpul yang rapi.</p></div>
+<div class="reveal"><p>Pembacalah yang pada akhirnya menyelesaikan ceritanya sendiri.</p>
+<p>Bukan formula yang harus ditiru, melainkan cara mengatur perhatian pembaca, mesin ini bekerja bukan dengan memberi jawaban, melainkan dengan menata rasa penasaran secara sangat presisi, dari permukaan menuju kedalaman dan kembali lagi ke permukaan yang sudah tidak sama seperti semula.</p>
+<p>Di balik lintasan itu, ada semacam gaya gravitasi yang menariknya ke satu arah tertentu: kesepian, memory, hasrat, identitas, keintiman, kematian, kebebasan, ketiadaan, dan ketidakmungkinan untuk benar-benar mengenal orang lain.</p></div>
+<div class="reveal"><p>Tokoh-tokoh Murakami bergerak di antara semua gaya tersebut, dan yang menarik, semua tema itu saling menarik satu sama lain: kesepian melahirkan hasrat, hasrat melahirkan keintiman, keintiman membuka kerapuhan, kerapuhan membuka kemungkinan kehilangan, kehilangan menghasilkan memory, memory memengaruhi identitas, dan identitas pada akhirnya menentukan bagaimana seseorang kembali menghadapi kesepiannya.</p>
+<p>Sebuah lingkaran, bukan garis lurus, itulah sebabnya membaca satu novel Murakami sering terasa seperti membaca semuanya sekaligus, karena semuanya sebenarnya sedang mengorbit pusat gravitasi yang sama.</p></div>
+  </div>
+</section>
+
+
+<section class="chapter" id="bab-33" data-toc-title="XXXIII. KEBEBASAN YANG TERASA SEPERTI KESEPIAN">
+  <div class="chapter-head reveal">
+    <span class="chapter-num">XXXIII</span>
+    <h2 class="chapter-title">KEBEBASAN YANG TERASA SEPERTI KESEPIAN</h2>
+  </div>
+  <div class="chapter-body">
+<div class="reveal"><p>Tokoh Murakami sering terlihat bebas.</p>
+<p>Mereka tinggal sendiri.</p>
+<p>Memasak sendiri.</p></div>
+<div class="reveal"><p>Mendengarkan musik sendiri.</p>
+<p>Mengatur hidup sendiri.</p>
+<p>Tidak banyak drama sosial.</p></div>
+<div class="reveal"><p>Tetapi kebebasan memiliki harga.</p>
+<p>Ketika tidak ada orang lain yang mengatur hidup kita, tidak ada pula orang lain yang dapat kita salahkan.</p>
+<p>Freedom berarti responsibility.</p></div>
+<div class="reveal"><p>Dan responsibility sering terasa seperti loneliness.</p>
+<p>Murakami tidak selalu menganggap solitude sebagai sesuatu yang buruk.</p>
+<p>Kadang solitude adalah tempat seseorang menemukan dirinya.</p></div>
+<div class="reveal"><p>Masalahnya muncul ketika solitude berubah menjadi isolation.</p>
+<p>Perbedaannya tipis.</p>
+<p>Solitude adalah memilih ruang.</p></div>
+<div class="reveal"><p>Isolation adalah tidak tahu bagaimana keluar dari ruang itu.</p></div>
+  </div>
+</section>
+
+
+<section class="chapter" id="bab-34" data-toc-title="XXXIV. MANUSIA YANG TIDAK BISA SEPENUHNYA DIKENAL">
+  <div class="chapter-head reveal">
+    <span class="chapter-num">XXXIV</span>
+    <h2 class="chapter-title">MANUSIA YANG TIDAK BISA SEPENUHNYA DIKENAL</h2>
+  </div>
+  <div class="chapter-body">
+<div class="reveal"><p>Mungkin inilah tema Murakami yang paling dalam.</p>
+<p>Bukan kesepian.</p>
+<p>Bukan seks.</p></div>
+<div class="reveal"><p>Bukan memory.</p>
+<p>Bukan dunia paralel.</p>
+<p>Melainkan ketidakmungkinan mengetahui manusia lain secara utuh.</p></div>
+<div class="reveal"><p>Kita dapat hidup dengan seseorang selama bertahun-tahun.</p>
+<p>Mengetahui kebiasaan makannya.</p>
+<p>Mengetahui cara ia tidur.</p></div>
+<div class="reveal"><p>Mengetahui lagu favoritnya.</p>
+<p>Mengetahui cara ia tertawa.</p>
+<p>Tetapi tetap ada sebuah kamar di dalam dirinya yang tidak memiliki kunci untuk kita.</p></div>
+<div class="reveal"><p>Dan sebaliknya.</p>
+<p>Ada bagian dari diri kita yang bahkan tidak kita kenali sendiri.</p>
+<p>Murakami terus bermain di batas itu.</p></div>
+<div class="reveal"><p>Antara intimacy dan unknowability.</p>
+<p>Antara ingin dekat dan tidak mungkin sepenuhnya dekat.</p>
+<p>Mungkin itulah sebabnya hubungan dalam cerita-ceritanya terasa begitu rapuh.</p></div>
+<div class="reveal"><p>Karena cinta tidak menghapus misteri seseorang.</p>
+<p>Cinta hanya membuat misteri itu menjadi penting.</p></div>
+  </div>
+</section>
+
+
+<section class="chapter" id="bab-35" data-toc-title="XXXV. MENGAPA MURAKAMI TERASA GLOBAL?">
+  <div class="chapter-head reveal">
+    <span class="chapter-num">XXXV</span>
+    <h2 class="chapter-title">MENGAPA MURAKAMI TERASA GLOBAL?</h2>
+  </div>
+  <div class="chapter-body">
+<div class="reveal"><p>Murakami berasal dari Jepang.</p>
+<p>Tetapi dunianya tidak dibangun hanya dari tanda-tanda Jepang.</p>
+<p>Ia penuh dengan jazz Amerika.</p></div>
+<div class="reveal"><p>The Beatles.</p>
+<p>Classical music.</p>
+<p>Western literature.</p></div>
+<div class="reveal"><p>Whisky.</p>
+<p>Spaghetti.</p>
+<p>Mobil.</p></div>
+<div class="reveal"><p>Hotel.</p>
+<p>Apartemen.</p>
+<p>Perpustakaan.</p></div>
+<div class="reveal"><p>Kopi.</p>
+<p>Ia tidak mencoba membuat Jepang menjadi eksotis.</p>
+<p>Justru ia melakukan hal sebaliknya.</p></div>
+<div class="reveal"><p>Ia membuat Tokyo terasa seperti kota yang bisa dihuni siapa pun.</p>
+<p>Kesepian di Tokyo tidak berbeda secara fundamental dari kesepian di New York, Jakarta, Berlin, atau Buenos Aires.</p>
+<p>Seorang manusia tetap bisa merasa sendirian di tengah jutaan orang.</p></div>
+<div class="reveal"><p>Inilah salah satu alasan Murakami mudah menyeberangi budaya.</p>
+<p>Ia menggunakan benda-benda yang sangat spesifik untuk berbicara tentang perasaan yang sangat universal.</p>
+<p>Faktor lain yang jarang dibahas adalah peran para penerjemahnya sendiri dalam membentuk suara Murakami versi internasional.</p></div>
+<div class="reveal"><p>Alfred Birnbaum, penerjemah pertamanya ke bahasa Inggris, memberi suara yang lebih ringan dan playful pada karya-karya awal seperti Trilogi Tikus dan Hard-Boiled Wonderland.</p>
+<p>Jay Rubin, yang menerjemahkan Norwegian Wood dan The Wind-Up Bird Chronicle, membawa nada yang lebih halus dan melankolis.</p>
+<p>Philip Gabriel, yang kemudian menerjemahkan Kafka on the Shore dan sebagian 1Q84, menambahkan presisi yang berbeda lagi.</p></div>
+<div class="reveal"><p>Karena Murakami sendiri fasih berbahasa Inggris dan terlibat aktif dalam proses penerjemahan karyanya, ia secara sadar mengizinkan suaranya sedikit berubah bentuk setiap kali melintasi bahasa, sebuah keputusan yang tidak biasa bagi penulis besar, dan mungkin justru itulah yang membuatnya terasa begitu pas dibaca dalam berbagai bahasa, karena ia tidak keras kepala mempertahankan satu suara tunggal yang harus dipaksakan ke semua pembaca dunia.</p></div>
+  </div>
+</section>
+
+
+<section class="chapter" id="bab-36" data-toc-title="XXXVI. STATUS YANG ANEH DI NEGERI SENDIRI">
+  <div class="chapter-head reveal">
+    <span class="chapter-num">XXXVI</span>
+    <h2 class="chapter-title">STATUS YANG ANEH DI NEGERI SENDIRI</h2>
+  </div>
+  <div class="chapter-body">
+<div class="reveal"><p>Ada sebuah paradoks yang menarik dalam karier Murakami: semakin besar namanya di panggung sastra dunia, semakin ambivalen pula sikap sebagian kalangan sastra Jepang terhadapnya di negerinya sendiri.</p>
+<p>Establishment sastra Jepang, yang secara historis menjunjung tinggi genre bernama junbungaku, sastra murni, dengan gaya prosa yang halus, introspektif, dan berakar dalam pada tradisi sastra Jepang klasik, sempat menganggap gaya Murakami yang terpengaruh budaya pop Barat sebagai sesuatu yang dangkal, terlalu mudah dicerna, terlalu Amerika.</p>
+<p>Kenzaburo Oe, peraih Nobel Sastra asal Jepang, pernah mengomentari karya Murakami dengan nada skeptis, mempertanyakan apakah gaya semacam itu benar-benar layak disebut sastra serius.</p></div>
+<div class="reveal"><p>Sementara itu, setiap tahun menjelang pengumuman Nobel Sastra, nama Murakami hampir selalu muncul di daftar taruhan para bandar Eropa sebagai kandidat terkuat, sebuah ritual tahunan yang oleh media Jepang sendiri kadang disebut dengan nada agak jenaka sebagai fenomena penantian abadi, dan setiap tahun pula ia tidak pernah benar-benar memenangkannya.</p>
+<p>Murakami sendiri jarang menanggapi spekulasi ini secara serius di depan publik, memilih menghindari sorotan media Jepang secara umum, jarang muncul di televisi, jarang memberi wawancara panjang di dalam negeri, sebuah pilihan yang semakin memperkuat citranya sebagai penulis yang lebih dicintai di luar negaranya sendiri daripada di dalamnya.</p>
+<p>Namun di sisi lain, generasi pembaca muda Jepang yang tumbuh bersama novel-novelnya sejak tahun 1980-an tidak pernah goyah kesetiaannya, dan penjualan bukunya di Jepang tetap masif setiap kali judul baru terbit, sering kali dengan antrean tengah malam di depan toko buku, sebuah gambaran ironis: penulis yang dianggap terlalu asing oleh sebagian kritikus generasi lama, justru menjadi salah satu suara paling akrab bagi jutaan pembaca biasa di negerinya sendiri.</p></div>
+  </div>
+</section>
+
+
+<section class="chapter" id="bab-37" data-toc-title="XXXVII. MENGAPA IA BEGITU POPULER?">
+  <div class="chapter-head reveal">
+    <span class="chapter-num">XXXVII</span>
+    <h2 class="chapter-title">MENGAPA IA BEGITU POPULER?</h2>
+  </div>
+  <div class="chapter-body">
+<div class="reveal"><p>Ada beberapa alasan.</p>
+<p>Pertama, prosa yang relatif mudah dimasuki.</p>
+<p>Kalimatnya tidak selalu rumit.</p></div>
+<div class="reveal"><p>Tetapi dunia yang dibangunnya bisa sangat dalam.</p>
+<p>Kedua, ordinary life.</p>
+<p>Pembaca tidak membutuhkan pengalaman menjadi superhero.</p></div>
+<div class="reveal"><p>Kita hanya perlu pernah merasa kesepian.</p>
+<p>Ketiga, mystery.</p>
+<p>Ia memberi kita sesuatu untuk dikejar.</p></div>
+<div class="reveal"><p>Keempat, music and sensory detail.</p>
+<p>Dunia Murakami dapat dirasakan.</p>
+<p>Kelima, emotional distance.</p></div>
+<div class="reveal"><p>Ia tidak memaksa pembaca menangis.</p>
+<p>Ia membiarkan kita menemukan emosi sendiri.</p>
+<p>Dan keenam, mungkin yang paling penting, Murakami memberi ruang.</p></div>
+<div class="reveal"><p>Pembaca dapat masuk ke dalam cerita tanpa merasa semua makna sudah ditentukan.</p></div>
+  </div>
+</section>
+
+
+<section class="chapter" id="bab-38" data-toc-title="XXXVIII. MURAKAMI TIDAK SEMPURNA">
+  <div class="chapter-head reveal">
+    <span class="chapter-num">XXXVIII</span>
+    <h2 class="chapter-title">MURAKAMI TIDAK SEMPURNA</h2>
+  </div>
+  <div class="chapter-body">
+<div class="reveal"><p>Namun justru karena itulah kritik terhadap Murakami penting.</p>
+<p>Dunianya kadang terlalu didominasi laki-laki.</p>
+<p>Karakter perempuannya sering menjadi objek misteri, desire, atau jalan menuju transformasi tokoh pria, sebuah pola yang oleh sejumlah kritikus feminis, termasuk beberapa akademisi sastra Jepang, disebut sebagai kecenderungan menulis perempuan sebagai fungsi naratif ketimbang sebagai subjek penuh dengan dunia batinnya sendiri.</p></div>
+<div class="reveal"><p>Perempuan-perempuan Murakami sering datang membawa rahasia, tubuh yang menggoda, atau luka yang eksotis, lalu menghilang tepat pada saat mereka mulai bisa dipahami lebih dalam, sebuah pola yang berulang cukup konsisten sejak Trilogi Tikus hingga karya-karya belakangan sehingga sulit dianggap kebetulan.</p>
+<p>Seks kadang terasa repetitif, dengan deskripsi payudara dan pakaian dalam yang muncul dengan frekuensi yang oleh sebagian pembaca dianggap berlebihan dan bahkan mengganggu momentum cerita.</p>
+<p>Tokoh-tokohnya juga dapat terlalu mirip satu sama lain, pria berusia tiga puluhan, pasif, gemar memasak, gemar musik jazz, kehilangan seorang perempuan, sampai memunculkan istilah bercanda di kalangan pembaca setianya sendiri, sindrom pria Murakami.</p></div>
+<div class="reveal"><p>Kesendirian mereka kadang terlihat romantis dengan cara yang mengaburkan sisi lebih gelap dari isolasi sesungguhnya.</p>
+<p>Dan absurditas yang bekerja sangat baik dalam satu novel dapat terasa seperti formula dalam novel lain, terutama bagi pembaca yang membaca banyak karyanya berurutan dalam waktu singkat.</p>
+<p>Ada juga risiko bahwa pembaca terlalu mudah jatuh ke dalam estetika Murakami: kopi, jazz, apartemen, malam, perempuan misterius, kesepian, dan hujan.</p></div>
+<div class="reveal"><p>Jika hanya ditiru di permukaan, yang tersisa hanyalah dekorasi.</p>
+<p>Padahal kekuatan Murakami bukan pada kopi atau jazz.</p>
+<p>Kekuatannya ada pada fungsi psikologis benda-benda tersebut, dan kritik-kritik di atas justru penting diajukan bukan untuk menjatuhkan karyanya, melainkan untuk membedakan mana bagian dari gaya Murakami yang benar-benar substansial, dan mana yang sekadar kebiasaan yang tidak pernah benar-benar diperiksa ulang olehnya sendiri.</p></div>
+  </div>
+</section>
+
+
+<section class="chapter" id="bab-39" data-toc-title="XXXIX. JIKA MEMORY HILANG">
+  <div class="chapter-head reveal">
+    <span class="chapter-num">XXXIX</span>
+    <h2 class="chapter-title">JIKA MEMORY HILANG</h2>
+  </div>
+  <div class="chapter-body">
+<div class="reveal"><p>Kita kembali kepada dua orang tadi.</p>
+<p>Mereka telah kehilangan memory satu sama lain.</p>
+<p>Mereka berjalan di kota.</p></div>
+<div class="reveal"><p>Tidak mengenal siapa pun.</p>
+<p>Lalu suatu pagi mereka berpapasan.</p>
+<p>Tidak ada musik dramatis.</p></div>
+<div class="reveal"><p>Tidak ada cahaya surgawi.</p>
+<p>Hanya dua manusia yang kebetulan berjalan di trotoar yang sama.</p>
+<p>Mereka berhenti sebentar.</p></div>
+<div class="reveal"><p>Ada sesuatu yang terasa familiar.</p>
+<p>Tetapi mereka tidak tahu apa.</p>
+<p>Mereka kemudian melanjutkan perjalanan.</p></div>
+<div class="reveal"><p>Pertanyaan eksperimen itu tidak memiliki jawaban.</p>
+<p>Mungkin mereka akan saling memilih lagi.</p>
+<p>Mungkin tidak.</p></div>
+<div class="reveal"><p>Dan mungkin justru itulah poinnya.</p>
+<p>Cinta bukan sesuatu yang dapat dibuktikan seperti eksperimen laboratorium.</p>
+<p>Memory mungkin membuat cinta bertahan.</p></div>
+<div class="reveal"><p>Tetapi memory juga dapat menciptakan ilusi cinta.</p>
+<p>Tanpa memory, mungkin kita kehilangan masa lalu.</p>
+<p>Tetapi mungkin juga kita memperoleh kesempatan untuk bertemu seseorang tanpa semua cerita yang pernah kita buat tentangnya.</p></div>
+  </div>
+</section>
+
+
+<section class="chapter" id="bab-40" data-toc-title="XL. THE BEAUTY OF NOTHING">
+  <div class="chapter-head reveal">
+    <span class="chapter-num">XL</span>
+    <h2 class="chapter-title">THE BEAUTY OF NOTHING</h2>
+  </div>
+  <div class="chapter-body">
+<div class="reveal"><p>Pada akhirnya, mungkin daya tarik terbesar Murakami berasal dari sesuatu yang tampak seperti kelemahan: nothing.</p>
+<p>Tidak ada jawaban.</p>
+<p>Tidak ada kepastian.</p></div>
+<div class="reveal"><p>Tidak ada final explanation.</p>
+<p>Tidak semua orang kembali.</p>
+<p>Tidak semua hubungan selesai dengan baik.</p></div>
+<div class="reveal"><p>Tidak semua misteri terpecahkan.</p>
+<p>Tidak semua luka mendapatkan closure.</p>
+<p>Tetapi kehidupan tetap berjalan.</p></div>
+<div class="reveal"><p>Kopi tetap dibuat.</p>
+<p>Musik tetap dimainkan.</p>
+<p>Mobil tetap bergerak.</p></div>
+<div class="reveal"><p>Hujan tetap turun.</p>
+<p>Seseorang tetap bangun pada pagi berikutnya.</p>
+<p>Dan mungkin di situlah keindahannya.</p></div>
+<div class="reveal"><p>Kita terlalu sering menginginkan cerita yang memberi arti pada segala sesuatu.</p>
+<p>Murakami justru memberi kita cerita yang membiarkan beberapa hal tidak memiliki arti yang pasti.</p>
+<p>Bukan karena hidup tidak bermakna.</p></div>
+<div class="reveal"><p>Tetapi karena mungkin makna tidak selalu datang dalam bentuk jawaban.</p>
+<p>Kadang makna muncul dari pengalaman kita ketika mencari jawaban.</p></div>
+  </div>
+</section>
+
+
+  <section class="epilogue" id="epilog">
+    <div class="section-label reveal">EPILOG — PAGI YANG SAMA</div>
+    <div class="chapter-body">
+<div class="reveal"><p>Pagi datang lagi.</p>
+<p>Seseorang membuat kopi.</p>
+<p>Seseorang menyalakan musik.</p></div>
+<div class="reveal"><p>Di luar jendela, kota mulai bergerak.</p>
+<p>Tidak ada sesuatu yang istimewa terjadi.</p>
+<p>Setidaknya belum.</p></div>
+<div class="reveal"><p>Seseorang berjalan di trotoar.</p>
+<p>Mungkin ia akan bertemu seseorang.</p>
+<p>Mungkin tidak.</p></div>
+<div class="reveal"><p>Mungkin ada cinta.</p>
+<p>Mungkin hanya kebetulan.</p>
+<p>Mungkin ada sesuatu yang hilang.</p></div>
+<div class="reveal"><p>Mungkin sesuatu yang baru saja ditemukan.</p>
+<p>Kita tidak tahu.</p>
+<p>Dan mungkin kita tidak perlu tahu.</p></div>
+<div class="reveal"><p>Karena sebagian dari keindahan kehidupan justru berada di sana: di antara apa yang kita ketahui dan apa yang tidak pernah dapat kita ketahui.</p>
+<p>Di antara memory dan lupa.</p>
+<p>Di antara kesepian dan intimacy.</p></div>
+<div class="reveal"><p>Di antara reality dan dream.</p>
+<p>Di antara seseorang yang pergi dan seseorang yang mungkin akan datang.</p>
+<p>Di antara cerita dan kehidupan itu sendiri.</p></div>
+<div class="reveal"><p>Mungkin itulah sebabnya kita terus membaca Murakami.</p>
+<p>Bukan karena ia memberi kita jawaban.</p>
+<p>Tetapi karena ia mengingatkan kita bahwa hidup tetap menarik bahkan ketika tidak ada apa-apa yang terjadi.</p></div>
+<div class="reveal"><p>Dan kadang, ketiadaan itu justru tempat sebuah cerita dimulai.</p></div>
+    </div>
+  </section>
+
+</main>
+
+<footer>
+  RUANG BACA · ESAI SASTRA · DITULIS UNTUK DIBACA PERLAHAN
+</footer>
+
+<button class="toc-toggle" id="tocToggle" aria-label="Daftar isi">DI</button>
+<nav class="toc-drawer" id="tocDrawer">
+  <div class="toc-heading">DAFTAR ISI</div>
+  <button class="toc-item" data-target="prolog"><span class="toc-num">—</span><span class="toc-label">Prolog</span></button>
+<button class="toc-item" data-target="bab-1"><span class="toc-num">I</span><span class="toc-label">PAGI YANG TIDAK TERJADI APA-APA</span></button>
+<button class="toc-item" data-target="bab-2"><span class="toc-num">II</span><span class="toc-label">SPAGHETTI</span></button>
+<button class="toc-item" data-target="bab-3"><span class="toc-num">III</span><span class="toc-label">KAMAR</span></button>
+<button class="toc-item" data-target="bab-4"><span class="toc-num">IV</span><span class="toc-label">100% PERFECT GIRL</span></button>
+<button class="toc-item" data-target="bab-5"><span class="toc-num">V</span><span class="toc-label">EKSPERIMEN MEMORY</span></button>
+<button class="toc-item" data-target="bab-6"><span class="toc-num">VI</span><span class="toc-label">MEMORY BUKAN ARSIP</span></button>
+<button class="toc-item" data-target="bab-7"><span class="toc-num">VII</span><span class="toc-label">ORANG YANG TIDAK ADA</span></button>
+<button class="toc-item" data-target="bab-8"><span class="toc-num">VIII</span><span class="toc-label">TUBUH</span></button>
+<button class="toc-item" data-target="bab-9"><span class="toc-num">IX</span><span class="toc-label">MUSIK</span></button>
+<button class="toc-item" data-target="bab-10"><span class="toc-num">X</span><span class="toc-label">KETIKA KUCING BERBICARA</span></button>
+<button class="toc-item" data-target="bab-11"><span class="toc-num">XI</span><span class="toc-label">DUNIA YANG SEDIKIT BERGESER</span></button>
+<button class="toc-item" data-target="bab-12"><span class="toc-num">XII</span><span class="toc-label">BAHASA ASING DI RUMAH SENDIRI</span></button>
+<button class="toc-item" data-target="bab-13"><span class="toc-num">XIII</span><span class="toc-label">TRILOGI TIKUS: BOKU DAN SANG TIKUS</span></button>
+<button class="toc-item" data-target="bab-14"><span class="toc-num">XIV</span><span class="toc-label">DANCE DANCE DANCE</span></button>
+<button class="toc-item" data-target="bab-15"><span class="toc-num">XV</span><span class="toc-label">NORWEGIAN WOOD</span></button>
+<button class="toc-item" data-target="bab-16"><span class="toc-num">XVI</span><span class="toc-label">SOUTH OF THE BORDER, WEST OF THE SUN</span></button>
+<button class="toc-item" data-target="bab-17"><span class="toc-num">XVII</span><span class="toc-label">HARD-BOILED WONDERLAND AND THE END OF THE WORLD</span></button>
+<button class="toc-item" data-target="bab-18"><span class="toc-num">XVIII</span><span class="toc-label">THE WIND-UP BIRD CHRONICLE</span></button>
+<button class="toc-item" data-target="bab-19"><span class="toc-num">XIX</span><span class="toc-label">SPUTNIK SWEETHEART</span></button>
+<button class="toc-item" data-target="bab-20"><span class="toc-num">XX</span><span class="toc-label">KAFKA ON THE SHORE</span></button>
+<button class="toc-item" data-target="bab-21"><span class="toc-num">XXI</span><span class="toc-label">AFTER DARK</span></button>
+<button class="toc-item" data-target="bab-22"><span class="toc-num">XXII</span><span class="toc-label">1Q84</span></button>
+<button class="toc-item" data-target="bab-23"><span class="toc-num">XXIII</span><span class="toc-label">COLORLESS TSUKURU TAZAKI DAN TAHUN-TAHUN ZIARAHNYA</span></button>
+<button class="toc-item" data-target="bab-24"><span class="toc-num">XXIV</span><span class="toc-label">KILLING COMMENDATORE</span></button>
+<button class="toc-item" data-target="bab-25"><span class="toc-num">XXV</span><span class="toc-label">MEN WITHOUT WOMEN</span></button>
+<button class="toc-item" data-target="bab-26"><span class="toc-num">XXVI</span><span class="toc-label">BURNING</span></button>
+<button class="toc-item" data-target="bab-27"><span class="toc-num">XXVII</span><span class="toc-label">FIRST PERSON SINGULAR</span></button>
+<button class="toc-item" data-target="bab-28"><span class="toc-num">XXVIII</span><span class="toc-label">DUNIA NYATA YANG MENGGANGGU: UNDERGROUND DAN LARI SEJAUH MUNGKIN</span></button>
+<button class="toc-item" data-target="bab-29"><span class="toc-num">XXIX</span><span class="toc-label">SEJARAH YANG MENYUSUP</span></button>
+<button class="toc-item" data-target="bab-30"><span class="toc-num">XXX</span><span class="toc-label">MENGAPA KITA MEMBENCI KEKOSONGAN?</span></button>
+<button class="toc-item" data-target="bab-31"><span class="toc-num">XXXI</span><span class="toc-label">FILSAFAT TANPA PANGGUNG</span></button>
+<button class="toc-item" data-target="bab-32"><span class="toc-num">XXXII</span><span class="toc-label">POLA YANG BERULANG</span></button>
+<button class="toc-item" data-target="bab-33"><span class="toc-num">XXXIII</span><span class="toc-label">KEBEBASAN YANG TERASA SEPERTI KESEPIAN</span></button>
+<button class="toc-item" data-target="bab-34"><span class="toc-num">XXXIV</span><span class="toc-label">MANUSIA YANG TIDAK BISA SEPENUHNYA DIKENAL</span></button>
+<button class="toc-item" data-target="bab-35"><span class="toc-num">XXXV</span><span class="toc-label">MENGAPA MURAKAMI TERASA GLOBAL?</span></button>
+<button class="toc-item" data-target="bab-36"><span class="toc-num">XXXVI</span><span class="toc-label">STATUS YANG ANEH DI NEGERI SENDIRI</span></button>
+<button class="toc-item" data-target="bab-37"><span class="toc-num">XXXVII</span><span class="toc-label">MENGAPA IA BEGITU POPULER?</span></button>
+<button class="toc-item" data-target="bab-38"><span class="toc-num">XXXVIII</span><span class="toc-label">MURAKAMI TIDAK SEMPURNA</span></button>
+<button class="toc-item" data-target="bab-39"><span class="toc-num">XXXIX</span><span class="toc-label">JIKA MEMORY HILANG</span></button>
+<button class="toc-item" data-target="bab-40"><span class="toc-num">XL</span><span class="toc-label">THE BEAUTY OF NOTHING</span></button>
+  <button class="toc-item" data-target="epilog"><span class="toc-num">—</span><span class="toc-label">Epilog</span></button>
+</nav>
+
+<script>
+(function(){
+  // hero rain generation
+  var rain = document.getElementById('rain');
+  var n = window.innerWidth < 560 ? 18 : 34;
+  for(var i=0;i<n;i++){
+    var d = document.createElement('span');
+    d.style.left = (Math.random()*100)+'%';
+    d.style.animationDuration = (2.2 + Math.random()*2.4)+'s';
+    d.style.animationDelay = (Math.random()*3)+'s';
+    rain.appendChild(d);
+  }
+
+  // scroll reveal with safety-net timer
+  var revealEls = Array.prototype.slice.call(document.querySelectorAll('.reveal'));
+  function revealAll(){
+    revealEls.forEach(function(el){ el.classList.add('visible'); });
+  }
+  if('IntersectionObserver' in window){
+    var io = new IntersectionObserver(function(entries){
+      entries.forEach(function(entry){
+        if(entry.isIntersecting){
+          entry.target.classList.add('visible');
+          io.unobserve(entry.target);
+        }
+      });
+    }, { threshold: 0.05, rootMargin: '0px 0px -5% 0px' });
+    revealEls.forEach(function(el){ io.observe(el); });
+  } else {
+    revealAll();
+  }
+  // safety net: guarantee nothing stays invisible if observer misbehaves
+  setTimeout(revealAll, 1200);
+
+  // TOC drawer
+  var toggle = document.getElementById('tocToggle');
+  var drawer = document.getElementById('tocDrawer');
+  toggle.addEventListener('click', function(){
+    drawer.classList.toggle('open');
+  });
+  document.querySelectorAll('.toc-item').forEach(function(btn){
+    btn.addEventListener('click', function(){
+      var id = btn.getAttribute('data-target');
+      var el = document.getElementById(id);
+      if(el){ el.scrollIntoView({behavior:'smooth', block:'start'}); }
+      drawer.classList.remove('open');
+      revealAll();
+    });
+  });
+  document.addEventListener('click', function(e){
+    if(!drawer.contains(e.target) && e.target !== toggle && drawer.classList.contains('open')){
+      drawer.classList.remove('open');
+    }
+  });
+})();
+</script>
+
+</body>
+</html>
