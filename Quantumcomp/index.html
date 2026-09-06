@@ -1,0 +1,2105 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Menuju Quantum Computing / Toward Quantum Computing</title>
+<style>
+/* ── RESET & BASE ─────────────────────────────────────── */
+*{box-sizing:border-box;margin:0;padding:0}
+:root{
+  --ink:#0f0f0e;
+  --ink2:#3a3a38;
+  --ink3:#6b6b68;
+  --ink4:#9e9e9a;
+  --paper:#f5f4f0;
+  --paper2:#eceae4;
+  --paper3:#e2e0d8;
+  --accent:#2d5be3;
+  --accent2:#1a3db5;
+  --teal:#0d7a65;
+  --gold:#b8860b;
+  --red:#c0392b;
+  --purple:#6a3fa8;
+  --serif:'Georgia','Times New Roman',serif;
+  --sans:system-ui,-apple-system,'Segoe UI',sans-serif;
+  --mono:'Courier New',monospace;
+  --r:10px;
+  --r2:16px;
+}
+html{scroll-behavior:smooth}
+body{font-family:var(--sans);background:var(--paper);color:var(--ink);line-height:1.7;font-size:15px}
+
+/* ── LANGUAGE TOGGLE ──────────────────────────────────── */
+.id-text{display:block}
+.en-text{display:none}
+body.en .id-text{display:none}
+body.en .en-text{display:block}
+.id-inline{display:inline}
+.en-inline{display:none}
+body.en .id-inline{display:none}
+body.en .en-inline{display:inline}
+
+/* ── LANG SWITCHER ────────────────────────────────────── */
+#lang-bar{position:fixed;top:16px;right:20px;z-index:999;display:flex;gap:6px;align-items:center;background:rgba(245,244,240,.92);backdrop-filter:blur(8px);border:1px solid var(--paper3);border-radius:50px;padding:5px 10px}
+.lb{font-size:12px;font-weight:600;padding:4px 12px;border-radius:50px;border:none;cursor:pointer;transition:all .2s;font-family:var(--sans);letter-spacing:.04em}
+.lb.on{background:var(--ink);color:var(--paper)}
+.lb:not(.on){background:transparent;color:var(--ink3)}
+.lb:not(.on):hover{background:var(--paper2)}
+
+/* ── PROGRESS BAR ─────────────────────────────────────── */
+#prog{position:fixed;top:0;left:0;height:2px;background:var(--accent);width:0%;z-index:1000;transition:width .1s}
+
+/* ── NAV SIDEBAR ──────────────────────────────────────── */
+#sidenav{position:fixed;left:20px;top:50%;transform:translateY(-50%);z-index:100;display:flex;flex-direction:column;gap:10px}
+.snav-dot{width:8px;height:8px;border-radius:50%;background:var(--paper3);border:1.5px solid var(--ink4);cursor:pointer;transition:all .2s;position:relative}
+.snav-dot.active{background:var(--accent);border-color:var(--accent);transform:scale(1.4)}
+.snav-dot:hover::after{content:attr(data-label);position:absolute;left:16px;top:50%;transform:translateY(-50%);white-space:nowrap;font-size:11px;background:var(--ink);color:var(--paper);padding:3px 8px;border-radius:4px;pointer-events:none;font-family:var(--sans)}
+
+/* ── SECTIONS ─────────────────────────────────────────── */
+section{min-height:100vh;padding:80px 60px 60px 80px;max-width:900px;margin:0 auto;display:flex;flex-direction:column;justify-content:center}
+
+/* ── HERO (image above title, panduan §5.1) ──────────────── */
+#hero{
+  text-align:left;
+  padding-top:110px;
+  min-height:100vh;
+  display:flex;
+  flex-direction:column;
+  justify-content:center;
+}
+.hero-image{
+  width:100%;max-width:620px;
+  border-radius:var(--r2);
+  overflow:hidden;
+  margin-bottom:2.25rem;
+  box-shadow:0 24px 60px rgba(20,30,50,.14);
+}
+.hero-image img{width:100%;height:auto;display:block}
+.hero-eyebrow{font-size:11px;font-weight:700;letter-spacing:.25em;text-transform:uppercase;color:var(--ink4);margin-bottom:1.5rem;display:flex;align-items:center;gap:12px}
+.hero-eyebrow::before{content:"";width:28px;height:1px;background:var(--ink4);display:inline-block}
+.hero-title{font-family:var(--serif);font-size:clamp(42px,7vw,80px);line-height:1.05;color:var(--ink);margin-bottom:.4rem;font-weight:400}
+.hero-title em{font-style:italic;color:var(--accent)}
+.hero-title-en{font-family:var(--serif);font-size:clamp(18px,3vw,28px);line-height:1.3;color:var(--ink3);font-weight:400;font-style:italic;margin-bottom:2rem;border-bottom:1px solid var(--paper3);padding-bottom:1.5rem}
+.hero-desc{font-size:16px;color:var(--ink2);max-width:560px;line-height:1.85;margin-bottom:1.75rem}
+.hero-quote{font-family:var(--serif);font-size:18px;font-style:italic;color:var(--ink3);border-left:3px solid var(--accent);padding-left:1.25rem;max-width:480px;line-height:1.6;margin-bottom:1.75rem}
+
+/* ── HERO META ROW (panduan §5.1: jumlah bab · waktu baca · penulis) ── */
+.hero-meta-row{
+  display:flex;flex-wrap:wrap;gap:10px 28px;align-items:center;
+  margin-bottom:1.75rem;padding-top:1.5rem;
+  border-top:1px solid var(--paper3);
+  max-width:560px;
+}
+.hero-meta-item{display:flex;align-items:center;gap:8px;font-family:var(--mono);font-size:11.5px;letter-spacing:.05em;color:var(--ink3)}
+.hero-meta-item .hmi-icon{color:var(--accent);font-size:13px}
+.hero-meta-item strong{color:var(--ink2);font-weight:600}
+
+/* ── FLOATING TOC (panduan §2, §6: drawer mengambang) ────── */
+#toc-toggle{
+  position:fixed;top:16px;left:20px;z-index:998;
+  display:flex;align-items:center;gap:8px;
+  font-family:var(--sans);font-size:12px;font-weight:600;letter-spacing:.04em;
+  background:rgba(15,15,14,.78);color:var(--paper);
+  border:1px solid rgba(255,255,255,.16);
+  border-radius:50px;padding:8px 16px 8px 14px;
+  cursor:pointer;backdrop-filter:blur(8px);
+  transition:background .2s,border-color .2s;
+}
+#toc-toggle:hover{background:rgba(15,15,14,.92);border-color:rgba(255,255,255,.32)}
+#toc-toggle .tt-icon{font-size:14px;line-height:1}
+#toc-panel{
+  position:fixed;inset:0 auto 0 0;z-index:997;
+  width:min(320px,84vw);height:100vh;
+  background:var(--paper);
+  border-right:1px solid var(--paper3);
+  box-shadow:24px 0 48px rgba(0,0,0,.14);
+  transform:translateX(-100%);
+  transition:transform .32s cubic-bezier(.4,0,.2,1);
+  overflow-y:auto;
+  padding:80px 0 40px;
+}
+#toc-panel.open{transform:translateX(0)}
+.toc-head{padding:0 28px 18px;border-bottom:1px solid var(--paper3);margin-bottom:8px}
+.toc-eyebrow{font-size:10px;font-weight:700;letter-spacing:.18em;text-transform:uppercase;color:var(--ink4)}
+.toc-book-title{font-family:var(--serif);font-size:17px;color:var(--ink);margin-top:4px}
+.toc-list{list-style:none;padding:0 14px;margin:8px 0 0}
+.toc-list li{margin-bottom:2px}
+.toc-item{
+  display:flex;align-items:baseline;gap:10px;width:100%;text-align:left;
+  background:none;border:none;cursor:pointer;
+  font-family:var(--sans);font-size:13px;color:var(--ink2);
+  padding:10px 14px;border-radius:8px;
+  transition:background .15s,color .15s;
+}
+.toc-item:hover{background:var(--paper2);color:var(--ink)}
+.toc-item .toc-num{font-family:var(--mono);font-size:10.5px;color:var(--ink4);flex-shrink:0}
+.toc-item.active{background:var(--paper2);color:var(--ink);font-weight:600}
+.toc-divider{height:1px;background:var(--paper3);margin:10px 20px}
+.toc-sub-label{font-size:10px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:var(--ink4);padding:12px 28px 4px}
+#toc-scrim{
+  position:fixed;inset:0;z-index:996;background:rgba(15,13,10,.32);
+  opacity:0;pointer-events:none;transition:opacity .28s ease;
+}
+#toc-scrim.open{opacity:1;pointer-events:auto}
+.pill{display:inline-block;font-size:11px;font-weight:600;letter-spacing:.08em;text-transform:uppercase;padding:5px 14px;border-radius:50px;border:1px solid;margin-right:6px;margin-bottom:6px}
+.pill-blue{color:var(--accent);border-color:var(--accent);background:rgba(45,91,227,.07)}
+.pill-teal{color:var(--teal);border-color:var(--teal);background:rgba(13,122,101,.07)}
+.pill-gold{color:var(--gold);border-color:var(--gold);background:rgba(184,134,11,.07)}
+.pill-purple{color:var(--purple);border-color:var(--purple);background:rgba(106,63,168,.07)}
+.pill-red{color:var(--red);border-color:var(--red);background:rgba(192,57,43,.07)}
+
+/* ── SCROLL CUE ───────────────────────────────────────── */
+.scroll-cue{display:flex;align-items:center;gap:.5rem;font-size:12px;color:var(--ink4);letter-spacing:.1em;text-transform:uppercase;margin-top:1rem}
+.scroll-cue::before{content:'';display:block;width:24px;height:1px;background:var(--ink4)}
+
+/* ── SECTION HEADERS ──────────────────────────────────── */
+.sec-eyebrow{font-size:10px;font-weight:700;letter-spacing:.22em;text-transform:uppercase;color:var(--ink4);margin-bottom:.75rem}
+.sec-num{font-family:var(--serif);font-size:clamp(48px,8vw,96px);color:var(--paper2);font-weight:400;line-height:1;position:absolute;left:-10px;top:-20px;z-index:-1;user-select:none}
+.sec-title{font-family:var(--serif);font-size:clamp(26px,4vw,40px);line-height:1.2;color:var(--ink);margin-bottom:1.5rem;font-weight:400;position:relative}
+.sec-lead{font-size:16px;color:var(--ink2);line-height:1.85;margin-bottom:1.5rem;max-width:640px}
+
+/* ── CARDS ────────────────────────────────────────────── */
+.card-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:14px;margin-bottom:1.5rem}
+.card{background:#fff;border:1px solid var(--paper3);border-radius:var(--r2);padding:1.25rem 1.4rem}
+.card-icon{font-size:22px;margin-bottom:.75rem}
+.card-title{font-size:13px;font-weight:700;color:var(--ink);margin-bottom:.4rem;letter-spacing:.02em}
+.card-body{font-size:12px;color:var(--ink3);line-height:1.65}
+.card-accent{border-top:3px solid var(--accent)}
+.card-teal{border-top:3px solid var(--teal)}
+.card-gold{border-top:3px solid var(--gold)}
+.card-purple{border-top:3px solid var(--purple)}
+.card-red{border-top:3px solid var(--red)}
+
+/* ── QUOTE BLOCKS ─────────────────────────────────────── */
+.blockquote{font-family:var(--serif);font-size:18px;font-style:italic;color:var(--ink2);border-left:3px solid var(--accent);padding:1rem 1.5rem;background:#fff;border-radius:0 var(--r) var(--r) 0;margin:1.5rem 0;line-height:1.7}
+.blockquote cite{display:block;font-size:12px;font-style:normal;font-weight:600;color:var(--ink4);margin-top:.5rem;letter-spacing:.05em;text-transform:uppercase}
+
+/* ── TIMELINE ─────────────────────────────────────────── */
+.timeline{position:relative;padding-left:2rem;margin:1.5rem 0}
+.timeline::before{content:'';position:absolute;left:6px;top:8px;bottom:8px;width:1px;background:var(--paper3)}
+.tl-item{position:relative;margin-bottom:1.5rem}
+.tl-dot{position:absolute;left:-2rem;top:4px;width:12px;height:12px;border-radius:50%;background:var(--paper);border:2px solid var(--accent)}
+.tl-year{font-size:11px;font-weight:700;color:var(--accent);letter-spacing:.1em;margin-bottom:2px}
+.tl-title{font-size:14px;font-weight:700;color:var(--ink);margin-bottom:3px}
+.tl-body{font-size:12px;color:var(--ink3);line-height:1.6}
+
+/* ── TWO-COL ──────────────────────────────────────────── */
+.two-col{display:grid;grid-template-columns:1fr 1fr;gap:20px;margin-bottom:1.5rem}
+.col-box{background:#fff;border:1px solid var(--paper3);border-radius:var(--r2);padding:1.25rem 1.4rem}
+.col-box-green{border-top:3px solid var(--teal)}
+.col-box-red{border-top:3px solid var(--red)}
+.col-title{font-size:12px;font-weight:700;text-transform:uppercase;letter-spacing:.12em;margin-bottom:.75rem}
+.col-title-green{color:var(--teal)}
+.col-title-red{color:var(--red)}
+.col-item{font-size:12px;color:var(--ink3);line-height:1.6;margin-bottom:.5rem;padding-left:1rem;position:relative}
+.col-item::before{content:'→';position:absolute;left:0;color:var(--ink4)}
+
+/* ── BAR CHART ────────────────────────────────────────── */
+.bar-row{display:flex;align-items:center;gap:10px;margin-bottom:10px}
+.bar-label{font-size:11px;color:var(--ink3);min-width:110px;text-align:right}
+.bar-track{flex:1;background:var(--paper2);border-radius:4px;height:8px;overflow:hidden}
+.bar-fill{height:100%;border-radius:4px;transition:width 1s ease}
+.bar-val{font-size:11px;font-weight:700;color:var(--ink2);min-width:36px}
+
+/* ── CLOSING ──────────────────────────────────────────── */
+.closing-box{background:var(--ink);color:var(--paper);border-radius:var(--r2);padding:2rem 2.5rem;margin-top:2rem}
+.closing-box p{font-size:14px;line-height:1.85;color:rgba(245,244,240,.8);margin-bottom:.75rem}
+.closing-box p:last-child{margin-bottom:0}
+.closing-box strong{color:var(--paper)}
+
+/* ── TECH EMBED NOTE ──────────────────────────────────── */
+.embed-note{background:var(--paper2);border:1px solid var(--paper3);border-radius:var(--r);padding:.75rem 1.1rem;font-size:12px;color:var(--ink3);display:flex;align-items:center;gap:.6rem;margin-bottom:1rem}
+.embed-note a{color:var(--accent);text-decoration:none;font-weight:600}
+
+/* ── LAB LINK BUTTONS ─────────────────────────────────── */
+.lab-links{margin-bottom:1rem}
+.lab-links-label{font-size:11px;color:var(--ink4);text-transform:uppercase;letter-spacing:.08em;font-weight:700;margin-bottom:.6rem}
+.lab-links-row{display:flex;gap:12px;flex-wrap:wrap}
+.lab-btn{display:flex;align-items:center;gap:.7rem;background:#fff;border:1px solid var(--paper3);border-radius:var(--r2);padding:.85rem 1.2rem;text-decoration:none;flex:1;min-width:220px;transition:border-color .15s,transform .15s,box-shadow .15s}
+.lab-btn:hover{border-color:var(--accent);transform:translateY(-1px);box-shadow:0 4px 14px rgba(0,0,0,.06)}
+.lab-btn-icon{font-size:20px;flex-shrink:0}
+.lab-btn-text{flex:1;font-size:13px;font-weight:700;color:var(--ink)}
+.lab-btn-arrow{color:var(--ink4);font-size:14px;flex-shrink:0;transition:transform .15s}
+.lab-btn:hover .lab-btn-arrow{transform:translateX(3px);color:var(--accent)}
+
+/* ── REF ──────────────────────────────────────────────── */
+.ref-block{border-top:1px solid var(--paper3);padding-top:1rem;margin-top:1rem}
+.ref-label{font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:.15em;color:var(--ink4);margin-bottom:.5rem}
+.ref-item{font-size:11px;color:var(--ink4);line-height:1.6;margin-bottom:2px}
+
+/* ── DIVIDER ──────────────────────────────────────────── */
+.divider{height:1px;background:var(--paper3);margin:1.5rem 0}
+
+/* ── INTERACTIVE QUBIT (mini) ─────────────────────────── */
+.mini-qubit{display:flex;gap:12px;flex-wrap:wrap;align-items:center;margin:1rem 0}
+.qb{width:48px;height:48px;border-radius:50%;border:1.5px solid;display:flex;align-items:center;justify-content:center;font-size:13px;font-weight:700;cursor:pointer;transition:all .3s;user-select:none;flex-shrink:0}
+.qb-super{background:#EEEDFE;border-color:#534AB7;color:#3C3489}
+.qb-zero{background:#E1F5EE;border-color:#0F6E56;color:#085041}
+.qb-one{background:#FDE8E8;border-color:#c0392b;color:#922b21}
+.mini-qubit-label{font-size:11px;color:var(--ink4);font-style:italic}
+
+/* ── INDUSTRY TABLE ───────────────────────────────────── */
+.ind-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:10px;margin-bottom:1.5rem}
+.ind-card{background:#fff;border:1px solid var(--paper3);border-radius:var(--r);padding:1rem 1.1rem;border-left:3px solid}
+.ind-card-name{font-size:13px;font-weight:700;color:var(--ink);margin-bottom:2px}
+.ind-card-co{font-size:11px;color:var(--ink4);margin-bottom:.5rem}
+.ind-card-focus{font-size:12px;color:var(--ink3);line-height:1.55}
+.ind-card-inv{font-size:11px;font-weight:700;margin-top:.5rem}
+
+/* ── GLOSSARY ─────────────────────────────────────────── */
+.gloss-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:0 28px;margin-bottom:1rem}
+.gloss-item{padding:11px 0;border-bottom:1px solid var(--paper3)}
+.gloss-term{font-size:12.5px;font-weight:700;color:var(--ink);margin-bottom:3px;font-family:var(--mono);letter-spacing:.01em}
+.gloss-term-en{font-weight:400;color:var(--ink4);font-style:italic}
+.gloss-def{font-size:11.5px;color:var(--ink3);line-height:1.6}
+.gloss-search{width:100%;padding:10px 14px;border-radius:50px;border:1px solid var(--paper3);background:#fff;font-size:13px;font-family:var(--sans);color:var(--ink);margin-bottom:1.5rem;outline:none}
+.gloss-search:focus{border-color:var(--accent)}
+.gloss-count{font-size:11px;color:var(--ink4);margin-bottom:1rem;font-style:italic}
+
+/* ── FAQ ACCORDION ─────────────────────────────────────── */
+.faq-item{background:#fff;border:1px solid var(--paper3);border-radius:var(--r2);margin-bottom:10px;overflow:hidden}
+.faq-q{padding:1rem 1.3rem;font-size:13px;font-weight:700;color:var(--ink);cursor:pointer;list-style:none;display:flex;justify-content:space-between;align-items:center;gap:1rem}
+.faq-q::-webkit-details-marker{display:none}
+.faq-q::after{content:'+';font-size:18px;font-weight:400;color:var(--ink4);flex-shrink:0;transition:transform .2s}
+.faq-item[open] .faq-q::after{transform:rotate(45deg)}
+.faq-a{padding:0 1.3rem 1.1rem;font-size:12.5px;color:var(--ink3);line-height:1.7}
+
+/* ── INTERPRETATION CARDS ─────────────────────────────── */
+.interp-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:14px;margin:1.5rem 0}
+.interp-card{background:#fff;border:1px solid var(--paper3);border-radius:var(--r2);padding:1.1rem 1.3rem;position:relative}
+.interp-year{position:absolute;top:1.1rem;right:1.3rem;font-size:10px;color:var(--ink4);font-weight:700}
+.interp-name{font-size:13px;font-weight:700;color:var(--ink);margin-bottom:.5rem;padding-right:2.5rem}
+.interp-claim{font-size:11.5px;color:var(--ink3);line-height:1.6;margin-bottom:.6rem}
+.interp-who{font-size:10.5px;color:var(--ink4);text-transform:uppercase;letter-spacing:.06em;font-weight:700}
+
+/* ── QUBIT TYPE COMPARISON ────────────────────────────── */
+.qtype-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(230px,1fr));gap:14px;margin:1.5rem 0}
+.qtype-card{background:#fff;border:1px solid var(--paper3);border-radius:var(--r2);padding:1.1rem 1.3rem;border-top:3px solid}
+.qtype-name{font-size:13px;font-weight:700;color:var(--ink);margin-bottom:.3rem}
+.qtype-co{font-size:10.5px;color:var(--ink4);margin-bottom:.6rem;text-transform:uppercase;letter-spacing:.05em}
+.qtype-body{font-size:11.5px;color:var(--ink3);line-height:1.6;margin-bottom:.6rem}
+.qtype-stats{display:flex;gap:12px;flex-wrap:wrap;font-size:10.5px}
+.qtype-stat{color:var(--ink4)}
+.qtype-stat strong{color:var(--ink2);display:block;font-size:13px}
+
+/* ── RESPONSIVE ───────────────────────────────────────── */
+@media(max-width:700px){
+  section{padding:60px 24px 48px;min-height:auto}
+  #sidenav{display:none}
+  .two-col{grid-template-columns:1fr}
+  .sec-num{font-size:48px}
+  .hero-title{font-size:38px}
+  .card-grid{grid-template-columns:1fr}
+  #hero{padding-top:88px}
+  .hero-image{margin-bottom:1.5rem}
+  .hero-meta-row{gap:8px 20px}
+  #toc-toggle{top:12px;left:12px;padding:7px 13px 7px 12px}
+  #toc-toggle .tt-label{display:none}
+}
+
+/* ── FADE IN ──────────────────────────────────────────── */
+.reveal{opacity:0;transform:translateY(20px);transition:opacity .6s ease,transform .6s ease}
+.reveal.visible{opacity:1;transform:none}
+</style>
+</head>
+<body>
+
+<div id="prog"></div>
+
+<!-- LANG SWITCHER -->
+<div id="lang-bar">
+  <button class="lb on" onclick="setLang('id')" id="btn-id">ID</button>
+  <button class="lb" onclick="setLang('en')" id="btn-en">EN</button>
+</div>
+
+<!-- FLOATING TOC (panduan §2, §6) -->
+<button type="button" id="toc-toggle" aria-expanded="false" aria-controls="toc-panel">
+  <span class="tt-icon">☰</span>
+  <span class="tt-label"><span class="id-text">Daftar Isi</span><span class="en-text">Contents</span></span>
+</button>
+<div id="toc-scrim"></div>
+<nav id="toc-panel" aria-hidden="true">
+  <div class="toc-head">
+    <div class="toc-eyebrow"><span class="id-text">Daftar Isi</span><span class="en-text">Table of Contents</span></div>
+    <div class="toc-book-title">
+      <span class="id-text">Menuju Quantum Computing</span>
+      <span class="en-text">Toward Quantum Computing</span>
+    </div>
+  </div>
+  <ul class="toc-list">
+    <li><button class="toc-item" data-sec="hero"><span class="toc-num">00</span><span class="id-text">Pembuka</span><span class="en-text">Introduction</span></button></li>
+    <li><button class="toc-item" data-sec="s1"><span class="toc-num">01</span><span class="id-text">Teori Kuantum Dasar</span><span class="en-text">Foundations of Quantum Theory</span></button></li>
+    <li><button class="toc-item" data-sec="s2"><span class="toc-num">02</span><span class="id-text">Tren Saat Ini</span><span class="en-text">Current Trends</span></button></li>
+    <li><button class="toc-item" data-sec="s3"><span class="toc-num">03</span><span class="id-text">Sejarah</span><span class="en-text">History</span></button></li>
+    <li><button class="toc-item" data-sec="s4"><span class="toc-num">04</span><span class="id-text">Apa yang Bisa Dicapai</span><span class="en-text">Capabilities</span></button></li>
+    <li><button class="toc-item" data-sec="s5"><span class="toc-num">05</span><span class="id-text">Industri</span><span class="en-text">Industry</span></button></li>
+    <li><button class="toc-item" data-sec="s6"><span class="toc-num">06</span><span class="id-text">Dampak & Masa Depan</span><span class="en-text">Impact & Future</span></button></li>
+    <li><button class="toc-item" data-sec="sg"><span class="toc-num">·</span><span class="id-text">Glosarium</span><span class="en-text">Glossary</span></button></li>
+    <li><button class="toc-item" data-sec="sf"><span class="toc-num">·</span><span class="id-text">FAQ</span><span class="en-text">FAQ</span></button></li>
+    <li><button class="toc-item" data-sec="s7"><span class="toc-num">·</span><span class="id-text">Penutup</span><span class="en-text">Closing</span></button></li>
+  </ul>
+  <div class="toc-divider"></div>
+  <div class="toc-sub-label"><span class="id-text">Modul Interaktif</span><span class="en-text">Interactive Modules</span></div>
+  <ul class="toc-list">
+    <li><a class="toc-item" href="superposisi_qubit.html" target="_blank" rel="noopener"><span class="toc-num">⚛</span><span class="id-text">Superposisi & Qubit</span><span class="en-text">Superposition & Qubit</span></a></li>
+    <li><a class="toc-item" href="entanglement_quantum.html" target="_blank" rel="noopener"><span class="toc-num">🔗</span><span class="id-text">Entanglement & Superposisi</span><span class="en-text">Entanglement & Superposition</span></a></li>
+  </ul>
+</nav>
+
+<!-- SIDE NAV -->
+<div id="sidenav">
+  <div class="snav-dot active" data-sec="hero" data-label="Pembuka / Intro" onclick="scrollTo2('hero')"></div>
+  <div class="snav-dot" data-sec="s1" data-label="Teori Kuantum / Quantum Theory" onclick="scrollTo2('s1')"></div>
+  <div class="snav-dot" data-sec="s2" data-label="Tren Saat Ini / Current Trends" onclick="scrollTo2('s2')"></div>
+  <div class="snav-dot" data-sec="s3" data-label="Sejarah / History" onclick="scrollTo2('s3')"></div>
+  <div class="snav-dot" data-sec="s4" data-label="Apa yang Bisa Dicapai / Capabilities" onclick="scrollTo2('s4')"></div>
+  <div class="snav-dot" data-sec="s5" data-label="Industri / Industry" onclick="scrollTo2('s5')"></div>
+  <div class="snav-dot" data-sec="s6" data-label="Dampak & Masa Depan / Future" onclick="scrollTo2('s6')"></div>
+  <div class="snav-dot" data-sec="sg" data-label="Glosarium / Glossary" onclick="scrollTo2('sg')"></div>
+  <div class="snav-dot" data-sec="sf" data-label="FAQ / FAQ" onclick="scrollTo2('sf')"></div>
+  <div class="snav-dot" data-sec="s7" data-label="Penutup / Closing" onclick="scrollTo2('s7')"></div>
+</div>
+
+<!-- ══════════════════════════════════════════════════════
+     HERO
+══════════════════════════════════════════════════════ -->
+<section id="hero">
+  <div class="hero-image">
+    <img src="images/hero-quantum-lab.jpeg" alt="Ilustrasi laboratorium quantum computer" loading="eager">
+  </div>
+  <p class="hero-eyebrow">Sangoeroep · 2026</p>
+  <h1 class="hero-title">
+    <span class="id-text">Menuju<br><em>Quantum Computing</em></span>
+    <span class="en-text">Toward<br><em>Quantum Computing</em></span>
+  </h1>
+  <p class="hero-title-en">
+    <span class="id-text">Toward Quantum Computing</span>
+    <span class="en-text">Menuju Quantum Computing</span>
+  </p>
+
+  <p class="hero-desc">
+    <span class="id-text">Sebuah perjalanan dari fisika yang "aneh" menuju mesin yang akan mendefinisikan ulang batas kemampuan manusia — dari laboratorium superkondukting hingga keputusan yang menyentuh kehidupan kita sehari-hari.</span>
+    <span class="en-text">A journey from "strange" physics to machines that will redefine the boundaries of human capability — from superconducting laboratories to decisions that touch our everyday lives.</span>
+  </p>
+
+  <div class="hero-quote">
+    <span class="id-text">"Siapapun yang tidak terkejut oleh mekanika kuantum berarti ia belum benar-benar memahaminya."</span>
+    <span class="en-text">"Anyone who is not shocked by quantum theory has not understood it."</span>
+    <br>— Niels Bohr
+  </div>
+
+  <div class="hero-meta-row">
+    <span class="hero-meta-item"><span class="hmi-icon">◧</span><strong>6</strong>&nbsp;<span class="id-inline">bab</span><span class="en-inline">chapters</span></span>
+    <span class="hero-meta-item"><span class="hmi-icon">◔</span><strong>± 30</strong>&nbsp;<span class="id-inline">menit membaca</span><span class="en-inline">min read</span></span>
+    <span class="hero-meta-item"><span class="hmi-icon">✦</span><span class="id-inline">Oleh</span><span class="en-inline">By</span>&nbsp;<strong>Sangoeroep</strong></span>
+  </div>
+
+  <div>
+    <span class="pill pill-blue">
+      <span class="id-inline">Fisika Kuantum</span><span class="en-inline">Quantum Physics</span>
+    </span>
+    <span class="pill pill-teal">
+      <span class="id-inline">Komputasi</span><span class="en-inline">Computing</span>
+    </span>
+    <span class="pill pill-gold">
+      <span class="id-inline">Industri</span><span class="en-inline">Industry</span>
+    </span>
+    <span class="pill pill-purple">
+      <span class="id-inline">Masa Depan</span><span class="en-inline">Future</span>
+    </span>
+  </div>
+
+  <div class="scroll-cue">
+    <span class="id-text">Mulai membaca</span>
+    <span class="en-text">Begin reading</span>
+  </div>
+</section>
+
+<!-- ══════════════════════════════════════════════════════
+     S1 · TEORI KUANTUM DASAR
+══════════════════════════════════════════════════════ -->
+<section id="s1" class="reveal">
+  <p class="sec-eyebrow">
+    <span class="id-text">Bagian 1</span><span class="en-text">Chapter 1</span>
+  </p>
+  <h2 class="sec-title" style="position:relative">
+    <span class="sec-num">01</span>
+    <span class="id-text">Teori Kuantum:<br>Fisika yang Mengejutkan Dunia</span>
+    <span class="en-text">Quantum Theory:<br>The Physics That Shocked the World</span>
+  </h2>
+
+  <p class="sec-lead">
+    <span class="id-text">Di awal abad ke-20, para fisikawan menemukan bahwa alam semesta di skala terkecil bekerja dengan cara yang sama sekali berbeda dari intuisi kita. Tiga prinsip menjadi pondasinya.</span>
+    <span class="en-text">At the start of the 20th century, physicists discovered that the universe at its smallest scale operates in ways completely contrary to our intuition. Three principles form its foundation.</span>
+  </p>
+
+  <!-- Mini interactive qubits -->
+  <div class="embed-note">⚛️
+    <span class="id-text">Klik lingkaran di bawah untuk "mengukur" qubit — lihat superposisi kolaps menjadi nilai pasti.</span>
+    <span class="en-text">Click the circles below to "measure" a qubit — watch superposition collapse into a definite value.</span>
+  </div>
+  <div class="mini-qubit" id="qubits-row">
+    <div class="qb qb-super" onclick="measureQ(this)" title="Klik untuk ukur">?</div>
+    <div class="qb qb-super" onclick="measureQ(this)" title="Klik untuk ukur">?</div>
+    <div class="qb qb-super" onclick="measureQ(this)" title="Klik untuk ukur">?</div>
+    <div class="qb qb-super" onclick="measureQ(this)" title="Klik untuk ukur">?</div>
+    <div class="qb qb-super" onclick="measureQ(this)" title="Klik untuk ukur">?</div>
+    <span class="mini-qubit-label">
+      <span class="id-text">← dalam superposisi, klik untuk ukur</span>
+      <span class="en-text">← in superposition, click to measure</span>
+    </span>
+    <button style="font-size:11px;padding:4px 10px;border-radius:50px;border:1px solid var(--paper3);background:var(--paper2);color:var(--ink3);cursor:pointer" onclick="resetQubits()">
+      <span class="id-text">Reset</span><span class="en-text">Reset</span>
+    </button>
+  </div>
+
+  <div class="card-grid">
+    <div class="card card-accent">
+      <div class="card-icon">⊕</div>
+      <div class="card-title">
+        <span class="id-text">Superposisi</span><span class="en-text">Superposition</span>
+      </div>
+      <div class="card-body">
+        <span class="id-text">Partikel bisa berada di banyak keadaan sekaligus sebelum diukur. Seperti koin yang berputar — bukan kepala, bukan ekor, melainkan keduanya. Qubit mengeksploitasi ini: ia adalah 0 dan 1 secara bersamaan. Dirumuskan: <strong>|ψ⟩ = α|0⟩ + β|1⟩</strong></span>
+        <span class="en-text">Particles can exist in multiple states simultaneously before being measured. Like a spinning coin — not heads, not tails, but both. A qubit exploits this: it is 0 and 1 simultaneously. Formalized as: <strong>|ψ⟩ = α|0⟩ + β|1⟩</strong></span>
+      </div>
+    </div>
+    <div class="card card-teal">
+      <div class="card-icon">∞</div>
+      <div class="card-title">
+        <span class="id-text">Keterjeratan (Entanglement)</span><span class="en-text">Entanglement</span>
+      </div>
+      <div class="card-body">
+        <span class="id-text">Dua partikel yang ter-entangle berbagi keadaan kuantum yang tak terpisahkan. Mengukur satu langsung menentukan yang lain — seketika, tanpa sinyal, tanpa batas jarak. Einstein menyebutnya "spooky action at a distance."</span>
+        <span class="en-text">Two entangled particles share an inseparable quantum state. Measuring one instantly determines the other — instantly, without signals, regardless of distance. Einstein called it "spooky action at a distance."</span>
+      </div>
+    </div>
+    <div class="card card-purple">
+      <div class="card-icon">≋</div>
+      <div class="card-title">
+        <span class="id-text">Interferensi Kuantum</span><span class="en-text">Quantum Interference</span>
+      </div>
+      <div class="card-body">
+        <span class="id-text">Seperti gelombang air, jalur komputasi bisa saling memperkuat (konstruktif) atau saling menghapus (destruktif). Algoritma kuantum merancang interferensi agar jawaban benar diperkuat dan jawaban salah dihapus.</span>
+        <span class="en-text">Like water waves, computational paths can reinforce (constructive) or cancel each other out (destructive). Quantum algorithms engineer interference so correct answers are amplified and wrong ones erased.</span>
+      </div>
+    </div>
+    <div class="card card-gold">
+      <div class="card-icon">△</div>
+      <div class="card-title">
+        <span class="id-text">Prinsip Ketidakpastian Heisenberg</span><span class="en-text">Heisenberg Uncertainty Principle</span>
+      </div>
+      <div class="card-body">
+        <span class="id-text">Tidak mungkin mengukur posisi dan momentum partikel secara bersamaan dengan presisi sempurna. Ini bukan keterbatasan alat — ini hukum alam. Dirumuskan 1927: <strong>Δx · Δp ≥ ℏ/2</strong></span>
+        <span class="en-text">It is impossible to simultaneously measure a particle's position and momentum with perfect precision. This is not an instrument limitation — it is a law of nature. Formulated 1927: <strong>Δx · Δp ≥ ℏ/2</strong></span>
+      </div>
+    </div>
+  </div>
+
+  <div class="blockquote">
+    <span class="id-text">"Tuhan tidak bermain dadu dengan alam semesta."</span>
+    <span class="en-text">"God does not play dice with the universe."</span>
+    <cite>— Albert Einstein (menolak mekanika kuantum / rejecting quantum mechanics, 1926)</cite>
+  </div>
+  <p style="font-size:12px;color:var(--ink4);font-style:italic">
+    <span class="id-text">Ironisnya, eksperimen Bell (1964) dan Nobel 2022 membuktikan: alam semesta memang bermain dadu — dan lebih aneh dari yang dibayangkan Einstein.</span>
+    <span class="en-text">Ironically, Bell's experiments (1964) and the 2022 Nobel Prize proved: the universe does play dice — and is stranger than Einstein imagined.</span>
+  </p>
+
+  <div class="divider"></div>
+
+  <!-- ── PARADOKS KUCING SCHRÖDINGER ─────────────────────── -->
+  <h3 style="font-size:15px;font-weight:700;color:var(--ink);margin-bottom:.75rem">
+    <span class="id-text">🐈 Paradoks Kucing Schrödinger</span>
+    <span class="en-text">🐈 Schrödinger's Cat Paradox</span>
+  </h3>
+  <p class="sec-lead" style="margin-bottom:1rem">
+    <span class="id-text">Pada 1935, Erwin Schrödinger merancang eksperimen pikiran untuk <em>menyindir</em> — bukan mendukung — implikasi mekanika kuantum yang menurutnya absurd. Seekor kucing dikurung dalam kotak tertutup bersama sebuah atom radioaktif, detektor Geiger, palu, dan botol racun. Jika atom itu meluruh (peristiwa kuantum probabilistik), detektor memicu palu memecahkan botol racun, membunuh kucing. Jika tidak, kucing tetap hidup.</span>
+    <span class="en-text">In 1935, Erwin Schrödinger devised a thought experiment to <em>mock</em> — not endorse — an implication of quantum mechanics he found absurd. A cat is sealed in a box with a radioactive atom, a Geiger counter, a hammer, and a vial of poison. If the atom decays (a probabilistic quantum event), the detector triggers the hammer to break the vial, killing the cat. If not, the cat lives.</span>
+  </p>
+  <p class="sec-lead" style="margin-bottom:1rem">
+    <span class="id-text">Karena atom radioaktif berada dalam superposisi "meluruh" dan "belum meluruh" sebelum diamati, penerapan literal aturan kuantum berarti seluruh sistem — termasuk kucing — juga berada dalam superposisi <strong>hidup dan mati sekaligus</strong>, sampai kotak dibuka dan diukur. Schrödinger ingin menunjukkan: aturan yang masuk akal untuk elektron menjadi absurd ketika diperbesar ke skala kucing. Pertanyaannya belum sepenuhnya terjawab hingga hari ini: <em>di mana tepatnya batas antara dunia kuantum yang probabilistik dan dunia sehari-hari yang pasti?</em> Inilah yang disebut <strong>masalah pengukuran</strong> (measurement problem).</span>
+    <span class="en-text">Because the radioactive atom is in a superposition of "decayed" and "not decayed" before observation, literally applying quantum rules means the entire system — including the cat — is also in superposition, <strong>both alive and dead</strong>, until the box is opened and measured. Schrödinger wanted to show that rules sensible for an electron become absurd when scaled up to a cat. The question remains unresolved today: <em>where exactly is the boundary between the probabilistic quantum world and the definite everyday world?</em> This is known as the <strong>measurement problem</strong>.</span>
+  </p>
+
+  <div class="blockquote" style="margin-bottom:1.5rem">
+    <span class="id-text">"Saya tidak menyukai [teori kuantum], dan saya menyesal pernah terlibat dengannya."</span>
+    <span class="en-text">"I don't like it, and I'm sorry I ever had anything to do with it."</span>
+    <cite>— Erwin Schrödinger, tentang mekanika kuantum / on quantum mechanics</cite>
+  </div>
+
+  <!-- ── INTERPRETASI KUANTUM ─────────────────────────────── -->
+  <h3 style="font-size:15px;font-weight:700;color:var(--ink);margin-bottom:.5rem">
+    <span class="id-text">Empat Cara Memahami "Kolaps": Interpretasi Kuantum</span>
+    <span class="en-text">Four Ways to Understand "Collapse": Quantum Interpretations</span>
+  </h3>
+  <p class="sec-lead" style="margin-bottom:.5rem">
+    <span class="id-text">Persamaan matematis mekanika kuantum tidak diperdebatkan — semua fisikawan sepakat pada rumusnya, dan prediksinya terverifikasi hingga presisi luar biasa. Yang diperdebatkan adalah <em>apa artinya secara fisik</em>. Berikut empat interpretasi utama yang masih bersaing hingga hari ini.</span>
+    <span class="en-text">The mathematics of quantum mechanics is not disputed — all physicists agree on the formulas, and predictions are verified to extraordinary precision. What is disputed is <em>what it physically means</em>. Below are four leading interpretations still competing today.</span>
+  </p>
+
+  <div class="interp-grid">
+    <div class="interp-card" style="border-top:3px solid var(--accent)">
+      <span class="interp-year">1927</span>
+      <div class="interp-name"><span class="id-text">Kopenhagen</span><span class="en-text">Copenhagen</span></div>
+      <div class="interp-claim">
+        <span class="id-text">Kucing Schrödinger benar-benar dalam superposisi hidup/mati sampai diukur. Pengukuran menyebabkan fungsi gelombang <strong>benar-benar kolaps</strong> menjadi satu hasil nyata. Alam semesta memang mengandung keacakan fundamental.</span>
+        <span class="en-text">Schrödinger's cat is genuinely in superposition until measured. Measurement causes the wave function to <strong>truly collapse</strong> into one real outcome. The universe genuinely contains fundamental randomness.</span>
+      </div>
+      <div class="interp-who">Bohr · Heisenberg</div>
+    </div>
+    <div class="interp-card" style="border-top:3px solid var(--purple)">
+      <span class="interp-year">1957</span>
+      <div class="interp-name"><span class="id-text">Banyak Dunia</span><span class="en-text">Many-Worlds</span></div>
+      <div class="interp-claim">
+        <span class="id-text">Tidak ada kolaps sama sekali. Setiap kemungkinan hasil benar-benar terjadi — alam semesta bercabang menjadi versi di mana kucing hidup, dan versi lain di mana kucing mati. Kita hanya mengalami satu cabang.</span>
+        <span class="en-text">There is no collapse at all. Every possible outcome genuinely happens — the universe branches into a version where the cat lives and another where it dies. We simply experience one branch.</span>
+      </div>
+      <div class="interp-who">Hugh Everett III</div>
+    </div>
+    <div class="interp-card" style="border-top:3px solid var(--teal)">
+      <span class="interp-year">1952</span>
+      <div class="interp-name"><span class="id-text">Gelombang Pandu</span><span class="en-text">Pilot Wave</span></div>
+      <div class="interp-claim">
+        <span class="id-text">Kucing selalu punya nasib pasti — hidup atau mati, bukan keduanya — hanya saja kita tidak tahu yang mana. Partikel dipandu oleh gelombang tersembunyi yang menentukan lintasannya secara deterministik, bukan acak.</span>
+        <span class="en-text">The cat always has a definite fate — alive or dead, not both — we simply don't know which. Particles are guided by a hidden wave that deterministically, not randomly, sets their trajectory.</span>
+      </div>
+      <div class="interp-who">de Broglie · David Bohm</div>
+    </div>
+    <div class="interp-card" style="border-top:3px solid var(--gold)">
+      <span class="interp-year">1994</span>
+      <div class="interp-name"><span class="id-text">Relasional</span><span class="en-text">Relational</span></div>
+      <div class="interp-claim">
+        <span class="id-text">"Hidup" atau "mati" bukan sifat mutlak si kucing — melainkan relatif terhadap siapa yang bertanya. Bagi pengamat di luar kotak, kucing dalam superposisi; bagi kucing itu sendiri, nasibnya sudah pasti. Realitas selalu relasional.</span>
+        <span class="en-text">"Alive" or "dead" is not an absolute property of the cat — it is relative to who is asking. To an observer outside the box, the cat is in superposition; to the cat itself, its fate is already settled. Reality is always relational.</span>
+      </div>
+      <div class="interp-who">Carlo Rovelli</div>
+    </div>
+  </div>
+  <p style="font-size:11px;color:var(--ink4);margin-bottom:1.5rem;font-style:italic">
+    <span class="id-text">Tidak satu pun interpretasi ini bisa dibedakan secara eksperimental hari ini — perbedaannya bersifat filosofis, bukan empiris. Fisikawan bisa sepakat pada matematika sambil tidak sepakat pada makna.</span>
+    <span class="en-text">None of these interpretations can currently be distinguished experimentally — the difference is philosophical, not empirical. Physicists can agree on the mathematics while disagreeing on its meaning.</span>
+  </p>
+
+  <div class="ref-block">
+    <div class="ref-label">Referensi / References</div>
+    <div class="ref-item">· Planck, M. (1900). On the Theory of the Energy Distribution Law of the Normal Spectrum. <em>Verhandlungen der Deutschen Physikalischen Gesellschaft</em>, 2, 237.</div>
+    <div class="ref-item">· Heisenberg, W. (1927). Über den anschaulichen Inhalt der quantentheoretischen Kinematik und Mechanik. <em>Zeitschrift für Physik</em>, 43, 172–198.</div>
+    <div class="ref-item">· Schrödinger, E. (1935). Die gegenwärtige Situation in der Quantenmechanik. <em>Naturwissenschaften</em>, 23, 807–812.</div>
+    <div class="ref-item">· Everett, H. (1957). "Relative State" formulation of quantum mechanics. <em>Reviews of Modern Physics</em>, 29(3), 454–462.</div>
+    <div class="ref-item">· Bohm, D. (1952). A suggested interpretation of the quantum theory in terms of "hidden" variables. <em>Physical Review</em>, 85, 166–193.</div>
+    <div class="ref-item">· Rovelli, C. (1996). Relational Quantum Mechanics. <em>International Journal of Theoretical Physics</em>, 35, 1637–1678.</div>
+    <div class="ref-item">· Rovelli, C. (2021). <em>Helgoland</em>. Riverhead Books.</div>
+  </div>
+</section>
+
+<!-- ══════════════════════════════════════════════════════
+     S2 · TREN SAAT INI
+══════════════════════════════════════════════════════ -->
+<section id="s2" class="reveal">
+  <p class="sec-eyebrow">
+    <span class="id-text">Bagian 2</span><span class="en-text">Chapter 2</span>
+  </p>
+  <h2 class="sec-title" style="position:relative">
+    <span class="sec-num">02</span>
+    <span class="id-text">Tren Saat Ini:<br>Kuantum Memasuki Kehidupan</span>
+    <span class="en-text">Current Trends:<br>Quantum Enters Daily Life</span>
+  </h2>
+
+  <p class="sec-lead">
+    <span class="id-text">Fisika kuantum bukan hanya milik laboratorium. Ia sudah ada di HP Anda (semikonduktor, laser), di MRI rumah sakit, bahkan dalam cara orang modern memaknai hidup dan pikiran mereka.</span>
+    <span class="en-text">Quantum physics isn't just for laboratories. It's already in your phone (semiconductors, lasers), in hospital MRIs, and even in how modern people make sense of life and their own minds.</span>
+  </p>
+
+  <div class="card-grid">
+    <div class="card card-accent">
+      <div class="card-icon">💻</div>
+      <div class="card-title">
+        <span class="id-text">Teknologi Sehari-hari</span><span class="en-text">Everyday Technology</span>
+      </div>
+      <div class="card-body">
+        <span class="id-text">Transistor, laser, LED, MRI, GPS — semuanya tidak akan ada tanpa pemahaman kuantum. Setiap chip di dalam smartphone Anda adalah produk rekayasa mekanika kuantum.</span>
+        <span class="en-text">Transistors, lasers, LEDs, MRI, GPS — none would exist without quantum understanding. Every chip in your smartphone is a product of quantum mechanics engineering.</span>
+      </div>
+    </div>
+    <div class="card card-teal">
+      <div class="card-icon">🧬</div>
+      <div class="card-title">
+        <span class="id-text">Biologi & Kesehatan</span><span class="en-text">Biology & Health</span>
+      </div>
+      <div class="card-body">
+        <span class="id-text">Fotosintesis tanaman, navigasi burung menggunakan medan magnet bumi, dan penciuman manusia — semua diduga melibatkan efek kuantum. Quantum biology adalah frontier baru.</span>
+        <span class="en-text">Plant photosynthesis, birds navigating via Earth's magnetic field, human smell — all are suspected to involve quantum effects. Quantum biology is the new frontier.</span>
+      </div>
+    </div>
+    <div class="card card-gold">
+      <div class="card-icon">🧘</div>
+      <div class="card-title">
+        <span class="id-text">Kuantum sebagai Metafora Hidup</span><span class="en-text">Quantum as a Life Metaphor</span>
+      </div>
+      <div class="card-body">
+        <span class="id-text">Konsep superposisi — "saya bisa menjadi banyak hal sekaligus" — dan entanglement — "kita saling terhubung" — telah menjadi bahasa motivasi, mindfulness, dan filosofi modern. Populer di buku self-help, meditasi, dan coaching.</span>
+        <span class="en-text">Superposition — "I can be many things at once" — and entanglement — "we are all connected" — have become the language of motivation, mindfulness, and modern philosophy. Popular in self-help books, meditation, and coaching.</span>
+      </div>
+    </div>
+    <div class="card card-purple">
+      <div class="card-icon">🔐</div>
+      <div class="card-title">
+        <span class="id-text">Kriptografi Kuantum (QKD)</span><span class="en-text">Quantum Cryptography (QKD)</span>
+      </div>
+      <div class="card-body">
+        <span class="id-text">Quantum Key Distribution menggunakan hukum fisika — bukan matematika — untuk mengamankan komunikasi. Sudah digunakan oleh bank sentral dan militer di China, Eropa, dan AS.</span>
+        <span class="en-text">Quantum Key Distribution uses laws of physics — not math — to secure communications. Already used by central banks and militaries in China, Europe, and the US.</span>
+      </div>
+    </div>
+  </div>
+
+  <div class="blockquote">
+    <span class="id-text">"Kita hidup di alam semesta kuantum. Yang aneh bukanlah bahwa fisika kuantum itu sulit dipahami — yang aneh adalah kita butuh waktu begitu lama untuk menyadarinya ada di mana-mana."</span>
+    <span class="en-text">"We live in a quantum universe. What's strange is not that quantum physics is hard to understand — what's strange is that it took us so long to realize it's everywhere."</span>
+    <cite>— Carlo Rovelli, fisikawan teoretis / theoretical physicist</cite>
+  </div>
+
+  <h3 style="font-size:15px;font-weight:700;color:var(--ink);margin-bottom:1rem">
+    <span class="id-text">Kuantum sebagai Way of Life: Populer tapi Perlu Kehati-hatian</span>
+    <span class="en-text">Quantum as Way of Life: Popular but Requires Care</span>
+  </h3>
+  <div class="two-col">
+    <div class="col-box col-box-green">
+      <div class="col-title col-title-green">
+        <span class="id-text">Yang Bermakna ✓</span><span class="en-text">What's Meaningful ✓</span>
+      </div>
+      <div class="col-item">
+        <span class="id-text">Superposisi mengajarkan: potensi manusia tidak harus dikunci ke satu identitas</span>
+        <span class="en-text">Superposition teaches: human potential need not be locked into one identity</span>
+      </div>
+      <div class="col-item">
+        <span class="id-text">Entanglement menginspirasi: koneksi antar manusia memiliki kedalaman yang melampaui komunikasi biasa</span>
+        <span class="en-text">Entanglement inspires: human connection has a depth that transcends ordinary communication</span>
+      </div>
+      <div class="col-item">
+        <span class="id-text">Ketidakpastian Heisenberg: mengukur (menghakimi) seseorang mengubah mereka</span>
+        <span class="en-text">Heisenberg uncertainty: measuring (judging) someone changes them</span>
+      </div>
+    </div>
+    <div class="col-box col-box-red">
+      <div class="col-title col-title-red">
+        <span class="id-text">Yang Perlu Diwaspadai ✗</span><span class="en-text">What to Watch Out For ✗</span>
+      </div>
+      <div class="col-item">
+        <span class="id-text">"Quantum healing" dan pseudosains yang menyalahgunakan terminologi fisika tanpa dasar ilmiah</span>
+        <span class="en-text">"Quantum healing" and pseudoscience misusing physics terminology without scientific basis</span>
+      </div>
+      <div class="col-item">
+        <span class="id-text">Superposisi pikiran ≠ superposisi kuantum: analogi boleh, literalisasi berbahaya</span>
+        <span class="en-text">Mental superposition ≠ quantum superposition: analogy is fine, literalization is dangerous</span>
+      </div>
+      <div class="col-item">
+        <span class="id-text">Produk "quantum" tanpa bukti ilmiah yang dikomersialkan secara masif</span>
+        <span class="en-text">Massively commercialized "quantum" products with no scientific evidence</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══════════════════════════════════════════════════════
+     S3 · SEJARAH QUANTUM COMPUTING
+══════════════════════════════════════════════════════ -->
+<section id="s3" class="reveal">
+  <p class="sec-eyebrow">
+    <span class="id-text">Bagian 3</span><span class="en-text">Chapter 3</span>
+  </p>
+  <h2 class="sec-title" style="position:relative">
+    <span class="sec-num">03</span>
+    <span class="id-text">Sejarah Quantum Computing:<br>Dari Ide Gila ke Mesin Nyata</span>
+    <span class="en-text">History of Quantum Computing:<br>From Wild Idea to Real Machine</span>
+  </h2>
+
+  <p class="sec-lead">
+    <span class="id-text">Perjalanannya dimulai bukan dari insinyur, melainkan dari fisikawan yang bertanya: "Bisakah alam semesta sendiri menjadi komputer?"</span>
+    <span class="en-text">The journey began not with engineers, but with physicists asking: "Could the universe itself be a computer?"</span>
+  </p>
+
+  <div class="timeline">
+    <div class="tl-item">
+      <div class="tl-dot"></div>
+      <div class="tl-year">1900–1935</div>
+      <div class="tl-title"><span class="id-text">Fondasi Mekanika Kuantum</span><span class="en-text">Quantum Mechanics Foundation</span></div>
+      <div class="tl-body"><span class="id-text">Planck, Einstein, Bohr, Heisenberg, Schrödinger membangun mekanika kuantum. Fisika menjadi tak terduga — dan itu menakutkan sekaligus memukau.</span><span class="en-text">Planck, Einstein, Bohr, Heisenberg, Schrödinger build quantum mechanics. Physics becomes unpredictable — simultaneously terrifying and fascinating.</span></div>
+    </div>
+    <div class="tl-item">
+      <div class="tl-dot"></div>
+      <div class="tl-year">1981</div>
+      <div class="tl-title">Richard Feynman — <span class="id-text">Ide Pertama</span><span class="en-text">The First Idea</span></div>
+      <div class="tl-body"><span class="id-text">Di konferensi MIT, Feynman mengusulkan: "Untuk mensimulasikan alam kuantum, kita butuh komputer kuantum." Makalahnya di <em>International Journal of Theoretical Physics</em> (1982) menjadi batu penjuru.</span><span class="en-text">At an MIT conference, Feynman proposes: "To simulate quantum nature, we need a quantum computer." His paper in <em>International Journal of Theoretical Physics</em> (1982) becomes the cornerstone.</span></div>
+    </div>
+    <div class="tl-item">
+      <div class="tl-dot"></div>
+      <div class="tl-year">1985</div>
+      <div class="tl-title">David Deutsch — <span class="id-text">Komputer Kuantum Universal</span><span class="en-text">Universal Quantum Computer</span></div>
+      <div class="tl-body"><span class="id-text">Deutsch merancang model teoritis komputer kuantum universal yang bisa mensimulasikan sistem fisik apapun. Ia juga menciptakan algoritma kuantum pertama.</span><span class="en-text">Deutsch designs the theoretical model of a universal quantum computer that can simulate any physical system. He also creates the first quantum algorithm.</span></div>
+    </div>
+    <div class="tl-item">
+      <div class="tl-dot"></div>
+      <div class="tl-year">1994</div>
+      <div class="tl-title">Peter Shor — <span class="id-text">Algoritma yang Mengguncang Kriptografi</span><span class="en-text">The Algorithm That Shook Cryptography</span></div>
+      <div class="tl-body"><span class="id-text">Algoritma Shor membuktikan komputer kuantum bisa memfaktorkan bilangan besar secara eksponensial lebih cepat dari komputer klasik — mengancam RSA encryption yang melindungi seluruh internet.</span><span class="en-text">Shor's algorithm proves quantum computers can factor large numbers exponentially faster than classical computers — threatening the RSA encryption protecting the entire internet.</span></div>
+    </div>
+    <div class="tl-item">
+      <div class="tl-dot"></div>
+      <div class="tl-year">1996</div>
+      <div class="tl-title">Lov Grover — <span class="id-text">Pencarian Kuantum</span><span class="en-text">Quantum Search</span></div>
+      <div class="tl-body"><span class="id-text">Algoritma Grover: mencari dalam database tak terurut dengan N entri hanya butuh √N langkah (bukan N). Percepatan kuadrat untuk masalah pencarian.</span><span class="en-text">Grover's algorithm: searching an unsorted database of N entries requires only √N steps (not N). Quadratic speedup for search problems.</span></div>
+    </div>
+    <div class="tl-item">
+      <div class="tl-dot"></div>
+      <div class="tl-year">2001</div>
+      <div class="tl-title">IBM — <span class="id-text">Faktorisasi Pertama</span><span class="en-text">First Factorization</span></div>
+      <div class="tl-body"><span class="id-text">IBM menggunakan 7-qubit NMR quantum computer untuk memfaktorkan angka 15 (= 3 × 5) menggunakan algoritma Shor. Sederhana, tapi bersejarah.</span><span class="en-text">IBM uses a 7-qubit NMR quantum computer to factor the number 15 (= 3 × 5) using Shor's algorithm. Simple, but historic.</span></div>
+    </div>
+    <div class="tl-item">
+      <div class="tl-dot"></div>
+      <div class="tl-year">2019</div>
+      <div class="tl-title">Google — <span class="id-text">Supremasi Kuantum</span><span class="en-text">Quantum Supremacy</span></div>
+      <div class="tl-body"><span class="id-text">Prosesor Sycamore (53 qubit) Google menyelesaikan komputasi dalam 200 detik yang akan membutuhkan 10.000 tahun pada superkomputer terbaik. Diterbitkan di <em>Nature</em>, 574, 505–510.</span><span class="en-text">Google's Sycamore processor (53 qubits) completes a computation in 200 seconds that would take 10,000 years on the best supercomputer. Published in <em>Nature</em>, 574, 505–510.</span></div>
+    </div>
+    <div class="tl-item">
+      <div class="tl-dot"></div>
+      <div class="tl-year">2022</div>
+      <div class="tl-title"><span class="id-text">Nobel Fisika</span><span class="en-text">Nobel Prize in Physics</span></div>
+      <div class="tl-body"><span class="id-text">Aspect, Clauser, Zeilinger memenangkan Nobel atas konfirmasi eksperimental entanglement dan pelanggaran ketidaksetaraan Bell — fondasi yang sama dari quantum computing.</span><span class="en-text">Aspect, Clauser, Zeilinger win Nobel for experimental confirmation of entanglement and Bell inequality violation — the same foundation of quantum computing.</span></div>
+    </div>
+    <div class="tl-item">
+      <div class="tl-dot" style="background:var(--accent)"></div>
+      <div class="tl-year">2023–2026</div>
+      <div class="tl-title"><span class="id-text">Era NISQ & Perlombaan Qubit</span><span class="en-text">The NISQ Era & Qubit Race</span></div>
+      <div class="tl-body"><span class="id-text">IBM mencapai 1.000+ qubit (Condor, 2023). Microsoft memperkenalkan topological qubit. Google, IonQ, Quantinuum berlomba menuju quantum advantage yang nyata dan dapat diverifikasi.</span><span class="en-text">IBM reaches 1,000+ qubits (Condor, 2023). Microsoft introduces topological qubits. Google, IonQ, Quantinuum race toward real, verifiable quantum advantage.</span></div>
+    </div>
+  </div>
+
+  <div class="divider"></div>
+
+  <!-- ── TOKOH-TOKOH ───────────────────────────────────────── -->
+  <h3 style="font-size:15px;font-weight:700;color:var(--ink);margin-bottom:.75rem">
+    <span class="id-text">👤 Di Balik Nama-Nama Besar</span>
+    <span class="en-text">👤 Behind the Big Names</span>
+  </h3>
+  <p class="sec-lead" style="margin-bottom:1rem">
+    <span class="id-text">Timeline hanya menunjukkan tanggal dan penemuan. Namun di baliknya ada manusia dengan kepribadian, keraguan, dan jalan hidup yang jarang lurus. Tiga sosok berikut mewakili tiga generasi berbeda dalam sejarah quantum computing.</span>
+    <span class="en-text">A timeline only shows dates and discoveries. Behind it are people with personalities, doubts, and rarely straightforward paths. The following three figures represent three different generations in quantum computing history.</span>
+  </p>
+
+  <div class="card-grid" style="margin-bottom:1rem">
+    <div class="card card-accent">
+      <div class="card-icon">🎻</div>
+      <div class="card-title"><span class="id-text">Richard Feynman</span><span class="en-text">Richard Feynman</span> <span style="font-weight:400;font-size:11px;color:var(--ink4)">1918–1988</span></div>
+      <div class="card-body">
+        <span class="id-text">Jauh sebelum jadi "bapak quantum computing", Feynman dikenal sebagai peretas brankas iseng di Los Alamos, pemain bongo yang tampil di klub malam, dan pelukis amatir. Ia memenangkan Nobel Fisika 1965 atas kerja elektrodinamika kuantum (QED), lalu menjadi tokoh publik lewat gaya mengajarnya yang jenaka dan blak-blakan (<em>Surely You're Joking, Mr. Feynman!</em>). Pada 1986, ia menjadi anggota tim investigasi bencana pesawat ulang-alik Challenger — dengan eksperimen sederhana namun ikonik: mencelupkan cincin-O karet ke air es untuk menunjukkan kegagalan materialnya di depan kamera televisi. Idenya tentang komputer kuantum (1981) lahir dari kejengkelannya: simulasi sistem kuantum di komputer klasik selalu lambat secara eksponensial — jadi kenapa tidak memakai sistem kuantum itu sendiri sebagai komputer?</span>
+        <span class="en-text">Long before becoming the "father of quantum computing," Feynman was known as a playful safe-cracker at Los Alamos, a bongo player performing in nightclubs, and an amateur painter. He won the 1965 Nobel Prize in Physics for quantum electrodynamics (QED), then became a public figure through his witty, blunt teaching style (<em>Surely You're Joking, Mr. Feynman!</em>). In 1986, he joined the investigation into the Challenger shuttle disaster — with a simple but iconic experiment: dipping a rubber O-ring into ice water to demonstrate its material failure live on television. His quantum computing idea (1981) was born from frustration: simulating quantum systems on classical computers is always exponentially slow — so why not use quantum systems themselves as the computer?</span>
+      </div>
+    </div>
+    <div class="card card-teal">
+      <div class="card-icon">📐</div>
+      <div class="card-title"><span class="id-text">David Deutsch</span><span class="en-text">David Deutsch</span> <span style="font-weight:400;font-size:11px;color:var(--ink4)">1953–</span></div>
+      <div class="card-body">
+        <span class="id-text">Fisikawan Oxford yang jarang tampil publik, Deutsch adalah orang yang pertama kali merumuskan model matematis lengkap komputer kuantum universal (1985) — bukan sekadar ide, tapi kerangka kerja formal yang membuktikan mesin semacam itu bisa dibangun. Ia juga filsuf sains yang serius: bukunya <em>The Fabric of Reality</em> (1997) menyatukan mekanika kuantum (interpretasi banyak-dunia, yang ia yakini penuh), teori komputasi, epistemologi Popperian, dan evolusi menjadi satu kerangka pemahaman realitas. Deutsch juga salah satu pendiri "constructor theory" — usaha ambisius merumuskan ulang fisika dari prinsip "transformasi apa yang mungkin dan tidak mungkin", bukan dari persamaan gerak.</span>
+        <span class="en-text">A reclusive Oxford physicist, Deutsch was the first to formulate the complete mathematical model of a universal quantum computer (1985) — not just an idea, but a formal framework proving such a machine could be built. He is also a serious philosopher of science: his book <em>The Fabric of Reality</em> (1997) unifies quantum mechanics (the many-worlds interpretation, which he firmly holds), computation theory, Popperian epistemology, and evolution into a single framework for understanding reality. Deutsch also co-founded "constructor theory" — an ambitious effort to reformulate physics from the principle of "what transformations are and aren't possible," rather than equations of motion.</span>
+      </div>
+    </div>
+    <div class="card card-gold">
+      <div class="card-icon">🌐</div>
+      <div class="card-title"><span class="id-text">Stephanie Wehner</span><span class="en-text">Stephanie Wehner</span> <span style="font-weight:400;font-size:11px;color:var(--ink4)">1978–</span></div>
+      <div class="card-body">
+        <span class="id-text">Profesor di TU Delft, Belanda — tempat penulis buku ini menempuh studi teknik elektro — Wehner adalah salah satu arsitek utama visi <strong>quantum internet</strong>: jaringan yang menghubungkan komputer kuantum lewat entanglement, bukan sekadar bit klasik. Ia memimpin Quantum Internet Alliance, proyek kolaborasi Eropa yang membangun prototipe jaringan kuantum nyata antar-kota Belanda. Sebelum ke fisika kuantum terapan, Wehner sempat bekerja sebagai peretas profesional di industri keamanan siber — latar belakang yang unik memberinya perspektif tajam soal implikasi keamanan quantum computing. Ia juga dikenal aktif mendorong representasi perempuan dalam fisika dan teknologi kuantum, bidang yang secara historis didominasi laki-laki.</span>
+        <span class="en-text">A professor at TU Delft, Netherlands — where this book's author studied electrical engineering — Wehner is one of the leading architects of the <strong>quantum internet</strong> vision: a network connecting quantum computers via entanglement, not merely classical bits. She leads the Quantum Internet Alliance, a European collaborative project building real quantum network prototypes between Dutch cities. Before applied quantum physics, Wehner worked as a professional hacker in the cybersecurity industry — a unique background giving her sharp perspective on quantum computing's security implications. She is also known for actively championing women's representation in physics and quantum technology, a field historically dominated by men.</span>
+      </div>
+    </div>
+  </div>
+
+  <div class="lab-links">
+    <div class="lab-links-label">
+      <span class="id-text">📄 Lab interaktif terkait</span>
+      <span class="en-text">📄 Related interactive labs</span>
+    </div>
+    <div class="lab-links-row">
+      <a href="superposisi_qubit.html" target="_blank" class="lab-btn">
+        <span class="lab-btn-icon">⚛️</span>
+        <span class="lab-btn-text">
+          <span class="id-text">Superposisi & Qubit</span>
+          <span class="en-text">Superposition & Qubit</span>
+        </span>
+        <span class="lab-btn-arrow">→</span>
+      </a>
+      <a href="entanglement_quantum.html" target="_blank" class="lab-btn">
+        <span class="lab-btn-icon">🔗</span>
+        <span class="lab-btn-text">
+          <span class="id-text">Entanglement Kuantum</span>
+          <span class="en-text">Quantum Entanglement</span>
+        </span>
+        <span class="lab-btn-arrow">→</span>
+      </a>
+    </div>
+  </div>
+</section>
+
+<!-- ══════════════════════════════════════════════════════
+     S4 · APA YANG BISA DICAPAI
+══════════════════════════════════════════════════════ -->
+<section id="s4" class="reveal">
+  <p class="sec-eyebrow">
+    <span class="id-text">Bagian 4</span><span class="en-text">Chapter 4</span>
+  </p>
+  <h2 class="sec-title" style="position:relative">
+    <span class="sec-num">04</span>
+    <span class="id-text">Apa yang Bisa Dicapai:<br>Dari Sederhana ke Kompleks</span>
+    <span class="en-text">What Can Be Achieved:<br>From Simple to Complex</span>
+  </h2>
+
+  <p class="sec-lead">
+    <span class="id-text">Quantum computing bukan solusi untuk semua masalah. Ia unggul di kelas masalah tertentu — dan memahami perbedaan ini adalah kunci literasi kuantum.</span>
+    <span class="en-text">Quantum computing is not a solution for all problems. It excels at specific problem classes — and understanding this distinction is key to quantum literacy.</span>
+  </p>
+
+  <h3 style="font-size:14px;font-weight:700;color:var(--ink3);text-transform:uppercase;letter-spacing:.1em;margin-bottom:1rem">
+    <span class="id-text">Tingkat Aplikasi</span><span class="en-text">Application Levels</span>
+  </h3>
+
+  <div class="card-grid">
+    <div class="card" style="border-top:3px solid #1D9E75">
+      <div class="card-icon">🔰</div>
+      <div class="card-title">
+        <span class="id-text">Dasar — Simulasi Kuantum</span><span class="en-text">Basic — Quantum Simulation</span>
+      </div>
+      <div class="card-body">
+        <span class="id-text">Mensimulasikan molekul dan bahan kimia dengan presisi yang tidak mungkin dicapai komputer klasik. Contoh: simulasi kafein, aspirin, atau enzim nitrogen. Berguna untuk desain obat dan material baru.</span>
+        <span class="en-text">Simulating molecules and chemicals with precision impossible for classical computers. Examples: simulating caffeine, aspirin, or nitrogen enzymes. Useful for drug design and new materials.</span>
+      </div>
+    </div>
+    <div class="card" style="border-top:3px solid #2d5be3">
+      <div class="card-icon">🔍</div>
+      <div class="card-title">
+        <span class="id-text">Menengah — Optimisasi</span><span class="en-text">Intermediate — Optimization</span>
+      </div>
+      <div class="card-body">
+        <span class="id-text">Traveling Salesman Problem, penjadwalan penerbangan, optimisasi rantai pasok, portofolio keuangan. Quantum annealing (D-Wave) sudah digunakan oleh Volkswagen untuk optimisasi lalu lintas.</span>
+        <span class="en-text">Traveling Salesman Problem, flight scheduling, supply chain optimization, financial portfolios. Quantum annealing (D-Wave) already used by Volkswagen for traffic optimization.</span>
+      </div>
+    </div>
+    <div class="card" style="border-top:3px solid #6a3fa8">
+      <div class="card-icon">🤖</div>
+      <div class="card-title">
+        <span class="id-text">Lanjutan — Quantum Machine Learning</span><span class="en-text">Advanced — Quantum Machine Learning</span>
+      </div>
+      <div class="card-body">
+        <span class="id-text">Melatih model AI dengan data kuantum, menemukan pola di dataset yang terlalu besar untuk AI klasik. Berpotensi merevolusi diagnostik medis, prediksi iklim, dan riset material.</span>
+        <span class="en-text">Training AI models with quantum data, finding patterns in datasets too large for classical AI. Potential to revolutionize medical diagnostics, climate prediction, and materials research.</span>
+      </div>
+    </div>
+    <div class="card" style="border-top:3px solid #b8860b">
+      <div class="card-icon">🔑</div>
+      <div class="card-title">
+        <span class="id-text">Kritis — Kriptografi & Keamanan</span><span class="en-text">Critical — Cryptography & Security</span>
+      </div>
+      <div class="card-body">
+        <span class="id-text">Algoritma Shor bisa memecahkan RSA-2048 yang melindungi perbankan dan internet global. Ini mendorong transisi ke post-quantum cryptography (PQC) — NIST telah menetapkan standar pertama pada 2024.</span>
+        <span class="en-text">Shor's algorithm can break RSA-2048 protecting global banking and internet. This drives transition to post-quantum cryptography (PQC) — NIST finalized first standards in 2024.</span>
+      </div>
+    </div>
+    <div class="card" style="border-top:3px solid #c0392b">
+      <div class="card-icon">⚗️</div>
+      <div class="card-title">
+        <span class="id-text">Transformatif — Kimia Kuantum</span><span class="en-text">Transformative — Quantum Chemistry</span>
+      </div>
+      <div class="card-body">
+        <span class="id-text">Simulasi fiksasi nitrogen oleh enzim nitrogenase bisa membuka pupuk tanpa energi fosil — mengubah pertanian global. Simulasi ini butuh jutaan qubit yang belum ada, tapi jalannya sudah jelas.</span>
+        <span class="en-text">Simulating nitrogen fixation by nitrogenase enzyme could unlock fertilizer without fossil fuels — transforming global agriculture. This requires millions of qubits not yet available, but the path is clear.</span>
+      </div>
+    </div>
+    <div class="card" style="border-top:3px solid #0d7a65">
+      <div class="card-icon">🌐</div>
+      <div class="card-title">
+        <span class="id-text">Visioner — Quantum Internet</span><span class="en-text">Visionary — Quantum Internet</span>
+      </div>
+      <div class="card-body">
+        <span class="id-text">Jaringan komunikasi berbasis entanglement yang secara fisik tidak bisa disadap. China sudah mendemonstrasikan quantum satellite communication sejauh 1.200 km (2017, Micius satellite).</span>
+        <span class="en-text">Entanglement-based communication network that is physically impossible to intercept. China already demonstrated quantum satellite communication over 1,200 km (2017, Micius satellite).</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- Bar chart kemajuan -->
+  <h3 style="font-size:13px;font-weight:700;color:var(--ink3);text-transform:uppercase;letter-spacing:.1em;margin-bottom:1rem">
+    <span class="id-text">Kematangan Teknologi Saat Ini (2026)</span><span class="en-text">Current Technology Maturity (2026)</span>
+  </h3>
+  <div class="bar-row"><div class="bar-label"><span class="id-text">Simulasi Kuantum</span><span class="en-text">Quantum Simulation</span></div><div class="bar-track"><div class="bar-fill" style="width:65%;background:var(--teal)"></div></div><div class="bar-val">65%</div></div>
+  <div class="bar-row"><div class="bar-label"><span class="id-text">Kriptografi (QKD)</span><span class="en-text">Cryptography (QKD)</span></div><div class="bar-track"><div class="bar-fill" style="width:72%;background:var(--teal)"></div></div><div class="bar-val">72%</div></div>
+  <div class="bar-row"><div class="bar-label"><span class="id-text">Optimisasi</span><span class="en-text">Optimization</span></div><div class="bar-track"><div class="bar-fill" style="width:45%;background:var(--accent)"></div></div><div class="bar-val">45%</div></div>
+  <div class="bar-row"><div class="bar-label"><span class="id-text">Quantum ML</span><span class="en-text">Quantum ML</span></div><div class="bar-track"><div class="bar-fill" style="width:30%;background:var(--accent)"></div></div><div class="bar-val">30%</div></div>
+  <div class="bar-row"><div class="bar-label"><span class="id-text">Kimia Kuantum</span><span class="en-text">Quantum Chemistry</span></div><div class="bar-track"><div class="bar-fill" style="width:20%;background:var(--purple)"></div></div><div class="bar-val">20%</div></div>
+  <div class="bar-row"><div class="bar-label"><span class="id-text">Quantum Internet</span><span class="en-text">Quantum Internet</span></div><div class="bar-track"><div class="bar-fill" style="width:12%;background:var(--purple)"></div></div><div class="bar-val">12%</div></div>
+  <p style="font-size:11px;color:var(--ink4);margin-top:.5rem;font-style:italic">
+    <span class="id-text">Estimasi penulis berdasarkan status penelitian publik 2026. Bukan proyeksi resmi industri.</span>
+    <span class="en-text">Author's estimate based on public research status 2026. Not an official industry projection.</span>
+  </p>
+
+  <div class="divider"></div>
+
+  <!-- ── NIST PQC STANDARDS 2024 ──────────────────────────── -->
+  <h3 style="font-size:15px;font-weight:700;color:var(--ink);margin-bottom:.75rem">
+    <span class="id-text">🔐 Mendalam: Standar Kriptografi Pasca-Kuantum NIST 2024</span>
+    <span class="en-text">🔐 Deep Dive: NIST's 2024 Post-Quantum Cryptography Standards</span>
+  </h3>
+  <p class="sec-lead" style="margin-bottom:1rem">
+    <span class="id-text">Hampir seluruh keamanan digital dunia — perbankan online, pesan terenkripsi, sertifikat situs web — bersandar pada dua keluarga algoritma: <strong>RSA</strong> dan <strong>Elliptic Curve Cryptography (ECC)</strong>. Keduanya aman terhadap komputer klasik karena mengandalkan kesulitan memfaktorkan bilangan besar atau menyelesaikan logaritma diskrit — masalah yang butuh miliaran tahun untuk dipecahkan komputer biasa. Algoritma Shor mengubah semua itu: pada komputer kuantum yang cukup besar, masalah yang sama bisa diselesaikan dalam hitungan jam.</span>
+    <span class="en-text">Nearly all of the world's digital security — online banking, encrypted messaging, website certificates — rests on two algorithm families: <strong>RSA</strong> and <strong>Elliptic Curve Cryptography (ECC)</strong>. Both are secure against classical computers because they rely on the difficulty of factoring large numbers or solving discrete logarithms — problems that would take ordinary computers billions of years. Shor's algorithm changes all that: on a sufficiently large quantum computer, the same problems could be solved in hours.</span>
+  </p>
+
+  <div class="two-col" style="margin-bottom:1.5rem">
+    <div class="col-box col-box-red">
+      <div class="col-title col-title-red"><span class="id-text">Rentan terhadap Shor ✗</span><span class="en-text">Vulnerable to Shor ✗</span></div>
+      <div class="col-item"><span class="id-text">RSA — mengandalkan kesulitan faktorisasi bilangan besar</span><span class="en-text">RSA — relies on the difficulty of factoring large numbers</span></div>
+      <div class="col-item"><span class="id-text">ECC (Elliptic Curve) — mengandalkan logaritma diskrit kurva eliptik; dipakai luas di HTTPS dan cryptocurrency</span><span class="en-text">ECC (Elliptic Curve) — relies on elliptic curve discrete logarithms; widely used in HTTPS and cryptocurrency</span></div>
+      <div class="col-item"><span class="id-text">Diffie-Hellman klasik — pertukaran kunci yang juga rentan terhadap versi kuantum algoritma Shor</span><span class="en-text">Classical Diffie-Hellman — key exchange also vulnerable to the quantum version of Shor's algorithm</span></div>
+    </div>
+    <div class="col-box col-box-green">
+      <div class="col-title col-title-green"><span class="id-text">Tahan Kuantum ✓</span><span class="en-text">Quantum-Resistant ✓</span></div>
+      <div class="col-item"><span class="id-text">Kriptografi berbasis kisi (lattice) — mengandalkan kesulitan masalah geometris dimensi tinggi, tak tersentuh algoritma Shor</span><span class="en-text">Lattice-based cryptography — relies on high-dimensional geometric problems untouched by Shor's algorithm</span></div>
+      <div class="col-item"><span class="id-text">Kriptografi berbasis hash — mengandalkan fungsi hash satu-arah, sudah dipercaya puluhan tahun</span><span class="en-text">Hash-based cryptography — relies on one-way hash functions, trusted for decades</span></div>
+      <div class="col-item"><span class="id-text">Kriptografi berbasis kode (code-based) — pendekatan tertua (1978), baru relevan kembali di era pasca-kuantum</span><span class="en-text">Code-based cryptography — the oldest approach (1978), newly relevant again in the post-quantum era</span></div>
+    </div>
+  </div>
+
+  <h3 style="font-size:13px;font-weight:700;color:var(--ink3);text-transform:uppercase;letter-spacing:.1em;margin-bottom:1rem">
+    <span class="id-text">Tiga Standar Resmi NIST (Agustus 2024)</span><span class="en-text">Three Official NIST Standards (August 2024)</span>
+  </h3>
+  <div class="card-grid" style="margin-bottom:1rem">
+    <div class="card card-accent">
+      <div class="card-icon">🔑</div>
+      <div class="card-title">FIPS 203 · ML-KEM<br><span style="font-weight:400;font-size:11px;color:var(--ink4)">CRYSTALS-Kyber</span></div>
+      <div class="card-body">
+        <span class="id-text">Standar utama untuk <strong>enkapsulasi kunci</strong> (pertukaran kunci rahasia) — pengganti Diffie-Hellman/RSA di hampir semua koneksi terenkripsi terenkripsi harian. Berbasis kisi modular (Module-LWE). Ukuran kunci kecil, performa cepat — kandidat utama untuk adopsi masal di TLS/HTTPS.</span>
+        <span class="en-text">The primary standard for <strong>key encapsulation</strong> (secure key exchange) — replacing Diffie-Hellman/RSA in nearly all everyday encrypted connections. Based on Module-LWE lattices. Small key sizes, fast performance — a leading candidate for mass adoption in TLS/HTTPS.</span>
+      </div>
+    </div>
+    <div class="card card-teal">
+      <div class="card-icon">✍️</div>
+      <div class="card-title">FIPS 204 · ML-DSA<br><span style="font-weight:400;font-size:11px;color:var(--ink4)">CRYSTALS-Dilithium</span></div>
+      <div class="card-body">
+        <span class="id-text">Standar utama untuk <strong>tanda tangan digital</strong> — memverifikasi identitas pengirim pesan atau keaslian dokumen/perangkat lunak. Juga berbasis kisi (lattice), dirancang sebagai pengganti default untuk ECDSA/RSA signature.</span>
+        <span class="en-text">The primary standard for <strong>digital signatures</strong> — verifying sender identity or the authenticity of documents/software. Also lattice-based, designed as the default replacement for ECDSA/RSA signatures.</span>
+      </div>
+    </div>
+    <div class="card card-gold">
+      <div class="card-icon">🌲</div>
+      <div class="card-title">FIPS 205 · SLH-DSA<br><span style="font-weight:400;font-size:11px;color:var(--ink4)">SPHINCS+</span></div>
+      <div class="card-body">
+        <span class="id-text">Standar tanda tangan <strong>cadangan</strong>, berbasis hash (bukan kisi) — matematikanya lebih sederhana dan dipercaya lebih lama, sehingga jadi jaring pengaman jika suatu hari kelemahan ditemukan pada pendekatan berbasis kisi. Ukuran tanda tangan lebih besar, lebih lambat, tapi sangat konservatif.</span>
+        <span class="en-text">A <strong>backup</strong> signature standard, hash-based rather than lattice-based — its mathematics is simpler and longer-trusted, serving as a safety net if a weakness is ever found in lattice-based approaches. Larger signature size, slower, but highly conservative.</span>
+      </div>
+    </div>
+  </div>
+
+  <div class="two-col" style="margin-bottom:1rem">
+    <div class="col-box">
+      <div class="col-title" style="color:var(--ink2)"><span class="id-text">⏳ Masalah "Y2Q"</span><span class="en-text">⏳ The "Y2Q" Problem</span></div>
+      <p style="font-size:12px;color:var(--ink3);line-height:1.6">
+        <span class="id-text">"Y2Q" (Years to Quantum) merujuk pada perkiraan kapan komputer kuantum cukup besar untuk memecahkan RSA-2048 — diperkirakan butuh sekitar <strong>~4.000 qubit logis</strong> (yang berarti jutaan qubit fisik dengan koreksi error saat ini). Estimasi para ahli berkisar antara <strong>2030–2040</strong>, meski ketidakpastiannya besar. Yang pasti: migrasi sistem kripto skala besar butuh bertahun-tahun, sehingga persiapan tidak bisa ditunda sampai ancaman itu nyata.</span>
+        <span class="en-text">"Y2Q" (Years to Quantum) refers to the estimated point when quantum computers become large enough to break RSA-2048 — thought to require roughly <strong>~4,000 logical qubits</strong> (translating to millions of physical qubits at today's error-correction overhead). Expert estimates range <strong>2030–2040</strong>, though uncertainty is substantial. What's certain: large-scale cryptographic migration takes years, so preparation cannot wait until the threat is imminent.</span>
+      </p>
+    </div>
+    <div class="col-box">
+      <div class="col-title" style="color:var(--ink2)"><span class="id-text">🎲 Quantum Random Number Generator</span><span class="en-text">🎲 Quantum Random Number Generator</span></div>
+      <p style="font-size:12px;color:var(--ink3);line-height:1.6">
+        <span class="id-text">Berbeda dari PQC (yang menahan serangan kuantum), QRNG memanfaatkan keacakan kuantum sejati — bukan pseudo-random dari algoritma klasik — untuk menghasilkan kunci kriptografi. Sudah komersial lewat perusahaan seperti <strong>ID Quantique</strong> (Swiss) dan <strong>QuintessenceLabs</strong> (Australia), dipakai bank dan pusat data yang butuh keacakan bersertifikat.</span>
+        <span class="en-text">Unlike PQC (which resists quantum attacks), QRNG harnesses genuine quantum randomness — not classical pseudo-randomness — to generate cryptographic keys. Already commercial through companies like <strong>ID Quantique</strong> (Switzerland) and <strong>QuintessenceLabs</strong> (Australia), used by banks and data centers requiring certified randomness.</span>
+      </p>
+    </div>
+  </div>
+  <p style="font-size:11px;color:var(--ink4);font-style:italic">
+    <span class="id-text">NIST merekomendasikan organisasi mulai migrasi ke PQC selambat-lambatnya 2030 untuk sistem sensitif — proses migrasi kriptografi skala enterprise historisnya memakan 5–10 tahun.</span>
+    <span class="en-text">NIST recommends organizations begin PQC migration no later than 2030 for sensitive systems — enterprise-scale cryptographic migration has historically taken 5–10 years.</span>
+  </p>
+
+  <div class="ref-block">
+    <div class="ref-label">Referensi / References</div>
+    <div class="ref-item">· NIST (2024). Module-Lattice-Based Key-Encapsulation Mechanism Standard. <em>FIPS 203</em>.</div>
+    <div class="ref-item">· NIST (2024). Module-Lattice-Based Digital Signature Standard. <em>FIPS 204</em>.</div>
+    <div class="ref-item">· NIST (2024). Stateless Hash-Based Digital Signature Standard. <em>FIPS 205</em>.</div>
+    <div class="ref-item">· Mosca, M. (2018). Cybersecurity in an era with quantum computers: will we be ready? <em>IEEE Security & Privacy</em>, 16(5), 38–41.</div>
+  </div>
+</section>
+
+<!-- ══════════════════════════════════════════════════════
+     S5 · INDUSTRI
+══════════════════════════════════════════════════════ -->
+<section id="s5" class="reveal">
+  <p class="sec-eyebrow">
+    <span class="id-text">Bagian 5</span><span class="en-text">Chapter 5</span>
+  </p>
+  <h2 class="sec-title" style="position:relative">
+    <span class="sec-num">05</span>
+    <span class="id-text">Industri yang Berinvestasi:<br>Perlombaan Menuju Quantum Advantage</span>
+    <span class="en-text">Investing Industries:<br>The Race Toward Quantum Advantage</span>
+  </h2>
+
+  <p class="sec-lead">
+    <span class="id-text">Investasi global dalam quantum computing mencapai lebih dari $35 miliar pada 2023–2025 — gabungan dari modal ventura, program pemerintah, dan R&D korporat. Ini bukan spekulasi; ini persaingan strategis.</span>
+    <span class="en-text">Global investment in quantum computing exceeded $35 billion in 2023–2025 — combining venture capital, government programs, and corporate R&D. This is not speculation; it is strategic competition.</span>
+  </p>
+
+  <h3 style="font-size:13px;font-weight:700;color:var(--ink3);text-transform:uppercase;letter-spacing:.1em;margin-bottom:1rem">
+    <span class="id-text">Pemain Utama Teknologi</span><span class="en-text">Major Technology Players</span>
+  </h3>
+  <div class="ind-grid">
+    <div class="ind-card" style="border-left-color:var(--accent)">
+      <div class="ind-card-name">IBM Quantum</div>
+      <div class="ind-card-co">🇺🇸 United States</div>
+      <div class="ind-card-focus"><span class="id-text">Pemimpin platform quantum cloud. IBM Quantum Network: 400+ organisasi mitra. Roadmap menuju 100.000 qubit logical pada 2033.</span><span class="en-text">Quantum cloud platform leader. IBM Quantum Network: 400+ partner organizations. Roadmap to 100,000 logical qubits by 2033.</span></div>
+      <div class="ind-card-inv" style="color:var(--accent)">~$3B R&D</div>
+    </div>
+    <div class="ind-card" style="border-left-color:var(--teal)">
+      <div class="ind-card-name">Google Quantum AI</div>
+      <div class="ind-card-co">🇺🇸 United States</div>
+      <div class="ind-card-focus"><span class="id-text">Pencapaian quantum supremacy (2019). Willow chip (2024): menyelesaikan dalam 5 menit komputasi yang butuh 10 septiliun tahun untuk superkomputer klasik.</span><span class="en-text">Achieved quantum supremacy (2019). Willow chip (2024): completed in 5 minutes a computation that would take 10 septillion years for classical supercomputers.</span></div>
+      <div class="ind-card-inv" style="color:var(--teal)">~$5B invested</div>
+    </div>
+    <div class="ind-card" style="border-left-color:var(--purple)">
+      <div class="ind-card-name">Microsoft Quantum</div>
+      <div class="ind-card-co">🇺🇸 United States</div>
+      <div class="ind-card-focus"><span class="id-text">Pendekatan topological qubit yang lebih stabil dari qubit konvensional. Azure Quantum platform. Target: 1 juta qubit logical dalam satu dekade.</span><span class="en-text">Topological qubit approach, more stable than conventional qubits. Azure Quantum platform. Target: 1 million logical qubits within a decade.</span></div>
+      <div class="ind-card-inv" style="color:var(--purple)">~$2B+</div>
+    </div>
+    <div class="ind-card" style="border-left-color:var(--gold)">
+      <div class="ind-card-name">D-Wave</div>
+      <div class="ind-card-co">🇨🇦 Canada</div>
+      <div class="ind-card-focus"><span class="id-text">Spesialis quantum annealing untuk optimisasi. Klien nyata: Volkswagen (optimisasi lalu lintas), Lockheed Martin, Unilever. Sudah menghasilkan pendapatan komersial.</span><span class="en-text">Quantum annealing specialist for optimization. Real clients: Volkswagen (traffic optimization), Lockheed Martin, Unilever. Already generating commercial revenue.</span></div>
+      <div class="ind-card-inv" style="color:var(--gold)">Listed NASDAQ</div>
+    </div>
+    <div class="ind-card" style="border-left-color:var(--red)">
+      <div class="ind-card-name">Baidu / Alibaba Quantum</div>
+      <div class="ind-card-co">🇨🇳 China</div>
+      <div class="ind-card-focus"><span class="id-text">China menginvestasikan $15B+ lewat program nasional. Quantum satellite Micius, jaringan QKD sepanjang 4.600 km. Target menjadi pemimpin global 2030.</span><span class="en-text">China invests $15B+ through national programs. Micius quantum satellite, 4,600 km QKD network. Target: global leader by 2030.</span></div>
+      <div class="ind-card-inv" style="color:var(--red)">$15B+ national</div>
+    </div>
+    <div class="ind-card" style="border-left-color:#666">
+      <div class="ind-card-name">IonQ · Quantinuum · Rigetti</div>
+      <div class="ind-card-co">🇺🇸 Startups</div>
+      <div class="ind-card-focus"><span class="id-text">Generasi baru perusahaan quantum murni. IonQ dan Rigetti sudah go public (NYSE/NASDAQ). Quantinuum (Honeywell + Cambridge QC) menjadi pemimpin quantum volume.</span><span class="en-text">New generation of pure-play quantum companies. IonQ and Rigetti already public (NYSE/NASDAQ). Quantinuum (Honeywell + Cambridge QC) becomes quantum volume leader.</span></div>
+      <div class="ind-card-inv" style="color:#666">$1B+ combined</div>
+    </div>
+  </div>
+
+  <h3 style="font-size:13px;font-weight:700;color:var(--ink3);text-transform:uppercase;letter-spacing:.1em;margin:.5rem 0 1rem">
+    <span class="id-text">Sektor Non-Teknologi yang Berinvestasi</span><span class="en-text">Non-Tech Sectors Investing</span>
+  </h3>
+  <div class="card-grid">
+    <div class="card">
+      <div class="card-icon">💊</div>
+      <div class="card-title"><span class="id-text">Farmasi & Kesehatan</span><span class="en-text">Pharma & Healthcare</span></div>
+      <div class="card-body"><span class="id-text">Roche, Pfizer, AstraZeneca berinvestasi dalam simulasi molekuler untuk penemuan obat. Target: mempercepat drug discovery dari 12 tahun menjadi 2–3 tahun.</span><span class="en-text">Roche, Pfizer, AstraZeneca investing in molecular simulation for drug discovery. Target: accelerating drug discovery from 12 years to 2–3 years.</span></div>
+    </div>
+    <div class="card">
+      <div class="card-icon">✈️</div>
+      <div class="card-title"><span class="id-text">Aerospace & Pertahanan</span><span class="en-text">Aerospace & Defense</span></div>
+      <div class="card-body"><span class="id-text">Lockheed Martin, Airbus, Boeing: optimisasi rute penerbangan, material pesawat, sistem navigasi quantum. AS, EU, dan China mengklasifikasi quantum sebagai teknologi strategis pertahanan.</span><span class="en-text">Lockheed Martin, Airbus, Boeing: flight route optimization, aircraft materials, quantum navigation systems. US, EU, and China classify quantum as strategic defense technology.</span></div>
+    </div>
+    <div class="card">
+      <div class="card-icon">🏦</div>
+      <div class="card-title"><span class="id-text">Keuangan & Perbankan</span><span class="en-text">Finance & Banking</span></div>
+      <div class="card-body"><span class="id-text">JPMorgan, Goldman Sachs, BBVA: optimisasi portofolio, pricing derivatif, deteksi penipuan. JPMorgan sudah mempublikasikan riset quantum algoritma untuk option pricing.</span><span class="en-text">JPMorgan, Goldman Sachs, BBVA: portfolio optimization, derivative pricing, fraud detection. JPMorgan already published quantum algorithm research for option pricing.</span></div>
+    </div>
+    <div class="card">
+      <div class="card-icon">⚡</div>
+      <div class="card-title"><span class="id-text">Energi</span><span class="en-text">Energy</span></div>
+      <div class="card-body"><span class="id-text">ExxonMobil, Shell, BP: optimisasi jaringan listrik, desain baterai generasi baru, simulasi reaksi kimia untuk energi terbarukan. ExxonMobil adalah salah satu partner IBM Quantum terbesar.</span><span class="en-text">ExxonMobil, Shell, BP: power grid optimization, next-generation battery design, chemical reaction simulation for renewables. ExxonMobil is one of IBM Quantum's largest partners.</span></div>
+    </div>
+  </div>
+
+  <div class="divider"></div>
+
+  <!-- ── PETA GEOPOLITIK KUANTUM GLOBAL ───────────────────── -->
+  <h3 style="font-size:15px;font-weight:700;color:var(--ink);margin-bottom:.75rem">
+    <span class="id-text">🌍 Peta Geopolitik Kuantum Global: Siapa Memimpin, dan Kenapa Ini Penting</span>
+    <span class="en-text">🌍 The Global Quantum Geopolitical Map: Who's Leading, and Why It Matters</span>
+  </h3>
+  <p class="sec-lead" style="margin-bottom:1rem">
+    <span class="id-text">Quantum computing sudah lama berhenti menjadi urusan laboratorium semata. Ia kini diperlakukan negara-negara besar setara teknologi strategis seperti semikonduktor — sesuatu yang menentukan keunggulan ekonomi, militer, dan intelijen selama beberapa dekade ke depan. Itulah sebabnya investasi, kebijakan ekspor, dan perlombaan talenta di bidang ini bergerak jauh lebih cepat dari yang terlihat di permukaan.</span>
+    <span class="en-text">Quantum computing stopped being purely a laboratory concern long ago. Major powers now treat it as a strategic technology on par with semiconductors — something that will shape economic, military, and intelligence advantage for decades to come. That's why investment, export policy, and the talent race in this field move far faster than what's visible on the surface.</span>
+  </p>
+
+  <div class="card-grid" style="margin-bottom:1rem">
+    <div class="card" style="border-top:3px solid var(--accent)">
+      <div class="card-icon">🇺🇸</div>
+      <div class="card-title"><span class="id-text">Amerika Serikat</span><span class="en-text">United States</span></div>
+      <div class="card-body">
+        <span class="id-text">Digerakkan sektor swasta lebih dari negara mana pun: IBM, Google, IonQ, PsiQuantum, Rigetti bersaing terbuka sambil menerbitkan riset. National Quantum Initiative Act (2018) mengoordinasikan dana federal, sementara Departemen Perdagangan memasukkan teknologi kuantum tertentu ke daftar kendali ekspor — pola yang sama dengan kebijakan pembatasan chip AI canggih.</span>
+        <span class="en-text">Driven by the private sector more than any other nation: IBM, Google, IonQ, PsiQuantum, and Rigetti compete openly while still publishing research. The National Quantum Initiative Act (2018) coordinates federal funding, while the Commerce Department has placed certain quantum technologies on export control lists — a pattern mirroring restrictions on advanced AI chips.</span>
+      </div>
+    </div>
+    <div class="card" style="border-top:3px solid var(--red)">
+      <div class="card-icon">🇨🇳</div>
+      <div class="card-title"><span class="id-text">China</span><span class="en-text">China</span></div>
+      <div class="card-body">
+        <span class="id-text">Investasi negara berskala besar lewat National Laboratory for Quantum Information Sciences di Hefei, dengan pendanaan yang dilaporkan melampaui gabungan banyak negara Barat. Unggul secara khusus di <strong>komunikasi kuantum</strong> — satelit Micius (2016) dan jaringan QKD darat Beijing–Shanghai sepanjang 2.000 km. Riset hardware komputasi cenderung kurang terbuka dipublikasikan dibanding AS/Eropa.</span>
+        <span class="en-text">Large-scale state investment through the National Laboratory for Quantum Information Sciences in Hefei, with funding reported to exceed the combined spending of many Western nations. Particularly strong in <strong>quantum communication</strong> — the Micius satellite (2016) and the 2,000 km Beijing–Shanghai terrestrial QKD network. Computing hardware research tends to be less openly published than in the US/Europe.</span>
+      </div>
+    </div>
+    <div class="card" style="border-top:3px solid var(--teal)">
+      <div class="card-icon">🇪🇺</div>
+      <div class="card-title"><span class="id-text">Uni Eropa</span><span class="en-text">European Union</span></div>
+      <div class="card-body">
+        <span class="id-text">Pendekatan kolaboratif lintas negara lewat Quantum Flagship (€1 miliar, ratusan institusi). Belanda menonjol lewat QuTech/TU Delft (arsitek quantum internet), disusul Jerman, Prancis, dan konsorsium Nordik. Filosofinya lebih terbuka dan berbagi dibanding pendekatan AS/China yang lebih kompetitif dan tertutup.</span>
+        <span class="en-text">A collaborative, cross-national approach via the Quantum Flagship (€1 billion, hundreds of institutions). The Netherlands stands out through QuTech/TU Delft (architects of the quantum internet), followed by Germany, France, and Nordic consortiums. The philosophy leans more open and shared compared to the more competitive, closed US/China approaches.</span>
+      </div>
+    </div>
+    <div class="card" style="border-top:3px solid var(--gold)">
+      <div class="card-icon">🌐</div>
+      <div class="card-title"><span class="id-text">Kelompok Kedua yang Menanjak</span><span class="en-text">The Rising Second Tier</span></div>
+      <div class="card-body">
+        <span class="id-text">Inggris (National Quantum Strategy, £2,5 miliar), Jepang (RIKEN, Fujitsu), India (National Mission on Quantum Technologies), Australia (Sydney Quantum Academy), dan Singapura (Centre for Quantum Technologies) — masing-masing membangun niche spesifik alih-alih bersaing head-to-head dengan tiga kekuatan utama. Pola yang familiar dari perlombaan teknologi strategis sebelumnya: chip, ruang angkasa, AI.</span>
+        <span class="en-text">The UK (National Quantum Strategy, £2.5 billion), Japan (RIKEN, Fujitsu), India (National Mission on Quantum Technologies), Australia (Sydney Quantum Academy), and Singapore (Centre for Quantum Technologies) — each building specific niches rather than competing head-to-head with the top three powers. A familiar pattern from earlier strategic technology races: chips, space, AI.</span>
+      </div>
+    </div>
+  </div>
+
+  <div class="two-col" style="margin-bottom:1.5rem">
+    <div class="col-box">
+      <div class="col-title" style="color:var(--ink2)"><span class="id-text">⚔️ Sains Terbuka vs Keamanan Nasional</span><span class="en-text">⚔️ Open Science vs National Security</span></div>
+      <p style="font-size:12px;color:var(--ink3);line-height:1.6">
+        <span class="id-text">Quantum computing lahir dari tradisi fisika akademik yang sangat terbuka — makalah dipublikasikan, hasil direplikasi lintas negara. Namun begitu potensinya untuk memecahkan enkripsi militer menjadi jelas, sebagian riset mulai bergeser ke ranah tertutup. Ketegangan antara "sains untuk kemajuan bersama" dan "teknologi untuk keunggulan strategis" adalah dinamika inti yang akan terus membentuk lapangan ini.</span>
+        <span class="en-text">Quantum computing emerged from a highly open academic physics tradition — papers published, results replicated across borders. But once its potential to break military-grade encryption became clear, some research began shifting toward closed doors. The tension between "science for shared progress" and "technology for strategic advantage" is the core dynamic that will keep shaping this field.</span>
+      </p>
+    </div>
+    <div class="col-box">
+      <div class="col-title" style="color:var(--ink2)"><span class="id-text">🧠 Perang Talenta</span><span class="en-text">🧠 The Talent War</span></div>
+      <p style="font-size:12px;color:var(--ink3);line-height:1.6">
+        <span class="id-text">Jumlah fisikawan dan insinyur kuantum berkualifikasi tinggi di dunia masih sangat terbatas — diperkirakan hanya ribuan orang secara global memiliki keahlian mendalam di bidang ini. Negara dan perusahaan besar bersaing ketat merekrut mereka, mirip pola perang talenta di AI beberapa tahun sebelumnya, dengan paket kompensasi dan kebebasan riset sebagai senjata utama.</span>
+        <span class="en-text">The pool of highly qualified quantum physicists and engineers worldwide remains very limited — estimated at only thousands of people globally with deep expertise in the field. Nations and major companies compete fiercely to recruit them, mirroring the AI talent war pattern of a few years earlier, with compensation packages and research freedom as the main weapons.</span>
+      </p>
+    </div>
+  </div>
+
+  <div class="divider"></div>
+
+  <!-- ── HELICOPTER VIEW: KONVERGENSI QUANTUM, AI, ROBOTIKA ── -->
+  <h3 style="font-size:15px;font-weight:700;color:var(--ink);margin-bottom:.75rem">
+    <span class="id-text">🚁 Pandangan dari Atas: Quantum, AI, Robotika, dan Wacana Singularity</span>
+    <span class="en-text">🚁 The Helicopter View: Quantum, AI, Robotics, and the Singularity Discourse</span>
+  </h3>
+  <p class="sec-lead" style="margin-bottom:1rem">
+    <span class="id-text">Naik satu level lebih tinggi dari sekadar perlombaan antarnegara: bagaimana posisi quantum computing dalam gambaran besar transformasi teknologi abad ini — bersama AI generatif, robotika, dan bioteknologi? Ada narasi populer yang menyatukan semuanya di bawah satu payung: <strong>the Singularity</strong>.</span>
+    <span class="en-text">Zooming out one level above the nation-to-nation race: where does quantum computing sit in the bigger picture of this century's technological transformation — alongside generative AI, robotics, and biotechnology? A popular narrative ties all of this together under one umbrella: <strong>the Singularity</strong>.</span>
+  </p>
+
+  <div class="two-col" style="margin-bottom:1rem">
+    <div class="col-box col-box-green">
+      <div class="col-title col-title-green"><span class="id-text">✦ Narasi Konvergensi</span><span class="en-text">✦ The Convergence Narrative</span></div>
+      <div class="col-item"><span class="id-text">Ray Kurzweil (futuris, Google) berpendapat lewat "law of accelerating returns": kemajuan komputasi, biotek, dan AI tumbuh eksponensial dan saling mempercepat satu sama lain — memprediksi kecerdasan mesin akan melampaui manusia sekitar 2045.</span><span class="en-text">Ray Kurzweil (futurist, Google) argues via the "law of accelerating returns": progress in computing, biotech, and AI grows exponentially and mutually accelerates — predicting machine intelligence will surpass human intelligence around 2045.</span></div>
+      <div class="col-item"><span class="id-text">Dalam narasi ini, quantum computing berperan sebagai salah satu "pengungkit" — memecahkan simulasi molekuler untuk biotek, mempercepat optimisasi untuk robotika, dan berpotensi suatu hari mempercepat pelatihan model AI raksasa.</span><span class="en-text">In this narrative, quantum computing plays the role of one "lever" — unlocking molecular simulation for biotech, accelerating optimization for robotics, and potentially one day speeding up training of giant AI models.</span></div>
+    </div>
+    <div class="col-box col-box-red">
+      <div class="col-title col-title-red"><span class="id-text">⚠ Pandangan Skeptis</span><span class="en-text">⚠ The Skeptical View</span></div>
+      <div class="col-item"><span class="id-text">Kritikus seperti Rodney Brooks (roboticist, MIT) dan Gary Marcus (kognitivis) menunjukkan: sebagian besar lompatan AI dan robotika saat ini murni digerakkan skala data dan chip GPU klasik — bukan quantum computing, yang sejauh ini nyaris tidak berperan dalam kemajuan AI komersial mana pun.</span><span class="en-text">Critics like Rodney Brooks (roboticist, MIT) and Gary Marcus (cognitive scientist) point out: most current leaps in AI and robotics are driven purely by data scale and classical GPU chips — not quantum computing, which has so far played almost no role in any commercial AI advance.</span></div>
+      <div class="col-item"><span class="id-text">Robotika fisik dibatasi terutama oleh aktuator, sensor, dan kontrol klasik real-time — bukan oleh kurangnya daya komputasi kuantum. Menyamakan kurva kemajuan quantum dengan kurva AI/robotika berisiko menyederhanakan tiga bidang yang punya hambatan teknis sangat berbeda.</span><span class="en-text">Physical robotics is constrained mainly by actuators, sensors, and real-time classical control — not by a lack of quantum computing power. Equating the quantum progress curve with the AI/robotics curve risks oversimplifying three fields with very different technical bottlenecks.</span></div>
+    </div>
+  </div>
+
+  <!-- ── TITIK TEMU KONKRET: AI SEBAGAI PERUMUS SOAL KUANTUM ── -->
+  <div class="card" style="border-top:3px solid var(--purple);margin-bottom:1rem">
+    <div class="card-icon">🎯</div>
+    <div class="card-title"><span class="id-text">Titik Temu yang Lebih Konkret: AI sebagai "Perumus Soal" untuk Quantum</span><span class="en-text">A More Concrete Meeting Point: AI as the "Problem Formulator" for Quantum</span></div>
+    <div class="card-body">
+      <span class="id-text">Ada arah konvergensi yang jauh lebih nyata hari ini dibanding "quantum mempercepat AI" — justru arah sebaliknya: <strong>AI membantu merumuskan soal yang tepat agar bisa dipecahkan komputer kuantum.</strong> Ini bukan spekulasi futuris; ini pekerjaan riil yang sedang berjalan. Bottleneck terbesar quantum computing sering kali bukan qubit-nya, melainkan <em>menerjemahkan</em> masalah dunia nyata menjadi bentuk yang bisa dijalankan quantum computer — merancang Hamiltonian yang tepat untuk simulasi molekul, menyusun ansatz (struktur sirkuit) untuk algoritma VQE, atau memformulasikan masalah optimisasi ke dalam QUBO/Ising model untuk quantum annealer.<br><br>
+      Di sinilah AI — terutama reinforcement learning dan model generatif — mulai berperan nyata: "quantum architecture search" memakai ML untuk menemukan sirkuit kuantum yang lebih efisien secara otomatis (riset Google Quantum AI, 2021+); startup seperti Multiverse Computing memakai AI untuk mengubah masalah bisnis mentah menjadi formulasi QUBO yang siap dijalankan; compiler seperti Qiskit sudah memakai teknik machine learning untuk optimisasi transpilasi sirkuit. Alih-alih menunggu "quantum mempercepat AI" yang masih spekulatif, arah yang justru sudah berjalan adalah: <strong>AI menjadi jembatan penerjemah antara masalah manusia dan bahasa native quantum computer.</strong></span>
+      <span class="en-text">There's a far more tangible convergence happening today than "quantum accelerating AI" — in fact the reverse direction: <strong>AI helping formulate the right problems so quantum computers can solve them.</strong> This isn't futurist speculation; it's real, ongoing work. Quantum computing's biggest bottleneck is often not the qubits themselves, but <em>translating</em> a real-world problem into a form a quantum computer can run — designing the right Hamiltonian for molecular simulation, constructing the ansatz (circuit structure) for VQE algorithms, or formulating an optimization problem into a QUBO/Ising model for a quantum annealer.<br><br>
+      This is where AI — especially reinforcement learning and generative models — is playing a genuine role: "quantum architecture search" uses ML to automatically discover more efficient quantum circuits (Google Quantum AI research, 2021+); startups like Multiverse Computing use AI to turn raw business problems into ready-to-run QUBO formulations; compilers like Qiskit already use machine-learning techniques to optimize circuit transpilation. Rather than waiting on the still-speculative "quantum accelerates AI," the direction already underway is: <strong>AI becoming the translation bridge between human problems and the native language of quantum computers.</strong></span>
+    </div>
+  </div>
+
+  <div class="blockquote" style="margin-bottom:1rem">
+    <span class="id-text">"Kita cenderung melebih-lebihkan dampak teknologi dalam 2 tahun ke depan, dan meremehkannya dalam 10 tahun ke depan." — sering dikaitkan dengan Roy Amara, ilmuwan komputer & futuris</span>
+    <span class="en-text">"We tend to overestimate the effect of a technology in the short run and underestimate the effect in the long run." — commonly attributed to Roy Amara, computer scientist & futurist</span>
+  </div>
+
+  <p class="sec-lead" style="margin-bottom:0">
+    <span class="id-text">Pandangan yang lebih realistis: quantum computing, AI generatif, dan robotika adalah tiga kurva eksponensial yang <strong>berjalan paralel</strong>, dengan titik-titik pertemuan yang nyata namun spesifik — bukan satu gelombang tunggal menuju "singularity". Anda tidak perlu percaya penuh pada narasi singularity untuk mengakui bahwa gabungan ketiganya, dalam dekade-dekade mendatang, akan mengubah lanskap ekonomi dan geopolitik secara mendalam — dengan atau tanpa titik ledakan tunggal yang dramatis.</span>
+    <span class="en-text">A more grounded view: quantum computing, generative AI, and robotics are three exponential curves running <strong>in parallel</strong>, with real but specific points of convergence — not one single wave toward a "singularity." You don't need to fully buy the singularity narrative to acknowledge that the combination of all three, over coming decades, will profoundly reshape the economic and geopolitical landscape — with or without one dramatic single tipping point.</span>
+  </p>
+
+  <div class="ref-block">
+    <div class="ref-label">Referensi / References</div>
+    <div class="ref-item">· Kurzweil, R. (2005). <em>The Singularity Is Near</em>. Viking.</div>
+    <div class="ref-item">· Ostaszewski, M. et al. / Google Quantum AI (2021). Reinforcement learning for quantum circuit/ansatz design — representative "quantum architecture search" research direction.</div>
+    <div class="ref-item">· Brooks, R. (2017–2024). Predictions Scorecard, various essays on AI/robotics timelines. <em>rodneybrooks.com</em>.</div>
+    <div class="ref-item">· Marcus, G. & Davis, E. (2019). <em>Rebooting AI</em>. Pantheon.</div>
+    <div class="ref-item">· National Quantum Initiative Act (2018), U.S. Public Law 115-368.</div>
+    <div class="ref-item">· European Commission (2018–). Quantum Flagship Programme.</div>
+  </div>
+</section>
+
+<!-- ══════════════════════════════════════════════════════
+     S6 · DAMPAK & MASA DEPAN
+══════════════════════════════════════════════════════ -->
+<section id="s6" class="reveal">
+  <p class="sec-eyebrow">
+    <span class="id-text">Bagian 6</span><span class="en-text">Chapter 6</span>
+  </p>
+  <h2 class="sec-title" style="position:relative">
+    <span class="sec-num">06</span>
+    <span class="id-text">Dampak Luas & Masa Depan Kemanusiaan</span>
+    <span class="en-text">Broad Impact & The Future of Humanity</span>
+  </h2>
+
+  <p class="sec-lead">
+    <span class="id-text">Quantum computing bukan sekadar teknologi baru — ia adalah perubahan paradigma yang akan menyentuh kesehatan, keamanan, energi, ekonomi, dan cara manusia memahami dirinya sendiri.</span>
+    <span class="en-text">Quantum computing is not just a new technology — it is a paradigm shift that will touch health, security, energy, economics, and how humans understand themselves.</span>
+  </p>
+
+  <div class="two-col">
+    <div class="col-box col-box-green">
+      <div class="col-title col-title-green">
+        <span class="id-text">✦ Peluang & Harapan</span><span class="en-text">✦ Opportunities & Hope</span>
+      </div>
+      <div class="col-item"><span class="id-text"><strong>Pengobatan personal:</strong> Simulasi protein dan DNA memungkinkan obat yang dirancang untuk genetik individu — bukan populasi umum</span><span class="en-text"><strong>Personalized medicine:</strong> Protein and DNA simulation enables drugs designed for individual genetics — not general populations</span></div>
+      <div class="col-item"><span class="id-text"><strong>Iklim:</strong> Model iklim yang akurat secara molekuler; desain katalis untuk menangkap CO₂; baterai generasi baru untuk energi terbarukan</span><span class="en-text"><strong>Climate:</strong> Molecularly accurate climate models; catalyst design to capture CO₂; next-generation batteries for renewable energy</span></div>
+      <div class="col-item"><span class="id-text"><strong>Pangan:</strong> Simulasi nitrogenase membuka pupuk tanpa fosil, memberi makan populasi global yang terus tumbuh</span><span class="en-text"><strong>Food:</strong> Nitrogenase simulation unlocks fossil-free fertilizer, feeding a continuously growing global population</span></div>
+      <div class="col-item"><span class="id-text"><strong>Keamanan:</strong> Quantum encryption yang secara fisik tidak bisa ditembus — privasi mutlak untuk komunikasi penting</span><span class="en-text"><strong>Security:</strong> Quantum encryption physically impossible to breach — absolute privacy for critical communications</span></div>
+      <div class="col-item"><span class="id-text"><strong>Sains:</strong> Simulasi Big Bang, black holes, dan asal usul alam semesta dengan presisi yang belum pernah ada</span><span class="en-text"><strong>Science:</strong> Simulating the Big Bang, black holes, and origins of the universe with unprecedented precision</span></div>
+    </div>
+    <div class="col-box col-box-red">
+      <div class="col-title col-title-red">
+        <span class="id-text">⚠ Risiko & Ancaman</span><span class="en-text">⚠ Risks & Threats</span>
+      </div>
+      <div class="col-item"><span class="id-text"><strong>Cryptopocalypse:</strong> Komputer kuantum yang cukup kuat bisa memecahkan semua enkripsi yang melindungi perbankan, militer, dan internet hari ini</span><span class="en-text"><strong>Cryptopocalypse:</strong> A sufficiently powerful quantum computer could break all encryption protecting today's banking, military, and internet</span></div>
+      <div class="col-item"><span class="id-text"><strong>"Harvest now, decrypt later":</strong> Negara-negara besar sudah mencuri data terenkripsi saat ini untuk didekripsi nanti ketika punya komputer kuantum</span><span class="en-text"><strong>"Harvest now, decrypt later":</strong> Major nations are already stealing encrypted data today to decrypt later when they have quantum computers</span></div>
+      <div class="col-item"><span class="id-text"><strong>Kesenjangan baru:</strong> Siapa yang punya akses ke quantum computing punya keunggulan tak terbatas dalam ekonomi, sains, dan militer — ketimpangan baru yang dramatis</span><span class="en-text"><strong>New inequality:</strong> Those with quantum computing access gain unbounded advantages in economics, science, and military — a dramatic new inequality</span></div>
+      <div class="col-item"><span class="id-text"><strong>Pengintaian total:</strong> Quantum sensing yang sangat sensitif bisa membuat pengawasan massal menjadi jauh lebih dalam dan sulit disembunyikan</span><span class="en-text"><strong>Total surveillance:</strong> Highly sensitive quantum sensing could make mass surveillance far deeper and harder to hide from</span></div>
+      <div class="col-item"><span class="id-text"><strong>Senjata:</strong> Optimisasi quantum untuk desain senjata, sistem pertahanan rudal, dan simulasi nuklir yang lebih akurat</span><span class="en-text"><strong>Weapons:</strong> Quantum optimization for weapons design, missile defense systems, and more accurate nuclear simulations</span></div>
+    </div>
+  </div>
+
+  <div class="blockquote">
+    <span class="id-text">"Quantum computing akan menjadi seperti listrik — infrastruktur yang tidak terlihat, yang menggerakkan segalanya. Yang penting bukan siapa yang membangunnya, tapi siapa yang memiliki aksesnya."</span>
+    <span class="en-text">"Quantum computing will become like electricity — an invisible infrastructure that powers everything. What matters is not who builds it, but who has access to it."</span>
+    <cite>— Michio Kaku, fisikawan & futuris / physicist & futurist</cite>
+  </div>
+
+  <div class="divider"></div>
+
+  <!-- ── HARVEST NOW, DECRYPT LATER ───────────────────────── -->
+  <h3 style="font-size:15px;font-weight:700;color:var(--ink);margin-bottom:.75rem">
+    <span class="id-text">⏳ Mendalam: "Harvest Now, Decrypt Later"</span>
+    <span class="en-text">⏳ Deep Dive: "Harvest Now, Decrypt Later"</span>
+  </h3>
+  <p class="sec-lead" style="margin-bottom:1rem">
+    <span class="id-text">Ini bukan ancaman masa depan — ini <strong>sedang terjadi sekarang</strong>. "Harvest now, decrypt later" (HNDL) adalah strategi mengumpulkan dan menyimpan data terenkripsi hari ini, dengan asumsi bahwa suatu hari nanti — 10, 15, atau 20 tahun lagi — komputer kuantum akan cukup kuat untuk mendekripsinya. Data yang dicuri hari ini menjadi "bom waktu" yang menunggu kunci kuantumnya matang.</span>
+    <span class="en-text">This isn't a future threat — it is <strong>happening right now</strong>. "Harvest now, decrypt later" (HNDL) is the strategy of collecting and storing encrypted data today, on the assumption that someday — in 10, 15, or 20 years — quantum computers will be powerful enough to decrypt it. Data stolen today becomes a "time bomb" waiting for its quantum key to mature.</span>
+  </p>
+
+  <div class="card-grid" style="margin-bottom:1rem">
+    <div class="card" style="border-top:3px solid var(--red)">
+      <div class="card-icon">🕵️</div>
+      <div class="card-title"><span class="id-text">Siapa yang Melakukannya?</span><span class="en-text">Who Is Doing This?</span></div>
+      <div class="card-body">
+        <span class="id-text">Badan intelijen negara-negara besar — termasuk yang secara terbuka disebut lembaga keamanan siber AS, Inggris, dan sekutunya — telah memperingatkan bahwa aktor negara (paling sering disebut dalam wacana publik: China, Rusia) diyakini secara aktif mengumpulkan lalu lintas data terenkripsi berskala besar. NSA dan badan setara di Eropa (ENISA, NCSC UK) telah menerbitkan pedoman resmi mendesak migrasi PQC dengan alasan eksplisit ancaman HNDL.</span>
+        <span class="en-text">National intelligence agencies — including those publicly named by US, UK, and allied cybersecurity bodies — have warned that state actors (most commonly referenced in public discourse: China, Russia) are believed to be actively harvesting encrypted traffic at scale. The NSA and European counterparts (ENISA, UK's NCSC) have issued official guidance urging PQC migration, explicitly citing the HNDL threat.</span>
+      </div>
+    </div>
+    <div class="card" style="border-top:3px solid var(--gold)">
+      <div class="card-icon">🎯</div>
+      <div class="card-title"><span class="id-text">Data Apa yang Paling Rentan?</span><span class="en-text">What Data Is Most at Risk?</span></div>
+      <div class="card-body">
+        <span class="id-text">Bukan semua data terenkripsi sama nilainya untuk didekripsi nanti. Yang paling berisiko: data dengan <strong>umur kerahasiaan panjang</strong> — rahasia negara, kekayaan intelektual farmasi/teknologi, komunikasi diplomatik, data kesehatan pribadi, rancangan senjata, dan kunci kriptografi jangka panjang. Pesan chat harian yang tidak sensitif setelah beberapa tahun relatif aman; rahasia dagang 30 tahun yang masih bernilai — tidak.</span>
+        <span class="en-text">Not all encrypted data holds equal value to decrypt later. Highest risk: data with <strong>long confidentiality lifespans</strong> — state secrets, pharmaceutical/tech intellectual property, diplomatic communications, personal health data, weapons designs, and long-lived cryptographic keys. A daily chat message that's no longer sensitive after a few years is relatively safe; a 30-year trade secret still worth stealing is not.</span>
+      </div>
+    </div>
+  </div>
+
+  <div class="two-col" style="margin-bottom:1rem">
+    <div class="col-box">
+      <div class="col-title" style="color:var(--ink2)"><span class="id-text">📊 Kerangka Berpikir: Mosca's Inequality</span><span class="en-text">📊 Framework: Mosca's Inequality</span></div>
+      <p style="font-size:12px;color:var(--ink3);line-height:1.6">
+        <span class="id-text">Michele Mosca (2018) merumuskan cara sederhana menilai urgensi: bandingkan <strong>X</strong> (berapa lama data harus tetap rahasia), <strong>Y</strong> (berapa lama migrasi ke PQC akan memakan waktu), dan <strong>Z</strong> (berapa tahun lagi sampai komputer kuantum yang relevan muncul). Jika <strong>X + Y &gt; Z</strong> — organisasi sudah terlambat, karena data yang dienkripsi hari ini akan tetap rentan saat komputer kuantum itu tiba.</span>
+        <span class="en-text">Michele Mosca (2018) formulated a simple way to assess urgency: compare <strong>X</strong> (how long data must stay secret), <strong>Y</strong> (how long PQC migration will take), and <strong>Z</strong> (how many years until a relevant quantum computer arrives). If <strong>X + Y &gt; Z</strong> — an organization is already too late, since data encrypted today will still be vulnerable once that quantum computer arrives.</span>
+      </p>
+    </div>
+    <div class="col-box">
+      <div class="col-title" style="color:var(--ink2)"><span class="id-text">🛡️ Apa yang Sudah Dilakukan Sektor Tertentu?</span><span class="en-text">🛡️ What Are Some Sectors Already Doing?</span></div>
+      <p style="font-size:12px;color:var(--ink3);line-height:1.6">
+        <span class="id-text">Beberapa perusahaan teknologi besar telah mulai mengaktifkan enkripsi hibrida (klasik + PQC) pada sebagian trafik mereka sejak sekitar 2023–2024 — sebagai langkah awal migrasi sebelum standar NIST final. Sektor perbankan dan pemerintahan umumnya bergerak lebih lambat karena ketergantungan pada sistem lama (legacy systems) yang sulit diganti cepat.</span>
+        <span class="en-text">Several major technology companies began enabling hybrid encryption (classical + PQC) on portions of their traffic around 2023–2024 — an early migration step ahead of NIST's final standards. Banking and government sectors generally move slower due to dependence on legacy systems that are difficult to replace quickly.</span>
+      </p>
+    </div>
+  </div>
+  <p style="font-size:11px;color:var(--ink4);font-style:italic">
+    <span class="id-text">Angka dan contoh sektor bersifat indikatif berdasarkan wacana publik 2026 — bukan daftar konfirmasi resmi dari perusahaan/lembaga tertentu.</span>
+    <span class="en-text">Figures and sector examples are indicative, based on 2026 public discourse — not an official confirmed list from specific companies or agencies.</span>
+  </p>
+
+  <div class="divider"></div>
+
+  <h3 style="font-size:14px;font-weight:700;color:var(--ink);margin-bottom:1rem">
+    <span class="id-text">Proyeksi Timeline (Estimasi Konservatif)</span><span class="en-text">Timeline Projection (Conservative Estimate)</span>
+  </h3>
+  <div class="timeline" style="margin-bottom:0">
+    <div class="tl-item">
+      <div class="tl-dot"></div>
+      <div class="tl-year">2025–2030</div>
+      <div class="tl-title"><span class="id-text">NISQ Advantage — Aplikasi Pertama yang Berguna</span><span class="en-text">NISQ Advantage — First Useful Applications</span></div>
+      <div class="tl-body"><span class="id-text">Quantum advantage nyata untuk optimisasi industri spesifik, simulasi kimia terbatas, dan kriptografi. Masih butuh komputer klasik sebagai hybrid.</span><span class="en-text">Real quantum advantage for specific industrial optimization, limited chemical simulation, and cryptography. Still needs classical computers as hybrid.</span></div>
+    </div>
+    <div class="tl-item">
+      <div class="tl-dot"></div>
+      <div class="tl-year">2030–2040</div>
+      <div class="tl-title"><span class="id-text">Fault-Tolerant Quantum Computing</span><span class="en-text">Fault-Tolerant Quantum Computing</span></div>
+      <div class="tl-body"><span class="id-text">Qubit logis yang stabil, bisa dikoreksi kesalahannya. Algoritma Shor dan Grover bisa dijalankan secara penuh. Dampak nyata pada kriptografi, farmasi, dan simulasi material.</span><span class="en-text">Stable logical qubits with error correction. Shor's and Grover's algorithms can run fully. Real impact on cryptography, pharmaceuticals, and material simulation.</span></div>
+    </div>
+    <div class="tl-item">
+      <div class="tl-dot"></div>
+      <div class="tl-year">2040–2060</div>
+      <div class="tl-title"><span class="id-text">Era Quantum — Infrastruktur Global</span><span class="en-text">The Quantum Era — Global Infrastructure</span></div>
+      <div class="tl-body"><span class="id-text">Quantum internet mulai beroperasi. Simulasi kimia penuh memungkinkan desain material dan obat revolusioner. Quantum AI melampaui AI klasik dalam domain tertentu.</span><span class="en-text">Quantum internet begins operating. Full chemical simulation enables revolutionary materials and drug design. Quantum AI surpasses classical AI in specific domains.</span></div>
+    </div>
+  </div>
+
+  <div class="ref-block">
+    <div class="ref-label">Referensi / References</div>
+    <div class="ref-item">· Mosca, M. (2018). Cybersecurity in an era with quantum computers: will we be ready? <em>IEEE Security & Privacy</em>, 16(5), 38–41.</div>
+    <div class="ref-item">· NSA (2022). Announcing the Commercial National Security Algorithm Suite 2.0.</div>
+    <div class="ref-item">· NIST (2016–2024). Post-Quantum Cryptography Standardization Process.</div>
+  </div>
+</section>
+
+<!-- ══════════════════════════════════════════════════════
+     SG · GLOSARIUM / GLOSSARY
+══════════════════════════════════════════════════════ -->
+<section id="sg" class="reveal">
+  <p class="sec-eyebrow">
+    <span class="id-text">Rujukan</span><span class="en-text">Reference</span>
+  </p>
+  <h2 class="sec-title" style="position:relative">
+    <span class="sec-num" style="font-size:clamp(40px,6vw,72px)">📖</span>
+    <span class="id-text">Glosarium Kuantum</span>
+    <span class="en-text">Quantum Glossary</span>
+  </h2>
+
+  <p class="sec-lead">
+    <span class="id-text">53 istilah kunci quantum computing, disusun alfabetis, untuk dirujuk kapan saja saat membaca bab-bab sebelumnya — dari dasar fisika hingga industri.</span>
+    <span class="en-text">53 key quantum computing terms, arranged alphabetically, to reference anytime while reading earlier chapters — from foundational physics to industry.</span>
+  </p>
+
+  <input type="text" class="gloss-search" id="gloss-search" oninput="filterGlossary(this.value)"
+    placeholder="Cari istilah… / Search terms…">
+  <div class="gloss-count" id="gloss-count"></div>
+
+  <div class="gloss-grid" id="gloss-grid">
+    <div class="gloss-item">
+      <div class="gloss-term">Algoritma Grover<span class="gloss-term-en"> / Grover's Algorithm</span></div>
+      <div class="gloss-def">
+        <span class="id-text">Algoritma kuantum (1996) untuk mempercepat pencarian pada basis data tak terurut secara kuadratik dibanding metode klasik.</span>
+        <span class="en-text">A quantum algorithm (1996) providing a quadratic speedup for searching unsorted databases compared to classical methods.</span>
+      </div>
+    </div>
+    <div class="gloss-item">
+      <div class="gloss-term">Algoritma Shor<span class="gloss-term-en"> / Shor's Algorithm</span></div>
+      <div class="gloss-def">
+        <span class="id-text">Algoritma kuantum (1994) untuk memfaktorkan bilangan besar secara eksponensial lebih cepat — ancaman langsung bagi kriptografi RSA.</span>
+        <span class="en-text">A quantum algorithm (1994) for factoring large numbers exponentially faster — a direct threat to RSA cryptography.</span>
+      </div>
+    </div>
+    <div class="gloss-item">
+      <div class="gloss-term">Amplitudo<span class="gloss-term-en"> / Amplitude</span></div>
+      <div class="gloss-def">
+        <span class="id-text">Bilangan kompleks yang menentukan probabilitas suatu keadaan kuantum akan terukur; kuadrat magnitudonya memberi peluang (Aturan Born).</span>
+        <span class="en-text">A complex number determining the probability a quantum state will be measured; its squared magnitude gives the probability (Born's Rule).</span>
+      </div>
+    </div>
+    <div class="gloss-item">
+      <div class="gloss-term">Aturan Born<span class="gloss-term-en"> / Born's Rule</span></div>
+      <div class="gloss-def">
+        <span class="id-text">Formula Max Born (1926) yang menghubungkan amplitudo kuantum dengan probabilitas pengukuran: P = |amplitudo|².</span>
+        <span class="en-text">Max Born's formula (1926) linking quantum amplitude to measurement probability: P = |amplitude|².</span>
+      </div>
+    </div>
+    <div class="gloss-item">
+      <div class="gloss-term">Biologi Kuantum<span class="gloss-term-en"> / Quantum Biology</span></div>
+      <div class="gloss-def">
+        <span class="id-text">Studi tentang kemungkinan peran efek kuantum (koherensi, terowongan) dalam proses biologis seperti fotosintesis dan navigasi burung.</span>
+        <span class="en-text">The study of possible roles of quantum effects (coherence, tunneling) in biological processes like photosynthesis and bird navigation.</span>
+      </div>
+    </div>
+    <div class="gloss-item">
+      <div class="gloss-term">Bloch Sphere<span class="gloss-term-en"> / Bloch Sphere</span></div>
+      <div class="gloss-def">
+        <span class="id-text">Representasi geometris bola untuk keadaan qubit tunggal — kutub utara/selatan mewakili |0⟩ dan |1⟩, permukaan mewakili semua superposisi.</span>
+        <span class="en-text"> geometric sphere representation of a single qubit's state — north/south poles represent |0⟩ and |1⟩, the surface represents all superpositions.</span>
+      </div>
+    </div>
+    <div class="gloss-item">
+      <div class="gloss-term">Dekoherensi<span class="gloss-term-en"> / Decoherence</span></div>
+      <div class="gloss-def">
+        <span class="id-text">Proses hilangnya sifat kuantum (superposisi, entanglement) akibat interaksi dengan lingkungan luar — musuh utama komputer kuantum.</span>
+        <span class="en-text">The loss of quantum properties (superposition, entanglement) due to interaction with the environment — the main enemy of quantum computers.</span>
+      </div>
+    </div>
+    <div class="gloss-item">
+      <div class="gloss-term">Dualitas Gelombang-Partikel<span class="gloss-term-en"> / Wave-Particle Duality</span></div>
+      <div class="gloss-def">
+        <span class="id-text">Sifat entitas kuantum yang berperilaku baik sebagai gelombang maupun partikel, tergantung cara diamati; dirumuskan de Broglie (1924), λ = h/p.</span>
+        <span class="en-text">The property of quantum entities behaving as both wave and particle depending on how they are observed; formulated by de Broglie (1924), λ = h/p.</span>
+      </div>
+    </div>
+    <div class="gloss-item">
+      <div class="gloss-term">Eksperimen Celah Ganda<span class="gloss-term-en"> / Double-Slit Experiment</span></div>
+      <div class="gloss-def">
+        <span class="id-text">Eksperimen klasik (Young, 1801; versi kuantum abad ke-20) yang membuktikan sifat gelombang partikel lewat pola interferensi.</span>
+        <span class="en-text">A classic experiment (Young, 1801; quantum version 20th century) proving particles' wave nature through interference patterns.</span>
+      </div>
+    </div>
+    <div class="gloss-item">
+      <div class="gloss-term">Fungsi Gelombang (ψ)<span class="gloss-term-en"> / Wave Function (ψ)</span></div>
+      <div class="gloss-def">
+        <span class="id-text">Deskripsi matematis lengkap dari keadaan kuantum suatu sistem; berisi semua informasi probabilistik yang bisa diketahui.</span>
+        <span class="en-text">The complete mathematical description of a quantum system's state; contains all probabilistic information that can be known.</span>
+      </div>
+    </div>
+    <div class="gloss-item">
+      <div class="gloss-term">Gerbang CNOT<span class="gloss-term-en"> / CNOT Gate (Controlled-NOT)</span></div>
+      <div class="gloss-def">
+        <span class="id-text">Gerbang dua-qubit yang membalik qubit target hanya jika qubit kontrol bernilai 1; kunci untuk menciptakan entanglement dalam sirkuit.</span>
+        <span class="en-text">A two-qubit gate that flips a target qubit only if the control qubit is 1; key to creating entanglement in circuits.</span>
+      </div>
+    </div>
+    <div class="gloss-item">
+      <div class="gloss-term">Gerbang Hadamard<span class="gloss-term-en"> / Hadamard Gate</span></div>
+      <div class="gloss-def">
+        <span class="id-text">Gerbang kuantum yang mengubah qubit pasti (|0⟩ atau |1⟩) menjadi superposisi sempurna — pintu masuk ke banyak algoritma kuantum.</span>
+        <span class="en-text">A quantum gate that turns a definite qubit (|0⟩ or |1⟩) into a perfect superposition — the entry point for many quantum algorithms.</span>
+      </div>
+    </div>
+    <div class="gloss-item">
+      <div class="gloss-term">Gerbang Kuantum<span class="gloss-term-en"> / Quantum Gate</span></div>
+      <div class="gloss-def">
+        <span class="id-text">Operasi dasar yang memanipulasi keadaan qubit, analog dengan gerbang logika (AND, OR) pada komputer klasik.</span>
+        <span class="en-text">A basic operation manipulating a qubit's state, analogous to logic gates (AND, OR) in classical computers.</span>
+      </div>
+    </div>
+    <div class="gloss-item">
+      <div class="gloss-term">Harvest Now, Decrypt Later<span class="gloss-term-en"> / Harvest Now, Decrypt Later</span></div>
+      <div class="gloss-def">
+        <span class="id-text">Strategi mengumpulkan data terenkripsi hari ini untuk didekripsi nanti begitu komputer kuantum cukup kuat — ancaman yang sudah berjalan sekarang.</span>
+        <span class="en-text">A strategy of collecting encrypted data today to decrypt later once quantum computers are powerful enough — a threat already underway today.</span>
+      </div>
+    </div>
+    <div class="gloss-item">
+      <div class="gloss-term">Interferensi Kuantum<span class="gloss-term-en"> / Quantum Interference</span></div>
+      <div class="gloss-def">
+        <span class="id-text">Fenomena di mana kemungkinan-kemungkinan kuantum saling menguatkan (konstruktif) atau meniadakan (destruktif), inti dari cara algoritma kuantum bekerja.</span>
+        <span class="en-text">The phenomenon where quantum probabilities reinforce (constructive) or cancel (destructive) each other — the core mechanism behind quantum algorithms.</span>
+      </div>
+    </div>
+    <div class="gloss-item">
+      <div class="gloss-term">Interpretasi Banyak Dunia<span class="gloss-term-en"> / Many-Worlds Interpretation</span></div>
+      <div class="gloss-def">
+        <span class="id-text">Interpretasi Everett (1957): tidak ada kolaps — setiap kemungkinan pengukuran terjadi, memecah alam semesta menjadi cabang-cabang paralel.</span>
+        <span class="en-text">Everett's interpretation (1957): no collapse occurs — every measurement outcome happens, splitting the universe into parallel branches.</span>
+      </div>
+    </div>
+    <div class="gloss-item">
+      <div class="gloss-term">Interpretasi Kopenhagen<span class="gloss-term-en"> / Copenhagen Interpretation</span></div>
+      <div class="gloss-def">
+        <span class="id-text">Interpretasi kuantum tertua dan paling mapan (Bohr, Heisenberg): pengukuran menyebabkan kolaps fungsi gelombang secara nyata.</span>
+        <span class="en-text">The oldest and most established quantum interpretation (Bohr, Heisenberg): measurement causes real collapse of the wave function.</span>
+      </div>
+    </div>
+    <div class="gloss-item">
+      <div class="gloss-term">Interpretasi Relasional<span class="gloss-term-en"> / Relational Quantum Mechanics</span></div>
+      <div class="gloss-def">
+        <span class="id-text">Interpretasi Carlo Rovelli: keadaan kuantum tidak absolut, melainkan selalu relatif terhadap pengamat tertentu.</span>
+        <span class="en-text">Carlo Rovelli's interpretation: quantum states are not absolute but always relative to a particular observer.</span>
+      </div>
+    </div>
+    <div class="gloss-item">
+      <div class="gloss-term">Keadaan Bell<span class="gloss-term-en"> / Bell State</span></div>
+      <div class="gloss-def">
+        <span class="id-text">Salah satu dari empat keadaan entanglement maksimal dua-qubit, dibentuk dengan gerbang Hadamard + CNOT.</span>
+        <span class="en-text">One of four maximally entangled two-qubit states, created using a Hadamard + CNOT gate combination.</span>
+      </div>
+    </div>
+    <div class="gloss-item">
+      <div class="gloss-term">Keterjeratan Kuantum<span class="gloss-term-en"> / Entanglement</span></div>
+      <div class="gloss-def">
+        <span class="id-text">Korelasi kuantum antar dua partikel atau lebih sehingga keadaan satu partikel tidak bisa dijelaskan tanpa merujuk yang lain, walau terpisah jarak jauh.</span>
+        <span class="en-text">Quantum correlation between two or more particles such that one particle's state cannot be described independently of the other, even across large distances.</span>
+      </div>
+    </div>
+    <div class="gloss-item">
+      <div class="gloss-term">Ketidaksetaraan Bell<span class="gloss-term-en"> / Bell Inequality</span></div>
+      <div class="gloss-def">
+        <span class="id-text">Batas matematis (Bell, 1964) yang harus dipatuhi teori "realitas lokal" klasik — dilanggar oleh eksperimen kuantum nyata, dibuktikan berulang kali hingga Nobel 2022.</span>
+        <span class="en-text">A mathematical bound (Bell, 1964) that classical "local realism" theories must obey — violated by real quantum experiments, repeatedly confirmed through the 2022 Nobel Prize.</span>
+      </div>
+    </div>
+    <div class="gloss-item">
+      <div class="gloss-term">Keunggulan Kuantum<span class="gloss-term-en"> / Quantum Supremacy / Advantage</span></div>
+      <div class="gloss-def">
+        <span class="id-text">Titik ketika komputer kuantum menyelesaikan tugas spesifik yang mustahil dilakukan komputer klasik dalam waktu wajar (dicapai Google, 2019).</span>
+        <span class="en-text">The point at which a quantum computer completes a specific task impossible for classical computers within a reasonable time (achieved by Google, 2019).</span>
+      </div>
+    </div>
+    <div class="gloss-item">
+      <div class="gloss-term">Koreksi Error Kuantum<span class="gloss-term-en"> / Quantum Error Correction</span></div>
+      <div class="gloss-def">
+        <span class="id-text">Teknik untuk melindungi informasi kuantum dari noise dan dekoherensi menggunakan qubit tambahan sebagai redundansi.</span>
+        <span class="en-text">Techniques for protecting quantum information from noise and decoherence using additional qubits as redundancy.</span>
+      </div>
+    </div>
+    <div class="gloss-item">
+      <div class="gloss-term">Kriptografi Berbasis Kisi<span class="gloss-term-en"> / Lattice-Based Cryptography</span></div>
+      <div class="gloss-def">
+        <span class="id-text">Pendekatan matematis untuk PQC yang mengandalkan kesulitan masalah geometris pada kisi berdimensi tinggi; dasar CRYSTALS-Kyber.</span>
+        <span class="en-text">A mathematical approach to PQC relying on the difficulty of geometric problems in high-dimensional lattices; the basis of CRYSTALS-Kyber.</span>
+      </div>
+    </div>
+    <div class="gloss-item">
+      <div class="gloss-term">Kriptografi Pasca-Kuantum (PQC)<span class="gloss-term-en"> / Post-Quantum Cryptography (PQC)</span></div>
+      <div class="gloss-def">
+        <span class="id-text">Algoritma kriptografi klasik yang dirancang tahan terhadap serangan komputer kuantum, distandarkan NIST pada 2024.</span>
+        <span class="en-text">Classical cryptographic algorithms designed to resist attacks from quantum computers, standardized by NIST in 2024.</span>
+      </div>
+    </div>
+    <div class="gloss-item">
+      <div class="gloss-term">Kucing Schrödinger<span class="gloss-term-en"> / Schrödinger's Cat</span></div>
+      <div class="gloss-def">
+        <span class="id-text">Eksperimen pikiran (1935) yang menggambarkan paradoks superposisi pada skala makroskopis — kucing yang secara teori "hidup dan mati sekaligus" sampai diukur.</span>
+        <span class="en-text">A thought experiment (1935) illustrating the paradox of superposition at macroscopic scale — a cat theoretically "both alive and dead" until observed.</span>
+      </div>
+    </div>
+    <div class="gloss-item">
+      <div class="gloss-term">NISQ<span class="gloss-term-en"> / NISQ (Noisy Intermediate-Scale Quantum)</span></div>
+      <div class="gloss-def">
+        <span class="id-text">Istilah Preskill (2018) untuk era saat ini: komputer kuantum dengan puluhan-ratusan qubit yang masih penuh noise dan belum dikoreksi error sepenuhnya.</span>
+        <span class="en-text">Preskill's term (2018) for the current era: quantum computers with tens to hundreds of qubits that remain noisy and not yet fully error-corrected.</span>
+      </div>
+    </div>
+    <div class="gloss-item">
+      <div class="gloss-term">Paradoks EPR<span class="gloss-term-en"> / EPR Paradox</span></div>
+      <div class="gloss-def">
+        <span class="id-text">Argumen Einstein-Podolsky-Rosen (1935) yang mempertanyakan kelengkapan mekanika kuantum lewat konsep "elemen realitas".</span>
+        <span class="en-text">The Einstein-Podolsky-Rosen argument (1935) questioning the completeness of quantum mechanics through the concept of "elements of reality".</span>
+      </div>
+    </div>
+    <div class="gloss-item">
+      <div class="gloss-term">Pengukuran Kuantum<span class="gloss-term-en"> / Quantum Measurement</span></div>
+      <div class="gloss-def">
+        <span class="id-text">Tindakan mengamati sistem kuantum yang menyebabkan superposisi "kolaps" menjadi satu keadaan pasti.</span>
+        <span class="en-text">The act of observing a quantum system, causing superposition to "collapse" into one definite state.</span>
+      </div>
+    </div>
+    <div class="gloss-item">
+      <div class="gloss-term">Persamaan Schrödinger<span class="gloss-term-en"> / Schrödinger Equation</span></div>
+      <div class="gloss-def">
+        <span class="id-text">Persamaan fundamental (1926) yang mendeskripsikan bagaimana fungsi gelombang berevolusi seiring waktu: iħ ∂ψ/∂t = Ĥψ.</span>
+        <span class="en-text">The fundamental equation (1926) describing how a wave function evolves over time: iħ ∂ψ/∂t = Ĥψ.</span>
+      </div>
+    </div>
+    <div class="gloss-item">
+      <div class="gloss-term">Prinsip Ketidakpastian Heisenberg<span class="gloss-term-en"> / Heisenberg Uncertainty Principle</span></div>
+      <div class="gloss-def">
+        <span class="id-text">Hukum alam (1927) yang menyatakan posisi dan momentum partikel tidak bisa diukur bersamaan dengan presisi sempurna.</span>
+        <span class="en-text">A law of nature (1927) stating that a particle's position and momentum cannot both be measured with perfect precision simultaneously.</span>
+      </div>
+    </div>
+    <div class="gloss-item">
+      <div class="gloss-term">Protokol BB84<span class="gloss-term-en"> / BB84 Protocol</span></div>
+      <div class="gloss-def">
+        <span class="id-text">Protokol QKD pertama (Bennett & Brassard, 1984), fondasi kriptografi kuantum praktis hingga hari ini.</span>
+        <span class="en-text">The first QKD protocol (Bennett & Brassard, 1984), the foundation of practical quantum cryptography to this day.</span>
+      </div>
+    </div>
+    <div class="gloss-item">
+      <div class="gloss-term">QAOA<span class="gloss-term-en"> / QAOA (Quantum Approximate Optimization Algorithm)</span></div>
+      <div class="gloss-def">
+        <span class="id-text">Algoritma hybrid untuk mendekati solusi optimal pada masalah kombinatorial seperti penjadwalan dan rute.</span>
+        <span class="en-text">A hybrid algorithm for approximating optimal solutions to combinatorial problems like scheduling and routing.</span>
+      </div>
+    </div>
+    <div class="gloss-item">
+      <div class="gloss-term">Quantum Annealing<span class="gloss-term-en"> / Quantum Annealing</span></div>
+      <div class="gloss-def">
+        <span class="id-text">Pendekatan komputasi kuantum khusus optimisasi (dipakai D-Wave), berbeda dari model gerbang universal IBM/Google.</span>
+        <span class="en-text">A quantum computing approach specialized for optimization (used by D-Wave), distinct from the universal gate model used by IBM/Google.</span>
+      </div>
+    </div>
+    <div class="gloss-item">
+      <div class="gloss-term">Quantum Dot<span class="gloss-term-en"> / Quantum Dot</span></div>
+      <div class="gloss-def">
+        <span class="id-text">Nanopartikel semikonduktor yang memanfaatkan efek kuantum untuk memancarkan warna spesifik; sudah komersial dalam layar QLED.</span>
+        <span class="en-text">A semiconductor nanoparticle exploiting quantum effects to emit specific colors; already commercial in QLED displays.</span>
+      </div>
+    </div>
+    <div class="gloss-item">
+      <div class="gloss-term">Quantum Key Distribution (QKD)<span class="gloss-term-en"> / Quantum Key Distribution (QKD)</span></div>
+      <div class="gloss-def">
+        <span class="id-text">Metode berbagi kunci kriptografi yang keamanannya dijamin hukum fisika kuantum, bukan kesulitan matematika — penyadapan otomatis terdeteksi.</span>
+        <span class="en-text">A method of sharing cryptographic keys whose security is guaranteed by physical law, not mathematical difficulty — eavesdropping is automatically detected.</span>
+      </div>
+    </div>
+    <div class="gloss-item">
+      <div class="gloss-term">Quantum Repeater<span class="gloss-term-en"> / Quantum Repeater</span></div>
+      <div class="gloss-def">
+        <span class="id-text">Perangkat yang memperluas jangkauan quantum internet dengan entanglement swapping, mengatasi batasan teorema no-cloning.</span>
+        <span class="en-text">A device extending the range of the quantum internet via entanglement swapping, overcoming the no-cloning theorem's limitations.</span>
+      </div>
+    </div>
+    <div class="gloss-item">
+      <div class="gloss-term">Quantum Sensing<span class="gloss-term-en"> / Quantum Sensing</span></div>
+      <div class="gloss-def">
+        <span class="id-text">Pemanfaatan efek kuantum untuk mengukur medan magnet, gravitasi, atau waktu dengan presisi yang melampaui alat klasik.</span>
+        <span class="en-text">The use of quantum effects to measure magnetic fields, gravity, or time with precision exceeding classical instruments.</span>
+      </div>
+    </div>
+    <div class="gloss-item">
+      <div class="gloss-term">Quantum Volume<span class="gloss-term-en"> / Quantum Volume</span></div>
+      <div class="gloss-def">
+        <span class="id-text">Metrik holistik untuk membandingkan komputer kuantum, memperhitungkan jumlah qubit, konektivitas, dan tingkat error sekaligus — bukan cuma jumlah qubit.</span>
+        <span class="en-text">A holistic metric for comparing quantum computers, accounting for qubit count, connectivity, and error rate together — not just qubit count.</span>
+      </div>
+    </div>
+    <div class="gloss-item">
+      <div class="gloss-term">Qubit<span class="gloss-term-en"> / Qubit</span></div>
+      <div class="gloss-def">
+        <span class="id-text">Unit dasar informasi kuantum. Berbeda dari bit klasik (0 atau 1), qubit dapat berada dalam superposisi keduanya secara bersamaan.</span>
+        <span class="en-text">The basic unit of quantum information. Unlike a classical bit (0 or 1), a qubit can exist in a superposition of both simultaneously.</span>
+      </div>
+    </div>
+    <div class="gloss-item">
+      <div class="gloss-term">Qubit Fotonik<span class="gloss-term-en"> / Photonic Qubit</span></div>
+      <div class="gloss-def">
+        <span class="id-text">Jenis qubit fisik menggunakan partikel cahaya (foton); bisa beroperasi pada suhu ruang, didorong PsiQuantum, Xanadu.</span>
+        <span class="en-text">A type of physical qubit using light particles (photons); can operate at room temperature, championed by PsiQuantum, Xanadu.</span>
+      </div>
+    </div>
+    <div class="gloss-item">
+      <div class="gloss-term">Qubit Ion Terperangkap<span class="gloss-term-en"> / Trapped-Ion Qubit</span></div>
+      <div class="gloss-def">
+        <span class="id-text">Jenis qubit fisik menggunakan ion yang ditahan medan elektromagnetik; dipakai IonQ dan Quantinuum, dikenal punya fidelity tinggi.</span>
+        <span class="en-text">A type of physical qubit using ions held by electromagnetic fields; used by IonQ and Quantinuum, known for high fidelity.</span>
+      </div>
+    </div>
+    <div class="gloss-item">
+      <div class="gloss-term">Qubit Logis vs Fisik<span class="gloss-term-en"> / Logical vs Physical Qubit</span></div>
+      <div class="gloss-def">
+        <span class="id-text">Qubit logis adalah satu qubit "bersih" hasil koreksi error, dibentuk dari puluhan-ribuan qubit fisik yang rentan — karena itu skala sejati masih jauh.</span>
+        <span class="en-text">A logical qubit is one "clean", error-corrected qubit built from dozens to thousands of fragile physical qubits — which is why true scale remains far off.</span>
+      </div>
+    </div>
+    <div class="gloss-item">
+      <div class="gloss-term">Qubit Superkonduktor<span class="gloss-term-en"> / Superconducting Qubit</span></div>
+      <div class="gloss-def">
+        <span class="id-text">Jenis qubit fisik berbasis sirkuit superkonduktor yang didinginkan mendekati nol mutlak; dipakai IBM dan Google.</span>
+        <span class="en-text">A type of physical qubit based on superconducting circuits cooled near absolute zero; used by IBM and Google.</span>
+      </div>
+    </div>
+    <div class="gloss-item">
+      <div class="gloss-term">Qubit Topologis<span class="gloss-term-en"> / Topological Qubit</span></div>
+      <div class="gloss-def">
+        <span class="id-text">Jenis qubit eksperimental (Microsoft) yang secara teori jauh lebih tahan dekoherensi karena informasi disimpan dalam sifat topologi materi.</span>
+        <span class="en-text">An experimental qubit type (Microsoft) theoretically far more resistant to decoherence because information is stored in the topological properties of matter.</span>
+      </div>
+    </div>
+    <div class="gloss-item">
+      <div class="gloss-term">Sirkuit Kuantum<span class="gloss-term-en"> / Quantum Circuit</span></div>
+      <div class="gloss-def">
+        <span class="id-text">Rangkaian gerbang kuantum yang disusun berurutan untuk menjalankan algoritma kuantum tertentu.</span>
+        <span class="en-text">A sequence of quantum gates arranged to execute a specific quantum algorithm.</span>
+      </div>
+    </div>
+    <div class="gloss-item">
+      <div class="gloss-term">Spin Kuantum<span class="gloss-term-en"> / Quantum Spin</span></div>
+      <div class="gloss-def">
+        <span class="id-text">Momentum sudut intrinsik partikel subatomik (Pauli, Dirac); dasar fisik umum untuk merepresentasikan qubit (spin-up/spin-down).</span>
+        <span class="en-text">The intrinsic angular momentum of subatomic particles (Pauli, Dirac); a common physical basis for representing a qubit (spin-up/spin-down).</span>
+      </div>
+    </div>
+    <div class="gloss-item">
+      <div class="gloss-term">Superposisi<span class="gloss-term-en"> / Superposition</span></div>
+      <div class="gloss-def">
+        <span class="id-text">Kemampuan sistem kuantum untuk berada dalam beberapa keadaan sekaligus sebelum diukur.</span>
+        <span class="en-text">The ability of a quantum system to exist in multiple states at once before measurement.</span>
+      </div>
+    </div>
+    <div class="gloss-item">
+      <div class="gloss-term">Surface Code<span class="gloss-term-en"> / Surface Code</span></div>
+      <div class="gloss-def">
+        <span class="id-text">Skema koreksi error kuantum paling populer saat ini, menyusun qubit fisik dalam kisi 2D untuk mendeteksi dan memperbaiki kesalahan.</span>
+        <span class="en-text"> today's most popular quantum error-correction scheme, arranging physical qubits in a 2D grid to detect and fix errors.</span>
+      </div>
+    </div>
+    <div class="gloss-item">
+      <div class="gloss-term">Teleportasi Kuantum<span class="gloss-term-en"> / Quantum Teleportation</span></div>
+      <div class="gloss-def">
+        <span class="id-text">Protokol (Bennett et al., 1993) memindahkan keadaan kuantum dari satu partikel ke partikel lain jarak jauh — bukan teleportasi materi, tapi teleportasi informasi.</span>
+        <span class="en-text">A protocol (Bennett et al., 1993) transferring a quantum state from one particle to a distant other — not teleportation of matter, but of information.</span>
+      </div>
+    </div>
+    <div class="gloss-item">
+      <div class="gloss-term">Teorema No-Cloning<span class="gloss-term-en"> / No-Cloning Theorem</span></div>
+      <div class="gloss-def">
+        <span class="id-text">Hukum fundamental kuantum yang menyatakan keadaan kuantum sembarang tidak bisa disalin secara sempurna — dasar keamanan QKD dan tantangan quantum internet.</span>
+        <span class="en-text">A fundamental quantum law stating an arbitrary quantum state cannot be perfectly copied — the basis of QKD security and a challenge for the quantum internet.</span>
+      </div>
+    </div>
+    <div class="gloss-item">
+      <div class="gloss-term">Teori Gelombang Pandu<span class="gloss-term-en"> / Pilot-Wave Theory</span></div>
+      <div class="gloss-def">
+        <span class="id-text">Interpretasi de Broglie-Bohm: partikel selalu punya posisi pasti, dipandu oleh gelombang tersembunyi — tanpa keacakan fundamental.</span>
+        <span class="en-text">The de Broglie-Bohm interpretation: particles always have a definite position, guided by a hidden wave — with no fundamental randomness.</span>
+      </div>
+    </div>
+    <div class="gloss-item">
+      <div class="gloss-term">Variational Quantum Eigensolver (VQE)<span class="gloss-term-en"> / Variational Quantum Eigensolver (VQE)</span></div>
+      <div class="gloss-def">
+        <span class="id-text">Algoritma hybrid kuantum-klasik untuk menghitung energi terendah suatu molekul — tulang punggung simulasi kimia kuantum saat ini.</span>
+        <span class="en-text">A hybrid quantum-classical algorithm for computing a molecule's lowest energy state — the backbone of today's quantum chemistry simulations.</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══════════════════════════════════════════════════════
+     SF · FAQ
+══════════════════════════════════════════════════════ -->
+<section id="sf" class="reveal">
+  <p class="sec-eyebrow">
+    <span class="id-text">Tanya Jawab</span><span class="en-text">Q&A</span>
+  </p>
+  <h2 class="sec-title" style="position:relative">
+    <span class="sec-num" style="font-size:clamp(40px,6vw,72px)">❓</span>
+    <span class="id-text">Pertanyaan yang Sering Diajukan</span>
+    <span class="en-text">Frequently Asked Questions</span>
+  </h2>
+
+  <p class="sec-lead">
+    <span class="id-text">20 pertanyaan paling umum tentang quantum computing, dijawab sejujur mungkin — termasuk mengakui ketika jawabannya "belum tahu" atau "tergantung".</span>
+    <span class="en-text">20 of the most common questions about quantum computing, answered as honestly as possible — including admitting when the answer is "not yet known" or "it depends".</span>
+  </p>
+
+  <details class="faq-item">
+    <summary class="faq-q"><span class="id-text">Apakah komputer kuantum akan menggantikan komputer biasa saya?</span><span class="en-text">Will quantum computers replace my regular computer?</span></summary>
+    <div class="faq-a">
+      <span class="id-text">Tidak. Komputer kuantum unggul untuk masalah spesifik (simulasi molekul, optimisasi, faktorisasi) tapi buruk untuk tugas sehari-hari seperti mengetik dokumen atau menonton video. Model realistisnya adalah hybrid: komputer klasik menangani sebagian besar tugas, memanggil prosesor kuantum lewat cloud hanya untuk sub-masalah tertentu.</span>
+      <span class="en-text">No. Quantum computers excel at specific problems (molecular simulation, optimization, factoring) but are poor at everyday tasks like typing documents or watching video. The realistic model is hybrid: classical computers handle most tasks, calling a quantum processor via the cloud only for specific sub-problems.</span>
+    </div>
+  </details>
+  <details class="faq-item">
+    <summary class="faq-q"><span class="id-text">Kapan saya bisa punya komputer kuantum di rumah?</span><span class="en-text">When can I have a quantum computer at home?</span></summary>
+    <div class="faq-a">
+      <span class="id-text">Kemungkinan besar tidak akan pernah — dan itu bukan masalah. Komputer kuantum butuh infrastruktur pendinginan ekstrem (atau setup laser presisi tinggi) yang tidak praktis untuk rumah tangga. Model aksesnya akan mirip superkomputer sekarang: diakses lewat cloud, bukan dimiliki pribadi.</span>
+      <span class="en-text">Most likely never — and that's fine. Quantum computers require extreme cooling infrastructure (or high-precision laser setups) impractical for households. The access model will resemble supercomputers today: accessed via cloud, not personally owned.</span>
+    </div>
+  </details>
+  <details class="faq-item">
+    <summary class="faq-q"><span class="id-text">Apakah quantum computing akan membuat AI jauh lebih pintar?</span><span class="en-text">Will quantum computing make AI much smarter?</span></summary>
+    <div class="faq-a">
+      <span class="id-text">Jujur: sebagian besar klaim ini masih spekulatif. Ada riset awal quantum machine learning yang menjanjikan untuk jenis data tertentu, tapi belum ada bukti kuat bahwa quantum computing akan mempercepat training model AI besar seperti yang dipakai hari ini. Anggap ini area riset aktif, bukan fakta mapan.</span>
+      <span class="en-text">Honestly: most such claims remain speculative. There's promising early research in quantum machine learning for certain data types, but no strong evidence yet that quantum computing will accelerate training of large AI models used today. Consider this an active research area, not an established fact.</span>
+    </div>
+  </details>
+  <details class="faq-item">
+    <summary class="faq-q"><span class="id-text">Apakah bitcoin dan cryptocurrency saya aman dari quantum computing?</span><span class="en-text">Is my Bitcoin and cryptocurrency safe from quantum computing?</span></summary>
+    <div class="faq-a">
+      <span class="id-text">Untuk saat ini, ya. Memecahkan kriptografi kurva eliptik (ECC) yang melindungi Bitcoin butuh komputer kuantum jauh lebih besar dari yang ada hari ini. Tapi ini bukan alasan untuk lengah — komunitas cryptocurrency sudah mulai mendiskusikan migrasi ke algoritma tahan-kuantum untuk dekade mendatang.</span>
+      <span class="en-text">For now, yes. Breaking the elliptic curve cryptography (ECC) protecting Bitcoin requires a much larger quantum computer than exists today. But this isn't a reason for complacency — the cryptocurrency community has already begun discussing migration to quantum-resistant algorithms for the coming decades.</span>
+    </div>
+  </details>
+  <details class="faq-item">
+    <summary class="faq-q"><span class="id-text">Berapa banyak qubit yang dibutuhkan untuk memecahkan enkripsi RSA-2048?</span><span class="en-text">How many qubits are needed to break RSA-2048 encryption?</span></summary>
+    <div class="faq-a">
+      <span class="id-text">Perkiraan riset saat ini: sekitar 4.000 qubit logis (qubit yang sudah dikoreksi error sepenuhnya) — yang berarti jutaan qubit fisik dengan teknologi koreksi error hari ini. Sebagai perbandingan, komputer kuantum terbesar saat ini punya ribuan qubit fisik, bukan qubit logis. Jaraknya masih jauh, tapi tidak infinite.</span>
+      <span class="en-text">Current research estimates: roughly 4,000 logical qubits (fully error-corrected qubits) — translating to millions of physical qubits with today's error-correction technology. For comparison, today's largest quantum computers have thousands of physical qubits, not logical ones. The gap remains large, but not infinite.</span>
+    </div>
+  </details>
+  <details class="faq-item">
+    <summary class="faq-q"><span class="id-text">Apakah ada aplikasi bisnis quantum computing yang nyata hari ini, atau semuanya masih riset?</span><span class="en-text">Are there any real business applications of quantum computing today, or is it all still research?</span></summary>
+    <div class="faq-a">
+      <span class="id-text">Sudah ada beberapa yang nyata, meski skalanya masih terbatas: optimisasi rute logistik (Volkswagen, DHL), penemuan katalis kimia (ExxonMobil, JPMorgan untuk risk modeling), dan eksperimen kriptografi kuantum di perbankan. Tapi kebanyakan masih tahap pilot/eksperimental — belum menggantikan solusi klasik secara luas.</span>
+      <span class="en-text">Some are real, though still limited in scale: logistics route optimization (Volkswagen, DHL), chemical catalyst discovery (ExxonMobil, JPMorgan for risk modeling), and quantum cryptography pilots in banking. But most remain pilot/experimental stage — not yet broadly replacing classical solutions.</span>
+    </div>
+  </details>
+  <details class="faq-item">
+    <summary class="faq-q"><span class="id-text">Apa bedanya komputer kuantum dengan superkomputer klasik biasa?</span><span class="en-text">What's the difference between a quantum computer and a regular classical supercomputer?</span></summary>
+    <div class="faq-a">
+      <span class="id-text">Bukan sekadar 'lebih cepat'. Superkomputer klasik tetap memproses bit demi bit secara berurutan (walau paralel masif). Komputer kuantum memanfaatkan superposisi dan interferensi untuk mengeksplorasi banyak kemungkinan solusi sekaligus — model komputasi yang secara fundamental berbeda, cocok untuk kelas masalah tertentu, bukan pengganti umum.</span>
+      <span class="en-text">Not simply 'faster.' Classical supercomputers still process bit by bit sequentially (though massively parallel). Quantum computers exploit superposition and interference to explore many possible solutions simultaneously — a fundamentally different computation model, suited to specific problem classes, not a general replacement.</span>
+    </div>
+  </details>
+  <details class="faq-item">
+    <summary class="faq-q"><span class="id-text">Apakah eksperimen Kucing Schrödinger sungguhan pernah dilakukan?</span><span class="en-text">Was the Schrödinger's Cat experiment ever actually performed?</span></summary>
+    <div class="faq-a">
+      <span class="id-text">Tidak dengan kucing sungguhan — dan memang tidak dimaksudkan begitu oleh Schrödinger; itu murni eksperimen pikiran untuk menyindir absurditas superposisi makroskopis. Namun versi skala-kecilnya (superposisi objek jauh lebih besar dari atom tunggal, seperti kristal mikroskopis) sudah didemonstrasikan di laboratorium — meski jauh dari skala seekor kucing.</span>
+      <span class="en-text">Not with a real cat — and it was never meant to be; it was purely a thought experiment mocking the absurdity of macroscopic superposition. However, small-scale versions (superposition of objects far larger than a single atom, like microscopic crystals) have been demonstrated in labs — though still far from cat-scale.</span>
+    </div>
+  </details>
+  <details class="faq-item">
+    <summary class="faq-q"><span class="id-text">Apakah teleportasi kuantum berarti kita bisa mengirim manusia lewat teleportasi?</span><span class="en-text">Does quantum teleportation mean we could teleport humans?</span></summary>
+    <div class="faq-a">
+      <span class="id-text">Tidak — dan kemungkinan besar tidak akan pernah bisa dengan cara ini. Teleportasi kuantum memindahkan keadaan informasi kuantum satu partikel, bukan materi. Untuk 'teleport' objek makroskopis seperti manusia, Anda perlu mentransfer keadaan kuantum setiap partikel penyusun tubuh secara sempurna — sebuah tantangan praktis (dan etis) yang sangat berbeda skalanya.</span>
+      <span class="en-text">No — and most likely never will work this way. Quantum teleportation transfers the quantum information state of one particle, not matter. To 'teleport' a macroscopic object like a human, you'd need to perfectly transfer the quantum state of every constituent particle in the body — a practical (and ethical) challenge of an entirely different scale.</span>
+    </div>
+  </details>
+  <details class="faq-item">
+    <summary class="faq-q"><span class="id-text">Apa itu 'quantum supremacy' — apakah berarti quantum sudah mengalahkan semua komputer klasik?</span><span class="en-text">What is 'quantum supremacy' — does it mean quantum has beaten all classical computers?</span></summary>
+    <div class="faq-a">
+      <span class="id-text">Bukan. Quantum supremacy (dicapai Google, 2019) berarti komputer kuantum menyelesaikan satu tugas sangat spesifik dan dirancang khusus (sampling dari sirkuit acak) yang tidak praktis dikerjakan komputer klasik dalam waktu wajar. Tugas itu sendiri hampir tidak berguna secara praktis — nilainya adalah pembuktian konsep, bukan kemenangan umum atas semua komputasi klasik.</span>
+      <span class="en-text">No. Quantum supremacy (achieved by Google, 2019) means a quantum computer completed one very specific, specially designed task (random circuit sampling) impractical for classical computers to complete in reasonable time. The task itself is nearly useless practically — its value was proof of concept, not a general victory over all classical computation.</span>
+    </div>
+  </details>
+  <details class="faq-item">
+    <summary class="faq-q"><span class="id-text">Kenapa komputer kuantum harus didinginkan sampai mendekati nol mutlak?</span><span class="en-text">Why do quantum computers need to be cooled to near absolute zero?</span></summary>
+    <div class="faq-a">
+      <span class="id-text">Ini spesifik untuk qubit superkonduktor (dipakai IBM, Google) — suhu ekstrem dingin (~15 milikelvin) diperlukan untuk meminimalkan getaran termal yang bisa merusak keadaan kuantum rapuh (dekoherensi). Menariknya, tidak semua jenis qubit butuh ini: qubit fotonik (PsiQuantum, Xanadu) justru bisa beroperasi pada suhu ruang.</span>
+      <span class="en-text">This is specific to superconducting qubits (used by IBM, Google) — extreme cold (~15 millikelvin) is needed to minimize thermal vibrations that can destroy fragile quantum states (decoherence). Interestingly, not all qubit types need this: photonic qubits (PsiQuantum, Xanadu) can actually operate at room temperature.</span>
+    </div>
+  </details>
+  <details class="faq-item">
+    <summary class="faq-q"><span class="id-text">Apakah saya perlu khawatir data saya dicuri sekarang karena ancaman quantum computing masa depan?</span><span class="en-text">Should I worry about my data being stolen now because of future quantum computing threats?</span></summary>
+    <div class="faq-a">
+      <span class="id-text">Tergantung berapa lama data itu perlu tetap rahasia. Jika Anda individu biasa dengan data yang tidak terlalu sensitif jangka panjang, risikonya rendah untuk saat ini. Tapi jika Anda mengelola data sensitif jangka panjang (rahasia dagang, data kesehatan, dokumen pemerintah), strategi 'harvest now, decrypt later' membuat migrasi ke enkripsi tahan-kuantum relevan untuk dipersiapkan mulai sekarang.</span>
+      <span class="en-text">It depends on how long that data needs to stay confidential. If you're an average individual with data that isn't especially sensitive long-term, the risk is low for now. But if you manage long-term sensitive data (trade secrets, health records, government documents), the 'harvest now, decrypt later' strategy makes preparing for quantum-resistant encryption migration relevant starting now.</span>
+    </div>
+  </details>
+  <details class="faq-item">
+    <summary class="faq-q"><span class="id-text">Siapa yang paling unggul dalam perlombaan quantum computing saat ini — AS atau China?</span><span class="en-text">Who is currently leading the quantum computing race — the US or China?</span></summary>
+    <div class="faq-a">
+      <span class="id-text">Ini pertanyaan yang berkembang cepat dan sensitif secara geopolitik — jawaban 'pasti' berisiko cepat usang. Yang bisa dikatakan dengan aman: AS unggul di riset akademik terbuka dan perusahaan swasta (IBM, Google, IonQ); China dilaporkan berinvestasi besar dalam komunikasi kuantum (QKD, satelit Micius) dan riset tertutup. Untuk data terkini, cek sumber langsung terbaru — status ini bisa berubah tiap tahun.</span>
+      <span class="en-text">This is a fast-evolving and geopolitically sensitive question — any 'definitive' answer risks quickly becoming outdated. What can safely be said: the US leads in open academic research and private companies (IBM, Google, IonQ); China is reported to invest heavily in quantum communication (QKD, the Micius satellite) and closed-door research. For current data, check the latest direct sources — this status can shift year to year.</span>
+    </div>
+  </details>
+  <details class="faq-item">
+    <summary class="faq-q"><span class="id-text">Apakah Indonesia punya komputer kuantum sendiri?</span><span class="en-text">Does Indonesia have its own quantum computer?</span></summary>
+    <div class="faq-a">
+      <span class="id-text">Belum ada program pembangunan hardware quantum computer skala penuh di Indonesia saat ini. BRIN memiliki kelompok riset fisika dan material kuantum, tapi fokusnya masih pada riset dasar, bukan pembangunan mesin. Lihat Bab 07 untuk pembahasan lebih detail tentang posisi Indonesia dan Asia Tenggara.</span>
+      <span class="en-text">There is currently no full-scale quantum computer hardware development program in Indonesia. BRIN has quantum physics and materials research groups, but the focus remains on foundational research, not machine construction. See Chapter 7 for a more detailed discussion of Indonesia and Southeast Asia's position.</span>
+    </div>
+  </details>
+  <details class="faq-item">
+    <summary class="faq-q"><span class="id-text">Bagaimana cara belajar quantum computing dari nol tanpa gelar fisika?</span><span class="en-text">How can I learn quantum computing from scratch without a physics degree?</span></summary>
+    <div class="faq-a">
+      <span class="id-text">Mulai dari intuisi, baru matematika. Coba platform interaktif seperti IBM Qiskit Textbook (gratis, dengan simulator asli) atau Quantum Country karya Michael Nielsen (menggunakan teknik spaced-repetition). Pelajari aljabar linear dasar (vektor, matriks) secukupnya sebelum masuk ke gerbang kuantum. Buku ini sendiri dirancang sebagai titik awal yang ramah pemula sebelum melangkah ke sumber yang lebih teknis.</span>
+      <span class="en-text">Start with intuition, then mathematics. Try interactive platforms like the IBM Qiskit Textbook (free, with a real simulator) or Michael Nielsen's Quantum Country (using spaced-repetition technique). Learn basic linear algebra (vectors, matrices) as needed before diving into quantum gates. This book itself is designed as a beginner-friendly starting point before moving to more technical sources.</span>
+    </div>
+  </details>
+  <details class="faq-item">
+    <summary class="faq-q"><span class="id-text">Apakah quantum computing berbahaya seperti senjata nuklir?</span><span class="en-text">Is quantum computing as dangerous as nuclear weapons?</span></summary>
+    <div class="faq-a">
+      <span class="id-text">Analoginya tidak tepat secara langsung, tapi ada kemiripan dalam satu hal: sama-sama teknologi 'dual-use' — bisa dipakai untuk kebaikan (obat, energi bersih) maupun bahaya (memecahkan enkripsi militer, mempercepat desain senjata). Bedanya, quantum computing tidak punya efek destruktif langsung seperti bom — ancamannya lebih ke arah pergeseran keseimbangan kekuatan informasi dan keamanan siber.</span>
+      <span class="en-text">The analogy isn't directly accurate, but shares one similarity: both are 'dual-use' technologies — usable for good (medicine, clean energy) or harm (breaking military encryption, accelerating weapons design). The difference: quantum computing has no direct destructive effect like a bomb — its threat leans more toward shifting the balance of informational power and cybersecurity.</span>
+    </div>
+  </details>
+  <details class="faq-item">
+    <summary class="faq-q"><span class="id-text">Apa itu era NISQ dan kenapa kita masih terjebak di dalamnya?</span><span class="en-text">What is the NISQ era and why are we still stuck in it?</span></summary>
+    <div class="faq-a">
+      <span class="id-text">NISQ (Noisy Intermediate-Scale Quantum) adalah istilah John Preskill (2018) untuk kondisi saat ini: komputer kuantum dengan puluhan hingga ribuan qubit yang masih penuh noise dan belum dikoreksi error sepenuhnya. Kita 'terjebak' karena koreksi error kuantum butuh qubit tambahan dalam jumlah besar (satu qubit logis = ratusan-ribuan qubit fisik) — dan mencapai skala itu masih butuh terobosan rekayasa signifikan.</span>
+      <span class="en-text">NISQ (Noisy Intermediate-Scale Quantum) is John Preskill's term (2018) for the current state: quantum computers with tens to thousands of qubits still full of noise and not yet fully error-corrected. We're 'stuck' because quantum error correction requires a large number of additional qubits (one logical qubit = hundreds to thousands of physical qubits) — and reaching that scale still requires significant engineering breakthroughs.</span>
+    </div>
+  </details>
+  <details class="faq-item">
+    <summary class="faq-q"><span class="id-text">Apakah semua produk yang mengklaim 'quantum' di pasaran benar-benar menggunakan teknologi kuantum?</span><span class="en-text">Do all products marketed as 'quantum' actually use quantum technology?</span></summary>
+    <div class="faq-a">
+      <span class="id-text">Sebagian besar tidak. Istilah 'quantum' sering dipakai sebagai kata pemasaran untuk produk kesehatan alternatif, perhiasan 'penyeimbang energi', atau aplikasi self-help — tanpa dasar ilmiah nyata. Cara membedakannya: teknologi kuantum sungguhan (QKD, quantum sensing, quantum computing) selalu punya makalah ilmiah peer-review, spesifikasi teknis terukur, dan klaim yang bisa diuji — bukan sekadar 'energi kuantum menyembuhkan Anda'.</span>
+      <span class="en-text">Most don't. The term 'quantum' is often used as marketing language for alternative health products, 'energy-balancing' jewelry, or self-help apps — without genuine scientific basis. How to tell the difference: real quantum technology (QKD, quantum sensing, quantum computing) always has peer-reviewed papers, measurable technical specifications, and testable claims — not just 'quantum energy heals you'.</span>
+    </div>
+  </details>
+  <details class="faq-item">
+    <summary class="faq-q"><span class="id-text">Kapan quantum computing akan benar-benar mengubah hidup sehari-hari saya?</span><span class="en-text">When will quantum computing actually change my everyday life?</span></summary>
+    <div class="faq-a">
+      <span class="id-text">Jawaban jujur: mungkin tidak secara langsung terasa untuk waktu yang lama — mirip bagaimana Anda tidak 'merasakan' internet backbone atau chip semikonduktor, meski keduanya mengubah hidup Anda total. Dampak paling awal kemungkinan tidak terlihat: obat baru yang dirancang lebih cepat, baterai yang lebih efisien, atau perubahan diam-diam pada standar enkripsi yang melindungi transaksi online Anda — bukan 'komputer kuantum di saku Anda'.</span>
+      <span class="en-text">The honest answer: possibly not directly noticeable for a long time — similar to how you don't 'feel' internet backbone infrastructure or semiconductor chips, even though both have totally transformed your life. The earliest impacts will likely be invisible: new drugs designed faster, more efficient batteries, or quiet changes to the encryption standards protecting your online transactions — not 'a quantum computer in your pocket'.</span>
+    </div>
+  </details>
+  <details class="faq-item">
+    <summary class="faq-q"><span class="id-text">Apakah quantum computing akan menyebabkan pengangguran massal seperti kekhawatiran soal AI?</span><span class="en-text">Will quantum computing cause mass unemployment like AI automation concerns?</span></summary>
+    <div class="faq-a">
+      <span class="id-text">Kemungkinan jauh lebih kecil dibanding kekhawatiran soal AI otomatisasi kerja. Quantum computing adalah alat komputasi khusus untuk kelas masalah tertentu (simulasi, optimisasi, kriptografi) — bukan pengganti tenaga kerja manusia secara luas. Justru sebaliknya, bidang ini menciptakan permintaan baru untuk keahlian langka: fisikawan kuantum, insinyur kriogenik, dan spesialis migrasi kriptografi pasca-kuantum.</span>
+      <span class="en-text">The likelihood is far smaller than concerns around AI-driven job automation. Quantum computing is a specialized computational tool for specific problem classes (simulation, optimization, cryptography) — not a broad replacement for human labor. If anything, the field creates new demand for scarce expertise: quantum physicists, cryogenic engineers, and post-quantum cryptography migration specialists.</span>
+    </div>
+  </details>
+</section>
+
+<!-- ══════════════════════════════════════════════════════
+     S7 · PENUTUP
+══════════════════════════════════════════════════════ -->
+<section id="s7" class="reveal">
+  <p class="sec-eyebrow">
+    <span class="id-text">Penutup</span><span class="en-text">Closing</span>
+  </p>
+  <h2 class="sec-title" style="position:relative">
+    <span class="sec-num">07</span>
+    <span class="id-text">Pandangan Pragmatis & Bijak:<br>Menuju dengan Mata Terbuka</span>
+    <span class="en-text">A Pragmatic & Wise View:<br>Moving Forward with Open Eyes</span>
+  </h2>
+
+  <p class="sec-lead">
+    <span class="id-text">Quantum computing adalah salah satu pencapaian intelektual paling luar biasa dalam sejarah manusia. Ia juga membawa tanggung jawab yang belum pernah ada sebelumnya.</span>
+    <span class="en-text">Quantum computing is one of the most extraordinary intellectual achievements in human history. It also brings responsibilities that have never existed before.</span>
+  </p>
+
+  <div class="closing-box">
+    <p>
+      <span class="id-text"><strong>Pertama, jaga perspektif waktu.</strong> Quantum computing tidak akan datang besok pagi dan mengubah segalanya. Ia adalah transformasi yang membutuhkan dekade — bukan tahun. Hype yang berlebihan sudah merugikan banyak investor dan pembuat kebijakan. Realitanya adalah: kita masih di era NISQ yang berisik dan penuh error. Yang sudah terbukti berguna hari ini masih sangat terbatas.</span>
+      <span class="en-text"><strong>First, maintain time perspective.</strong> Quantum computing will not arrive tomorrow morning and change everything. It is a transformation requiring decades — not years. Excessive hype has already harmed many investors and policymakers. The reality is: we are still in the noisy, error-prone NISQ era. What has proven useful today remains very limited.</span>
+    </p>
+    <p>
+      <span class="id-text"><strong>Kedua, pisahkan sinyal dari kebisingan.</strong> Banyak klaim "quantum" di produk komersial, aplikasi kesehatan, dan motivasi diri adalah penyalahgunaan terminologi ilmiah. Ini tidak harus membuat kita sinis — tapi harus membuat kita kritis. Metafora kuantum untuk kehidupan bisa bermakna jika digunakan dengan jujur sebagai analogi, bukan klaim ilmiah.</span>
+      <span class="en-text"><strong>Second, separate signal from noise.</strong> Many "quantum" claims in commercial products, health applications, and self-motivation are misuse of scientific terminology. This need not make us cynical — but it should make us critical. Quantum metaphors for life can be meaningful when used honestly as analogy, not scientific claim.</span>
+    </p>
+    <p>
+      <span class="id-text"><strong>Ketiga, mulai bersiap sekarang.</strong> Transisi ke post-quantum cryptography tidak bisa ditunda. "Harvest now, decrypt later" sudah terjadi. Organisasi dan pemerintah yang tidak mulai mempersiapkan infrastruktur keamanan kuantum hari ini akan menghadapi risiko serius dalam satu dekade ke depan.</span>
+      <span class="en-text"><strong>Third, start preparing now.</strong> Transition to post-quantum cryptography cannot be delayed. "Harvest now, decrypt later" is already happening. Organizations and governments that don't begin preparing quantum security infrastructure today will face serious risks within a decade.</span>
+    </p>
+    <p>
+      <span class="id-text"><strong>Keempat, ini adalah pertanyaan kemanusiaan.</strong> Siapa yang mengontrol quantum computing masa depan? Akankah ia memperkuat demokrasi atau otoritarianisme? Akankah manfaatnya tersebar luas atau terkonsentrasi? Pertanyaan-pertanyaan ini tidak bisa dijawab oleh fisikawan atau insinyur saja — ini membutuhkan filsuf, ekonom, pembuat kebijakan, dan warga negara yang melek kuantum.</span>
+      <span class="en-text"><strong>Fourth, this is a human question.</strong> Who controls future quantum computing? Will it strengthen democracy or authoritarianism? Will its benefits spread widely or concentrate? These questions cannot be answered by physicists or engineers alone — they require philosophers, economists, policymakers, and quantum-literate citizens.</span>
+    </p>
+    <p>
+      <span class="id-text"><strong>Akhirnya:</strong> Fisika kuantum mengajarkan satu hal yang melampaui semua aplikasi dan algoritmanya — bahwa alam semesta, di tingkat yang paling fundamental, adalah tempat yang jauh lebih kaya, lebih aneh, dan lebih mengejutkan dari yang pernah kita duga. Menuju quantum computing bukan hanya tentang mesin yang lebih cepat. Ia adalah undangan untuk melihat realitas dengan mata yang lebih luas — dan bertindak dengan kebijaksanaan yang sepadan.</span>
+      <span class="en-text"><strong>Finally:</strong> Quantum physics teaches one thing that transcends all its applications and algorithms — that the universe, at its most fundamental level, is a place far richer, stranger, and more surprising than we ever imagined. Moving toward quantum computing is not just about faster machines. It is an invitation to see reality with wider eyes — and to act with wisdom commensurate with that vision.</span>
+    </p>
+  </div>
+
+  <div class="divider"></div>
+
+  <div class="ref-block">
+    <div class="ref-label"><span class="id-text">Referensi Utama</span><span class="en-text">Key References</span></div>
+    <div class="ref-item">· Nielsen, M.A. & Chuang, I.L. (2000). <em>Quantum Computation and Quantum Information</em>. Cambridge University Press.</div>
+    <div class="ref-item">· Feynman, R.P. (1982). Simulating physics with computers. <em>International Journal of Theoretical Physics</em>, 21(6–7), 467–488.</div>
+    <div class="ref-item">· Shor, P.W. (1994). Algorithms for quantum computation. <em>Proc. 35th Annual Symposium on FOCS</em>, 124–134.</div>
+    <div class="ref-item">· Arute, F. et al. (2019). Quantum supremacy using a programmable superconducting processor. <em>Nature</em>, 574, 505–510.</div>
+    <div class="ref-item">· Aspect, A., Clauser, J., Zeilinger, A. (2022). Nobel Prize in Physics — entanglement experiments.</div>
+    <div class="ref-item">· Preskill, J. (1998). Lecture Notes on Quantum Computation. Caltech. [quant-ph/9712048]</div>
+    <div class="ref-item">· NIST (2024). Post-Quantum Cryptography Standards. FIPS 203, 204, 205.</div>
+    <div class="ref-item">· Yin, J. et al. (2017). Satellite-based entanglement distribution over 1200 kilometers. <em>Science</em>, 356(6343), 1140–1144.</div>
+  </div>
+
+  <div style="margin-top:2rem;text-align:center">
+    <p style="font-size:12px;color:var(--ink4)">
+      <span class="id-text">Ditulis oleh</span><span class="en-text">Written by</span>
+      <strong style="color:var(--ink3)">Sangoeroep</strong> · 2026
+    </p>
+    <p style="font-size:11px;color:var(--ink4);margin-top:.25rem">
+      <span class="id-text">Bagian dari seri</span><span class="en-text">Part of the series</span>
+      <em>Ruang Baca</em>
+    </p>
+  </div>
+</section>
+
+<script>
+// ── LANGUAGE TOGGLE ────────────────────────────────────
+function setLang(l){
+  document.body.classList.toggle('en', l==='en');
+  document.getElementById('btn-id').classList.toggle('on', l==='id');
+  document.getElementById('btn-en').classList.toggle('on', l==='en');
+  document.documentElement.lang = l;
+}
+
+// ── SCROLL NAV ─────────────────────────────────────────
+function scrollTo2(id){document.getElementById(id).scrollIntoView({behavior:'smooth'})}
+
+// ── FLOATING TOC DRAWER (panduan §6) ────────────────────
+const tocBtn = document.getElementById('toc-toggle');
+const tocPanel = document.getElementById('toc-panel');
+const tocScrim = document.getElementById('toc-scrim');
+
+function openToc(){
+  tocPanel.classList.add('open');
+  tocScrim.classList.add('open');
+  tocPanel.setAttribute('aria-hidden','false');
+  tocBtn.setAttribute('aria-expanded','true');
+}
+function closeToc(){
+  tocPanel.classList.remove('open');
+  tocScrim.classList.remove('open');
+  tocPanel.setAttribute('aria-hidden','true');
+  tocBtn.setAttribute('aria-expanded','false');
+}
+tocBtn.addEventListener('click', () => {
+  tocPanel.classList.contains('open') ? closeToc() : openToc();
+});
+tocScrim.addEventListener('click', closeToc);
+tocPanel.querySelectorAll('.toc-item[data-sec]').forEach(btn => {
+  btn.addEventListener('click', () => {
+    scrollTo2(btn.dataset.sec);
+    closeToc();
+  });
+});
+document.addEventListener('keydown', (e) => {
+  if(e.key === 'Escape') closeToc();
+});
+
+// ── PROGRESS BAR ───────────────────────────────────────
+const ALL_SECS=['hero','s1','s2','s3','s4','s5','s6','sg','sf','s7'];
+window.addEventListener('scroll',()=>{
+  const h=document.documentElement;
+  const pct=(h.scrollTop/(h.scrollHeight-h.clientHeight))*100;
+  document.getElementById('prog').style.width=pct+'%';
+  // active sidenav dot + toc item
+  let active='hero';
+  ALL_SECS.forEach(id=>{
+    const el=document.getElementById(id);
+    if(el && el.getBoundingClientRect().top < window.innerHeight*0.5) active=id;
+  });
+  document.querySelectorAll('.snav-dot').forEach(d=>{
+    d.classList.toggle('active', d.dataset.sec===active);
+  });
+  document.querySelectorAll('.toc-item[data-sec]').forEach(t=>{
+    t.classList.toggle('active', t.dataset.sec===active);
+  });
+});
+
+// ── REVEAL ON SCROLL ───────────────────────────────────
+const obs=new IntersectionObserver(entries=>{
+  entries.forEach(e=>{if(e.isIntersecting){e.target.classList.add('visible')}});
+},{threshold:0.1});
+document.querySelectorAll('.reveal').forEach(el=>obs.observe(el));
+
+// ── MINI QUBIT INTERACTION ─────────────────────────────
+function measureQ(el){
+  if(el.textContent!=='?')return;
+  const r=Math.random()<.5?0:1;
+  el.textContent=r;
+  el.className='qb '+(r===0?'qb-zero':'qb-one');
+  el.style.cursor='default';
+  el.style.transform='scale(1.15)';
+  setTimeout(()=>el.style.transform='',300);
+}
+function resetQubits(){
+  document.querySelectorAll('#qubits-row .qb').forEach(el=>{
+    el.textContent='?';
+    el.className='qb qb-super';
+    el.style.cursor='pointer';
+    el.style.transform='';
+    el.onclick=function(){measureQ(this)};
+  });
+}
+
+// ── GLOSSARY FILTER ────────────────────────────────────
+function filterGlossary(q){
+  q=q.trim().toLowerCase();
+  const items=document.querySelectorAll('#gloss-grid .gloss-item');
+  let shown=0;
+  items.forEach(it=>{
+    const txt=it.textContent.toLowerCase();
+    const match=q==='' || txt.includes(q);
+    it.style.display=match?'':'none';
+    if(match)shown++;
+  });
+  const counter=document.getElementById('gloss-count');
+  const isEn=document.body.classList.contains('en');
+  if(q===''){counter.textContent='';}
+  else{counter.textContent=isEn?`${shown} term(s) found`:`${shown} istilah ditemukan`;}
+}
+</script>
+</body>
+</html>

@@ -1,0 +1,544 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Entanglement & Superposisi — Quantum Computing</title>
+<style>
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body { font-family: system-ui, -apple-system, sans-serif; background: #f8f7f4; color: #1a1a18; min-height: 100vh; padding: 2rem 1.5rem; }
+  .wrap { max-width: 720px; margin: 0 auto; }
+  .kap { font-size: 11px; font-weight: 600; letter-spacing: .18em; text-transform: uppercase; color: #888; margin-bottom: 1.5rem; }
+  .nav { display: flex; gap: 8px; flex-wrap: wrap; margin-bottom: 1.5rem; }
+  .nb { font-size: 12px; padding: 6px 14px; border-radius: 8px; border: 1px solid #ddd; background: #fff; color: #555; cursor: pointer; transition: all .15s; font-family:inherit; }
+  .nb.on { background: #1a1a18; color: #fff; border-color: #1a1a18; }
+  .card { background: #fff; border: 1px solid #e8e6e0; border-radius: 12px; padding: 1.25rem 1.5rem; margin-bottom: 1rem; }
+  .ct { font-size: 14px; font-weight: 600; color: #1a1a18; margin-bottom: .6rem; }
+  .cb { font-size: 13px; color: #555; line-height: 1.8; }
+  .cb strong { color: #1a1a18; font-weight: 600; }
+  .quote { border-left: 2px solid #ddd; padding-left: 1rem; margin-top: 1rem; font-style: italic; font-size: 13px; color: #888; line-height: 1.7; }
+  .chips { display: grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); gap: 8px; margin-top: 1rem; }
+  .chip { background: #f8f7f4; border: 1px solid #e8e6e0; border-radius: 8px; padding: .65rem 1rem; font-size: 12px; color: #555; line-height: 1.5; }
+  .chip strong { display: block; font-size: 10px; font-weight: 700; color: #999; text-transform: uppercase; letter-spacing: .1em; margin-bottom: 3px; }
+  .divider { height: 1px; background: #e8e6e0; margin: 1.5rem 0; }
+  .btn { font-size: 12px; padding: 7px 16px; border-radius: 8px; border: 1px solid #ddd; background: #fff; color: #1a1a18; cursor: pointer; transition: background .15s; font-family:inherit; }
+  .btn:hover { background: #f8f7f4; }
+  .btn-row { display: flex; gap: 8px; flex-wrap: wrap; }
+  .bar-wrap { background: #e8e6e0; border-radius: 4px; height: 8px; overflow: hidden; }
+  .bar { height: 100%; border-radius: 4px; transition: width .5s cubic-bezier(.4,0,.2,1); }
+  .circle { width: 80px; height: 80px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 22px; font-weight: 700; margin: 0 auto; transition: all .4s; border: 2px solid; }
+  @keyframes pulse { 0%,100%{opacity:.6}50%{opacity:1} }
+  .pulsing { animation: pulse 2s ease-in-out infinite; }
+  .metric { background: #f8f7f4; border-radius: 8px; padding: .75rem 1rem; }
+  .metric-label { font-size: 10px; font-weight: 700; text-transform: uppercase; letter-spacing: .1em; color: #999; margin-bottom: 4px; }
+  .metric-val { font-size: 22px; font-weight: 700; color: #1a1a18; }
+  .tp-dot{width:8px;height:8px;border-radius:50%;background:#e0ddf5}
+  .tp-dot.on{background:#534AB7}
+  .tp-dot.done{background:#0F6E56}
+  .btn-primary-tp{background:#1a1a18;color:#fff;border-color:#1a1a18}
+  .btn-primary-tp:hover{background:#333}
+
+  /* ── LANGUAGE TOGGLE ──────────────────────────────────── */
+  .id-text{display:block}
+  .en-text{display:none}
+  body.en .id-text{display:none}
+  body.en .en-text{display:block}
+  .id-inline{display:inline}
+  .en-inline{display:none}
+  body.en .id-inline{display:none}
+  body.en .en-inline{display:inline}
+  #lang-bar{position:fixed;top:16px;right:20px;z-index:999;display:flex;gap:6px;align-items:center;background:rgba(248,247,244,.92);backdrop-filter:blur(8px);border:1px solid #e8e6e0;border-radius:50px;padding:5px 10px}
+  .lb{font-size:12px;font-weight:600;padding:4px 12px;border-radius:50px;border:none;cursor:pointer;transition:all .2s;font-family:inherit;letter-spacing:.04em}
+  .lb.on{background:#1a1a18;color:#fff}
+  .lb:not(.on){background:transparent;color:#888}
+  .lb:not(.on):hover{background:#eceae4}
+</style>
+</head>
+<body>
+
+<div id="lang-bar">
+  <button class="lb on" onclick="setLang('id')" id="btn-id">ID</button>
+  <button class="lb" onclick="setLang('en')" id="btn-en">EN</button>
+</div>
+
+<div class="wrap">
+  <p class="kap">
+    <span class="id-text">Bab 2 · Quantum Computing — Entanglement &amp; Superposisi</span>
+    <span class="en-text">Chapter 2 · Quantum Computing — Entanglement &amp; Superposition</span>
+  </p>
+
+  <div class="nav">
+    <button class="nb on" onclick="go(0,this)"><span class="id-inline">Dari superposisi ke entanglement</span><span class="en-inline">From superposition to entanglement</span></button>
+    <button class="nb" onclick="go(1,this)"><span class="id-inline">Simulasi keterjeratan</span><span class="en-inline">Entanglement simulation</span></button>
+    <button class="nb" onclick="go(2,this)"><span class="id-inline">Bukan telepati</span><span class="en-inline">Not telepathy</span></button>
+    <button class="nb" onclick="go(3,this)"><span class="id-inline">Bell & Nobel 2022</span><span class="en-inline">Bell & 2022 Nobel</span></button>
+    <button class="nb" onclick="go(4,this)"><span class="id-inline">Teleportasi kuantum</span><span class="en-inline">Quantum teleportation</span></button>
+  </div>
+
+  <!-- PANEL 0 -->
+  <div id="p0">
+    <div class="card">
+      <div class="ct">
+        <span class="id-text">Superposisi adalah bahan baku — entanglement adalah produk jadinya</span>
+        <span class="en-text">Superposition is the raw material — entanglement is the finished product</span>
+      </div>
+      <div class="cb">
+        <span class="id-text">
+        Ingat superposisi: satu qubit bisa berada dalam keadaan |0⟩ dan |1⟩ <strong>sekaligus</strong>. Sekarang bayangkan dua qubit yang berinteraksi. Keduanya tidak lagi memiliki keadaan kuantum yang independen — mereka membentuk <strong>satu keadaan kuantum bersama</strong> yang tidak bisa dipecah.<br><br>
+        Inilah entanglement: dua partikel yang berbagi gelombang probabilitas yang <strong>tak terpisahkan</strong> — bukan karena ada sinyal yang mengalir di antara mereka, melainkan karena secara matematis mereka adalah <strong>satu sistem tunggal</strong>, tak peduli seberapa jauh jarak fisiknya.
+        </span>
+        <span class="en-text">
+        Recall superposition: a single qubit can exist in states |0⟩ and |1⟩ <strong>at once</strong>. Now imagine two qubits interacting. Neither retains an independent quantum state — together they form <strong>one shared quantum state</strong> that cannot be split apart.<br><br>
+        This is entanglement: two particles sharing a probability wave that is <strong>inseparable</strong> — not because a signal flows between them, but because mathematically they are <strong>a single system</strong>, no matter how far apart they physically are.
+        </span>
+        <div class="quote">
+          <span class="id-text">"Alam semesta tidak memiliki 'bagian-bagian' yang benar-benar terpisah. Entanglement adalah bukti paling nyata dari kenyataan itu." — David Bohm, 1980</span>
+          <span class="en-text">"The universe does not have truly separate 'parts.' Entanglement is the most concrete evidence of that fact." — David Bohm, 1980</span>
+        </div>
+      </div>
+    </div>
+
+    <svg width="100%" viewBox="0 0 680 200" style="display:block;margin-bottom:1rem" role="img">
+      <title id="svg-t0"><span class="id-inline">Dua qubit independen bergabung menjadi satu sistem entangled</span></title>
+      <defs><marker id="ar" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M2 1L8 5L2 9" fill="none" stroke="#aaa" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></marker></defs>
+      <rect x="30" y="70" width="120" height="60" rx="8" fill="#EEEDFE" stroke="#534AB7" stroke-width="1"/>
+      <text x="90" y="97" text-anchor="middle" font-size="13" font-weight="600" fill="#3C3489" font-family="system-ui">Qubit A</text>
+      <text x="90" y="116" text-anchor="middle" font-size="11" fill="#534AB7" font-family="system-ui">α|0⟩ + β|1⟩</text>
+      <rect x="30" y="148" width="120" height="30" rx="6" fill="#E1F5EE" stroke="#0F6E56" stroke-width=".5"/>
+      <text id="svg-e-mandiri1" x="90" y="163" text-anchor="middle" font-size="10" fill="#085041" font-family="system-ui">superposisi mandiri</text>
+
+      <rect x="210" y="70" width="120" height="60" rx="8" fill="#EEEDFE" stroke="#534AB7" stroke-width="1"/>
+      <text x="270" y="97" text-anchor="middle" font-size="13" font-weight="600" fill="#3C3489" font-family="system-ui">Qubit B</text>
+      <text x="270" y="116" text-anchor="middle" font-size="11" fill="#534AB7" font-family="system-ui">γ|0⟩ + δ|1⟩</text>
+      <rect x="210" y="148" width="120" height="30" rx="6" fill="#E1F5EE" stroke="#0F6E56" stroke-width=".5"/>
+      <text id="svg-e-mandiri2" x="270" y="163" text-anchor="middle" font-size="10" fill="#085041" font-family="system-ui">superposisi mandiri</text>
+
+      <line x1="152" y1="100" x2="207" y2="100" stroke="#aaa" stroke-width="1" marker-end="url(#ar)"/>
+      <text id="svg-e-interaksi" x="180" y="90" text-anchor="middle" font-size="10" fill="#888" font-family="system-ui">interaksi</text>
+
+      <line x1="332" y1="100" x2="390" y2="100" stroke="#aaa" stroke-width="1" marker-end="url(#ar)"/>
+
+      <rect x="392" y="58" width="258" height="84" rx="12" fill="#EEEDFE" stroke="#534AB7" stroke-width="1.5"/>
+      <text id="svg-e-sistem" x="521" y="88" text-anchor="middle" font-size="13" font-weight="600" fill="#3C3489" font-family="system-ui">Sistem entangled (A+B)</text>
+      <text id="svg-e-satukeadaan" x="521" y="112" text-anchor="middle" font-size="11" fill="#534AB7" font-family="system-ui">|00⟩ + |11⟩  (satu keadaan bersama)</text>
+
+      <rect x="392" y="152" width="258" height="30" rx="6" fill="#FBEAF0" stroke="#993556" stroke-width=".5"/>
+      <text id="svg-e-tidakbisa" x="521" y="167" text-anchor="middle" font-size="10" fill="#72243E" font-family="system-ui">tidak bisa dipisahkan menjadi dua qubit mandiri</text>
+    </svg>
+
+    <div class="chips">
+      <div class="chip"><strong><span class="id-inline">Sebelum entanglement</span><span class="en-inline">Before entanglement</span></strong><span class="id-text">Setiap qubit punya keadaan superposisi sendiri yang independen</span><span class="en-text">Each qubit has its own independent superposition state</span></div>
+      <div class="chip"><strong><span class="id-inline">Setelah entanglement</span><span class="en-inline">After entanglement</span></strong><span class="id-text">Satu fungsi gelombang bersama — mengukur satu langsung menentukan yang lain</span><span class="en-text">One shared wave function — measuring one instantly determines the other</span></div>
+      <div class="chip"><strong>Bell state</strong><span class="id-text">|Ψ⟩ = (|00⟩ + |11⟩) / √2 — keadaan entangled paling dasar</span><span class="en-text">|Ψ⟩ = (|00⟩ + |11⟩) / √2 — the most basic entangled state</span></div>
+    </div>
+  </div>
+
+  <!-- PANEL 1 -->
+  <div id="p1" style="display:none">
+    <div class="card">
+      <div class="ct">
+        <span class="id-text">Simulasi: ukur qubit A, lihat apa yang terjadi pada qubit B</span>
+        <span class="en-text">Simulation: measure qubit A, see what happens to qubit B</span>
+      </div>
+      <div class="cb">
+        <span class="id-text">Dua qubit dalam keadaan Bell: <strong>|Ψ⟩ = (|00⟩ + |11⟩) / √2</strong>. Jika A terukur 0 → B pasti 0. Jika A terukur 1 → B pasti 1. Korelasi sempurna, seketika, tanpa sinyal apapun.</span>
+        <span class="en-text">Two qubits in a Bell state: <strong>|Ψ⟩ = (|00⟩ + |11⟩) / √2</strong>. If A measures 0 → B is guaranteed to be 0. If A measures 1 → B is guaranteed to be 1. A perfect, instantaneous correlation, with no signal involved.</span>
+      </div>
+    </div>
+
+    <div style="margin:1rem 0">
+      <div style="display:flex;align-items:center;gap:1.5rem;margin-bottom:1.5rem;flex-wrap:wrap">
+        <div style="flex:1;min-width:120px;text-align:center">
+          <div style="font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:.1em;color:#999;margin-bottom:.5rem">Qubit A</div>
+          <div id="qa" class="circle pulsing" style="background:#EEEDFE;border-color:#534AB7;color:#3C3489">?</div>
+          <div id="qa-lbl" style="font-size:11px;color:#999;margin-top:.5rem"><span class="id-inline">superposisi</span><span class="en-inline">superposition</span></div>
+        </div>
+        <div style="flex:0 0 auto;text-align:center">
+          <div style="font-size:10px;color:#aaa;letter-spacing:.08em;margin-bottom:4px"><span class="id-inline">— entangled —</span><span class="en-inline">— entangled —</span></div>
+          <div style="width:80px;height:1px;background:#AFA9EC;margin:0 auto"></div>
+        </div>
+        <div style="flex:1;min-width:120px;text-align:center">
+          <div style="font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:.1em;color:#999;margin-bottom:.5rem">Qubit B</div>
+          <div id="qb" class="circle pulsing" style="background:#EEEDFE;border-color:#534AB7;color:#3C3489;animation-delay:.5s">?</div>
+          <div id="qb-lbl" style="font-size:11px;color:#999;margin-top:.5rem"><span class="id-inline">superposisi</span><span class="en-inline">superposition</span></div>
+        </div>
+      </div>
+
+      <div style="margin-bottom:1rem">
+        <div style="font-size:11px;color:#888;margin-bottom:.5rem;text-align:center"><span class="id-inline">Jarak antara A dan B:</span><span class="en-inline">Distance between A and B:</span></div>
+        <input type="range" id="dist" min="0" max="4" value="0" step="1" oninput="updDist(this.value)" style="width:100%">
+        <div id="dist-lbl" style="font-size:12px;font-weight:600;color:#1a1a18;text-align:center;margin-top:.4rem">Dalam laboratorium yang sama</div>
+      </div>
+
+      <div class="btn-row" style="justify-content:center;margin-bottom:1rem">
+        <button class="btn" onclick="ukur()"><span class="id-inline">Ukur qubit A</span><span class="en-inline">Measure qubit A</span></button>
+        <button class="btn" onclick="reset1()"><span class="id-inline">Reset</span><span class="en-inline">Reset</span></button>
+      </div>
+
+      <div id="log" style="background:#f8f7f4;border:1px solid #e8e6e0;border-radius:8px;padding:.75rem 1rem;min-height:56px;font-size:12px;color:#666;line-height:1.6">
+        <span class="id-inline">Tekan "Ukur qubit A" untuk melihat korelasi...</span><span class="en-inline">Press "Measure qubit A" to see the correlation...</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- PANEL 2 -->
+  <div id="p2" style="display:none">
+    <div class="card">
+      <div class="ct">
+        <span class="id-text">Kesalahpahaman terbesar: entanglement bukan telepati</span>
+        <span class="en-text">The biggest misconception: entanglement is not telepathy</span>
+      </div>
+      <div class="cb">
+        <span class="id-text">
+        Einstein menyebutnya <em>"spooky action at a distance"</em> dan menolaknya — ia berargumen pasti ada <strong>variabel tersembunyi</strong> yang sudah menentukan hasil sejak awal.<br><br>
+        John Bell (1964) membuktikan argumen itu bisa diuji. Alain Aspect (1982) melakukan eksperimen dan hasilnya: <strong>variabel tersembunyi tidak ada</strong>. Korelasi kuantum lebih kuat dari yang bisa dijelaskan fisika klasik manapun. Aspect, Clauser, dan Zeilinger menang <strong>Nobel Fisika 2022</strong> atas konfirmasi ini.
+        </span>
+        <span class="en-text">
+        Einstein called it <em>"spooky action at a distance"</em> and rejected it — he argued there must be a <strong>hidden variable</strong> that determined the outcome from the very start.<br><br>
+        John Bell (1964) proved that argument could be tested. Alain Aspect (1982) ran the experiment, and the result: <strong>no hidden variable exists</strong>. Quantum correlation is stronger than any classical physics could explain. Aspect, Clauser, and Zeilinger won the <strong>2022 Nobel Prize in Physics</strong> for this confirmation.
+        </span>
+      </div>
+    </div>
+
+    <svg width="100%" viewBox="0 0 680 210" style="display:block;margin-bottom:1rem" role="img">
+      <title id="svg-t2"><span class="id-inline">Perbandingan korelasi klasik dengan korelasi kuantum</span></title>
+      <rect x="20" y="20" width="300" height="175" rx="12" fill="#f8f7f4" stroke="#ccc" stroke-width="1"/>
+      <text id="svg-korklasik" x="170" y="46" text-anchor="middle" font-size="13" font-weight="600" fill="#444" font-family="system-ui">Korelasi klasik</text>
+      <text id="svg-sarung" x="170" y="62" text-anchor="middle" font-size="11" fill="#888" font-family="system-ui">(sarung tangan Einstein)</text>
+      <rect x="45" y="80" width="110" height="38" rx="6" fill="#e8e6e0" stroke="#aaa" stroke-width=".5"/>
+      <text id="svg-kotakjkt" x="100" y="99" text-anchor="middle" dominant-baseline="central" font-size="12" fill="#444" font-family="system-ui">Kotak Jakarta</text>
+      <rect x="165" y="80" width="130" height="38" rx="6" fill="#e8e6e0" stroke="#aaa" stroke-width=".5"/>
+      <text id="svg-kotaktokyo" x="230" y="99" text-anchor="middle" dominant-baseline="central" font-size="12" fill="#444" font-family="system-ui">Kotak Tokyo</text>
+      <text id="svg-sudahditentukan" x="170" y="140" text-anchor="middle" font-size="11" fill="#888" font-family="system-ui">Hasil sudah ditentukan sejak awal</text>
+      <text id="svg-bukanini" x="170" y="180" text-anchor="middle" font-size="11" fill="#aaa" font-family="system-ui">← Bukan ini yang terjadi pada qubit</text>
+
+      <rect x="360" y="20" width="300" height="175" rx="12" fill="#EEEDFE" stroke="#534AB7" stroke-width="1"/>
+      <text id="svg-korkuantum" x="510" y="46" text-anchor="middle" font-size="13" font-weight="600" fill="#3C3489" font-family="system-ui">Korelasi kuantum</text>
+      <text id="svg-entsejati" x="510" y="62" text-anchor="middle" font-size="11" fill="#534AB7" font-family="system-ui">(entanglement sesungguhnya)</text>
+      <rect x="380" y="80" width="110" height="38" rx="6" fill="#CECBF6" stroke="#534AB7" stroke-width=".5"/>
+      <text x="435" y="99" text-anchor="middle" dominant-baseline="central" font-size="12" fill="#3C3489" font-family="system-ui">Qubit A</text>
+      <rect x="510" y="80" width="130" height="38" rx="6" fill="#CECBF6" stroke="#534AB7" stroke-width=".5"/>
+      <text x="575" y="99" text-anchor="middle" dominant-baseline="central" font-size="12" fill="#3C3489" font-family="system-ui">Qubit B</text>
+      <text id="svg-tidakada" x="510" y="140" text-anchor="middle" font-size="11" fill="#534AB7" font-family="system-ui">Tidak ada hasil tersembunyi.</text>
+      <text id="svg-tercipta" x="510" y="158" text-anchor="middle" font-size="11" fill="#534AB7" font-family="system-ui">Korelasi tercipta saat diukur.</text>
+      <text id="svg-dibuktikan" x="510" y="180" text-anchor="middle" font-size="11" fill="#3C3489" font-family="system-ui">→ Dibuktikan Nobel 2022</text>
+    </svg>
+
+    <div class="chips">
+      <div class="chip"><strong><span class="id-inline">Tidak bisa kirim data</span><span class="en-inline">Cannot send data</span></strong><span class="id-text">Hasil acak, tidak bisa dikontrol — tidak ada pesan yang bisa dikodekan</span><span class="en-text">The outcome is random and uncontrollable — no message can be encoded in it</span></div>
+      <div class="chip"><strong><span class="id-inline">Kegunaannya</span><span class="en-inline">Its uses</span></strong><span class="id-text">Kriptografi kuantum (QKD) dan algoritma kuantum yang menggunakan korelasi sebagai sumber daya</span><span class="en-text">Quantum cryptography (QKD) and quantum algorithms that use correlation as a resource</span></div>
+      <div class="chip"><strong><span class="id-inline">Nobel 2022</span><span class="en-inline">2022 Nobel</span></strong><span class="id-text">Aspect, Clauser, Zeilinger — konfirmasi entanglement adalah fenomena nyata</span><span class="en-text">Aspect, Clauser, Zeilinger — confirming entanglement is a real phenomenon</span></div>
+    </div>
+  </div>
+
+  <!-- PANEL 3 -->
+  <div id="p3" style="display:none">
+    <div class="card">
+      <div class="ct">
+        <span class="id-text">Ketidaksetaraan Bell: cara mengukur "keanehan" kuantum</span>
+        <span class="en-text">Bell's inequality: how to measure quantum "strangeness"</span>
+      </div>
+      <div class="cb">
+        <span class="id-text">John Bell (1964) membuktikan: jika Einstein benar (ada variabel tersembunyi), korelasi dua partikel tidak bisa melebihi <strong>|S| ≤ 2</strong>. Mekanika kuantum memprediksi <strong>|S| ≤ 2√2 ≈ 2.83</strong>. Semua eksperimen nyata selalu membuktikan prediksi kuantum.</span>
+        <span class="en-text">John Bell (1964) proved: if Einstein was right (a hidden variable exists), the correlation between two particles cannot exceed <strong>|S| ≤ 2</strong>. Quantum mechanics predicts <strong>|S| ≤ 2√2 ≈ 2.83</strong>. Every real experiment has always confirmed the quantum prediction.</span>
+      </div>
+    </div>
+
+    <div style="background:#fff;border:1px solid #e8e6e0;border-radius:12px;padding:1.25rem 1.5rem;margin-bottom:1rem">
+      <div style="font-size:12px;color:#666;margin-bottom:1rem">
+        <span class="id-inline">Nilai S (parameter CHSH) dari berbagai eksperimen:</span>
+        <span class="en-inline">S values (CHSH parameter) from various experiments:</span>
+      </div>
+      <div style="display:flex;flex-direction:column;gap:12px">
+        <div>
+          <div style="display:flex;justify-content:space-between;margin-bottom:4px">
+            <span style="font-size:12px;color:#666"><span class="id-inline">Batas klasik (Einstein benar)</span><span class="en-inline">Classical limit (Einstein correct)</span></span>
+            <span style="font-size:12px;font-weight:700;color:#888">|S| = 2.00</span>
+          </div>
+          <div class="bar-wrap"><div class="bar" style="width:71%;background:#ccc"></div></div>
+        </div>
+        <div>
+          <div style="display:flex;justify-content:space-between;margin-bottom:4px">
+            <span style="font-size:12px;color:#666"><span class="id-inline">Aspect et al., 1982 (eksperimen pertama)</span><span class="en-inline">Aspect et al., 1982 (first experiment)</span></span>
+            <span style="font-size:12px;font-weight:700;color:#534AB7">|S| = 2.70</span>
+          </div>
+          <div class="bar-wrap"><div class="bar" style="width:96%;background:#AFA9EC"></div></div>
+        </div>
+        <div>
+          <div style="display:flex;justify-content:space-between;margin-bottom:4px">
+            <span style="font-size:12px;color:#666">Hensen et al., 2015 (loophole-free)</span>
+            <span style="font-size:12px;font-weight:700;color:#3C3489">|S| = 2.42</span>
+          </div>
+          <div class="bar-wrap"><div class="bar" style="width:86%;background:#534AB7"></div></div>
+        </div>
+        <div>
+          <div style="display:flex;justify-content:space-between;margin-bottom:4px">
+            <span style="font-size:12px;color:#666"><span class="id-inline">Prediksi maksimum kuantum (Tsirelson)</span><span class="en-inline">Maximum quantum prediction (Tsirelson)</span></span>
+            <span style="font-size:12px;font-weight:700;color:#0F6E56">|S| = 2.83</span>
+          </div>
+          <div class="bar-wrap"><div class="bar" style="width:100%;background:#1D9E75"></div></div>
+        </div>
+      </div>
+      <div style="font-size:11px;color:#aaa;margin-top:1rem">
+        <span class="id-inline">Semua eksperimen melampaui batas klasik (2.00) → entanglement nyata, bukan ilusi statistik</span>
+        <span class="en-inline">Every experiment exceeds the classical limit (2.00) → entanglement is real, not a statistical illusion</span>
+      </div>
+    </div>
+
+    <div class="chips">
+      <div class="chip"><strong>John Bell, 1964</strong><span class="id-text">Merumuskan ketidaksetaraan yang membuat entanglement bisa diuji secara empiris</span><span class="en-text">Formulated the inequality that made entanglement empirically testable</span></div>
+      <div class="chip"><strong>Alain Aspect, 1982</strong><span class="id-text">Eksperimen foton pertama yang melanggar batas Bell secara meyakinkan</span><span class="en-text">The first photon experiment to convincingly violate the Bell limit</span></div>
+      <div class="chip"><strong><span class="id-inline">Nobel Fisika 2022</span><span class="en-inline">2022 Nobel Physics</span></strong><span class="id-text">Aspek, Clauser, Zeilinger — konfirmasi definitif dunia kuantum "lebih aneh" dari fisika klasik</span><span class="en-text">Aspect, Clauser, Zeilinger — definitive confirmation the quantum world is "stranger" than classical physics</span></div>
+    </div>
+  </div>
+
+  <!-- PANEL 4: TELEPORTASI KUANTUM -->
+  <div id="p4" style="display:none">
+    <div class="card">
+      <div class="ct">
+        <span class="id-text">Bukan Star Trek: memindahkan keadaan, bukan materi</span>
+        <span class="en-text">Not Star Trek: moving a state, not matter</span>
+      </div>
+      <div class="cb">
+        <span class="id-text">
+        "Teleportasi kuantum" adalah istilah yang menyesatkan bagi kebanyakan orang — tidak ada atom atau materi apa pun yang berpindah tempat. Yang dipindahkan adalah <strong>keadaan kuantum</strong> (informasi) dari satu qubit ke qubit lain di lokasi berbeda, menggunakan entanglement sebagai "kabel" dan komunikasi klasik biasa sebagai pelengkap wajib.<br><br>
+        Protokolnya dirumuskan oleh Charles Bennett dan rekan-rekannya pada 1993, dan pertama kali didemonstrasikan secara eksperimental pada 1997. Ini bukan fiksi ilmiah — ini sudah dilakukan berulang kali di laboratorium, bahkan lewat satelit sejauh 1.400 km (Ren et al., 2017).
+        </span>
+        <span class="en-text">
+        "Quantum teleportation" is a misleading term for most people — no atom or any matter actually moves. What is transferred is the <strong>quantum state</strong> (information) from one qubit to another at a different location, using entanglement as the "cable" with ordinary classical communication as a required complement.<br><br>
+        The protocol was formulated by Charles Bennett and colleagues in 1993, and first experimentally demonstrated in 1997. This is not science fiction — it has been performed repeatedly in laboratories, even via satellite across 1,400 km (Ren et al., 2017).
+        </span>
+        <div class="quote">
+          <span class="id-text">"Kami tidak mengirim materi atau energi, tapi sesuatu yang mungkin lebih halus: informasi." — Charles H. Bennett, salah satu perumus protokol teleportasi kuantum</span>
+          <span class="en-text">"We do not send matter or energy, but something perhaps subtler: information." — Charles H. Bennett, co-originator of the quantum teleportation protocol</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="card">
+      <div style="font-size:13px;color:#555;margin-bottom:1rem">
+        <span class="id-text">Ikuti protokolnya langkah demi langkah — Alice ingin mengirim keadaan qubit tak dikenal <strong>|ψ⟩</strong> ke Bob:</span>
+        <span class="en-text">Follow the protocol step by step — Alice wants to send an unknown qubit state <strong>|ψ⟩</strong> to Bob:</span>
+      </div>
+
+      <div style="display:flex;justify-content:center;gap:6px;margin-bottom:1.25rem" id="tp-dots">
+        <div class="tp-dot" data-i="0"></div><div class="tp-dot" data-i="1"></div><div class="tp-dot" data-i="2"></div><div class="tp-dot" data-i="3"></div><div class="tp-dot" data-i="4"></div>
+      </div>
+
+      <div style="display:flex;align-items:center;justify-content:center;gap:1.25rem;flex-wrap:wrap;margin-bottom:1.25rem;min-height:120px">
+        <div style="text-align:center">
+          <div style="font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:.08em;color:#999;margin-bottom:.4rem">
+            Qubit |ψ⟩<br><span class="id-inline">(Alice, asal)</span><span class="en-inline">(Alice, origin)</span>
+          </div>
+          <div id="tp-psi" class="circle" style="background:#FBEAF0;border-color:#993556;color:#72243E">ψ</div>
+        </div>
+        <div style="text-align:center">
+          <div style="font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:.08em;color:#999;margin-bottom:.4rem">
+            Half-A<br><span class="id-inline">(Alice, entangled)</span><span class="en-inline">(Alice, entangled)</span>
+          </div>
+          <div id="tp-a" class="circle" style="background:#EEEDFE;border-color:#534AB7;color:#3C3489">A</div>
+        </div>
+        <div style="text-align:center;font-size:20px;color:#ccc">⋯</div>
+        <div style="text-align:center">
+          <div style="font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:.08em;color:#999;margin-bottom:.4rem">
+            Half-B<br><span class="id-inline">(Bob, entangled)</span><span class="en-inline">(Bob, entangled)</span>
+          </div>
+          <div id="tp-b" class="circle" style="background:#EEEDFE;border-color:#534AB7;color:#3C3489">B</div>
+        </div>
+      </div>
+
+      <div id="tp-bits" style="text-align:center;font-size:12px;color:#888;margin-bottom:1rem;min-height:18px"></div>
+
+      <div id="tp-desc" style="font-size:12.5px;color:#555;line-height:1.7;padding:.85rem 1rem;background:#f8f7f4;border-radius:8px;margin-bottom:1rem">
+        Langkah 0: Alice dan Bob sudah berbagi sepasang qubit entangled (Bell pair) sebelumnya — satu di tangan masing-masing, di mana pun lokasi mereka. Alice juga punya qubit |ψ⟩ yang keadaannya tidak diketahui siapa pun, yang ingin ia kirim ke Bob.
+      </div>
+
+      <div class="btn-row" style="justify-content:center">
+        <button class="btn btn-primary-tp" onclick="tpNext()" id="tp-btn"><span class="id-inline">Langkah berikutnya →</span><span class="en-inline">Next step →</span></button>
+        <button class="btn" onclick="tpReset()"><span class="id-inline">Reset</span><span class="en-inline">Reset</span></button>
+      </div>
+    </div>
+
+    <div class="chips">
+      <div class="chip"><strong><span class="id-inline">Tidak melanggar relativitas</span><span class="en-inline">Doesn't violate relativity</span></strong><span class="id-text">Bob tidak bisa memakai qubitnya sebelum menerima 2 bit klasik dari Alice — proses ini dibatasi kecepatan cahaya</span><span class="en-text">Bob cannot use his qubit before receiving 2 classical bits from Alice — this process is limited by the speed of light</span></div>
+      <div class="chip"><strong><span class="id-inline">No-cloning terpenuhi</span><span class="en-inline">No-cloning satisfied</span></strong><span class="id-text">Keadaan asli di Alice hancur begitu diukur — tidak pernah ada dua salinan |ψ⟩ yang sama pada saat bersamaan</span><span class="en-text">The original state at Alice's end is destroyed upon measurement — there are never two identical copies of |ψ⟩ at the same time</span></div>
+      <div class="chip"><strong><span class="id-inline">Sudah dibuktikan</span><span class="en-inline">Already proven</span></strong><span class="id-text">Pertama kali 1997 (foton); rekor jarak 1.400 km via satelit Micius (Ren et al., 2017)</span><span class="en-text">First done in 1997 (photons); distance record of 1,400 km via the Micius satellite (Ren et al., 2017)</span></div>
+    </div>
+  </div>
+
+  <div class="divider"></div>
+  <div style="font-size:11px;color:#aaa;text-align:center;line-height:1.7">
+    <span class="id-inline">Referensi:</span><span class="en-inline">References:</span> Bell (1964) Physics 1:195–200 · Aspect et al. (1982) PRL 49:1804 · Nobel Prize Physics 2022<br>
+    Bennett, C.H. et al. (1993). Teleporting an unknown quantum state via dual classical and EPR channels. <em>PRL</em> 70:1895 · Ren, J-G. et al. (2017). Ground-to-satellite quantum teleportation. <em>Nature</em> 549:70
+  </div>
+</div>
+
+<script>
+let lang = 'id';
+
+const SVG_I18N = {
+  'svg-t0': {id:'Dua qubit independen bergabung menjadi satu sistem entangled', en:'Two independent qubits merge into one entangled system'},
+  'svg-e-mandiri1': {id:'superposisi mandiri', en:'independent superposition'},
+  'svg-e-mandiri2': {id:'superposisi mandiri', en:'independent superposition'},
+  'svg-e-interaksi': {id:'interaksi', en:'interaction'},
+  'svg-e-sistem': {id:'Sistem entangled (A+B)', en:'Entangled system (A+B)'},
+  'svg-e-satukeadaan': {id:'|00⟩ + |11⟩  (satu keadaan bersama)', en:'|00⟩ + |11⟩  (one shared state)'},
+  'svg-e-tidakbisa': {id:'tidak bisa dipisahkan menjadi dua qubit mandiri', en:'cannot be separated into two independent qubits'},
+  'svg-t2': {id:'Perbandingan korelasi klasik dengan korelasi kuantum', en:'Comparing classical correlation with quantum correlation'},
+  'svg-korklasik': {id:'Korelasi klasik', en:'Classical correlation'},
+  'svg-sarung': {id:'(sarung tangan Einstein)', en:"(Einstein's gloves)"},
+  'svg-kotakjkt': {id:'Kotak Jakarta', en:'Jakarta box'},
+  'svg-kotaktokyo': {id:'Kotak Tokyo', en:'Tokyo box'},
+  'svg-sudahditentukan': {id:'Hasil sudah ditentukan sejak awal', en:'Outcome was determined from the start'},
+  'svg-bukanini': {id:'← Bukan ini yang terjadi pada qubit', en:'← This is not what happens with qubits'},
+  'svg-korkuantum': {id:'Korelasi kuantum', en:'Quantum correlation'},
+  'svg-entsejati': {id:'(entanglement sesungguhnya)', en:'(true entanglement)'},
+  'svg-tidakada': {id:'Tidak ada hasil tersembunyi.', en:'No hidden outcome.'},
+  'svg-tercipta': {id:'Korelasi tercipta saat diukur.', en:'Correlation is created upon measurement.'},
+  'svg-dibuktikan': {id:'→ Dibuktikan Nobel 2022', en:'→ Confirmed by the 2022 Nobel Prize'}
+};
+
+function setLang(l){
+  lang = l;
+  document.body.classList.toggle('en', l==='en');
+  document.getElementById('btn-id').classList.toggle('on', l==='id');
+  document.getElementById('btn-en').classList.toggle('on', l==='en');
+  document.documentElement.lang = l;
+  Object.keys(SVG_I18N).forEach(id=>{
+    const el = document.getElementById(id);
+    if(el) el.textContent = SVG_I18N[id][l];
+  });
+  updDist(document.getElementById('dist').value);
+  const qal=document.getElementById('qa-lbl'), qbl=document.getElementById('qb-lbl');
+  if(qal.textContent.indexOf('superposisi')>-1 || qal.textContent.indexOf('superposition')>-1){
+    qal.textContent = lang==='en' ? 'superposition' : 'superposisi';
+  }
+  if(qbl.textContent.indexOf('superposisi')>-1 || qbl.textContent.indexOf('superposition')>-1){
+    qbl.textContent = lang==='en' ? 'superposition' : 'superposisi';
+  }
+  if(tpSteps) tpRender();
+}
+
+function go(i,btn){
+  for(let k=0;k<5;k++){const p=document.getElementById('p'+k);if(p)p.style.display=k===i?'block':'none'}
+  document.querySelectorAll('.nb').forEach(b=>b.classList.remove('on'));
+  btn.classList.add('on');
+}
+
+const dists={
+  id:['Dalam laboratorium yang sama','Antarkota (100 km)','Antarnegara (1.000 km)','Antarbenua (10.000 km)','Antargalaksi'],
+  en:['Within the same laboratory','Between cities (100 km)','Between countries (1,000 km)','Between continents (10,000 km)','Between galaxies']
+};
+function updDist(v){document.getElementById('dist-lbl').textContent=dists[lang][v]}
+
+let logs=[];
+function ukur(){
+  const r=Math.random()<.5?0:1;
+  const qa=document.getElementById('qa'), qb=document.getElementById('qb');
+  const ql=document.getElementById('qa-lbl'), qbl=document.getElementById('qb-lbl');
+  qa.classList.remove('pulsing'); qb.classList.remove('pulsing');
+  qa.textContent='...'; qb.textContent='?';
+  qa.style.background='#f8f7f4'; qa.style.borderColor='#ccc'; qa.style.color='#888';
+
+  setTimeout(()=>{
+    qa.textContent=r;
+    if(r===0){qa.style.background='#E1F5EE';qa.style.borderColor='#0F6E56';qa.style.color='#085041';}
+    else{qa.style.background='#EEEDFE';qa.style.borderColor='#534AB7';qa.style.color='#3C3489';}
+    ql.textContent=(lang==='en'?'measured: ':'terukur: ')+r;
+    ql.style.color=r===0?'#0F6E56':'#534AB7';
+
+    setTimeout(()=>{
+      qb.textContent=r;
+      if(r===0){qb.style.background='#E1F5EE';qb.style.borderColor='#0F6E56';qb.style.color='#085041';}
+      else{qb.style.background='#EEEDFE';qb.style.borderColor='#534AB7';qb.style.color='#3C3489';}
+      qbl.textContent=(lang==='en'?'collapsed: ':'kolaps: ')+r+(lang==='en'?' (instantly)':' (seketika)');
+      qbl.style.color=r===0?'#0F6E56':'#534AB7';
+
+      const dist=dists[lang][document.getElementById('dist').value];
+      const msg=(lang==='en'?'Measurement ':'Pengukuran ')+(logs.length+1)+': A='+r+', B='+r+' · '+dist;
+      logs.unshift(msg);
+      if(logs.length>5)logs.pop();
+      document.getElementById('log').innerHTML=logs.map((m,i)=>'<div style="opacity:'+(1-i*.18)+';margin-bottom:3px">'+m+'</div>').join('');
+    },400);
+  },500);
+}
+
+function reset1(){
+  const qa=document.getElementById('qa'), qb=document.getElementById('qb');
+  qa.textContent='?'; qb.textContent='?';
+  qa.style.background='#EEEDFE'; qb.style.background='#EEEDFE';
+  qa.style.borderColor='#534AB7'; qb.style.borderColor='#534AB7';
+  qa.style.color='#3C3489'; qb.style.color='#3C3489';
+  qa.classList.add('pulsing'); qb.classList.add('pulsing');
+  document.getElementById('qa-lbl').textContent = lang==='en' ? 'superposition' : 'superposisi';
+  document.getElementById('qa-lbl').style.color='#999';
+  document.getElementById('qb-lbl').textContent = lang==='en' ? 'superposition' : 'superposisi';
+  document.getElementById('qb-lbl').style.color='#999';
+  document.getElementById('log').textContent = lang==='en' ? 'Press "Measure qubit A" to see the correlation...' : 'Tekan "Ukur qubit A" untuk melihat korelasi...';
+  logs=[];
+}
+
+// PANEL 4: Teleportasi kuantum step-by-step
+let tpStep=0, tpBitsVal='';
+const tpSteps={
+  id:[
+    {desc:'Langkah 0 — Persiapan: Alice dan Bob sudah berbagi sepasang qubit entangled (Bell pair) sebelumnya — satu di tangan masing-masing, di mana pun lokasi mereka. Alice juga punya qubit |ψ⟩ yang keadaannya tidak diketahui siapa pun, yang ingin ia kirim ke Bob.', psi:'ψ', a:'A', b:'B', bits:''},
+    {desc:'Langkah 1 — Pengukuran Bell: Alice menggabungkan qubit |ψ⟩ dengan qubit half-A miliknya, lalu melakukan pengukuran gabungan dalam basis Bell pada keduanya sekaligus.', psi:'⚡', a:'⚡', b:'B', bits:''},
+    {desc:'Langkah 2 — Hasil acak & kolaps: pengukuran menghasilkan salah satu dari 4 hasil klasik acak (00, 01, 10, 11), masing-masing 25%. Keadaan asli |ψ⟩ di tangan Alice HANCUR (sesuai teorema no-cloning) — dan qubit Bob langsung berubah secara instan karena entanglement, meski belum bisa "dibaca" secara berguna.', psi:'✗', a:'✗', b:'?', bits:'Hasil pengukuran Alice: 2 bit acak dihasilkan →'},
+    {desc:'Langkah 3 — Kirim lewat saluran klasik: Alice mengirim 2 bit hasil pengukuran tadi ke Bob lewat saluran komunikasi BIASA (telepon, internet, radio). Ini butuh waktu — tidak lebih cepat dari cahaya. Tanpa 2 bit ini, qubit Bob hanyalah noise acak yang tidak berguna.', psi:'', a:'', b:'?', bits:null},
+    {desc:'Langkah 4 — Koreksi & selesai: Bob menerima 2 bit itu, lalu menerapkan salah satu dari 4 koreksi (Identitas, X, Z, atau XZ) sesuai nilai bitnya. Setelah koreksi, qubit Bob kini PERSIS dalam keadaan |ψ⟩ yang sama seperti qubit asli Alice. Teleportasi selesai — hanya informasi yang berpindah, bukan materi.', psi:'', a:'', b:'ψ', bits:null}
+  ],
+  en:[
+    {desc:'Step 0 — Preparation: Alice and Bob have already shared a pair of entangled qubits (a Bell pair) beforehand — one in each of their hands, wherever they are. Alice also holds a qubit |ψ⟩ whose state is unknown to anyone, which she wants to send to Bob.', psi:'ψ', a:'A', b:'B', bits:''},
+    {desc:'Step 1 — Bell measurement: Alice combines the qubit |ψ⟩ with her own half-A qubit, then performs a joint measurement on both in the Bell basis.', psi:'⚡', a:'⚡', b:'B', bits:''},
+    {desc:'Step 2 — Random outcome & collapse: the measurement yields one of 4 random classical outcomes (00, 01, 10, 11), each with 25% probability. The original state |ψ⟩ in Alice\'s hands is DESTROYED (per the no-cloning theorem) — and Bob\'s qubit instantly changes due to entanglement, though it cannot yet be "read" usefully.', psi:'✗', a:'✗', b:'?', bits:"Alice's measurement result: 2 random bits generated →"},
+    {desc:'Step 3 — Send via classical channel: Alice sends those 2 measurement bits to Bob over an ORDINARY communication channel (phone, internet, radio). This takes time — no faster than light. Without these 2 bits, Bob\'s qubit is just useless random noise.', psi:'', a:'', b:'?', bits:null},
+    {desc:'Step 4 — Correction & done: Bob receives the 2 bits, then applies one of 4 corrections (Identity, X, Z, or XZ) matching the bit values. After the correction, Bob\'s qubit is now EXACTLY in the same state |ψ⟩ as Alice\'s original qubit. Teleportation complete — only information moved, not matter.', psi:'', a:'', b:'ψ', bits:null}
+  ]
+};
+function tpRenderDots(){
+  document.querySelectorAll('.tp-dot').forEach((d,i)=>{
+    d.classList.remove('on','done');
+    if(i<tpStep)d.classList.add('done');
+    else if(i===tpStep)d.classList.add('on');
+  });
+}
+function tpRender(){
+  const s=tpSteps[lang][tpStep];
+  document.getElementById('tp-desc').textContent=s.desc;
+  const psiEl=document.getElementById('tp-psi'), aEl=document.getElementById('tp-a'), bEl=document.getElementById('tp-b');
+  if(s.psi!==''){psiEl.textContent=s.psi;psiEl.style.opacity='1';}else{psiEl.style.opacity='.25';}
+  if(s.a!==''){aEl.textContent=s.a;aEl.style.opacity='1';}else{aEl.style.opacity='.25';}
+  bEl.textContent=s.b;
+  if(tpStep===2){
+    if(!tpBitsVal) tpBitsVal=(Math.random()<.5?'0':'1')+(Math.random()<.5?'0':'1');
+    document.getElementById('tp-bits').textContent=s.bits+' "'+tpBitsVal+'"';
+  } else if(tpStep===3){
+    document.getElementById('tp-bits').textContent=(lang==='en'?'Alice → Bob, sending bits "':'Alice → Bob, mengirim bit "')+tpBitsVal+(lang==='en'?'" via classical channel...':'" via saluran klasik...');
+  } else if(tpStep===4){
+    document.getElementById('tp-bits').textContent=(lang==='en'?'Bob applies a correction based on bits "':'Bob menerapkan koreksi berdasarkan bit "')+tpBitsVal+(lang==='en'?'" → Bob\'s qubit is now = |ψ⟩ ✓':'" → qubit Bob kini = |ψ⟩ ✓');
+  } else {
+    document.getElementById('tp-bits').textContent='';
+  }
+  tpRenderDots();
+  const btn=document.getElementById('tp-btn');
+  if(tpStep>=tpSteps[lang].length-1){
+    btn.innerHTML = lang==='en' ? 'Teleportation complete ✓' : 'Teleportasi selesai ✓';
+    btn.disabled=true;btn.style.opacity='.5';btn.style.cursor='default';
+  } else {
+    btn.innerHTML = '<span class="id-inline">Langkah berikutnya →</span><span class="en-inline">Next step →</span>';
+    btn.disabled=false;btn.style.opacity='1';btn.style.cursor='pointer';
+  }
+}
+function tpNext(){
+  if(tpStep<tpSteps[lang].length-1){tpStep++;tpRender();}
+}
+function tpReset(){
+  tpStep=0;tpBitsVal='';
+  document.getElementById('tp-psi').style.opacity='1';
+  document.getElementById('tp-a').style.opacity='1';
+  tpRender();
+}
+</script>
+</body>
+</html>

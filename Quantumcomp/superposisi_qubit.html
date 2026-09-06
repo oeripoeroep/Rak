@@ -1,0 +1,804 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Superposisi & Qubit — Quantum Computing</title>
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:system-ui,-apple-system,sans-serif;background:#f8f7f4;color:#1a1a18;min-height:100vh;padding:2rem 1.5rem}
+.wrap{max-width:720px;margin:0 auto}
+.kap{font-size:11px;font-weight:600;letter-spacing:.18em;text-transform:uppercase;color:#888;margin-bottom:.4rem}
+h1{font-size:32px;font-weight:700;line-height:1.15;color:#1a1a18;margin-bottom:.4rem}
+h1 em{font-style:italic;color:#534AB7}
+.sub{font-size:13px;color:#888;margin-bottom:1.5rem}
+.nav{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:1.5rem}
+.nb{font-size:12px;padding:6px 14px;border-radius:8px;border:1px solid #ddd;background:#fff;color:#555;cursor:pointer;transition:all .15s;font-family:inherit}
+.nb.on{background:#1a1a18;color:#fff;border-color:#1a1a18}
+.card{background:#fff;border:1px solid #e8e6e0;border-radius:12px;padding:1.25rem 1.5rem;margin-bottom:1rem}
+.ct{font-size:14px;font-weight:600;color:#1a1a18;margin-bottom:.5rem}
+.cb{font-size:13px;color:#555;line-height:1.85;font-weight:400}
+.cb strong{color:#1a1a18;font-weight:600}
+.quote{border-left:2px solid #ddd;padding-left:1rem;margin-top:1rem;font-style:italic;font-size:13px;color:#888;line-height:1.7}
+.chips{display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:8px;margin-top:1rem}
+.chip{background:#f8f7f4;border:1px solid #e8e6e0;border-radius:8px;padding:.65rem 1rem;font-size:12px;color:#555;line-height:1.55}
+.chip strong{display:block;font-size:10px;font-weight:700;color:#999;text-transform:uppercase;letter-spacing:.1em;margin-bottom:3px}
+.divider{height:1px;background:#e8e6e0;margin:1.5rem 0}
+.btn{font-size:12px;padding:7px 16px;border-radius:8px;border:1px solid #ddd;background:#fff;color:#1a1a18;cursor:pointer;transition:background .15s;font-family:inherit}
+.btn:hover{background:#f8f7f4}
+.btn-primary{background:#1a1a18;color:#fff;border-color:#1a1a18}
+.btn-primary:hover{background:#333}
+.btn-row{display:flex;gap:8px;flex-wrap:wrap}
+.bar-wrap{background:#e8e6e0;border-radius:4px;height:10px;overflow:hidden}
+.bar{height:100%;border-radius:4px;transition:width .5s cubic-bezier(.4,0,.2,1)}
+.metric{background:#f8f7f4;border:1px solid #e8e6e0;border-radius:8px;padding:.75rem 1rem}
+.metric-lbl{font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:.1em;color:#999;margin-bottom:4px}
+.metric-val{font-size:22px;font-weight:700;color:#1a1a18}
+.metric-sub{font-size:11px;color:#aaa;margin-top:2px}
+@keyframes spin{0%{transform:rotateY(0deg)}50%{transform:rotateY(90deg) scaleX(.1)}100%{transform:rotateY(0deg)}}
+@keyframes pulse{0%,100%{box-shadow:0 0 0 0 rgba(83,74,183,.3)}50%{box-shadow:0 0 0 8px rgba(83,74,183,0)}}
+.pulsing{animation:pulse 2s ease-in-out infinite}
+.qtcard{background:#fff;border:1px solid #e8e6e0;border-left:4px solid;border-radius:10px;padding:1rem 1.25rem;margin-bottom:.85rem}
+.qtcard-head{display:flex;justify-content:space-between;align-items:baseline;flex-wrap:wrap;gap:6px;margin-bottom:.5rem}
+.qtcard-name{font-size:14px;font-weight:700;color:#1a1a18}
+.qtcard-co{font-size:10.5px;color:#999;text-transform:uppercase;letter-spacing:.08em;font-weight:700}
+.qtcard-body{font-size:12.5px;color:#555;line-height:1.75;margin-bottom:.6rem}
+.qtcard-stats{display:flex;gap:16px;flex-wrap:wrap;font-size:11px;color:#888;border-top:1px solid #f0efea;padding-top:.5rem}
+.qtcard-stats b{color:#333;display:block;font-size:13px;font-weight:700}
+
+/* ── LANGUAGE TOGGLE ──────────────────────────────────── */
+.id-text{display:block}
+.en-text{display:none}
+body.en .id-text{display:none}
+body.en .en-text{display:block}
+.id-inline{display:inline}
+.en-inline{display:none}
+body.en .id-inline{display:none}
+body.en .en-inline{display:inline}
+#lang-bar{position:fixed;top:16px;right:20px;z-index:999;display:flex;gap:6px;align-items:center;background:rgba(248,247,244,.92);backdrop-filter:blur(8px);border:1px solid #e8e6e0;border-radius:50px;padding:5px 10px}
+.lb{font-size:12px;font-weight:600;padding:4px 12px;border-radius:50px;border:none;cursor:pointer;transition:all .2s;font-family:inherit;letter-spacing:.04em}
+.lb.on{background:#1a1a18;color:#fff}
+.lb:not(.on){background:transparent;color:#888}
+.lb:not(.on):hover{background:#eceae4}
+</style>
+</head>
+<body>
+
+<div id="lang-bar">
+  <button class="lb on" onclick="setLang('id')" id="btn-id">ID</button>
+  <button class="lb" onclick="setLang('en')" id="btn-en">EN</button>
+</div>
+
+<div class="wrap">
+
+  <p class="kap"><span class="id-text">Bab 1 · Quantum Computing</span><span class="en-text">Chapter 1 · Quantum Computing</span></p>
+  <h1><span class="id-text">Superposisi &amp; <em>Qubit</em></span><span class="en-text">Superposition &amp; <em>Qubit</em></span></h1>
+  <p class="sub">
+    <span class="id-text">Dari koin yang berputar, hingga gelombang probabilitas yang mengubah komputasi</span>
+    <span class="en-text">From a spinning coin to the probability wave that is reshaping computation</span>
+  </p>
+
+  <div class="nav">
+    <button class="nb on" onclick="go(0,this)"><span class="id-inline">Analogi koin</span><span class="en-inline">Coin analogy</span></button>
+    <button class="nb" onclick="go(1,this)"><span class="id-inline">Bit vs Qubit</span><span class="en-inline">Bit vs Qubit</span></button>
+    <button class="nb" onclick="go(2,this)"><span class="id-inline">Gelombang probabilitas</span><span class="en-inline">Probability wave</span></button>
+    <button class="nb" onclick="go(3,this)"><span class="id-inline">Saat diukur</span><span class="en-inline">Upon measurement</span></button>
+    <button class="nb" onclick="go(4,this)"><span class="id-inline">Kekuatan eksponensial</span><span class="en-inline">Exponential power</span></button>
+    <button class="nb" onclick="go(5,this)"><span class="id-inline">Jenis qubit fisik</span><span class="en-inline">Physical qubit types</span></button>
+  </div>
+
+  <!-- PANEL 0: ANALOGI KOIN -->
+  <div id="p0">
+    <div class="card">
+      <div class="ct">
+        <span class="id-text">Analogi terbaik: koin yang sedang berputar di udara</span>
+        <span class="en-text">The best analogy: a coin spinning in mid-air</span>
+      </div>
+      <div class="cb">
+        <span class="id-text">
+        Bayangkan Anda melempar koin ke udara. Selama ia masih berputar, ia <strong>bukan kepala dan bukan ekor</strong> — ia adalah <strong>keduanya sekaligus</strong>. Sistem fisiknya belum memutuskan. Baru ketika koin mendarat, alam semesta "memilih" satu hasil.<br><br>
+        Qubit adalah koin yang selalu berputar — ia hidup dalam keadaan antara <strong>0 dan 1 secara bersamaan</strong>. Mengukurnya adalah mendaratkan koin itu. Sebelum diukur, ia tidak "memilih" — ia sungguh-sungguh berada di kedua keadaan sekaligus. Ini bukan ketidaktahuan kita. Ini sifat fundamental alam semesta.
+        </span>
+        <span class="en-text">
+        Imagine tossing a coin into the air. While it's still spinning, it is <strong>neither heads nor tails</strong> — it is <strong>both at once</strong>. The physical system hasn't decided yet. Only when the coin lands does the universe "pick" one outcome.<br><br>
+        A qubit is a coin that never stops spinning — it lives in a state of <strong>0 and 1 simultaneously</strong>. Measuring it is landing the coin. Before measurement, it hasn't "chosen" — it genuinely exists in both states at once. This is not our ignorance. It is a fundamental property of the universe.
+        </span>
+        <div class="quote">
+          <span class="id-text">"Siapapun yang tidak terkejut oleh mekanika kuantum berarti ia belum benar-benar memahaminya." — Niels Bohr, fisikawan, perumus interpretasi Kopenhagen</span>
+          <span class="en-text">"Anyone who is not shocked by quantum theory has not understood it." — Niels Bohr, physicist, originator of the Copenhagen interpretation</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- Koin interaktif -->
+    <div class="card" style="text-align:center;padding:2rem 1.5rem">
+      <div style="font-size:12px;color:#888;margin-bottom:1.25rem">
+        <span class="id-text">Klik koin untuk "melempar" dan "mengukur" qubit</span>
+        <span class="en-text">Click the coin to "toss" and "measure" the qubit</span>
+      </div>
+      <div id="koin" onclick="lemparKoin()" class="pulsing" style="width:96px;height:96px;border-radius:50%;background:#EEEDFE;border:2px solid #534AB7;display:flex;align-items:center;justify-content:center;margin:0 auto;font-size:36px;cursor:pointer;user-select:none;transition:all .3s">🪙</div>
+      <div id="koin-status" style="margin-top:1rem;font-size:13px;color:#888;font-style:italic">
+        <span class="id-inline">Dalam superposisi — klik untuk mengukur</span><span class="en-inline">In superposition — click to measure</span>
+      </div>
+      <div id="koin-count" style="margin-top:.5rem;font-size:12px;color:#aaa">
+        <span class="id-inline">Hasil: —</span><span class="en-inline">Result: —</span>
+      </div>
+      <div style="display:flex;justify-content:center;gap:2rem;margin-top:1.25rem">
+        <div style="text-align:center">
+          <div id="cnt0" style="font-size:24px;font-weight:700;color:#0F6E56">0</div>
+          <div style="font-size:11px;color:#aaa"><span class="id-inline">kali |0⟩</span><span class="en-inline">times |0⟩</span></div>
+        </div>
+        <div style="text-align:center">
+          <div id="cnt1" style="font-size:24px;font-weight:700;color:#534AB7">0</div>
+          <div style="font-size:11px;color:#aaa"><span class="id-inline">kali |1⟩</span><span class="en-inline">times |1⟩</span></div>
+        </div>
+        <div style="text-align:center">
+          <div id="cntT" style="font-size:24px;font-weight:700;color:#1a1a18">0</div>
+          <div style="font-size:11px;color:#aaa"><span class="id-inline">total</span><span class="en-inline">total</span></div>
+        </div>
+      </div>
+      <button class="btn" style="margin-top:1rem" onclick="resetKoin()"><span class="id-inline">Reset</span><span class="en-inline">Reset</span></button>
+    </div>
+
+    <svg width="100%" viewBox="0 0 680 170" style="display:block;margin-bottom:1rem" role="img">
+      <title id="svg-t1"><span class="id-inline">Tiga fase qubit: sebelum lempar, dalam superposisi, setelah diukur</span></title>
+      <defs><marker id="ar0" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M2 1L8 5L2 9" fill="none" stroke="#aaa" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></marker></defs>
+      <!-- Fase 1 -->
+      <rect x="30" y="55" width="120" height="60" rx="10" fill="#E1F5EE" stroke="#0F6E56" stroke-width="1"/>
+      <text x="90" y="82" text-anchor="middle" font-size="20" fill="#085041" font-family="system-ui">0</text>
+      <text id="svg-bitklasik" x="90" y="102" text-anchor="middle" font-size="11" fill="#0F6E56" font-family="system-ui">bit klasik</text>
+      <text id="svg-keadaanpasti" x="90" y="130" text-anchor="middle" font-size="11" fill="#aaa" font-family="system-ui">keadaan pasti</text>
+      <!-- panah -->
+      <line x1="152" y1="85" x2="218" y2="85" stroke="#ccc" stroke-width="1" marker-end="url(#ar0)"/>
+      <text id="svg-lempar" x="185" y="76" text-anchor="middle" font-size="10" fill="#aaa" font-family="system-ui">lempar</text>
+      <!-- Fase 2 -->
+      <rect x="220" y="45" width="240" height="80" rx="10" fill="#EEEDFE" stroke="#534AB7" stroke-width="1.5"/>
+      <text x="340" y="75" text-anchor="middle" font-size="15" font-weight="600" fill="#3C3489" font-family="system-ui">|ψ⟩ = α|0⟩ + β|1⟩</text>
+      <text id="svg-super" x="340" y="97" text-anchor="middle" font-size="11" fill="#534AB7" font-family="system-ui">qubit dalam superposisi (0 dan 1 sekaligus)</text>
+      <text id="svg-belumpasti" x="340" y="140" text-anchor="middle" font-size="11" fill="#aaa" font-family="system-ui">belum ada keadaan pasti</text>
+      <!-- panah -->
+      <line x1="462" y1="85" x2="528" y2="85" stroke="#ccc" stroke-width="1" marker-end="url(#ar0)"/>
+      <text id="svg-ukur" x="495" y="76" text-anchor="middle" font-size="10" fill="#aaa" font-family="system-ui">ukur</text>
+      <!-- Fase 3 -->
+      <rect x="530" y="55" width="120" height="60" rx="10" fill="#EEEDFE" stroke="#534AB7" stroke-width="1"/>
+      <text x="590" y="82" text-anchor="middle" font-size="20" fill="#3C3489" font-family="system-ui">1</text>
+      <text id="svg-hasilukur" x="590" y="102" text-anchor="middle" font-size="11" fill="#534AB7" font-family="system-ui">hasil pengukuran</text>
+      <text id="svg-kolaps" x="590" y="130" text-anchor="middle" font-size="11" fill="#aaa" font-family="system-ui">kolaps ke satu nilai</text>
+    </svg>
+
+    <div class="chips">
+      <div class="chip"><strong><span class="id-inline">Kunci</span><span class="en-inline">Key point</span></strong><span class="id-text">Superposisi bukan ketidaktahuan kita — qubit sungguh berada di kedua keadaan sebelum diukur</span><span class="en-text">Superposition is not our ignorance — a qubit genuinely exists in both states before measurement</span></div>
+      <div class="chip"><strong><span class="id-inline">Dibuktikan</span><span class="en-inline">Proven by</span></strong><span class="id-text">Eksperimen celah ganda (Young, 1801) dan banyak eksperimen modern mengkonfirmasi ini</span><span class="en-text">The double-slit experiment (Young, 1801) and many modern experiments confirm this</span></div>
+      <div class="chip"><strong><span class="id-inline">Matematika</span><span class="en-inline">Mathematics</span></strong><span class="id-text">|ψ⟩ = α|0⟩ + β|1⟩ di mana |α|² + |β|² = 1 (aturan normalisasi)</span><span class="en-text">|ψ⟩ = α|0⟩ + β|1⟩ where |α|² + |β|² = 1 (the normalization rule)</span></div>
+    </div>
+  </div>
+
+  <!-- PANEL 1: BIT VS QUBIT -->
+  <div id="p1" style="display:none">
+    <div class="card">
+      <div class="ct">
+        <span class="id-text">Saklar lampu vs jarum kompas di bola: perbedaan yang fundamental</span>
+        <span class="en-text">Light switch vs. a compass needle on a sphere: a fundamental difference</span>
+      </div>
+      <div class="cb">
+        <span class="id-text">
+        Bit klasik seperti <strong>saklar lampu</strong> — hanya dua posisi: ON (1) atau OFF (0). Tidak ada posisi tengah, tidak ada abu-abu.<br><br>
+        Qubit seperti <strong>jarum kompas yang bebas berputar di permukaan bola</strong>. Jarum bisa menunjuk ke mana saja: atas (|0⟩), bawah (|1⟩), atau <strong>jutaan titik di antaranya</strong>. Semua titik itu adalah keadaan superposisi yang valid. Bola ini dalam fisika kuantum disebut <strong>Bloch Sphere</strong> — representasi geometri resmi untuk keadaan qubit tunggal.
+        </span>
+        <span class="en-text">
+        A classical bit is like a <strong>light switch</strong> — only two positions: ON (1) or OFF (0). No middle position, no gray area.<br><br>
+        A qubit is like a <strong>compass needle free to point anywhere on a sphere</strong>. The needle can point anywhere: up (|0⟩), down (|1⟩), or <strong>millions of points in between</strong>. Every one of those points is a valid superposition state. In quantum physics, this sphere is called the <strong>Bloch Sphere</strong> — the formal geometric representation of a single qubit's state.
+        </span>
+        <div class="quote">
+          <span class="id-text">"Qubit bukan hanya 0 dan 1. Ia adalah semua kombinasi 0 dan 1 yang mungkin — secara bersamaan." — Michael Nielsen &amp; Isaac Chuang, <em>Quantum Computation and Quantum Information</em>, 2000</span>
+          <span class="en-text">"A qubit is not just 0 and 1. It is every possible combination of 0 and 1 — simultaneously." — Michael Nielsen &amp; Isaac Chuang, <em>Quantum Computation and Quantum Information</em>, 2000</span>
+        </div>
+      </div>
+    </div>
+
+    <svg width="100%" viewBox="0 0 680 240" style="display:block;margin-bottom:1rem" role="img">
+      <title id="svg-t2"><span class="id-inline">Perbandingan bit klasik dengan saklar dan qubit dengan Bloch Sphere</span></title>
+      <!-- BIT KLASIK -->
+      <text id="svg-bitklasik-h" x="160" y="28" text-anchor="middle" font-size="12" font-weight="700" fill="#444" font-family="system-ui" letter-spacing="2">BIT KLASIK</text>
+      <!-- Saklar OFF -->
+      <rect x="60" y="48" width="80" height="40" rx="20" fill="#e8e6e0" stroke="#aaa" stroke-width="1"/>
+      <circle cx="88" cy="68" r="16" fill="#fff" stroke="#aaa" stroke-width="1"/>
+      <text x="120" y="72" text-anchor="middle" dominant-baseline="central" font-size="12" fill="#888" font-family="system-ui">0</text>
+      <text x="100" y="105" text-anchor="middle" font-size="11" fill="#aaa" font-family="system-ui">OFF</text>
+      <!-- Saklar ON -->
+      <rect x="180" y="48" width="80" height="40" rx="20" fill="#E1F5EE" stroke="#0F6E56" stroke-width="1"/>
+      <circle cx="232" cy="68" r="16" fill="#0F6E56"/>
+      <text x="220" y="72" text-anchor="middle" dominant-baseline="central" font-size="12" fill="#fff" font-family="system-ui">1</text>
+      <text x="220" y="105" text-anchor="middle" font-size="11" fill="#0F6E56" font-family="system-ui">ON</text>
+      <text id="svg-hanya2" x="160" y="135" text-anchor="middle" font-size="11" fill="#aaa" font-family="system-ui">hanya 2 keadaan</text>
+      <text id="svg-tidakada" x="160" y="152" text-anchor="middle" font-size="10" fill="#ccc" font-family="system-ui">tidak ada posisi lain</text>
+
+      <!-- QUBIT BLOCH SPHERE -->
+      <text x="500" y="28" text-anchor="middle" font-size="12" font-weight="700" fill="#3C3489" font-family="system-ui" letter-spacing="2">QUBIT (BLOCH SPHERE)</text>
+      <!-- Lingkaran bola -->
+      <ellipse cx="500" cy="120" rx="90" ry="90" fill="none" stroke="#AFA9EC" stroke-width="1"/>
+      <!-- Ekuator (elips horizontal) -->
+      <ellipse cx="500" cy="120" rx="90" ry="22" fill="none" stroke="#AFA9EC" stroke-width=".8" stroke-dasharray="4 3"/>
+      <!-- Garis vertikal -->
+      <line x1="500" y1="30" x2="500" y2="210" stroke="#ddd" stroke-width=".8" stroke-dasharray="3 3"/>
+      <!-- Garis horizontal -->
+      <line x1="410" y1="120" x2="590" y2="120" stroke="#ddd" stroke-width=".8" stroke-dasharray="3 3"/>
+      <!-- Kutub |0> -->
+      <circle cx="500" cy="30" r="10" fill="#EEEDFE" stroke="#534AB7" stroke-width="1"/>
+      <text x="500" y="30" text-anchor="middle" dominant-baseline="central" font-size="11" font-weight="600" fill="#3C3489" font-family="system-ui">|0⟩</text>
+      <!-- Kutub |1> -->
+      <circle cx="500" cy="210" r="10" fill="#EEEDFE" stroke="#534AB7" stroke-width="1"/>
+      <text x="500" y="210" text-anchor="middle" dominant-baseline="central" font-size="11" font-weight="600" fill="#3C3489" font-family="system-ui">|1⟩</text>
+      <!-- Vektor qubit (jarum kompas) -->
+      <defs><marker id="arBloch" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M2 1L8 5L2 9" fill="none" stroke="#534AB7" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></marker></defs>
+      <line x1="500" y1="120" x2="562" y2="68" stroke="#534AB7" stroke-width="2.5" marker-end="url(#arBloch)"/>
+      <circle cx="562" cy="68" r="5" fill="#534AB7" opacity=".5"/>
+      <text id="svg-keadaan" x="578" y="65" font-size="11" fill="#534AB7" font-family="system-ui">keadaan</text>
+      <text id="svg-superposisi2" x="578" y="80" font-size="11" fill="#534AB7" font-family="system-ui">superposisi</text>
+      <text id="svg-infinitestates" x="500" y="230" text-anchor="middle" font-size="11" fill="#888" font-family="system-ui">∞ keadaan yang mungkin</text>
+    </svg>
+
+    <div class="chips">
+      <div class="chip"><strong><span class="id-inline">Bit klasik</span><span class="en-inline">Classical bit</span></strong><span class="id-text">2 keadaan saja: 0 atau 1, tidak ada yang lain</span><span class="en-text">Only 2 states: 0 or 1, nothing else</span></div>
+      <div class="chip"><strong>Qubit</strong><span class="id-text">Kontinum tak terhingga antara |0⟩ dan |1⟩ di permukaan Bloch Sphere</span><span class="en-text">An infinite continuum between |0⟩ and |1⟩ on the surface of the Bloch Sphere</span></div>
+      <div class="chip"><strong><span class="id-inline">Bloch Sphere</span><span class="en-inline">Bloch Sphere</span></strong><span class="id-text">Model geometri formal (Bloch, 1946) — dipakai di semua teks fisika kuantum</span><span class="en-text">A formal geometric model (Bloch, 1946) — used in every quantum physics textbook</span></div>
+    </div>
+  </div>
+
+  <!-- PANEL 2: GELOMBANG PROBABILITAS -->
+  <div id="p2" style="display:none">
+    <div class="card">
+      <div class="ct">
+        <span class="id-text">Qubit adalah gelombang probabilitas, bukan angka</span>
+        <span class="en-text">A qubit is a probability wave, not a number</span>
+      </div>
+      <div class="cb">
+        <span class="id-text">
+        Qubit bukan sekadar "setengah 0 setengah 1." Ia adalah <strong>gelombang probabilitas</strong> yang digambarkan oleh persamaan: <strong>|ψ⟩ = α|0⟩ + β|1⟩</strong>, di mana α dan β adalah <em>amplitudo</em> — angka kompleks yang menentukan seberapa besar "bobot" masing-masing keadaan.<br><br>
+        Probabilitas mendapat hasil 0 adalah <strong>|α|²</strong>, dan mendapat 1 adalah <strong>|β|²</strong>. Keduanya selalu menjumlah ke 1 (|α|² + |β|² = 1). Ini adalah <strong>aturan Born</strong>, dirumuskan oleh Max Born pada 1926 — salah satu postulat paling fundamental mekanika kuantum.
+        </span>
+        <span class="en-text">
+        A qubit isn't simply "half 0, half 1." It is a <strong>probability wave</strong> described by the equation: <strong>|ψ⟩ = α|0⟩ + β|1⟩</strong>, where α and β are <em>amplitudes</em> — complex numbers that determine how much "weight" each state carries.<br><br>
+        The probability of getting 0 is <strong>|α|²</strong>, and of getting 1 is <strong>|β|²</strong>. The two always sum to 1 (|α|² + |β|² = 1). This is the <strong>Born rule</strong>, formulated by Max Born in 1926 — one of the most fundamental postulates of quantum mechanics.
+        </span>
+      </div>
+    </div>
+
+    <div class="card">
+      <div style="font-size:13px;color:#555;margin-bottom:1rem">
+        <span class="id-inline">Geser slider untuk mengubah amplitudo qubit dan lihat probabilitasnya:</span>
+        <span class="en-inline">Drag the slider to change the qubit's amplitude and watch its probabilities:</span>
+      </div>
+
+      <div style="display:flex;align-items:center;gap:12px;margin-bottom:1.25rem">
+        <span style="font-size:12px;color:#0F6E56;font-weight:600;min-width:28px">|0⟩</span>
+        <input type="range" id="amp" min="0" max="100" value="50" step="1" oninput="updWave(this.value)" style="flex:1">
+        <span style="font-size:12px;color:#534AB7;font-weight:600;min-width:28px">|1⟩</span>
+      </div>
+
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-bottom:1rem">
+        <div class="metric">
+          <div class="metric-lbl" style="color:#0F6E56"><span class="id-inline">Prob. mendapat |0⟩</span><span class="en-inline">Prob. of getting |0⟩</span></div>
+          <div class="bar-wrap" style="margin-bottom:8px"><div id="bar0" class="bar" style="width:50%;background:#1D9E75"></div></div>
+          <div id="pct0" class="metric-val" style="color:#085041">50%</div>
+          <div id="alpha" class="metric-sub">|α|² = 0.500</div>
+        </div>
+        <div class="metric">
+          <div class="metric-lbl" style="color:#534AB7"><span class="id-inline">Prob. mendapat |1⟩</span><span class="en-inline">Prob. of getting |1⟩</span></div>
+          <div class="bar-wrap" style="margin-bottom:8px"><div id="bar1" class="bar" style="width:50%;background:#534AB7"></div></div>
+          <div id="pct1" class="metric-val" style="color:#3C3489">50%</div>
+          <div id="beta" class="metric-sub">|β|² = 0.500</div>
+        </div>
+      </div>
+
+      <div id="wave-desc" style="font-size:12px;color:#888;font-style:italic;text-align:center;padding:.5rem;background:#f8f7f4;border-radius:6px">
+        <span class="id-inline">Superposisi sempurna — qubit sama mungkin menghasilkan 0 atau 1</span>
+        <span class="en-inline">Perfect superposition — the qubit is equally likely to yield 0 or 1</span>
+      </div>
+    </div>
+
+    <div class="chips">
+      <div class="chip"><strong><span class="id-inline">Aturan Born (1926)</span><span class="en-inline">Born Rule (1926)</span></strong><span class="id-text">Probabilitas hasil = kuadrat amplitudo: P(0) = |α|², P(1) = |β|²</span><span class="en-text">Outcome probability = squared amplitude: P(0) = |α|², P(1) = |β|²</span></div>
+      <div class="chip"><strong><span class="id-inline">Normalisasi</span><span class="en-inline">Normalization</span></strong><span class="id-text">|α|² + |β|² = 1 selalu — total probabilitas semua hasil = 100%</span><span class="en-text">|α|² + |β|² = 1 always — total probability of all outcomes = 100%</span></div>
+      <div class="chip"><strong><span class="id-inline">Superposisi sempurna</span><span class="en-inline">Perfect superposition</span></strong><span class="id-text">α = β = 1/√2 → P(0) = P(1) = 50% — ini keadaan yang paling "kuantum"</span><span class="en-text">α = β = 1/√2 → P(0) = P(1) = 50% — this is the most "quantum" state possible</span></div>
+    </div>
+  </div>
+
+  <!-- PANEL 3: SAAT DIUKUR -->
+  <div id="p3" style="display:none">
+    <div class="card">
+      <div class="ct">
+        <span class="id-text">Kolaps gelombang: saat diukur, superposisi berakhir selamanya</span>
+        <span class="en-text">Wave collapse: once measured, superposition ends forever</span>
+      </div>
+      <div class="cb">
+        <span class="id-text">
+        Ini adalah momen paling mengejutkan dalam fisika kuantum. Saat Anda <strong>mengukur qubit</strong>, gelombang probabilitasnya langsung "kolaps" — menjadi satu nilai pasti: 0 atau 1. Dan setelah itu, superposisi hilang. Qubit tidak lagi berada di kedua keadaan.<br><br>
+        Ini bukan karena alat ukur kita tidak cukup canggih. Ini adalah <strong>sifat fundamental alam semesta</strong> — dikenal sebagai <strong>Postulat Pengukuran</strong> dalam mekanika kuantum. Richard Feynman menyebutnya sebagai "satu-satunya misteri sejati dalam fisika kuantum."
+        </span>
+        <span class="en-text">
+        This is the most startling moment in quantum physics. The instant you <strong>measure a qubit</strong>, its probability wave instantly "collapses" — into one definite value: 0 or 1. And after that, the superposition is gone. The qubit no longer exists in both states.<br><br>
+        This isn't because our instruments aren't sophisticated enough. It is a <strong>fundamental property of the universe</strong> — known as the <strong>Measurement Postulate</strong> in quantum mechanics. Richard Feynman called it "the only real mystery in quantum physics."
+        </span>
+        <div class="quote">
+          <span class="id-text">"Saya pikir saya bisa mengatakan dengan aman bahwa tidak ada yang memahami mekanika kuantum." — Richard Feynman, <em>The Character of Physical Law</em>, 1965</span>
+          <span class="en-text">"I think I can safely say that nobody understands quantum mechanics." — Richard Feynman, <em>The Character of Physical Law</em>, 1965</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="card">
+      <div style="font-size:13px;color:#555;margin-bottom:1rem">
+        <span class="id-inline">Simulasi kolaps gelombang — ukur qubit berulang kali:</span>
+        <span class="en-inline">Wave collapse simulation — measure the qubit repeatedly:</span>
+      </div>
+      <div class="btn-row" style="margin-bottom:1rem">
+        <button class="btn btn-primary" onclick="ukur1()"><span class="id-inline">Ukur 1×</span><span class="en-inline">Measure 1×</span></button>
+        <button class="btn" onclick="ukur10()"><span class="id-inline">Ukur 10×</span><span class="en-inline">Measure 10×</span></button>
+        <button class="btn" onclick="ukur100()"><span class="id-inline">Ukur 100×</span><span class="en-inline">Measure 100×</span></button>
+        <button class="btn" onclick="resetUkur()"><span class="id-inline">Reset</span><span class="en-inline">Reset</span></button>
+      </div>
+
+      <div id="hasil-grid" style="display:flex;gap:5px;flex-wrap:wrap;min-height:40px;margin-bottom:1rem"></div>
+
+      <div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:10px;margin-bottom:1rem">
+        <div class="metric">
+          <div class="metric-lbl"><span class="id-inline">Hasil 0</span><span class="en-inline">Result 0</span></div>
+          <div id="u0" class="metric-val" style="color:#0F6E56">0</div>
+        </div>
+        <div class="metric">
+          <div class="metric-lbl"><span class="id-inline">Hasil 1</span><span class="en-inline">Result 1</span></div>
+          <div id="u1" class="metric-val" style="color:#534AB7">0</div>
+        </div>
+        <div class="metric">
+          <div class="metric-lbl"><span class="id-inline">Rasio 0/1</span><span class="en-inline">Ratio 0/1</span></div>
+          <div id="uratio" class="metric-val">—</div>
+        </div>
+      </div>
+
+      <div id="ukur-desc" style="font-size:12px;color:#888;font-style:italic;padding:.5rem;background:#f8f7f4;border-radius:6px">
+        <span class="id-inline">Belum ada pengukuran. Semakin banyak pengukuran, semakin mendekati 50/50.</span>
+        <span class="en-inline">No measurements yet. The more measurements, the closer it gets to 50/50.</span>
+      </div>
+    </div>
+
+    <div class="chips">
+      <div class="chip"><strong><span class="id-inline">Kolaps gelombang</span><span class="en-inline">Wave collapse</span></strong><span class="id-text">Pengukuran mengakhiri superposisi — qubit menjadi pasti selamanya</span><span class="en-text">Measurement ends superposition — the qubit becomes definite forever</span></div>
+      <div class="chip"><strong><span class="id-inline">Tidak bisa dikembalikan</span><span class="en-inline">Irreversible</span></strong><span class="id-text">Setelah diukur, informasi kuantumnya hilang — ini sebabnya pengukuran harus dilakukan di akhir komputasi</span><span class="en-text">Once measured, the quantum information is gone — this is why measurement must happen at the end of a computation</span></div>
+      <div class="chip"><strong><span class="id-inline">Hukum bilangan besar</span><span class="en-inline">Law of large numbers</span></strong><span class="id-text">Ukur 1000× qubit identik → distribusi mendekati probabilitas teoritis (hukum Born)</span><span class="en-text">Measure 1000 identical qubits → the distribution approaches the theoretical probability (Born rule)</span></div>
+    </div>
+  </div>
+
+  <!-- PANEL 4: KEKUATAN EKSPONENSIAL -->
+  <div id="p4" style="display:none">
+    <div class="card">
+      <div class="ct">
+        <span class="id-text">Mengapa superposisi mengubah segalanya: ledakan eksponensial</span>
+        <span class="en-text">Why superposition changes everything: an exponential explosion</span>
+      </div>
+      <div class="cb">
+        <span class="id-text">
+        Komputer klasik dengan <strong>n bit</strong> hanya bisa berada dalam <strong>satu keadaan</strong> dari 2ⁿ kemungkinan pada satu waktu — seperti membaca satu halaman buku.<br><br>
+        Komputer kuantum dengan <strong>n qubit</strong> berada dalam <strong>superposisi dari semua 2ⁿ keadaan sekaligus</strong> — seperti membaca semua halaman buku sekaligus. Dengan <strong>300 qubit</strong>, Anda memanipulasi lebih banyak keadaan sekaligus daripada jumlah atom di seluruh alam semesta (~10⁸⁰).
+        </span>
+        <span class="en-text">
+        A classical computer with <strong>n bits</strong> can only be in <strong>one state</strong> out of 2ⁿ possibilities at a time — like reading one page of a book.<br><br>
+        A quantum computer with <strong>n qubits</strong> exists in a <strong>superposition of all 2ⁿ states at once</strong> — like reading every page of the book simultaneously. With <strong>300 qubits</strong>, you would be manipulating more states at once than there are atoms in the entire observable universe (~10⁸⁰).
+        </span>
+      </div>
+    </div>
+
+    <div class="card">
+      <div style="font-size:13px;color:#555;margin-bottom:.75rem">
+        <span class="id-inline">Geser untuk lihat pertumbuhan eksponensial:</span>
+        <span class="en-inline">Drag to see the exponential growth:</span>
+      </div>
+      <input type="range" id="nq" min="1" max="12" value="3" step="1" oninput="updPower(this.value)" style="width:100%;margin-bottom:.75rem">
+      <div id="nq-lbl" style="font-size:12px;color:#888;text-align:center;margin-bottom:1.25rem">3 qubit</div>
+
+      <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(140px,1fr));gap:10px;margin-bottom:1rem">
+        <div class="metric">
+          <div class="metric-lbl"><span class="id-inline">Jumlah qubit</span><span class="en-inline">Number of qubits</span></div>
+          <div id="pow-n" class="metric-val">3</div>
+          <div class="metric-sub">qubit</div>
+        </div>
+        <div class="metric">
+          <div class="metric-lbl"><span class="id-inline">Keadaan paralel</span><span class="en-inline">Parallel states</span></div>
+          <div id="pow-states" class="metric-val" style="color:#534AB7">8</div>
+          <div class="metric-sub"><span class="id-inline">2ⁿ keadaan sekaligus</span><span class="en-inline">2ⁿ states at once</span></div>
+        </div>
+        <div class="metric">
+          <div class="metric-lbl"><span class="id-inline">Bit klasik setara</span><span class="en-inline">Classical bit equivalent</span></div>
+          <div id="pow-bits" class="metric-val" style="color:#0F6E56">3 bit</div>
+          <div class="metric-sub"><span class="id-inline">hanya 1 keadaan</span><span class="en-inline">only 1 state</span></div>
+        </div>
+      </div>
+
+      <!-- Visualisasi perbandingan -->
+      <div style="margin-top:1rem">
+        <div style="display:flex;justify-content:space-between;margin-bottom:4px">
+          <span style="font-size:12px;color:#555"><span class="id-inline">Bit klasik (keadaan aktif)</span><span class="en-inline">Classical bit (active state)</span></span>
+          <span style="font-size:12px;font-weight:600;color:#1a1a18"><span class="id-inline">1 dari</span><span class="en-inline">1 of</span> <span id="total-classic">8</span></span>
+        </div>
+        <div class="bar-wrap" style="margin-bottom:10px"><div class="bar" id="bar-classic" style="width:12.5%;background:#ccc"></div></div>
+
+        <div style="display:flex;justify-content:space-between;margin-bottom:4px">
+          <span style="font-size:12px;color:#555"><span class="id-inline">Qubit (semua keadaan sekaligus)</span><span class="en-inline">Qubit (all states at once)</span></span>
+          <span style="font-size:12px;font-weight:600;color:#534AB7"><span id="total-quantum">8</span> <span class="id-inline">dari</span><span class="en-inline">of</span> <span id="total-quantum2">8</span></span>
+        </div>
+        <div class="bar-wrap"><div class="bar" style="width:100%;background:#534AB7"></div></div>
+      </div>
+
+      <div id="pow-desc" style="font-size:12px;color:#888;font-style:italic;margin-top:1rem;padding:.5rem;background:#f8f7f4;border-radius:6px">
+        <span class="id-inline">3 qubit = 8 keadaan paralel. Bit klasik hanya bisa berada di 1 dari 8.</span>
+        <span class="en-inline">3 qubits = 8 parallel states. A classical bit can only be in 1 of 8.</span>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="ct">
+        <span class="id-text">Dari Angka ke Dunia Nyata: Ketika Miliaran Kombinasi Bukan Lagi Masalah</span>
+        <span class="en-text">From Numbers to the Real World: When Billions of Combinations Stop Being a Problem</span>
+      </div>
+      <div class="cb">
+        <span class="id-text">
+        Angka "2ⁿ keadaan sekaligus" di atas terdengar abstrak — sampai Anda melihatnya menabrak masalah nyata yang selama ini <em>secara harfiah mustahil</em> dihitung superkomputer tercanggih sekalipun, bukan karena mesinnya kurang cepat, tapi karena jumlah kombinasinya lebih besar dari yang bisa dijelajahi alam semesta dalam waktu yang tersedia.
+        </span>
+        <span class="en-text">
+        The "2ⁿ states at once" figure above sounds abstract — until you see it collide with real problems that are <em>literally impossible</em> for even the most advanced supercomputer to compute, not because the machine isn't fast enough, but because the number of combinations exceeds what the universe could explore in the time available.
+        </span>
+      </div>
+    </div>
+
+    <div class="card" style="border-left:4px solid #0d7a65">
+      <div class="ct">
+        <span class="id-text">🧬 Kasus 1: Melipat Protein untuk Menemukan Obat</span>
+        <span class="en-text">🧬 Case 1: Folding Proteins to Discover Drugs</span>
+      </div>
+      <div class="cb">
+        <span class="id-text">
+        Setiap protein dalam tubuh Anda adalah untai asam amino yang harus melipat diri menjadi bentuk 3D yang sangat spesifik agar berfungsi — dan bentuk itulah yang menentukan apakah sebuah molekul obat bisa "mengunci" ke protein target atau tidak. Masalahnya: protein sedang dengan hanya ~100 asam amino punya sekitar <strong>10⁴⁷ kemungkinan cara melipat</strong> (dikenal sebagai <em>Paradoks Levinthal</em>, 1969). Bahkan jika superkomputer tercepat di dunia mengecek satu triliun kemungkinan per detik, ia butuh waktu jauh lebih lama dari umur alam semesta untuk mencoba semuanya satu per satu.<br><br>
+        Di sinilah superposisi berperan berbeda dari sekadar "coba semua lebih cepat": algoritma kuantum seperti <strong>VQE (Variational Quantum Eigensolver)</strong> merepresentasikan seluruh lanskap energi kemungkinan lipatan protein sebagai satu keadaan superposisi, lalu memakai interferensi kuantum untuk membuat kemungkinan berenergi tinggi (tidak stabil, tidak realistis) saling meniadakan, sementara kemungkinan berenergi rendah (stabil, kemungkinan bentuk sebenarnya) saling menguatkan. Hasilnya bukan mengecek 10⁴⁷ opsi satu-satu, melainkan membiarkan matematika kuantum "menyaring" jawaban yang benar jauh lebih cepat. Inilah alasan perusahaan farmasi besar (termasuk kolaborasi dengan IBM dan Google Quantum AI) mulai bereksperimen dengan simulasi molekuler kuantum untuk mempercepat penemuan obat baru.
+        </span>
+        <span class="en-text">
+        Every protein in your body is a strand of amino acids that must fold into a very specific 3D shape to function — and that shape determines whether a drug molecule can "lock" onto the target protein or not. The problem: a mid-sized protein with only ~100 amino acids has roughly <strong>10⁴⁷ possible ways to fold</strong> (known as <em>Levinthal's Paradox</em>, 1969). Even if the world's fastest supercomputer checked one trillion possibilities per second, it would need far longer than the age of the universe to try them all one by one.<br><br>
+        This is where superposition plays a role different from just "trying everything faster": quantum algorithms like <strong>VQE (Variational Quantum Eigensolver)</strong> represent the entire energy landscape of possible protein folds as a single superposition state, then use quantum interference to make high-energy possibilities (unstable, unrealistic) cancel each other out, while low-energy possibilities (stable, likely the true shape) reinforce each other. The result isn't checking 10⁴⁷ options one by one, but letting quantum mathematics "filter" the correct answer far more quickly. This is why major pharmaceutical companies (including collaborations with IBM and Google Quantum AI) have begun experimenting with quantum molecular simulation to accelerate new drug discovery.
+        </span>
+      </div>
+    </div>
+
+    <div class="card" style="border-left:4px solid #2d5be3">
+      <div class="ct">
+        <span class="id-text">🗺️ Kasus 2: Rute Tercepat dalam Jaringan yang Rumit</span>
+        <span class="en-text">🗺️ Case 2: The Fastest Route Through a Complex Network</span>
+      </div>
+      <div class="cb">
+        <span class="id-text">
+        Bayangkan sebuah perusahaan logistik harus mengirim 50 truk ke 200 titik tujuan dengan rute paling efisien — masalah klasik yang disebut <em>vehicle routing problem</em>, sepupu dari <em>traveling salesman problem</em> yang terkenal. Dengan hanya 20 titik saja, jumlah kemungkinan urutan rute sudah mencapai sekitar <strong>10¹⁸ kombinasi</strong> — dengan 200 titik, angka itu meledak menjadi sesuatu yang tidak bisa lagi ditulis dengan notasi biasa. Superkomputer klasik terpaksa memakai jalan pintas (heuristik) yang memberi jawaban "cukup baik", bukan yang benar-benar optimal, karena mengecek semua kombinasi sungguhan mustahil.<br><br>
+        Pendekatan kuantum — lewat <strong>QAOA (Quantum Approximate Optimization Algorithm)</strong> atau <em>quantum annealing</em> (dipakai D-Wave) — mengubah masalah rute ini menjadi sebuah "lanskap energi": setiap kombinasi rute punya nilai energi, dan rute paling efisien = titik dengan energi paling rendah. Qubit dalam superposisi menjelajahi banyak kombinasi rute sekaligus, dan interferensi kuantum secara bertahap "menuntun" sistem menuju titik energi terendah itu — mirip air yang mengalir mencari titik terendah di lanskap pegunungan, tapi menjelajahi jutaan jalur sekaligus, bukan satu per satu. Volkswagen dan DHL sudah menguji pendekatan ini untuk optimisasi rute armada dan lalu lintas kota nyata.
+        </span>
+        <span class="en-text">
+        Imagine a logistics company must send 50 trucks to 200 destinations along the most efficient routes — a classic problem called the <em>vehicle routing problem</em>, a cousin of the famous <em>traveling salesman problem</em>. With just 20 stops, the number of possible route orderings already reaches roughly <strong>10¹⁸ combinations</strong> — at 200 stops, that figure explodes into something no longer expressible in ordinary notation. Classical supercomputers are forced to use shortcuts (heuristics) that give a "good enough" answer, not a truly optimal one, because checking every real combination is impossible.<br><br>
+        The quantum approach — via <strong>QAOA (Quantum Approximate Optimization Algorithm)</strong> or <em>quantum annealing</em> (used by D-Wave) — turns this routing problem into an "energy landscape": every route combination has an energy value, and the most efficient route = the point with the lowest energy. Qubits in superposition explore many route combinations at once, and quantum interference gradually "guides" the system toward that lowest energy point — like water flowing to find the lowest point on a mountain landscape, but exploring millions of paths at once rather than one at a time. Volkswagen and DHL have already tested this approach for real fleet routing and city traffic optimization.
+        </span>
+      </div>
+    </div>
+
+    <div class="card" style="border-left:4px solid #b8860b">
+      <div class="ct">
+        <span class="id-text">🤖 Jembatan Terakhir: AI yang Menerjemahkan Masalah Menjadi Bahasa Kuantum</span>
+        <span class="en-text">🤖 The Final Bridge: AI That Translates Problems Into Quantum Language</span>
+      </div>
+      <div class="cb">
+        <span class="id-text">
+        Ada satu langkah krusial yang sering dilewatkan dalam cerita di atas: protein dan peta rute tidak datang dalam bentuk yang siap dimasukkan ke komputer kuantum begitu saja. Seseorang — atau <em>sesuatu</em> — harus <strong>menerjemahkan</strong> masalah dunia nyata (struktur kimia protein, peta jalan dan jarak antar kota) menjadi formulasi matematis yang bisa dijalankan qubit: Hamiltonian yang tepat untuk energi molekul, atau model QUBO/Ising untuk masalah rute. Merancang terjemahan ini secara manual butuh keahlian sangat langka dan proses coba-coba yang lambat.<br><br>
+        Di titik inilah AI mulai mengambil peran nyata — bukan menjalankan komputasi kuantumnya, melainkan <strong>membantu merumuskan soal yang tepat</strong> agar bisa "dimengerti" komputer kuantum. Model machine learning dipakai untuk mencari struktur ansatz (rangkaian sirkuit) yang paling efisien untuk VQE secara otomatis, atau mengubah data logistik mentah menjadi formulasi QUBO siap-jalan untuk QAOA. Rantai lengkapnya jadi: <strong>masalah dunia nyata → AI merumuskan sebagai kombinasi kuantum → qubit menjelajahi miliaran kemungkinan lewat superposisi → interferensi kuantum menyaring jawaban terbaik → hasil diterjemahkan kembali jadi solusi yang bisa dipakai manusia.</strong> Kombinasi tiga elemen ini — bukan quantum computing sendirian — yang membuat masalah "mustahil dihitung" hari ini punya jalan realistis untuk dipecahkan di masa depan.
+        </span>
+        <span class="en-text">
+        There is one crucial step often skipped in the story above: proteins and route maps don't arrive in a form ready to feed directly into a quantum computer. Someone — or <em>something</em> — must <strong>translate</strong> the real-world problem (a protein's chemical structure, a road map and inter-city distances) into a mathematical formulation a qubit can run: the correct Hamiltonian for molecular energy, or a QUBO/Ising model for routing problems. Designing this translation by hand requires very rare expertise and a slow trial-and-error process.<br><br>
+        This is where AI starts to play a real role — not running the quantum computation itself, but <strong>helping formulate the right problem</strong> so it can be "understood" by the quantum computer. Machine learning models are used to automatically search for the most efficient ansatz (circuit structure) for VQE, or to turn raw logistics data into a ready-to-run QUBO formulation for QAOA. The complete chain becomes: <strong>real-world problem → AI formulates it as a quantum combination → qubits explore billions of possibilities through superposition → quantum interference filters the best answer → the result is translated back into a solution humans can use.</strong> It is this combination of three elements — not quantum computing alone — that gives today's "impossible to compute" problems a realistic path to being solved in the future.
+        </span>
+      </div>
+    </div>
+
+    <div class="chips">
+      <div class="chip"><strong><span class="id-inline">Bukan sekedar "lebih cepat"</span><span class="en-inline">Not just "faster"</span></strong><span class="id-text">Qubit tidak menjalankan program lebih cepat — ia menjelajahi semua kemungkinan secara bersamaan</span><span class="en-text">A qubit doesn't run a program faster — it explores every possibility simultaneously</span></div>
+      <div class="chip"><strong><span class="id-inline">Tetapi ada tangkapan</span><span class="en-inline">But there's a catch</span></strong><span class="id-text">Mengukur hanya menghasilkan 1 nilai — algoritma kuantum harus merancang interferensi agar jawaban benar muncul</span><span class="en-text">Measuring only yields 1 value — the quantum algorithm must engineer interference so the correct answer surfaces</span></div>
+      <div class="chip"><strong>300 qubit</strong><span class="id-text">Lebih banyak keadaan paralel daripada atom di alam semesta — itulah kekuatan sesungguhnya</span><span class="en-text">More parallel states than atoms in the universe — that is the real power</span></div>
+      <div class="chip"><strong><span class="id-inline">10⁴⁷ lipatan protein</span><span class="en-inline">10⁴⁷ protein folds</span></strong><span class="id-text">Paradoks Levinthal — mustahil dihitung satu-satu, tapi bisa "disaring" lewat interferensi kuantum</span><span class="en-text">Levinthal's Paradox — impossible to compute one by one, but can be "filtered" through quantum interference</span></div>
+      <div class="chip"><strong>AI + Quantum</strong><span class="id-text">AI merumuskan soal, quantum computer menjelajahi kombinasinya — dua kekuatan yang saling melengkapi, bukan bersaing</span><span class="en-text">AI formulates the problem, the quantum computer explores its combinations — two complementary powers, not competing ones</span></div>
+    </div>
+  </div>
+
+  <!-- PANEL 5: JENIS QUBIT FISIK -->
+  <div id="p5" style="display:none">
+    <div class="card">
+      <div class="ct">
+        <span class="id-text">Satu ide, banyak cara membangunnya: perlombaan hardware kuantum</span>
+        <span class="en-text">One idea, many ways to build it: the quantum hardware race</span>
+      </div>
+      <div class="cb">
+        <span class="id-text">
+        Semua yang kita bahas sejauh ini — superposisi, Bloch Sphere, kolaps pengukuran — adalah <strong>matematika qubit</strong>, berlaku untuk qubit apa pun. Tapi secara fisik, "membangun" satu qubit nyata yang stabil ternyata bisa dilakukan dengan setidaknya lima pendekatan berbeda, masing-masing dengan trade-off sendiri antara kestabilan, kecepatan, dan kemudahan diperbesar (scaling). Inilah sebabnya IBM, Google, Microsoft, dan IonQ terlihat mengerjakan "hal yang sama" tapi sebenarnya bertaruh pada teknologi fisik yang sangat berbeda.
+        </span>
+        <span class="en-text">
+        Everything we've discussed so far — superposition, the Bloch Sphere, measurement collapse — is <strong>qubit mathematics</strong>, applicable to any qubit. But physically, "building" one real, stable qubit can be done in at least five different ways, each with its own trade-offs between stability, speed, and ease of scaling. This is why IBM, Google, Microsoft, and IonQ appear to be working on "the same thing" but are actually betting on very different physical technologies.
+        </span>
+        <div class="quote">
+          <span class="id-text">"Tidak ada yang tahu jenis qubit mana yang akan menang jangka panjang — mungkin jawabannya bukan satu, tapi kombinasi beberapa." — John Preskill, fisikawan, Caltech</span>
+          <span class="en-text">"Nobody knows which qubit type will win in the long run — perhaps the answer isn't one, but a combination of several." — John Preskill, physicist, Caltech</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="qtcard" style="border-left-color:#2d5be3">
+      <div class="qtcard-head">
+        <span class="qtcard-name">⚡ Superconducting Qubit</span>
+        <span class="qtcard-co">IBM · Google · Rigetti</span>
+      </div>
+      <div class="qtcard-body">
+        <span class="id-text">Sirkuit listrik superkonduktor didinginkan hingga ~15 milikelvin — lebih dingin dari luar angkasa — menggunakan <em>dilution refrigerator</em>. Arus listrik yang mengalir tanpa hambatan berperilaku sebagai sistem kuantum. Pendekatan paling matang saat ini: Google Willow (2024) dan IBM Condor (1.121 qubit, 2023) memakai teknologi ini.</span>
+        <span class="en-text">Superconducting electrical circuits are cooled to ~15 millikelvin — colder than outer space — using a <em>dilution refrigerator</em>. Current flowing without resistance behaves as a quantum system. The most mature approach today: Google Willow (2024) and IBM Condor (1,121 qubits, 2023) use this technology.</span>
+      </div>
+      <div class="qtcard-stats">
+        <div><b>~µs–ms</b><span class="id-inline">waktu koherensi</span><span class="en-inline">coherence time</span></div>
+        <div><b><span class="id-inline">Cepat</span><span class="en-inline">Fast</span></b><span class="id-inline">kecepatan gerbang</span><span class="en-inline">gate speed</span></div>
+        <div><b><span class="id-inline">Sulit</span><span class="en-inline">Hard</span></b><span class="id-inline">konektivitas jarak jauh</span><span class="en-inline">long-range connectivity</span></div>
+      </div>
+    </div>
+
+    <div class="qtcard" style="border-left-color:#0d7a65">
+      <div class="qtcard-head">
+        <span class="qtcard-name">🔵 Trapped-Ion Qubit</span>
+        <span class="qtcard-co">IonQ · Quantinuum</span>
+      </div>
+      <div class="qtcard-body">
+        <span class="id-text">Atom bermuatan (ion) ditahan melayang menggunakan medan elektromagnetik dalam ruang hampa, lalu dimanipulasi dengan laser presisi tinggi. Setiap ion identik secara alami — tidak seperti qubit superkonduktor yang harus dibuat manual chip demi chip — sehingga cenderung punya fidelity (akurasi) lebih tinggi, meski gerbangnya lebih lambat.</span>
+        <span class="en-text">Charged atoms (ions) are suspended using electromagnetic fields in a vacuum, then manipulated with high-precision lasers. Every ion is naturally identical — unlike superconducting qubits, which must be manually fabricated chip by chip — so it tends to have higher fidelity (accuracy), though its gates are slower.</span>
+      </div>
+      <div class="qtcard-stats">
+        <div><b><span class="id-inline">~detik–menit</span><span class="en-inline">~seconds–minutes</span></b><span class="id-inline">waktu koherensi</span><span class="en-inline">coherence time</span></div>
+        <div><b><span class="id-inline">Lambat</span><span class="en-inline">Slow</span></b><span class="id-inline">kecepatan gerbang</span><span class="en-inline">gate speed</span></div>
+        <div><b><span class="id-inline">Tinggi</span><span class="en-inline">High</span></b><span class="id-inline">fidelity/akurasi</span><span class="en-inline">fidelity/accuracy</span></div>
+      </div>
+    </div>
+
+    <div class="qtcard" style="border-left-color:#b8860b">
+      <div class="qtcard-head">
+        <span class="qtcard-name">💡 Photonic Qubit</span>
+        <span class="qtcard-co">PsiQuantum · Xanadu</span>
+      </div>
+      <div class="qtcard-body">
+        <span class="id-text">Informasi kuantum dikodekan pada partikel cahaya (foton) — misalnya polarisasi atau jalur optiknya. Keunggulan besar: bisa beroperasi pada <strong>suhu ruang</strong> (tidak butuh pendingin ekstrem) dan foton relatif tahan dekoherensi karena jarang berinteraksi dengan lingkungan. Tantangannya: menghasilkan dan mendeteksi foton tunggal secara andal masih sulit direkayasa dalam skala besar.</span>
+        <span class="en-text">Quantum information is encoded on particles of light (photons) — for example, their polarization or optical path. Big advantage: it can operate at <strong>room temperature</strong> (no extreme cooling needed), and photons are relatively resistant to decoherence because they rarely interact with the environment. The challenge: reliably generating and detecting single photons is still hard to engineer at large scale.</span>
+      </div>
+      <div class="qtcard-stats">
+        <div><b><span class="id-inline">Suhu ruang</span><span class="en-inline">Room temperature</span></b><span class="id-inline">operasi</span><span class="en-inline">operation</span></div>
+        <div><b><span class="id-inline">Sangat cepat</span><span class="en-inline">Very fast</span></b><span class="id-inline">kecepatan cahaya</span><span class="en-inline">speed of light</span></div>
+        <div><b><span class="id-inline">Sulit</span><span class="en-inline">Hard</span></b><span class="id-inline">deteksi foton tunggal</span><span class="en-inline">single-photon detection</span></div>
+      </div>
+    </div>
+
+    <div class="qtcard" style="border-left-color:#6a3fa8">
+      <div class="qtcard-head">
+        <span class="qtcard-name">🌀 Topological Qubit</span>
+        <span class="qtcard-co">Microsoft</span>
+      </div>
+      <div class="qtcard-body">
+        <span class="id-text">Pendekatan paling eksperimental: informasi disimpan bukan dalam partikel tunggal, melainkan dalam <em>sifat topologi</em> kolektif dari kuasipartikel eksotis (anyon Majorana). Secara teori jauh lebih tahan dekoherensi karena gangguan lokal kecil tidak mengubah sifat topologinya — analoginya seperti simpul pada tali: mengguncang talinya tidak mengubah jenis simpulnya. Microsoft mengklaim kemajuan (2024–2025) tapi klaim ini masih dalam proses verifikasi ketat komunitas fisika.</span>
+        <span class="en-text">The most experimental approach: information is stored not in a single particle, but in the collective <em>topological property</em> of exotic quasiparticles (Majorana anyons). In theory it's far more resistant to decoherence, because small local disturbances don't change the topological property — like a knot in a rope: shaking the rope doesn't change the type of knot. Microsoft has claimed progress (2024–2025), but these claims are still undergoing rigorous verification by the physics community.</span>
+      </div>
+      <div class="qtcard-stats">
+        <div><b><span class="id-inline">Teoretis tinggi</span><span class="en-inline">Theoretically high</span></b><span class="id-inline">ketahanan error</span><span class="en-inline">error resistance</span></div>
+        <div><b><span class="id-inline">Belum matang</span><span class="en-inline">Not yet mature</span></b><span class="id-inline">status hardware</span><span class="en-inline">hardware status</span></div>
+        <div><b><span class="id-inline">Dalam verifikasi</span><span class="en-inline">Under verification</span></b><span class="id-inline">klaim ilmiah</span><span class="en-inline">scientific claims</span></div>
+      </div>
+    </div>
+
+    <div class="qtcard" style="border-left-color:#c0392b">
+      <div class="qtcard-head">
+        <span class="qtcard-name">🔴 Neutral Atom Qubit</span>
+        <span class="qtcard-co">QuEra · Pasqal</span>
+      </div>
+      <div class="qtcard-body">
+        <span class="id-text">Atom netral (bukan ion bermuatan) ditata dalam kisi menggunakan "pinset optik" — sinar laser terfokus yang bisa menahan dan menyusun ratusan atom dalam pola apa pun. Pendekatan yang relatif baru tapi berkembang cepat karena kemudahan menambah jumlah qubit — QuEra sudah mendemonstrasikan ratusan qubit dalam satu susunan.</span>
+        <span class="en-text">Neutral atoms (not charged ions) are arranged in a lattice using "optical tweezers" — focused laser beams that can hold and arrange hundreds of atoms in any pattern. A relatively new but rapidly advancing approach thanks to how easily qubit counts can be scaled — QuEra has already demonstrated hundreds of qubits in a single array.</span>
+      </div>
+      <div class="qtcard-stats">
+        <div><b><span class="id-inline">~detik</span><span class="en-inline">~seconds</span></b><span class="id-inline">waktu koherensi</span><span class="en-inline">coherence time</span></div>
+        <div><b><span class="id-inline">Sangat baik</span><span class="en-inline">Very good</span></b><span class="id-inline">skalabilitas</span><span class="en-inline">scalability</span></div>
+        <div><b><span class="id-inline">Baru</span><span class="en-inline">New</span></b><span class="id-inline">generasi teknologi</span><span class="en-inline">technology generation</span></div>
+      </div>
+    </div>
+
+    <div class="chips">
+      <div class="chip"><strong><span class="id-inline">Tidak ada pemenang tunggal</span><span class="en-inline">No single winner</span></strong><span class="id-text">Setiap pendekatan unggul di satu dimensi (kecepatan, akurasi, suhu, skalabilitas) dan lemah di dimensi lain</span><span class="en-text">Each approach excels in one dimension (speed, accuracy, temperature, scalability) and is weak in another</span></div>
+      <div class="chip"><strong>Quantum Volume</strong><span class="id-text">Metrik holistik untuk membandingkan qubit lintas teknologi — bukan sekadar hitung jumlah qubit mentah</span><span class="en-text">A holistic metric for comparing qubits across technologies — not just a raw qubit count</span></div>
+      <div class="chip"><strong><span class="id-inline">Era NISQ</span><span class="en-inline">The NISQ era</span></strong><span class="id-text">Semua pendekatan di atas masih "noisy" — belum ada satupun yang mencapai qubit logis berkoreksi-error penuh dalam skala besar</span><span class="en-text">All approaches above are still "noisy" — none has yet achieved fully error-corrected logical qubits at large scale</span></div>
+    </div>
+  </div>
+
+  <div class="divider"></div>
+  <div style="font-size:11px;color:#aaa;text-align:center;line-height:1.7">
+    <span class="id-inline">Referensi:</span><span class="en-inline">References:</span> Nielsen &amp; Chuang (2000) · Born, M. (1926) Z. Phys. 37:863 · Feynman (1965) · Bloch (1946) Phys. Rev. 70:460<br>
+    Krantz, P. et al. (2019) <em>Applied Physics Reviews</em> 6:021318 · Preskill, J. (2018) <em>Quantum</em> 2:79 (NISQ) · Arute, F. et al. (2019) <em>Nature</em> 574:505<br>
+    Levinthal, C. (1969). How to fold graciously. <em>Mössbauer Spectroscopy in Biological Systems Proceedings</em> · Peruzzi, A. et al. (2014). A variational eigenvalue solver on a photonic quantum processor. <em>Nature Communications</em> 5:4213 (VQE) · Farhi, E. et al. (2014). A Quantum Approximate Optimization Algorithm. <em>arXiv:1411.4028</em> (QAOA)
+  </div>
+</div>
+
+<script>
+let lang = 'id';
+const SVG_I18N = {
+  'svg-t1': {id:'Tiga fase qubit: sebelum lempar, dalam superposisi, setelah diukur', en:'Three phases of a qubit: before the toss, in superposition, after measurement'},
+  'svg-bitklasik': {id:'bit klasik', en:'classical bit'},
+  'svg-keadaanpasti': {id:'keadaan pasti', en:'definite state'},
+  'svg-lempar': {id:'lempar', en:'toss'},
+  'svg-super': {id:'qubit dalam superposisi (0 dan 1 sekaligus)', en:'qubit in superposition (0 and 1 at once)'},
+  'svg-belumpasti': {id:'belum ada keadaan pasti', en:'no definite state yet'},
+  'svg-ukur': {id:'ukur', en:'measure'},
+  'svg-hasilukur': {id:'hasil pengukuran', en:'measurement result'},
+  'svg-kolaps': {id:'kolaps ke satu nilai', en:'collapses to one value'},
+  'svg-t2': {id:'Perbandingan bit klasik dengan saklar dan qubit dengan Bloch Sphere', en:'Comparing a classical bit as a switch with a qubit on the Bloch Sphere'},
+  'svg-bitklasik-h': {id:'BIT KLASIK', en:'CLASSICAL BIT'},
+  'svg-hanya2': {id:'hanya 2 keadaan', en:'only 2 states'},
+  'svg-tidakada': {id:'tidak ada posisi lain', en:'no other position'},
+  'svg-keadaan': {id:'keadaan', en:'state of'},
+  'svg-superposisi2': {id:'superposisi', en:'superposition'},
+  'svg-infinitestates': {id:'∞ keadaan yang mungkin', en:'∞ possible states'}
+};
+
+function setLang(l){
+  lang = l;
+  document.body.classList.toggle('en', l==='en');
+  document.getElementById('btn-id').classList.toggle('on', l==='id');
+  document.getElementById('btn-en').classList.toggle('on', l==='en');
+  document.documentElement.lang = l;
+  Object.keys(SVG_I18N).forEach(id=>{
+    const el = document.getElementById(id);
+    if(el) el.textContent = SVG_I18N[id][l];
+  });
+}
+
+function go(i,btn){
+  for(let k=0;k<6;k++){const p=document.getElementById('p'+k);if(p)p.style.display=k===i?'block':'none'}
+  document.querySelectorAll('.nb').forEach(b=>b.classList.remove('on'));
+  btn.classList.add('on');
+}
+
+// PANEL 0: Koin
+let c0=0,c1=0,cT=0,koinLock=false;
+function lemparKoin(){
+  if(koinLock)return;
+  koinLock=true;
+  const k=document.getElementById('koin');
+  const ks=document.getElementById('koin-status');
+  k.classList.remove('pulsing');
+  k.style.animation='spin .6s ease';
+  k.textContent='🪙';
+  ks.textContent = lang==='en' ? 'Measuring...' : 'Mengukur...';
+  setTimeout(()=>{
+    const r=Math.random()<.5?0:1;
+    if(r===0){c0++;k.textContent='🟢';k.style.background='#E1F5EE';k.style.borderColor='#0F6E56';}
+    else{c1++;k.textContent='🟣';k.style.background='#EEEDFE';k.style.borderColor='#534AB7';}
+    cT++;
+    document.getElementById('cnt0').textContent=c0;
+    document.getElementById('cnt1').textContent=c1;
+    document.getElementById('cntT').textContent=cT;
+    ks.textContent = (lang==='en' ? 'Result: |'+r+'⟩ — superposition collapsed!' : 'Hasil: |'+r+'⟩ — superposisi kolaps!');
+    document.getElementById('koin-count').textContent = (lang==='en' ? 'Ratio 0:1 = ' : 'Rasio 0:1 = ')+c0+':'+c1+' ('+Math.round(c0/cT*100)+'% vs '+Math.round(c1/cT*100)+'%)';
+    setTimeout(()=>{
+      k.textContent='🪙';k.style.background='#EEEDFE';k.style.borderColor='#534AB7';
+      k.style.animation='';k.classList.add('pulsing');
+      ks.textContent = lang==='en' ? 'In superposition — click to measure' : 'Dalam superposisi — klik untuk mengukur';
+      koinLock=false;
+    },1400);
+  },600);
+}
+function resetKoin(){
+  c0=0;c1=0;cT=0;
+  document.getElementById('cnt0').textContent=0;
+  document.getElementById('cnt1').textContent=0;
+  document.getElementById('cntT').textContent=0;
+  document.getElementById('koin-count').textContent = lang==='en' ? 'Result: —' : 'Hasil: —';
+  document.getElementById('koin-status').textContent = lang==='en' ? 'In superposition — click to measure' : 'Dalam superposisi — klik untuk mengukur';
+  const k=document.getElementById('koin');
+  k.textContent='🪙';k.style.background='#EEEDFE';k.style.borderColor='#534AB7';
+  k.classList.add('pulsing');koinLock=false;
+}
+
+// PANEL 2: Gelombang
+function updWave(v){
+  const p1=Math.round(100-v),p0=100-p1;
+  document.getElementById('bar0').style.width=p0+'%';
+  document.getElementById('bar1').style.width=p1+'%';
+  document.getElementById('pct0').textContent=p0+'%';
+  document.getElementById('pct1').textContent=p1+'%';
+  document.getElementById('alpha').textContent='|α|² = '+(p0/100).toFixed(3);
+  document.getElementById('beta').textContent='|β|² = '+(p1/100).toFixed(3);
+  const desc = lang==='en'
+    ? (p0===50?'Perfect superposition — the qubit is equally likely to yield 0 or 1':
+       p0>80?'Qubit strongly biased toward |0⟩ — almost certain to yield 0':
+       p1>80?'Qubit strongly biased toward |1⟩ — almost certain to yield 1':
+       p0>p1?'Qubit slightly biased toward |0⟩':'Qubit slightly biased toward |1⟩')
+    : (p0===50?'Superposisi sempurna — qubit sama mungkin menghasilkan 0 atau 1':
+       p0>80?'Qubit sangat condong ke |0⟩ — hampir pasti menghasilkan 0':
+       p1>80?'Qubit sangat condong ke |1⟩ — hampir pasti menghasilkan 1':
+       p0>p1?'Qubit sedikit lebih condong ke |0⟩':'Qubit sedikit lebih condong ke |1⟩');
+  document.getElementById('wave-desc').textContent=desc;
+}
+
+// PANEL 3: Pengukuran
+let u0=0,u1=0;
+function ukur1(){
+  const r=Math.random()<.5?0:1;
+  if(r===0)u0++;else u1++;
+  const grid=document.getElementById('hasil-grid');
+  const chip=document.createElement('div');
+  chip.style.cssText='width:26px;height:26px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:11px;font-weight:700;border:1px solid;flex-shrink:0;';
+  if(r===0){chip.style.background='#E1F5EE';chip.style.borderColor='#0F6E56';chip.style.color='#085041';}
+  else{chip.style.background='#EEEDFE';chip.style.borderColor='#534AB7';chip.style.color='#3C3489';}
+  chip.textContent=r;
+  grid.appendChild(chip);
+  updUkur();
+}
+function ukur10(){for(let i=0;i<10;i++)ukur1();}
+function ukur100(){
+  for(let i=0;i<100;i++){
+    const r=Math.random()<.5?0:1;
+    if(r===0)u0++;else u1++;
+  }
+  const grid=document.getElementById('hasil-grid');
+  grid.innerHTML='';
+  const total=u0+u1;
+  const show=Math.min(total,30);
+  for(let i=0;i<show;i++){
+    const chip=document.createElement('div');
+    const isZero=i/show<u0/total;
+    chip.style.cssText='width:26px;height:26px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:11px;font-weight:700;border:1px solid;flex-shrink:0;';
+    if(isZero){chip.style.background='#E1F5EE';chip.style.borderColor='#0F6E56';chip.style.color='#085041';chip.textContent='0';}
+    else{chip.style.background='#EEEDFE';chip.style.borderColor='#534AB7';chip.style.color='#3C3489';chip.textContent='1';}
+    grid.appendChild(chip);
+  }
+  updUkur();
+}
+function updUkur(){
+  const total=u0+u1;
+  document.getElementById('u0').textContent=u0;
+  document.getElementById('u1').textContent=u1;
+  document.getElementById('uratio').textContent=total?Math.round(u0/total*100)+'%/'+Math.round(u1/total*100)+'%':'—';
+  document.getElementById('ukur-desc').textContent = lang==='en'
+    ? total+' measurements: '+u0+' times got 0 ('+Math.round(u0/total*100)+'%), '+u1+' times got 1 ('+Math.round(u1/total*100)+'%). '+(total>=50?'Approaching the Born prediction: 50/50.':'Add more measurements to see the law of large numbers.')
+    : total+' pengukuran: '+u0+' kali dapat 0 ('+Math.round(u0/total*100)+'%), '+u1+' kali dapat 1 ('+Math.round(u1/total*100)+'%). '+(total>=50?'Mendekati prediksi Born: 50/50.':'Tambah pengukuran untuk melihat hukum bilangan besar.');
+}
+function resetUkur(){
+  u0=0;u1=0;document.getElementById('hasil-grid').innerHTML='';
+  document.getElementById('u0').textContent=0;document.getElementById('u1').textContent=0;document.getElementById('uratio').textContent='—';
+  document.getElementById('ukur-desc').textContent = lang==='en' ? 'No measurements yet. The more measurements, the closer it gets to 50/50.' : 'Belum ada pengukuran. Semakin banyak pengukuran, semakin mendekati 50/50.';
+}
+
+// PANEL 4: Kekuatan eksponensial
+function updPower(n){
+  n=parseInt(n);
+  const states=Math.pow(2,n);
+  document.getElementById('nq-lbl').textContent = n+' '+(lang==='en'?'qubit(s) →':'qubit →')+' '+states.toLocaleString()+' '+(lang==='en'?'parallel states':'keadaan paralel');
+  document.getElementById('pow-n').textContent=n;
+  document.getElementById('pow-states').textContent=states.toLocaleString();
+  document.getElementById('pow-bits').textContent=n+' bit';
+  document.getElementById('total-classic').textContent=states.toLocaleString();
+  document.getElementById('total-quantum').textContent=states.toLocaleString();
+  document.getElementById('total-quantum2').textContent=states.toLocaleString();
+  document.getElementById('bar-classic').style.width=(1/states*100)+'%';
+  const special = lang==='en'
+    ? (n>=10?'⚡ '+states.toLocaleString()+' parallel states! A classical computer would have to try them one by one.':
+       n>=7?'Already '+states.toLocaleString()+' states — classical computers start falling far behind.':
+       'Only '+states.toLocaleString()+' states — add more qubits to see the exponential explosion!')
+    : (n>=10?'⚡ '+states.toLocaleString()+' keadaan paralel! Komputer klasik harus mencoba satu per satu.':
+       n>=7?'Sudah '+states.toLocaleString()+' keadaan — komputer klasik mulai ketinggalan jauh.':
+       'Hanya '+states.toLocaleString()+' keadaan — tambah qubit untuk melihat ledakan eksponensial!');
+  document.getElementById('pow-desc').textContent = lang==='en'
+    ? n+' qubits = '+states.toLocaleString()+' parallel states. '+special
+    : n+' qubit = '+states.toLocaleString()+' keadaan paralel. '+special;
+}
+</script>
+</body>
+</html>
