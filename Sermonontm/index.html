@@ -1,0 +1,837 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Sermon on the Mount — Ajaran Cinta Kasih Kemanusiaan | Ruang Baca</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,400;0,9..144,600;1,9..144,400;1,9..144,500&family=Literata:ital,opsz,wght@0,7..72,400;0,7..72,500;1,7..72,400&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+:root{
+  --parchment:#FFFFFF;
+  --parchment-dim:#F5F3ED;
+  --panel:#FBFAF6;
+  --ink:#161412;
+  --ink-soft:#413C36;
+  --oxide:#5C1A26;
+  --oxide-dim:#8B3347;
+  --indigo:#2C3A52;
+  --gold:#8A6B22;
+  --ink-faint:#8A8479;
+  --line:rgba(22,20,18,0.13);
+  --chapter-max-width: 680px;
+  --body-font-size: 19px;
+  --body-line-height: 1.75;
+}
+*{box-sizing:border-box;}
+html{scroll-behavior:smooth;}
+body{
+  margin:0;
+  background:var(--parchment);
+  color:var(--ink);
+  font-family:'Literata',serif;
+  font-size:var(--body-font-size);
+  line-height:var(--body-line-height);
+  -webkit-font-smoothing:antialiased;
+  transition:background 0.3s ease, color 0.3s ease;
+}
+
+/* Bilingual display rules with !important to prevent specificity overrides */
+body.show-en .lang-id{display:none !important;}
+body:not(.show-en) .lang-en{display:none !important;}
+
+h1,h2,h3,.display{font-family:'Fraunces',serif;font-weight:600;color:var(--ink);letter-spacing:-0.01em;}
+.mono{font-family:'IBM Plex Mono',monospace;}
+
+/* progress bar */
+#progress{position:fixed;top:0;left:0;height:3px;background:var(--oxide);width:0%;z-index:999;transition:width .1s linear;}
+
+/* top controls */
+.controls{position:fixed;top:16px;right:16px;z-index:900;display:flex;gap:8px;flex-wrap:wrap;justify-content:flex-end;}
+.pill-btn{
+  font-family:'IBM Plex Mono',monospace;font-size:12px;letter-spacing:.02em;
+  background:var(--panel);border:1px solid var(--line);color:var(--ink);
+  padding:9px 14px;border-radius:100px;cursor:pointer;
+  box-shadow:0 2px 8px rgba(22,20,18,0.08);
+  display:inline-flex;align-items:center;gap:6px;
+  transition:all 0.2s ease;
+}
+.pill-btn:hover{border-color:var(--oxide);background:#fff;}
+.pill-btn:focus-visible{outline:2px solid var(--oxide);outline-offset:2px;}
+.pill-btn.active{background:var(--oxide);color:#fff;border-color:var(--oxide);}
+
+/* TOC Drawer */
+.drawer{
+  position:fixed;top:0;right:-360px;width:340px;max-width:90vw;height:100%;
+  background:var(--panel);border-left:1px solid var(--line);
+  padding:80px 24px 30px;z-index:950;overflow-y:auto;
+  transition:right .3s cubic-bezier(0.16, 1, 0.3, 1);
+  box-shadow:-4px 0 24px rgba(22,20,18,0.08);
+}
+.drawer.open{right:0;}
+.drawer-backdrop{
+  position:fixed;top:0;left:0;width:100vw;height:100vh;
+  background:rgba(22,20,18,0.25);z-index:940;
+  opacity:0;pointer-events:none;transition:opacity .3s ease;
+}
+.drawer-backdrop.active{opacity:1;pointer-events:auto;}
+
+.drawer h4{
+  font-family:'IBM Plex Mono',monospace;font-size:12px;
+  text-transform:uppercase;letter-spacing:.08em;color:var(--ink-soft);
+  margin-top:0;margin-bottom:20px;padding-bottom:10px;border-bottom:1px solid var(--line);
+}
+.drawer-close{
+  position:absolute;top:20px;right:20px;background:none;border:none;
+  font-size:20px;cursor:pointer;color:var(--ink-soft);padding:6px;
+}
+.drawer-close:hover{color:var(--oxide);}
+
+/* TOC links */
+#tocDrawer ol{list-style:none;margin:0;padding:0;counter-reset:toc;}
+#tocDrawer li{counter-increment:toc;margin-bottom:14px;}
+#tocDrawer a{
+  display:block;color:var(--ink);text-decoration:none;font-size:15px;line-height:1.4;
+  border-left:2px solid transparent;padding-left:10px;transition:border-color .2s;
+}
+#tocDrawer a::before{content:counter(toc,decimal-leading-zero)"  ";font-family:'IBM Plex Mono',monospace;color:var(--oxide);font-size:12px;}
+#tocDrawer a:hover{border-left-color:var(--oxide);}
+
+/* hero section centered */
+.hero{
+  min-height:92vh;display:flex;flex-direction:column;justify-content:center;
+  align-items:center;padding:80px 8vw 60px;position:relative;
+  text-align:center;
+  background:
+    radial-gradient(circle at 15% 20%, rgba(92,26,38,0.08), transparent 45%),
+    radial-gradient(circle at 85% 80%, rgba(44,58,82,0.09), transparent 45%),
+    var(--parchment);
+}
+.hero-inner{
+  width:100%;max-width:860px;
+  margin:0 auto;
+  display:flex;flex-direction:column;
+  align-items:center;
+  text-align:center;
+}
+.hero-orb-wrap{
+  width:100%;
+  display:flex;align-items:center;justify-content:center;
+  margin:0 auto 28px;
+  position:relative;
+}
+
+/* Orb & Pulsing Light - Precisely Centered and Concentric */
+.loader {
+  --color-1: rgba(255, 250, 232, 1);
+  --color-2: rgb(255, 221, 140);
+  --color-3: rgb(197, 148, 58);
+  --color-4: rgb(35, 22, 6);
+  --color-6: rgba(212, 168, 66, 0.25);
+  --color-7: rgba(212, 168, 66, 0.35);
+  --color-8: rgba(212, 168, 66, 0.55);
+  --color-9: rgba(212, 168, 66, 0.75);
+  --color-10: #d4a842;
+  --color-11: rgba(212, 168, 66, 0.65);
+  --color-12: rgba(212, 168, 66, 0.40);
+
+  width: 90px;
+  height: 90px;
+  background: radial-gradient(
+    circle at 35% 35%,
+    var(--color-1) 0%,
+    var(--color-2) 35%,
+    var(--color-3) 75%,
+    var(--color-4) 100%
+  );
+  border-radius: 50%;
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 0 auto;
+  box-shadow: 0 0 35px rgba(212, 168, 66, 0.35);
+}
+.loader:before {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  border-radius: 50%;
+  content: '';
+  box-sizing: border-box;
+  transform-origin: 50% 50%;
+  /* Perfectly concentric aura aligned with the exact center of the orb */
+  box-shadow:
+    0 0 16px 4px var(--color-7) inset,
+    0 0 8px 2px var(--color-9) inset,
+    0 0 12px 3px var(--color-10),
+    0 0 24px 6px var(--color-11),
+    0 0 44px 12px var(--color-6);
+  filter: blur(2.5px);
+  animation: 3s orbPulse linear infinite;
+}
+@keyframes orbPulse {
+  0% { transform: scale(1) rotate(0deg); opacity: 0.85; }
+  50% { transform: scale(1.08) rotate(180deg); opacity: 1; }
+  100% { transform: scale(1) rotate(360deg); opacity: 0.85; }
+}
+
+/* Title and abstract block with 50px top margin & center alignment */
+.hero-title-block{
+  margin-top:50px;
+  width:100%;
+  display:flex;flex-direction:column;
+  align-items:center;
+  text-align:center;
+}
+
+.hero .eyebrow{
+  font-family:'IBM Plex Mono',monospace;font-size:13px;
+  color:var(--oxide);margin-bottom:20px;
+  text-align:center;
+}
+.hero h1{
+  font-size:clamp(2.4rem,6vw,4.6rem);line-height:1.04;
+  margin:0 0 28px;
+  text-align:center;
+}
+.hero .sub{
+  max-width:58ch;font-size:1.15rem;color:var(--ink-soft);
+  font-style:italic;font-family:'Fraunces',serif;font-weight:400;
+  margin:0 auto;
+  text-align:center;
+}
+
+/* Format, Lensa, Sikap centered metadata */
+.hero .meta{
+  margin-top:56px;display:flex;gap:28px;flex-wrap:wrap;
+  justify-content:center;
+  text-align:center;
+  font-family:'IBM Plex Mono',monospace;font-size:12px;color:var(--ink-soft);
+}
+.hero .meta div{
+  text-align:center;
+}
+.hero .meta strong{
+  color:var(--ink);display:block;font-size:14px;
+  margin-bottom:2px;font-family:'Literata',serif;
+}
+.scroll-cue{
+  margin-top:48px;display:flex;align-items:center;justify-content:center;
+  gap:12px;font-family:'IBM Plex Mono',monospace;font-size:11px;
+  letter-spacing:0.08em;color:var(--ink-faint);text-transform:uppercase;
+}
+.scroll-cue .line{width:30px;height:1px;background:var(--oxide);display:inline-block;}
+
+/* sections */
+section.chapter{
+  max-width:var(--chapter-max-width);margin:0 auto;padding:100px 24px;
+  border-bottom:1px solid var(--line);
+  text-align:left;
+}
+section.chapter:last-of-type{border-bottom:none;}
+.chapter-num{font-family:'IBM Plex Mono',monospace;font-size:13px;color:var(--oxide);margin-bottom:14px;}
+.chapter h2{font-size:clamp(1.7rem,4vw,2.5rem);margin:0 0 8px;line-height:1.15;text-align:left;}
+.chapter .kicker{font-family:'Fraunces',serif;font-style:italic;font-weight:400;color:var(--ink-soft);font-size:1.1rem;margin-bottom:40px;display:block;}
+.chapter h3{font-size:1.28rem;margin:38px 0 10px;color:var(--oxide);text-align:left;}
+.chapter h3.h3-compact{font-size:1.02rem;letter-spacing:0.01em;}
+
+.chapter p{margin:0 0 24px;text-align:left;}
+.chapter p.lead::first-letter{
+  font-family:'Fraunces',serif;font-size:3.6em;line-height:0.85;float:left;
+  padding-right:10px;padding-top:4px;color:var(--oxide);font-weight:600;
+}
+blockquote{
+  margin:40px 0;padding:4px 0 4px 26px;border-left:3px solid var(--oxide);
+  font-family:'Fraunces',serif;font-style:italic;font-size:1.15rem;color:var(--ink-soft);
+  text-align:left;
+}
+.aside{
+  background:var(--panel);border:1px solid var(--line);border-radius:4px;
+  padding:22px 24px;margin:32px 0;font-size:0.96rem;text-align:left;
+}
+.aside .aside-label{font-family:'IBM Plex Mono',monospace;font-size:11px;text-transform:uppercase;letter-spacing:.07em;color:var(--oxide);margin-bottom:10px;display:block;}
+.refs{margin-top:16px;font-size:0.9rem;color:var(--ink-soft);}
+.refs em{font-style:italic;}
+
+.divider{width:40px;height:2px;background:var(--gold);margin:48px 0;border:none;}
+
+.tension{
+  border:1px solid var(--indigo);border-left:3px solid var(--indigo);
+  padding:20px 22px;margin:32px 0;border-radius:4px;background:rgba(44,58,82,0.05);
+  text-align:left;
+}
+.tension .aside-label{color:var(--indigo);}
+
+.lexicon{
+  border:1px solid var(--gold);border-radius:4px;
+  padding:20px 22px;margin:28px 0;background:rgba(138,107,34,0.06);
+  text-align:left;
+}
+.lexicon .aside-label{color:var(--gold);}
+.lexicon .greek{font-family:'Fraunces',serif;font-size:1.3rem;color:var(--ink);margin-right:10px;}
+.lexicon .translit{font-family:'IBM Plex Mono',monospace;font-size:12.5px;color:var(--ink-soft);font-style:italic;}
+.lexicon .gloss{display:block;margin-top:4px;font-size:0.95rem;}
+
+.scripture{
+  border:1px solid var(--ink);border-radius:4px;
+  padding:24px 26px;margin:32px 0;background:var(--panel);
+  text-align:left;
+}
+.scripture .aside-label{color:var(--ink);}
+.scripture .verse{margin:0 0 18px;padding-bottom:16px;border-bottom:1px dashed var(--line);}
+.scripture .verse:last-child{margin-bottom:0;padding-bottom:0;border-bottom:none;}
+.scripture .vnum{font-family:'IBM Plex Mono',monospace;font-size:11px;color:var(--oxide);margin-right:6px;}
+.scripture .greek-line{font-family:'Fraunces',serif;font-size:1.05rem;color:var(--ink);display:block;margin-bottom:6px;}
+.scripture .id-line{font-family:'Literata',serif;font-style:italic;color:var(--ink-soft);display:block;}
+
+.chapter-figure{margin:36px 0;}
+.chapter-figure img{width:100%;height:auto;display:block;border-radius:4px;box-shadow:0 6px 24px rgba(22,20,18,0.16);}
+.chapter-figure figcaption{margin-top:10px;font-family:'IBM Plex Mono',monospace;font-size:11.5px;color:var(--ink-soft);line-height:1.5;}
+
+.reveal{opacity:0;transform:translateY(18px);transition:opacity .7s ease, transform .7s ease;}
+.reveal.visible{opacity:1;transform:translateY(0);}
+
+footer{padding:80px 24px 120px;text-align:center;max-width:600px;margin:0 auto;}
+footer .mono{color:var(--ink-soft);font-size:13px;}
+
+@media(max-width:600px){
+  body{font-size:17px;}
+  section.chapter{padding:70px 18px;}
+  .hero{padding:70px 6vw 40px;}
+}
+</style>
+</head>
+<body>
+
+<div id="progress"></div>
+<div class="drawer-backdrop" id="drawerBackdrop" onclick="closeAllDrawers()"></div>
+
+<div class="controls">
+  <button class="pill-btn mono" id="langBtn" onclick="toggleLang()" title="Ganti Bahasa / Toggle Language">EN</button>
+  <button class="pill-btn mono" id="tocBtn" onclick="toggleToc()" title="Daftar Isi / Contents">TOC</button>
+</div>
+
+<!-- TOC Drawer -->
+<nav id="tocDrawer" class="drawer">
+  <button class="drawer-close" onclick="toggleToc()" aria-label="Tutup">&times;</button>
+  <h4 class="lang-id">Daftar Isi</h4>
+  <h4 class="lang-en">Contents</h4>
+  <ol>
+    <li><a href="#prolog" onclick="closeAllDrawers()"><span class="lang-id">Pesan Nilai Kemanusiaan yang Mengubah Dunia</span><span class="lang-en">A Message of Human Value That Changed the World</span></a></li>
+    <li><a href="#godaan" onclick="closeAllDrawers()"><span class="lang-id">Padang Gurun: Kebebasan Kehendak</span><span class="lang-en">The Wilderness: Free Will</span></a></li>
+    <li><a href="#sabda" onclick="closeAllDrawers()"><span class="lang-id">Delapan Sabda Bahagia</span><span class="lang-en">The Eight Beatitudes</span></a></li>
+    <li><a href="#hukum" onclick="closeAllDrawers()"><span class="lang-id">Dari Hukum ke Nurani</span><span class="lang-en">From Law to Conscience</span></a></li>
+    <li><a href="#garam" onclick="closeAllDrawers()"><span class="lang-id">Garam, Terang, dan Kesalehan Tersembunyi</span><span class="lang-en">Salt, Light, and Hidden Piety</span></a></li>
+    <li><a href="#waktu" onclick="closeAllDrawers()"><span class="lang-id">Kedaulatan Saat Ini</span><span class="lang-en">The Sovereignty of Now</span></a></li>
+    <li><a href="#pintu" onclick="closeAllDrawers()"><span class="lang-id">Menghakimi, Pintu Sempit, dan Fondasi yang Kokoh</span><span class="lang-en">Judging, the Narrow Gate, and a Firm Foundation</span></a></li>
+    <li><a href="#perumpamaan" onclick="closeAllDrawers()"><span class="lang-id">Perumpamaan sebagai Eksperimen Pikiran</span><span class="lang-en">Parables as Thought Experiments</span></a></li>
+    <li><a href="#lintas" onclick="closeAllDrawers()"><span class="lang-id">Titik Temu Lintas Peradaban</span><span class="lang-en">A Confluence of Civilizations</span></a></li>
+    <li><a href="#epilog" onclick="closeAllDrawers()"><span class="lang-id">Epilog: Teks yang Hidup</span><span class="lang-en">Epilogue: A Living Text</span></a></li>
+  </ol>
+</nav>
+
+<!-- Hero Section with Centered Title, Abstract & 50px Margin -->
+<header class="hero">
+  <div class="hero-inner">
+    <div class="hero-orb-wrap"><div class="loader"></div></div>
+    
+    <div class="hero-title-block">
+      <div class="eyebrow mono lang-id">AJARAN CINTA KASIH KEMANUSIAAN</div>
+      <div class="eyebrow mono lang-en">A TEACHING OF LOVE FOR HUMANITY</div>
+      
+      <h1 class="lang-id">Sermon on<br>the Mount</h1>
+      <h1 class="lang-en">Sermon on<br>the Mount</h1>
+      
+      <p class="sub lang-id">Ajaran cinta kasih yang disampaikan Yesus Kristus di atas sebuah bukit di Galilea, yang membalikkan logika kekuasaan, kemurnian, dan kelayakan — satu alur revolusi eksistensial-spiritual, dari kebebasan kehendak di padang gurun sampai keberanian menanggung akibat kebenaran, yang masih menuntut jawaban kita hari ini.</p>
+      <p class="sub lang-en">The teaching of love Jesus Christ delivered on a hillside in Galilee, overturning the logic of power, purity, and worth — one existential-spiritual revolution, from free will in the wilderness to the courage to bear truth's cost, that still demands an answer from us today.</p>
+    </div>
+
+    <!-- Centered Metadata: Format, Lensa, Sikap with strict bilingual toggle -->
+    <div class="meta">
+      <div>
+        <strong class="lang-id">Format</strong>
+        <strong class="lang-en">Format</strong>
+        <span class="lang-id">Webbook reflektif, ±30 menit</span>
+        <span class="lang-en">Reflective webbook, ±30 min</span>
+      </div>
+      <div>
+        <strong class="lang-id">Lensa</strong>
+        <strong class="lang-en">Lens</strong>
+        <span class="lang-id">Filsafat, psikologi kedalaman, sejarah agama</span>
+        <span class="lang-en">Philosophy, depth psychology, history of religion</span>
+      </div>
+      <div>
+        <strong class="lang-id">Sikap</strong>
+        <strong class="lang-en">Stance</strong>
+        <span class="lang-id">Terbuka, tidak menghakimi, lintas tradisi</span>
+        <span class="lang-en">Open, non-judgmental, cross-tradition</span>
+      </div>
+    </div>
+
+    <div class="scroll-cue">
+      <span class="line"></span>
+      <span class="lang-id">gulir untuk memulai perjalanan</span>
+      <span class="lang-en">scroll to begin the journey</span>
+    </div>
+  </div>
+</header>
+<section class="chapter reveal" id="prolog">
+  <div class="chapter-num mono lang-id">BAB SATU</div>
+  <div class="chapter-num mono lang-en">CHAPTER ONE</div>
+  <h2 class="lang-id">Pesan Nilai Kemanusiaan yang Mengubah Dunia</h2>
+  <h2 class="lang-en">A Message of Human Value That Changed the World</h2>
+  <span class="kicker lang-id">Ketika satu ajaran di atas bukit mengubah arah peradaban</span>
+  <span class="kicker lang-en">When one teaching on a hillside redirected civilization</span>
+
+  <p class="lead lang-id">Sesuatu berubah secara permanen ketika Sang Guru berdiri di sebuah bukit di Galilea dan menyampaikan ajaran cinta kasih yang belum pernah terdengar dengan cara seperti itu sebelumnya: bahwa yang miskin di hadapan Allah, yang berduka, yang lemah lembut, yang lapar akan keadilan — bukan yang kuat, yang kaya, atau yang berkuasa — adalah mereka yang diberkati. Ini bukan sekadar nasihat moral yang menenangkan hati. Ini adalah pesan nilai kemanusiaan yang, secara pelan namun tak terhentikan, mengubah arah peradaban manusia selama dua ribu tahun berikutnya.</p>
+  <p class="lang-id">Sejarawan Tom Holland, dalam <em>Dominion: How the Christian Revolution Remade the World</em>, mengajukan argumen yang provokatif sekaligus banyak diperdebatkan: sejumlah nilai yang hari ini dianggap "universal" dan bahkan "sekuler" — martabat setiap manusia tanpa memandang status sosial, kewajiban moral merawat yang lemah dan sakit, gagasan bahwa penguasa bisa saja salah meski memegang kekuasaan penuh — sebenarnya adalah warisan langsung dari revolusi nilai yang dimulai di atas bukit itu, bukan produk akal murni yang berdiri sendiri di luar sejarah. Tesis ini tentu tidak diterima bulat-bulat; banyak sejarawan lain menunjukkan bahwa welas asih dan kepedulian pada sesama juga tumbuh independen dalam tradisi Buddhis, Stoik, dan Konfusian jauh sebelum dan sesudahnya. Namun paling tidak, klaim Holland menegaskan satu hal yang sulit dibantah: pesan yang disampaikan di bukit itu bukan sekadar riwayat spiritual pribadi, melainkan turut membentuk arsitektur nilai yang dipakai peradaban manusia sampai hari ini.</p>
+  <p class="lang-id">Sejarawan zaman kuno akhir seperti Peter Brown mencatat sebuah inovasi sosial yang nyata dan terukur: komunitas-komunitas awal yang menghidupi ajaran ini adalah salah satu yang pertama secara sistematis mengorganisasi bantuan bagi janda, yatim piatu, dan orang sakit tanpa memandang kelayakan sosial mereka — praktik yang kelak menjadi cikal bakal rumah sakit dan lembaga amal modern, dan yang di dunia Yunani-Romawi kuno sebelumnya nyaris tidak memiliki preseden dalam skala tersebut. Ini bukan bukti bahwa satu tradisi memonopoli kebaikan; ia hanya menunjukkan bahwa sebuah pesan nilai, ketika dihidupi secara konsisten, mampu mengubah struktur nyata masyarakat — bukan hanya batin orang per orang.</p>
+
+  <p class="lead lang-en">Something changed permanently when the Teacher stood on a hillside in Galilee and delivered a teaching of love unlike anything heard that way before: that the poor in spirit, the mourning, the meek, those hungry for justice — not the strong, the wealthy, or the powerful — are the ones who are blessed. This was not merely comforting moral advice. It was a message of human value that, slowly but unstoppably, redirected the course of human civilization for the two thousand years that followed.</p>
+  <p class="lang-en">Historian Tom Holland, in <em>Dominion: How the Christian Revolution Remade the World</em>, makes a provocative and much-debated argument: several values considered "universal" and even "secular" today — the dignity of every human regardless of social status, the moral duty to care for the weak and sick, the idea that a ruler can be wrong even while holding total power — are in fact a direct inheritance of the revolution in values that began on that hillside, not a product of pure reason standing outside history. This thesis is far from unanimously accepted; many other historians point out that compassion and care for others also grew independently within Buddhist, Stoic, and Confucian traditions, both before and after. Still, Holland's claim underscores something hard to dismiss: the message delivered on that hillside was not merely a private spiritual episode, but helped shape the architecture of values human civilization still uses today.</p>
+  <p class="lang-en">Historians of late antiquity such as Peter Brown note a real, measurable social innovation: the earliest communities living out this teaching were among the first to systematically organize aid for widows, orphans, and the sick regardless of their social worth — a practice that would later seed modern hospitals and charitable institutions, and which had almost no precedent at that scale in the earlier Greco-Roman world. This is not proof that one tradition monopolizes goodness; it simply shows that a message of value, lived consistently, can reshape the actual structure of a society — not just the interior life of individuals.</p>
+
+  <div class="aside">
+    <span class="aside-label lang-id">CATATAN METODE</span>
+    <span class="aside-label lang-en">A NOTE ON METHOD</span>
+    <p class="lang-id" style="margin:0;">Webbook ini tidak berpretensi memutuskan perdebatan teologis mana pun. Ia membaca Khotbah di Bukit dan Dataran (Matius 5–7, Lukas 6) sebagai <em>teks kebijaksanaan</em> — genre yang juga kita temukan pada Tao Te Ching, Dhammapada, atau dialog-dialog Stoik — dan meletakkannya berdampingan dengan filsafat modern untuk melihat apa yang masih bergema, sambil tetap menaruh hormat penuh pada Yesus Kristus sebagai gurunya.</p>
+    <p class="lang-en" style="margin:0;">This webbook makes no claim to settle any theological debate. It reads the Sermon on the Mount and the Plain (Matthew 5–7, Luke 6) as <em>wisdom literature</em> — the same genre we find in the Tao Te Ching, the Dhammapada, or Stoic dialogues — and sets it beside modern philosophy to see what still resonates, while holding Jesus Christ as its teacher in full respect.</p>
+  </div>
+
+  <div class="aside">
+    <span class="aside-label lang-id">BUKIT DAN DATARAN: DUA LENSA, SATU PESAN</span>
+    <span class="aside-label lang-en">MOUNT AND PLAIN: TWO LENSES, ONE MESSAGE</span>
+    <p class="lang-id" style="margin:0 0 14px;">Matius mencatat khotbah ini disampaikan di atas bukit (Matius 5:1); Lukas mencatat versi yang secara substansi sejalan disampaikan "di tempat yang datar" (Lukas 6:17). Para sarjana Alkitab masih berbeda pendapat apakah keduanya mencatat satu peristiwa yang sama dengan penekanan berbeda, atau dua kesempatan berbeda ketika Yesus mengajarkan isi yang serupa berulang kali kepada khalayak yang berlainan — sebuah kebiasaan lazim bagi guru pengembara di zamannya. Yang tidak diperdebatkan adalah intinya: keduanya membawa satu manifesto etika dan kesadaran batin yang sama — kasih tanpa syarat, penolakan terhadap kekerasan, dan pembongkaran kemunafikan — hanya disampaikan lewat penekanan yang berbeda.</p>
+    <p class="lang-id" style="margin:0;">Matius menulis dari perspektif yang lebih batin dan spiritual: transformasi dimulai dari cara seseorang mengelola niat, ego, dan orientasi rohaninya di hadapan yang transenden — karena itu ia menempatkan khotbah ini di atas gunung, tempat yang dalam tradisi Yahudi selalu melambangkan pertemuan dengan Allah. Lukas menulis dari perspektif yang lebih sosial dan konkret: transformasi itu harus diwujudkan di tengah realitas penderitaan, ketimpangan ekonomi, dan hidup sehari-hari — karena itu ia menempatkannya di dataran rendah, sejajar dengan orang banyak, dan bahkan menajamkan penekanannya ("berbahagialah kamu yang miskin," bukan "miskin di hadapan Allah," serta menambahkan seruan "celakalah kamu yang kaya" yang tidak muncul di Matius). Keduanya ibarat dua lensa kamera memotret objek yang sama persis: satu memperbesar kedalaman batin individu, satu lagi memperbesar dampak sosial dan keberpihakan pada yang rentan. Webbook ini merangkai kedua lensa itu menjadi satu, karena keduanya memang tidak pernah dimaksudkan terpisah.</p>
+    <p class="lang-en" style="margin:14px 0 0;">Matthew records this sermon delivered on a mountainside (Matthew 5:1); Luke records a substantively parallel version delivered "on a level place" (Luke 6:17). Biblical scholars still debate whether these record the same single event with different emphasis, or two separate occasions when Jesus taught similar content repeatedly to different audiences — a common practice for an itinerant teacher of his time. What is not in dispute is the core: both carry the same single manifesto of ethics and inner awareness — unconditional love, the rejection of violence, and the dismantling of hypocrisy — only delivered with a different emphasis.</p>
+    <p class="lang-en" style="margin:14px 0 0;">Matthew writes from a more inward, spiritual perspective: transformation begins in how a person manages intention, ego, and spiritual orientation before the transcendent — which is why he places the sermon on a mountain, a setting that in Jewish tradition always signals an encounter with God. Luke writes from a more social, concrete perspective: transformation must be enacted amid real suffering, economic inequality, and daily life — which is why he places it on level ground, level with the crowd, and even sharpens the emphasis ("blessed are you who are poor," rather than "poor in spirit," adding a "woe to you who are rich" that does not appear in Matthew at all). The two are like two camera lenses photographing the exact same object: one magnifies the depth of individual inner life, the other magnifies social impact and solidarity with the vulnerable. This webbook weaves both lenses together, because they were never meant to stand apart.</p>
+  </div>
+</section>
+
+<section class="chapter reveal" id="godaan">
+  <div class="chapter-num mono lang-id">BAB DUA</div>
+  <div class="chapter-num mono lang-en">CHAPTER TWO</div>
+  <h2 class="lang-id">Padang Gurun: Kebebasan Kehendak</h2>
+  <h2 class="lang-en">The Wilderness: Free Will</h2>
+  <span class="kicker lang-id">Sebelum berkhotbah, Ia lebih dulu memilih untuk bebas</span>
+  <span class="kicker lang-en">Before he preached, he first chose to be free</span>
+
+  <p class="lead lang-id">Sebelum satu kata pun dari Khotbah di Bukit diucapkan, ada empat puluh hari sunyi di padang gurun Yudea — Yesus berpuasa, sendirian, dan di titik paling rapuhnya didatangi oleh Iblis, sang penggoda, dengan tiga tawaran (Matius 4:1–11, Lukas 4:1–13). Ubah batu menjadi roti, untuk mengakhiri lapar dengan kekuatan-Nya sendiri. Jatuhkan diri dari bubungan Bait Allah, agar malaikat menopang-Nya dan semua orang percaya lewat pertunjukan mukjizat. Sujud menyembah Iblis, dan seluruh kerajaan dunia akan diberikan tanpa perlu melalui jalan salib. Tiga tawaran ini bukan godaan dosa-dosa kecil; ia adalah tiga jalan pintas menuju kekuasaan — lewat pemenuhan kebutuhan instan, lewat bukti ajaib yang memaksa iman, dan lewat penguasaan dunia tanpa kebenaran. Yesus menolak ketiganya, dan penolakan itulah — bukan mukjizat penyembuhan mana pun — yang menjadi fondasi moral bagi segala yang Ia ajarkan setelahnya.</p>
+  <p class="lang-id">Psikolog Jordan B. Peterson, dalam telaahnya yang meluas atas narasi ini, membaca Iblis bukan sebagai makhluk eksternal semata, melainkan sebagai arketipe suara adversarial dalam jiwa manusia sendiri — bagian dari diri yang selalu menawarkan jalan pintas rasional untuk menghindari penderitaan yang perlu. Peterson menandai bahwa ketiga godaan itu tersusun secara hierarkis, dari yang paling personal ke paling sistemik: godaan roti adalah godaan memakai kekuatan untuk kenyamanan diri sendiri; godaan bubungan Bait Allah adalah godaan menuntut kepastian instan alih-alih berjalan lewat kepercayaan yang ditempa waktu; godaan atas segala kerajaan adalah godaan tirani — menguasai dunia lewat paksaan dan tunduk pada kebohongan, bukan lewat kebenaran yang diperjuangkan dan dikorbankan untuknya. Bagi Peterson, seseorang tidak layak memegang otoritas moral apa pun sebelum lebih dulu menolak ketiga korupsi kekuasaan ini dalam dirinya sendiri — sebuah pembacaan yang menempatkan narasi ini sebagai cetak biru psikologis bagi siapa pun yang hendak memikul tanggung jawab, bukan sekadar riwayat mukjizat masa lalu.</p>
+
+  <div class="lexicon">
+    <span class="aside-label lang-id">STUDI KATA</span>
+    <span class="aside-label lang-en">WORD STUDY</span>
+    <p style="margin:8px 0 0;"><span class="greek">διάβολος</span><span class="translit">diabolos</span></p>
+    <span class="gloss lang-id">Kata Yunani yang diterjemahkan "Iblis" dalam narasi ini, <em>diabolos</em> (διάβολος), secara harfiah berarti "sang pemfitnah" atau "sang penuduh" — dari kata kerja <em>diaballein</em> (διαβάλλειν), "melemparkan sesuatu yang memisahkan" atau "menuduh dengan maksud memecah". Dari kata inilah bahasa-bahasa Eropa mewarisi kata "devil" dan "diable". Namanya sendiri sudah menjelaskan fungsinya dalam narasi: ia bukan sekadar penggoda selera, melainkan sosok yang berusaha menuduh dan memisahkan — memisahkan Yesus dari kepercayaan-Nya pada Bapa, dan, dalam pembacaan Peterson, memisahkan setiap manusia dari tanggung jawabnya sendiri lewat argumen yang terdengar masuk akal.</span>
+    <span class="gloss lang-en">The Greek word translated "the Devil" in this narrative, <em>diabolos</em> (διάβολος), literally means "the slanderer" or "the accuser" — from the verb <em>diaballein</em> (διαβάλλειν), "to throw across" or "to accuse with intent to divide." English "devil" and French "diable" both descend from this word. The name itself explains its function in the story: not merely a tempter of appetite, but a figure who accuses and divides — separating Jesus from his trust in the Father, and, in Peterson's reading, separating every person from their own responsibility through arguments that sound entirely reasonable.</span>
+  </div>
+
+  <p class="lead lang-en">Before a single word of the Sermon on the Mount was spoken, there were forty silent days in the Judean wilderness — Jesus fasting, alone, and at his most fragile approached by the Devil with three offers (Matthew 4:1–11, Luke 4:1–13). Turn stone into bread, ending hunger by his own power. Throw himself from the Temple's parapet, so angels would catch him and everyone would believe through spectacle. Bow down to the Devil, and every kingdom of the world would be his without ever passing through the cross. These three offers are not petty sins; they are three shortcuts to power — through instant gratification, through coercive proof that forces belief, and through ruling the world without truth. Jesus refused all three, and that refusal — not any healing miracle — becomes the moral foundation for everything he taught afterward.</p>
+  <p class="lang-en">Psychologist Jordan B. Peterson, in his extensive commentary on this narrative, reads the Devil not merely as an external being but as an archetype of the adversarial voice within the human psyche itself — the part of the self that always offers a rational shortcut around necessary suffering. Peterson notes that the three temptations are arranged hierarchically, from the most personal to the most systemic: the temptation of bread is the temptation to use power for one's own comfort; the temptation at the Temple's edge is the temptation to demand instant certainty instead of walking through trust forged over time; the temptation of all the kingdoms is the temptation of tyranny — ruling the world through coercion and submission to a lie, rather than through a truth fought for and sacrificed for. For Peterson, no one deserves moral authority before first refusing these three corruptions of power within themselves — a reading that treats this narrative as a psychological blueprint for anyone taking on responsibility, not merely a record of a past miracle.</p>
+
+  <blockquote class="lang-id">"Manusia hidup bukan dari roti saja." — sebuah jawaban yang menolak menukar kebebasan dengan kepastian kebutuhan yang terjamin.</blockquote>
+  <blockquote class="lang-en">"One does not live by bread alone" — an answer that refuses to trade freedom for guaranteed security.</blockquote>
+
+  <p class="lang-id">Delapan belas abad kemudian, Fyodor Dostoevsky menulis ulang ketiga godaan ini dalam salah satu bab paling terkenal dalam sejarah sastra dunia: <em>Sang Inkuisitor Agung</em>, dalam <em>Kakak Beradik Karamazov</em>. Dalam kisah rekaan yang diceritakan tokoh Ivan Karamazov, Kristus kembali ke bumi pada abad keenam belas di Seville, hanya untuk ditangkap oleh Inkuisitor Agung yang justru menuduhnya salah menolak ketiga godaan di padang gurun. Argumen sang Inkuisitor tajam dan mengganggu: manusia, katanya, sebenarnya tidak menginginkan kebebasan — kebebasan adalah beban yang terlalu berat untuk dipikul kebanyakan orang. Yang benar-benar diinginkan manusia hanyalah tiga hal — <em>mukjizat, misteri, dan otoritas</em> (chudo, taina, avtoritet). Dengan menolak mengubah batu jadi roti, Kristus memaksa manusia memilih iman secara bebas alih-alih menjamin perut mereka — padahal, kata sang Inkuisitor, kebanyakan orang akan menukar kebebasan dengan roti tanpa berpikir dua kali. Dengan menolak melompat dari bubungan Bait Allah, Ia menolak memberi bukti mukjizat yang memaksa kepercayaan — padahal manusia mendambakan kepastian yang membebaskan mereka dari keraguan. Dan dengan menolak kerajaan-kerajaan dunia, Ia menolak otoritas tunggal yang bisa mengakhiri semua konflik manusia lewat kekuasaan — sebuah otoritas yang, menurut sang Inkuisitor, justru kemudian diambil alih oleh Gereja sendiri, demi membebaskan manusia dari beban kebebasan yang tidak sanggup mereka pikul.</p>
+  <p class="lang-id">Dostoevsky sengaja tidak memberi Kristus argumen balasan sepatah kata pun. Setelah semalaman mendengarkan tuduhan itu dalam diam, Kristus hanya mendekat dan mencium sang Inkuisitor — sebuah jawaban lewat kasih, bukan lewat perdebatan. Namun tepat di titik ini letak kejutan yang sesungguhnya, dan yang paling sering luput dari pembacaan sekilas: sang Inkuisitor, meski telah membangun argumen semalam penuh untuk membenarkan mengapa Kristus seharusnya dihukum mati kembali, pada akhirnya justru membuka pintu selnya dan membiarkan-Nya pergi ke dalam gelapnya jalanan kota, tanpa hukuman apa pun. Kristus pergi begitu saja, dalam diam, dan tidak pernah kembali dalam cerita itu.</p>
+  <p class="lang-id">Keputusan sang Inkuisitor untuk melepaskan, bukan mengeksekusi, adalah teka-teki yang oleh Dostoevsky sengaja dibiarkan tanpa penjelasan — dan barangkali di situlah letak kedalamannya yang sesungguhnya. Sebagian pembaca menafsirkannya sebagai bukti bahwa ciuman itu berhasil menembus, membangkitkan kembali percikan hati nurani yang telah lama dikubur sang Inkuisitor di balik sistemnya sendiri. Yang lain membacanya justru sebaliknya: sang Inkuisitor melepaskan Kristus bukan karena tersentuh, melainkan karena yakin sepenuhnya bahwa ia telah menang — bahwa dunia toh akan tetap memilih roti, mukjizat, dan otoritas, sehingga satu orang bebas yang dilepaskan tidak lagi menjadi ancaman apa pun bagi sistem yang telah ia bangun. Ada pula yang membacanya sebagai gambaran kekuasaan yang, betapapun yakin akan pembenarannya sendiri, pada akhirnya tetap tidak sanggup menanggung kematian secara langsung di hadapan kasih yang tidak melawan. Dostoevsky tidak memihak salah satu tafsir ini; dan justru karena itulah pertanyaan tentang kebebasan kehendak dibiarkan benar-benar terbuka, dipulangkan sepenuhnya kepada setiap pembaca untuk diputuskan sendiri: benarkah manusia mendambakan kebebasan, atau diam-diam lebih memilih ditukar dengan roti, mukjizat, dan otoritas yang menjamin rasa aman — dan apa yang sebenarnya terjadi dalam diri seseorang yang telah berkuasa penuh, ketika ia memilih untuk tidak menggunakan kekuasaan itu sampai batas akhirnya?</p>
+  <p class="lang-en">Eighteen centuries later, Fyodor Dostoevsky rewrote these same three temptations in one of the most celebrated chapters in world literature: <em>The Grand Inquisitor</em>, in <em>The Brothers Karamazov</em>. In the fictional tale told by the character Ivan Karamazov, Christ returns to earth in sixteenth-century Seville, only to be arrested by a Grand Inquisitor who accuses him of having wrongly refused the three wilderness temptations. The Inquisitor's argument is sharp and unsettling: humanity, he claims, does not actually want freedom — freedom is too heavy a burden for most people to bear. What humanity truly wants is only three things — <em>miracle, mystery, and authority</em>. By refusing to turn stone into bread, Christ forced humanity to choose faith freely instead of guaranteeing their hunger would end — yet, says the Inquisitor, most people would trade freedom for bread without a second thought. By refusing to leap from the Temple, he refused to offer the miraculous proof that would force belief — yet humanity craves the certainty that frees them from doubt. And by refusing the kingdoms of the world, he refused a single authority that could end all human conflict through power — an authority which, the Inquisitor claims, the Church itself later took up, precisely to free humanity from a burden of freedom it could not carry.</p>
+  <p class="lang-en">Dostoevsky deliberately gives Christ no rebuttal, not a single word. After listening to the accusation in silence all night, Christ simply approaches and kisses the Inquisitor — an answer through love rather than argument. But the real surprise, the one most casual readings miss, sits exactly here: the Inquisitor, despite having spent the whole night constructing an argument for why Christ should be put to death all over again, ultimately opens the cell door and lets him go, out into the dark city streets, with no punishment at all. Christ simply leaves, in silence, and never returns within the story.</p>
+  <p class="lang-en">The Inquisitor's choice to release rather than execute is a puzzle Dostoevsky deliberately leaves unexplained — and perhaps that is exactly where its depth lies. Some readers interpret it as proof that the kiss broke through, reawakening a spark of conscience the Inquisitor had long buried beneath his own system. Others read it the opposite way: the Inquisitor lets Christ go not because he was moved, but because he is entirely convinced he has already won — that the world will choose bread, miracle, and authority regardless, so one free man released poses no threat to the system he has built. Still others read it as a portrait of power that, however certain of its own justification, ultimately cannot bring itself to deliver death directly into the face of a love that does not resist. Dostoevsky takes no side among these readings; and precisely because of that, the question of free will is left genuinely open, handed entirely back to each reader to decide: does humanity truly long for freedom, or does it quietly prefer to trade it for bread, miracle, and an authority that guarantees safety — and what actually happens inside someone holding total power, in the moment he chooses not to use it to its final extent?</p>
+
+  <div class="tension">
+    <span class="aside-label lang-id">KEBEBASAN YANG DITAKUTI</span>
+    <span class="aside-label lang-en">THE FREEDOM WE FEAR</span>
+    <p class="lang-id" style="margin:0;">Erich Fromm, dalam <em>Escape from Freedom</em> — ditulis di bayang-bayang bangkitnya fasisme Eropa — sampai pada tesis yang nyaris identik lewat jalur psikologi sosial, bukan sastra: kebebasan modern yang diraih lewat pelepasan dari otoritas tradisional justru sering melahirkan kecemasan dan keterasingan yang begitu berat, sehingga banyak orang secara sukarela menyerahkan diri pada otoritarianisme demi rasa aman. Argumen sang Inkuisitor Agung, dibaca lewat Fromm, bukan lagi fiksi abad ke-19 semata, melainkan diagnosis yang terus terbukti relevan pada abad ke-20 dan ke-21.</p>
+    <p class="lang-en" style="margin:0;">Erich Fromm, in <em>Escape from Freedom</em> — written in the shadow of rising European fascism — arrived at a nearly identical thesis through social psychology rather than literature: modern freedom, won by release from traditional authority, often produces such heavy anxiety and alienation that many people voluntarily surrender themselves to authoritarianism in exchange for safety. The Grand Inquisitor's argument, read through Fromm, is no longer merely nineteenth-century fiction, but a diagnosis that keeps proving relevant across the twentieth and twenty-first centuries.</p>
+  </div>
+
+  <p class="lang-id">Inilah simpul yang menautkan padang gurun dengan segala yang menyusul di khotbah-khotbah berikutnya: setiap nilai yang akan diberkati dalam Sabda Bahagia — kerendahan hati, dukacita, kelemahlembutan, kelaparan akan kebenaran — hanya bermakna karena lebih dulu dipilih secara bebas, bukan dipaksakan lewat roti, mukjizat, atau otoritas. Revolusi yang dimulai di padang gurun bukan revolusi kekuasaan, melainkan revolusi kehendak: penegasan bahwa martabat manusia justru lahir dari beratnya memilih kebenaran secara sukarela, bukan dari kemudahan menerima jaminan apa pun secara cuma-cuma.</p>
+  <p class="lang-en">This is the knot that ties the wilderness to everything that follows in the sermons ahead: every value about to be blessed in the Beatitudes — humility, mourning, meekness, hunger for righteousness — only carries meaning because it is first freely chosen, not forced through bread, miracle, or authority. The revolution that begins in the wilderness is not a revolution of power but a revolution of will: an assertion that human dignity is born precisely from the weight of choosing truth voluntarily, not from the ease of accepting any guarantee for free.</p>
+</section>
+
+<section class="chapter reveal" id="sabda">
+  <div class="chapter-num mono lang-id">BAB TIGA</div>
+  <div class="chapter-num mono lang-en">CHAPTER THREE</div>
+  <h2 class="lang-id">Delapan Sabda Bahagia</h2>
+  <h2 class="lang-en">The Eight Beatitudes</h2>
+  <span class="kicker lang-id">Konsep revolusioner dalam Khotbah di Bukit dan di Dataran</span>
+  <span class="kicker lang-en">A revolutionary concept in the Sermon on the Mount and on the Plain</span>
+
+  <figure class="chapter-figure">
+    <img src="sabda-bahagia.png" alt="Lukisan Yesus Kristus mengajar delapan Sabda Bahagia kepada kerumunan di atas bukit">
+    <figcaption class="lang-id">Ilustrasi: Sang Guru menyampaikan Sabda Bahagia kepada kerumunan di atas bukit — gambaran visual dari Khotbah di Bukit, Matius 5:1–2.</figcaption>
+    <figcaption class="lang-en">Illustration: The Teacher delivers the Beatitudes to the crowd on the hillside — a visual depiction of the Sermon on the Mount, Matthew 5:1–2.</figcaption>
+  </figure>
+
+  <div class="scripture">
+    <span class="aside-label lang-id">TEKS ASLI — MATIUS 5:3–10</span>
+    <span class="aside-label lang-en">SOURCE TEXT — MATTHEW 5:3–10</span>
+    <p style="margin:10px 0 16px;font-size:0.85rem;">
+      <span class="lang-id">Yunani: <em>Novum Testamentum Graece</em> (Nestle-Aland/teks kritis standar) · Indonesia: <em>Alkitab Terjemahan Baru</em>, Lembaga Alkitab Indonesia (LAI)</span>
+      <span class="lang-en">Greek: <em>Novum Testamentum Graece</em> (Nestle-Aland critical text) · Indonesian: <em>Alkitab Terjemahan Baru</em>, Indonesian Bible Society (LAI)</span>
+    </p>
+
+    <div class="verse"><span class="vnum">3</span><span class="greek-line">Μακάριοι οἱ πτωχοὶ τῷ πνεύματι, ὅτι αὐτῶν ἐστιν ἡ βασιλεία τῶν οὐρανῶν.</span><span class="id-line">"Berbahagialah orang yang miskin di hadapan Allah, karena merekalah yang empunya Kerajaan Sorga.</span></div>
+    <div class="verse"><span class="vnum">4</span><span class="greek-line">μακάριοι οἱ πενθοῦντες, ὅτι αὐτοὶ παρακληθήσονται.</span><span class="id-line">Berbahagialah orang yang berdukacita, karena mereka akan dihibur.</span></div>
+    <div class="verse"><span class="vnum">5</span><span class="greek-line">μακάριοι οἱ πραεῖς, ὅτι αὐτοὶ κληρονομήσουσιν τὴν γῆν.</span><span class="id-line">Berbahagialah orang yang lemah lembut, karena mereka akan memiliki bumi.</span></div>
+    <div class="verse"><span class="vnum">6</span><span class="greek-line">μακάριοι οἱ πεινῶντες καὶ διψῶντες τὴν δικαιοσύνην, ὅτι αὐτοὶ χορτασθήσονται.</span><span class="id-line">Berbahagialah orang yang lapar dan haus akan kebenaran, karena mereka akan dipuaskan.</span></div>
+    <div class="verse"><span class="vnum">7</span><span class="greek-line">μακάριοι οἱ ἐλεήμονες, ὅτι αὐτοὶ ἐλεηθήσονται.</span><span class="id-line">Berbahagialah orang yang murah hatinya, karena mereka akan beroleh kemurahan.</span></div>
+    <div class="verse"><span class="vnum">8</span><span class="greek-line">μακάριοι οἱ καθαροὶ τῇ καρδίᾳ, ὅτι αὐτοὶ τὸν θεὸν ὄψονται.</span><span class="id-line">Berbahagialah orang yang suci hatinya, karena mereka akan melihat Allah.</span></div>
+    <div class="verse"><span class="vnum">9</span><span class="greek-line">μακάριοι οἱ εἰρηνοποιοί, ὅτι αὐτοὶ υἱοὶ θεοῦ κληθήσονται.</span><span class="id-line">Berbahagialah orang yang membawa damai, karena mereka akan disebut anak-anak Allah.</span></div>
+    <div class="verse"><span class="vnum">10</span><span class="greek-line">μακάριοι οἱ δεδιωγμένοι ἕνεκεν δικαιοσύνης, ὅτι αὐτῶν ἐστιν ἡ βασιλεία τῶν οὐρανῶν.</span><span class="id-line">Berbahagialah orang yang dianiaya oleh sebab kebenaran, karena merekalah yang empunya Kerajaan Sorga."</span></div>
+  </div>
+
+  <p class="lead lang-id">Bayangkan berdiri di tengah kerumunan di bukit Galilea itu, dan mendengar Sang Guru membuka pidatonya bukan dengan memuji yang kuat, yang benar secara ritual, atau yang berhasil — melainkan memberkati yang miskin di hadapan Tuhan, yang berduka, yang lembut hati, yang lapar akan keadilan. Ini bukan sekadar penghiburan sentimental untuk kaum tertindas. Ini adalah konsep revolusioner: dekonstruksi total atas hierarki nilai yang dipegang hampir semua masyarakat kuno — dan, jika kita jujur, sebagian besar masyarakat hari ini: kekuatan mengalahkan kelemahan, kemenangan mengalahkan kekalahan, kepastian mengalahkan keraguan.</p>
+  <p class="lang-id">Filsuf Prancis René Girard membaca pembalikan ini melalui teorinya tentang <em>hasrat mimetik</em> dan mekanisme <em>kambing hitam</em>: masyarakat manusia, menurut Girard, secara historis menstabilkan diri dengan menyalahkan dan mengorbankan satu pihak yang lemah demi meredakan kekerasan kolektif. Yang membuat narasi Injil unik, argumen Girard, adalah bahwa ia menceritakan kisah kambing hitam dari sudut pandang korban yang tidak bersalah — membongkar mekanisme itu alih-alih menyembunyikannya. Delapan Sabda ini adalah versi etisnya: pernyataan terbuka bahwa mereka yang biasanya dikorbankan, dipinggirkan, atau dianggap gagal, justru berdiri di pusat perhatian moral.</p>
+  <p class="lang-id">Friedrich Nietzsche melihat gerakan yang sama ini dan menyimpulkan hal yang berlawanan: baginya, pemuliaan atas kelemahan dan kerendahan hati adalah <em>moralitas budak</em>, lahir dari ressentiment yang menyamar sebagai kebajikan — kritik yang akan terus kita bawa sepanjang bab ini, bukan untuk ditutup terburu-buru, melainkan untuk diuji pada tiap sabda satu demi satu.</p>
+  <p class="lang-id">Satu catatan bahasa penting sebelum masuk ke tiap sabda: kata pembuka yang diulang delapan kali, <em>Μακάριοι</em> (<em>Makarioi</em>, jamak dari <em>makarios</em>), sering diterjemahkan "berbahagialah" — namun ini bukan kebahagiaan dangkal seperti perasaan senang karena mendapat hadiah. <em>Makarios</em> menandai sebuah <em>status</em>: diberkati, diselaraskan dengan sukacita ilahi, kepuasan batin dari Allah yang tidak bergantung sama sekali pada keadaan duniawi. Delapan sabda ini bukan resep untuk merasa senang; mereka mendeklarasikan siapa yang sesungguhnya berada dalam posisi diberkati di hadapan Allah — klaim yang jauh lebih radikal daripada sekadar nasihat menuju kebahagiaan.</p>
+
+  <p class="lead lang-en">Picture standing in that crowd on the Galilean hillside, hearing the Teacher open not by praising the strong, the ritually correct, or the successful — but by blessing the poor in spirit, the grieving, the meek, those hungry for justice. This is not sentimental comfort for the oppressed. It is a revolutionary concept: a total deconstruction of the value hierarchy held by nearly every ancient society — and, if we are honest, most societies today: strength over weakness, victory over defeat, certainty over doubt.</p>
+  <p class="lang-en">French philosopher René Girard read this reversal through his theory of <em>mimetic desire</em> and the <em>scapegoat mechanism</em>: human societies, Girard argued, have historically stabilized themselves by blaming and sacrificing a weaker party to defuse collective violence. What makes the Gospel narrative unique, in Girard's account, is that it tells the scapegoat story from the point of view of the innocent victim — exposing the mechanism rather than hiding it. These eight sayings are its ethical counterpart: an open declaration that those usually sacrificed, marginalized, or judged failures now stand at the center of moral attention.</p>
+  <p class="lang-en">Friedrich Nietzsche saw the same movement and drew the opposite conclusion: for him, glorifying weakness and lowliness was <em>slave morality</em>, born of ressentiment disguised as virtue — a critique we will carry through this chapter, not to close it hastily, but to test it against each saying in turn.</p>
+  <p class="lang-en">One linguistic note before turning to each saying: the opening word repeated eight times, <em>Μακάριοι</em> (<em>Makarioi</em>, plural of <em>makarios</em>), is usually translated "blessed" — but this is not shallow happiness, the kind felt upon receiving a gift. <em>Makarios</em> marks a <em>status</em>: being blessed, aligned with divine joy, an inner satisfaction from God that depends not at all on worldly circumstance. These eight sayings are not a recipe for feeling good; they declare who actually stands in a blessed position before God — a far more radical claim than mere advice toward happiness.</p>
+
+  <hr class="divider">
+
+  <h3 class="lang-id">1 · Miskin di Hadapan Allah — Kerendahan Epistemik</h3>
+  <h3 class="lang-en">1 · Poor in Spirit — Epistemic Humility</h3>
+  <p class="lang-id">Bahasa Yunani punya dua kata berbeda untuk "miskin": <em>penia</em> (πενία, miskin namun masih bisa bekerja untuk bertahan hidup) dan <em>ptōchos</em> (πτωχός, miskin ekstrem — bangkrut total, mengemis, sepenuhnya bergantung pada belas kasihan orang lain). Sabda pertama secara sengaja memilih kata yang kedua, yang lebih keras: <em>hoi ptōchoi tō pneumati</em> (οἱ πτωχοὶ τῷ πνεύματι), "yang bangkrut total di hadapan Allah". Ini bukan sekadar kerendahan hati yang sopan, melainkan pengakuan penuh bahwa seseorang tidak memiliki kebaikan, kebenaran, atau kehebatan apa pun untuk dibanggakan sebagai bekal menyelamatkan dirinya sendiri — sebuah kebangkrutan rohani total, sejalan dengan pengakuan Sokrates bahwa kebijaksanaan sejati dimulai dari mengetahui bahwa kita tidak tahu. <strong>Nilai filosofis aktualnya</strong> sangat konkret: riset psikologi tentang efek Dunning–Kruger menunjukkan justru mereka yang paling minim kompetensi cenderung paling percaya diri, sementara "kerendahan hati intelektual" (intellectual humility) — kini diteliti serius oleh psikolog seperti Mark Leary — terbukti berkorelasi dengan keterbukaan berpikir dan kualitas keputusan yang lebih baik. Di era kepastian yang diperjualbelikan lewat media sosial dan polarisasi opini, sabda ini adalah penolakan radikal terhadap godaan untuk selalu merasa paling benar. Fromm menambahkan lapisan penting: ini bukan panggilan untuk pasif, melainkan pelepasan dari kebutuhan memiliki, mengontrol, dan membuktikan diri (Being Mode, bukan Having Mode) — jawaban langsung atas kekhawatiran Nietzsche bahwa ini hanya kelemahan yang disamarkan.</p>
+  <p class="lang-en">Greek has two distinct words for "poor": <em>penia</em> (πενία, poor but still able to work for survival) and <em>ptōchos</em> (πτωχός, extreme poverty — utterly bankrupt, reduced to begging, wholly dependent on the mercy of others). The first saying deliberately chooses the harsher term: <em>hoi ptōchoi tō pneumati</em> (οἱ πτωχοὶ τῷ πνεύματι), "those utterly bankrupt before God." This is not polite modesty but a total admission that one has no goodness, righteousness, or greatness of one's own to offer as collateral for saving oneself — a complete spiritual bankruptcy, aligned with Socrates's admission that true wisdom begins with knowing that we do not know. <strong>Its actual philosophical value</strong> is concrete: research on the Dunning–Kruger effect shows that those with the least competence tend to be most confident, while "intellectual humility" — now studied seriously by psychologists like Mark Leary — correlates with open-mindedness and better decision quality. In an age where certainty is sold through social media and polarized opinion, this saying is a radical refusal of the temptation to always feel right. Fromm adds an important layer: this is not a call to passivity, but a release from the need to possess, control, and prove oneself (Being Mode, not Having Mode) — a direct answer to Nietzsche's worry that this is merely weakness in disguise.</p>
+
+  <h3 class="lang-id">2 · Berduka — Menolak Mati Rasa</h3>
+  <h3 class="lang-en">2 · Those Who Mourn — Refusing Numbness</h3>
+  <p class="lang-id">Kata Yunani yang dipakai, <em>penthountes</em> (πενθοῦντες, dari <em>pentheō</em>), bukan istilah untuk kesedihan ringan — ini adalah kata yang lazim dipakai untuk ratapan atas kematian seseorang yang sangat dicintai, duka paling dalam yang dikenal manusia. Yang diratapi bukan sekadar nasib buruk, melainkan dosa itu sendiri — baik dosa pribadi maupun dosa yang merusak dunia. Berduka di sini bukan kepasifan, melainkan penolakan terhadap penyangkalan (denial) — keberanian merasakan penuh kehilangan itu, alih-alih menumpulkannya lewat kesibukan atau hiburan tanpa henti. Janji balasannya pun dipilih dengan cermat: mereka yang meratap akan <em>parakaleō</em> (παρακαλέω) — dihibur, dipanggil untuk didampingi — kata yang sama yang kelak dipakai untuk menyebut Roh Kudus sebagai "Penghibur/Parakletos". Elisabeth Kübler-Ross, lewat penelitiannya tentang tahapan duka, menegaskan bahwa dukacita yang diproses secara jujur adalah jalan menuju penerimaan, sementara duka yang ditekan justru menetap dan mendistorsi jiwa dalam bentuk lain. <strong>Nilai filosofis aktualnya</strong> menghantam langsung budaya "positivitas beracun" (toxic positivity) di zaman kita, yang menuntut orang selalu tampak baik-baik saja — sabda ini justru memberkati keberanian menampakkan kerapuhan.</p>
+  <p class="lang-en">The Greek word used, <em>penthountes</em> (πενθοῦντες, from <em>pentheō</em>), is no term for mild sadness — it is the word ordinarily used for mourning the death of someone deeply loved, the deepest grief known to humans. What is mourned here is not merely bad luck, but sin itself — both personal sin and the sin that wounds the world. Mourning here is not passivity but a refusal of denial — the courage to feel that loss fully, instead of numbing it through busyness or endless distraction. Even the promised reward is chosen precisely: those who mourn will be <em>parakaleō</em> (παρακαλέω) — comforted, called alongside — the same word later used for the Holy Spirit as "Comforter/Paraclete." Elisabeth Kübler-Ross's work on the stages of grief affirms that honestly processed grief is the road to acceptance, while suppressed grief lingers and distorts the soul in other forms. <strong>Its actual philosophical value</strong> cuts directly against today's "toxic positivity" culture, which demands people always appear fine — this saying instead blesses the courage to show fragility.</p>
+
+  <h3 class="lang-id">3 · Lemah Lembut — Kekuatan yang Terkendali</h3>
+  <h3 class="lang-en">3 · The Meek — Strength Under Control</h3>
+  <p class="lang-id">Kata Yunani yang diterjemahkan "lemah lembut", <em>praeis</em> (πραεῖς, dari <em>praus</em>), sering disalahpahami sebagai "penakut" atau "lemah". Dalam Yunani kuno, <em>praus</em> justru dipakai untuk menggambarkan seekor kuda liar yang telah dijinakkan sepenuhnya: kekuatannya yang besar tidak dihilangkan, hanya dialihkan sepenuhnya ke bawah kendali penunggangnya — bukan kuda tak berdaya, melainkan kekuatan besar yang memilih tunduk. Girard akan membacanya sebagai penolakan ikut serta dalam rivalitas mimetik: menolak eskalasi kekerasan balas-membalas yang menjerat hampir semua konflik manusia. <strong>Nilai filosofis aktualnya</strong> terlihat jelas dalam studi kepemimpinan kontemporer, yang membedakan "kekuasaan atas" (power over) dari "kekuasaan bersama" (power with) — kelemahlembutan, dalam pengertian ini, adalah kepemimpinan yang tidak butuh mendominasi untuk dianggap kuat.</p>
+  <p class="lang-en">The Greek word translated "meek," <em>praeis</em> (πραεῖς, from <em>praus</em>), is often misunderstood as "timid" or "weak." In ancient Greek, <em>praus</em> was in fact used to describe a wild horse that had been fully tamed: its great strength is not removed, only fully redirected under its rider's control — not a helpless animal, but immense strength that has chosen submission. Girard would read this as a refusal to enter mimetic rivalry: declining the escalating cycle of retaliatory violence that traps nearly every human conflict. <strong>Its actual philosophical value</strong> shows up clearly in contemporary leadership studies, which distinguish "power over" from "power with" — meekness, in this sense, is leadership that needs no domination to be recognized as strong.</p>
+
+  <h3 class="lang-id">4 · Lapar dan Haus akan Kebenaran — Urgensi Moral</h3>
+  <h3 class="lang-en">4 · Hunger and Thirst for Righteousness — Moral Urgency</h3>
+  <p class="lang-id"><em>Dikaiosynē</em> (δικαιοσύνη), kata Yunani yang diterjemahkan "kebenaran" di sini, mencakup lebih dari sekadar benar secara moral — ia berarti keadilan dan keselarasan hidup penuh dengan kehendak serta karakter Allah. Tata bahasa yang dipakai juga bukan kebetulan: kata kerja <em>peinōntes</em> dan <em>dipsōntes</em> (πεινῶντες καὶ διψῶντες) berbentuk partisip aktif, menandai hasrat yang terus-menerus dan mendesak — bukan lapar sesaat yang bisa diabaikan, melainkan kerinduan konstan, seperti orang tersesat di padang pasir yang benar-benar membutuhkan air untuk bertahan hidup. Sabda ini menolak kepuasan diri (complacency) moral — menuntut agar keadilan bukan sekadar cita-cita abstrak, melainkan kebutuhan semendesak lapar dan haus jasmani, dengan janji bahwa mereka akan <em>chortasthēsontai</em> (χορτασθήσονται) — dikenyangkan sampai benar-benar puas. Filsuf moral menyebut kapasitas mengejar keadilan tanpa henti ini "keberanian moral" (moral courage): kesediaan bertindak benar meski berisiko kerugian pribadi, sebagaimana diteliti Rushworth Kidder. <strong>Nilai filosofis aktualnya</strong> tampak jelas pada mereka yang mempertaruhkan karier dan keamanan demi mengungkap kebenaran — dari pelapor pelanggaran (whistleblower) hingga aktivis hak sipil — sekaligus menjadi kritik terhadap "lisensi moral" (moral licensing), kecenderungan merasa cukup berbuat baik setelah satu tindakan kecil, lalu berhenti menuntut lebih dari diri sendiri.</p>
+  <p class="lang-en"><em>Dikaiosynē</em> (δικαιοσύνη), the Greek word translated "righteousness" here, covers more than mere moral correctness — it means justice and a life fully aligned with the will and character of God. The grammar is also no accident: the verbs <em>peinōntes</em> and <em>dipsōntes</em> (πεινῶντες καὶ διψῶντες) are active participles, marking a continuous, urgent craving — not a passing hunger easily ignored, but a constant longing, like someone lost in the desert who genuinely needs water to survive. This saying rejects moral complacency — insisting that justice is not an abstract ideal but a need as urgent as physical hunger and thirst, with the promise that they will be <em>chortasthēsontai</em> (χορτασθήσονται) — filled to complete satisfaction. Moral philosophers call this relentless pursuit of justice "moral courage": the willingness to act rightly despite personal risk, as studied by Rushworth Kidder. <strong>Its actual philosophical value</strong> is visible in those who risk career and safety to expose the truth — from whistleblowers to civil-rights activists — and it doubles as a critique of "moral licensing," the tendency to feel one good deed earns a pass from demanding more of oneself.</p>
+
+  <h3 class="lang-id">5 · Murah Hati — Memutus Rantai Pembalasan</h3>
+  <h3 class="lang-en">5 · The Merciful — Breaking the Chain of Retribution</h3>
+  <p class="lang-id">Kata Yunani <em>eleēmones</em> (ἐλεήμονες, dari <em>eleēmōn</em>) berakar pada konsep Ibrani <em>chesed</em> — bukan sekadar rasa kasihan yang pasif di dalam hati, melainkan kasih setia yang bertindak nyata. Belas kasihan di sini adalah kemampuan masuk ke dalam penderitaan orang lain dan benar-benar melakukan sesuatu untuk meringankannya — keputusan aktif memutus siklus balas dendam yang menjadi mesin kekerasan sepanjang sejarah manusia, sejalan dengan mekanisme kambing hitam yang dibongkar Girard. Mereka yang <em>eleēmōn</em> bertindak demikian karena sadar telah lebih dulu menerima kemurahan yang sama dari Allah. Riset primatolog Frans de Waal tentang empati pada kera besar menunjukkan bahwa kapasitas berbelas kasih memiliki akar biologis yang dalam, bukan sekadar konstruksi budaya. <strong>Nilai filosofis aktualnya</strong> hidup dalam gerakan keadilan restoratif (restorative justice), yang mengutamakan pemulihan hubungan pelaku-korban ketimbang sekadar hukuman balas dendam yang menjadi default banyak sistem peradilan modern.</p>
+  <p class="lang-en">The Greek word <em>eleēmones</em> (ἐλεήμονες, from <em>eleēmōn</em>) is rooted in the Hebrew concept of <em>chesed</em> — not passive pity felt in the heart, but loving-kindness that acts. Mercy here is the ability to enter another's suffering and actually do something to relieve it — an active decision to break the cycle of retaliation that has fueled violence throughout human history, aligned with the scapegoat mechanism Girard exposed. Those who are <em>eleēmōn</em> act this way because they know they first received the same mercy from God. Primatologist Frans de Waal's research on empathy in great apes shows this capacity has deep biological roots, not merely cultural construction. <strong>Its actual philosophical value</strong> lives on in the restorative justice movement, which prioritizes repairing the relationship between offender and victim over the retributive punishment that remains the default in so many modern justice systems.</p>
+
+  <h3 class="lang-id">6 · Suci Hatinya — Keselarasan Diri</h3>
+  <h3 class="lang-en">6 · The Pure in Heart — Inner Congruence</h3>
+  <p class="lang-id">Kata Yunani <em>katharoi</em> (καθαροὶ, dari <em>katharos</em>) berarti murni, bersih dari campuran — istilah yang sama dipakai untuk logam yang telah dimurnikan dari terak, atau air tanpa kotoran sedikit pun. Kesucian hati di sini bukan soal ritual luar, seperti tradisi keagamaan pada zaman itu, melainkan <em>singleness of heart</em> — hati yang tulus dan tidak terbagi, keselarasan penuh antara persona yang ditampilkan ke dunia dan siapa diri kita sebenarnya di balik pintu tertutup, tanpa kepalsuan, hipokrisi, atau niat tersembunyi. Ini penyatuan yang oleh psikolog humanistik Carl Rogers disebut <em>kongruensi</em>, yang dalam penelitiannya terbukti menjadi salah satu prasyarat kesehatan mental yang mendalam. <strong>Nilai filosofis aktualnya</strong> terasa tajam di zaman identitas yang dikurasi habis-habisan di media sosial — sabda ini adalah tantangan langsung terhadap kehidupan performatif, mengingatkan bahwa jarak antara wajah publik dan batin yang sesungguhnya adalah sumber keretakan psikologis yang diam-diam menggerogoti.</p>
+  <p class="lang-en">The Greek word <em>katharoi</em> (καθαροὶ, from <em>katharos</em>) means pure, unmixed — the same term used for metal refined of its dross, or water without a trace of contamination. Purity of heart here is not about outward ritual, as in the religious tradition of the time, but <em>singleness of heart</em> — a heart sincere and undivided, full alignment between the persona shown to the world and who we actually are behind closed doors, without falseness, hypocrisy, or hidden motive. This is the unity humanistic psychologist Carl Rogers called <em>congruence</em>, which his research found to be a precondition for deep mental health. <strong>Its actual philosophical value</strong> feels sharp in an age of heavily curated social-media identity — this saying directly challenges performative living, a reminder that the gap between public face and inner self is a quietly corrosive source of psychological fracture.</p>
+
+  <h3 class="lang-id">7 · Membawa Damai — Damai yang Aktif</h3>
+  <h3 class="lang-en">7 · The Peacemakers — Peace as Active Work</h3>
+  <p class="lang-id">Kata Yunani <em>eirēnopoioi</em> (εἰρηνοποιοί) adalah gabungan dua kata: <em>eirēnē</em> (εἰρήνη, damai/syalom) dan <em>poieō</em> (ποιέω, membuat atau menciptakan). Teks ini secara sengaja tidak mengatakan "pencinta damai" (peace-lovers, yang bisa saja pasif), melainkan "pembuat damai" — orang yang secara aktif <em>menciptakan</em> damai lewat kerja nyata mendamaikan manusia dengan Allah dan mendamaikan sesama yang berselisih. Membawa damai adalah kata kerja, bukan sifat pasif — menuntut keterlibatan aktif merajut rekonsiliasi, bukan sekadar menghindari konflik. Martin Luther King Jr., dalam <em>Surat dari Penjara Birmingham</em>, membedakan "damai negatif" — ketiadaan sementara ketegangan yang mempertahankan status quo tak adil — dari "damai positif": hadirnya keadilan sesungguhnya, sebuah pembedaan yang ia gali langsung dari tradisi etis yang sama ini. <strong>Nilai filosofis aktualnya</strong> penting dalam setiap perdebatan rekonsiliasi pascakonflik: kedamaian sejati menuntut keberanian menghadapi ketidakadilan yang mendasarinya, bukan sekadar membungkamnya.</p>
+  <p class="lang-en">The Greek word <em>eirēnopoioi</em> (εἰρηνοποιοί) is a compound of two words: <em>eirēnē</em> (εἰρήνη, peace/shalom) and <em>poieō</em> (ποιέω, to make or create). The text deliberately does not say "peace-lovers" (who could remain passive), but "peace-makers" — those who actively <em>create</em> peace through the real work of reconciling people to God and reconciling those at odds with one another. Peacemaking is a verb, not a passive trait — it demands active work weaving reconciliation, not merely avoiding conflict. Martin Luther King Jr., in his <em>Letter from Birmingham Jail</em>, distinguished "negative peace" — the temporary absence of tension that preserves an unjust status quo — from "positive peace": the presence of genuine justice, a distinction he drew directly from this same ethical tradition. <strong>Its actual philosophical value</strong> matters in every post-conflict reconciliation debate: real peace demands the courage to confront underlying injustice, not simply silence it.</p>
+
+  <h3 class="lang-id">8 · Dianiaya karena Kebenaran — Ongkos Integritas</h3>
+  <h3 class="lang-en">8 · Persecuted for Righteousness — The Cost of Integrity</h3>
+  <p class="lang-id">Kata kerja <em>diōkō</em> (διώκω) berarti mengejar sesuatu secara agresif — dan bentuk tata bahasa yang dipakai di sini, <em>dediōgmenoi</em> (δεδιωγμένοι), adalah bentuk pasif sempurna (perfect passive): secara harfiah "mereka yang telah dan terus-menerus dikejar/dianiaya," bukan peristiwa sesaat yang lewat begitu saja, melainkan kondisi berkelanjutan. Sabda penutup ini pengakuan jujur bahwa memegang teguh kebenaran akan berbiaya sosial yang terus-menerus — pengucilan, kehilangan status, bahkan bahaya nyata — dan penganiayaan itu datang bukan karena kesalahan moral atau kecerobohan pribadi, melainkan justru karena mempertahankan kebenaran Allah di tengah dunia yang membencinya. Václav Havel, dramawan yang kelak menjadi presiden Cekoslowakia setelah dipenjara rezim totaliter, menyebut sikap ini "hidup dalam kebenaran" (living in truth): penolakan berpartisipasi dalam kebohongan kolektif meski harganya mahal. <strong>Nilai filosofis aktualnya</strong> diperkuat riset psikologi sosial tentang pengucilan (ostracism), seperti karya Kipling Williams, yang menunjukkan betapa berat secara neurologis biaya penolakan sosial bagi manusia — menjadikan sabda ini bukan janji kosong, melainkan pengakuan realistis atas beratnya harga yang ditanggung siapa pun yang menolak tunduk pada kebohongan yang nyaman.</p>
+  <p class="lang-en">The verb <em>diōkō</em> (διώκω) means to pursue aggressively — and the grammatical form used here, <em>dediōgmenoi</em> (δεδιωγμένοι), is the perfect passive: literally "those who have been and continue to be pursued/persecuted," not a single passing event but an ongoing condition. This closing saying is an honest admission that holding fast to truth carries an ongoing social cost — exclusion, loss of status, even real danger — and that persecution comes not from moral failure or personal carelessness, but precisely from upholding God's truth in a world that hates it. Václav Havel, the playwright who later became president of Czechoslovakia after imprisonment under a totalitarian regime, called this stance "living in truth": refusing to participate in collective lies no matter the price. <strong>Its actual philosophical value</strong> is reinforced by social psychology research on ostracism, such as Kipling Williams's work, showing how neurologically heavy the cost of social rejection is for humans — making this saying not an empty promise but a realistic acknowledgment of the price anyone pays for refusing a comfortable lie.</p>
+
+  <hr class="divider">
+  <p class="lang-id"><strong>Rangkuman struktur teks:</strong> dibaca berurutan, kedelapan sabda ini bukan daftar acak, melainkan satu lingkaran spiritual yang membangun satu sama lain. Ia diawali dari kesadaran akan kebangkrutan rohani (<em>ptōchos</em>), mendorong pertobatan lewat dukacita (<em>pentheō</em>), menghasilkan kelembutan dan kerendahan hati (<em>praus</em>), membangkitkan keharusan mengejar kebenaran Allah (<em>dikaiosynē</em>), lalu diwujudkan dalam tindakan nyata — kemurahan hati (<em>eleēmōn</em>), kemurnian hati (<em>katharos</em>), dan penciptaan damai (<em>eirēnopoios</em>) — yang pada akhirnya, karena dijalani secara konsisten di dunia yang membenci kebenaran, memicu penolakan dan penganiayaan (<em>diōkō</em>). Lingkaran ini tidak berhenti di titik terakhir; ia kembali menuntut kerendahan hati yang sama yang membukanya.</p>
+  <p class="lang-en"><strong>Structural summary:</strong> read in sequence, these eight sayings are not a random list but a single spiritual circle that builds on itself. It begins with awareness of spiritual bankruptcy (<em>ptōchos</em>), drives repentance through mourning (<em>pentheō</em>), produces gentleness and humility (<em>praus</em>), awakens an urgent hunger for God's righteousness (<em>dikaiosynē</em>), and is then embodied in concrete action — mercy (<em>eleēmōn</em>), purity of heart (<em>katharos</em>), and the active making of peace (<em>eirēnopoios</em>) — which, lived consistently in a world that hates the truth, ultimately provokes rejection and persecution (<em>diōkō</em>). The circle does not end there; it loops back, demanding the same humility that opened it.</p>
+
+  <p class="lang-id">Dibaca satu demi satu seperti ini, Carl Jung akan menyebut kedelapan sabda bukan sebagai daftar kebajikan terpisah, melainkan satu peta bertahap dari kehancuran ego menuju keutuhan jiwa — dari kesadaran akan kekosongan diri, melalui dukacita dan kelaparan akan makna, sampai pada kapasitas mendamaikan dan menanggung akibat karena berpegang pada kebenaran. Seseorang yang telah berdamai dengan kegelapannya sendiri (Bayangan, dalam istilah Jung) tidak lagi butuh mengorbankan orang lain untuk merasa benar.</p>
+  <p class="lang-en">Read one by one like this, Carl Jung would call the eight sayings not a list of separate virtues but a single, staged map from the collapse of ego toward wholeness of soul — from awareness of one's own emptiness, through grief and hunger for meaning, to the capacity to reconcile and bear the cost of holding to truth. Someone who has made peace with their own darkness (the Shadow, in Jung's term) no longer needs to sacrifice others to feel righteous.</p>
+
+  <div class="tension">
+    <span class="aside-label lang-id">TEGANGAN YANG DIBIARKAN TERBUKA</span>
+    <span class="aside-label lang-en">A TENSION LEFT OPEN</span>
+    <p class="lang-id" style="margin:0;">Kritik Nietzsche tidak pernah benar-benar terbantahkan, dan tidak seharusnya buru-buru dijawab. Ada perbedaan nyata antara martabat yang ditemukan dalam penderitaan yang dipilih secara sadar, dan romantisasi penderitaan yang justru melanggengkan ketidakadilan. Pembaca yang jujur akan membawa pertanyaan ini terus, bukan menutupnya.</p>
+    <p class="lang-en" style="margin:0;">Nietzsche's critique has never truly been refuted, and should not be answered too quickly. There is a real difference between dignity found in suffering consciously chosen, and a romanticizing of suffering that ends up perpetuating injustice. The honest reader carries this question forward rather than closing it.</p>
+  </div>
+</section>
+
+<section class="chapter reveal" id="hukum">
+  <div class="chapter-num mono lang-id">BAB EMPAT</div>
+  <div class="chapter-num mono lang-en">CHAPTER FOUR</div>
+  <h2 class="lang-id">Dari Hukum ke Nurani</h2>
+  <h2 class="lang-en">From Law to Conscience</h2>
+  <span class="kicker lang-id">Ketika kepatuhan berhenti menjadi cukup</span>
+  <span class="kicker lang-en">When obedience stops being enough</span>
+
+  <p class="lead lang-id">Serangkaian antitesis dalam Khotbah di Bukit — "kamu telah mendengar... tetapi aku berkata kepadamu" — adalah salah satu gerakan filosofis paling berani dalam literatur kuno. Guru ini tidak membatalkan hukum; Ia memindahkan medan pertempurannya. Larangan membunuh diperluas menjadi larangan menyimpan kebencian di hati; larangan berzina diperluas menjadi larangan memandang dengan hasrat menguasai. Yang diadili bukan lagi tindakan yang tampak, melainkan niat yang tersembunyi.</p>
+  <p class="lang-id">Immanuel Kant, delapan belas abad kemudian, akan merumuskan sesuatu yang secara struktural mirip dalam <em>imperatif kategoris</em>-nya: tindakan bermoral bukan karena konsekuensinya menguntungkan, atau karena hukum eksternal memaksanya, melainkan karena kehendak itu sendiri selaras dengan hukum universal yang kita tetapkan bagi diri sendiri. Ini adalah pergeseran dari heteronomi — kepatuhan pada otoritas di luar diri karena takut hukuman atau mengejar pahala — menuju otonomi, di mana nurani menjadi hakim tertinggi. Bedanya, dan ini penting: Kant sampai pada otonomi lewat rasio murni yang dingin, sedangkan pergeseran dalam Khotbah di Bukit sampai ke sana lewat kasih yang menuntut lebih dari sekadar rasio.</p>
+
+  <p class="lead lang-en">The series of antitheses in the Sermon on the Mount — "you have heard it said... but I tell you" — is one of the boldest philosophical moves in ancient literature. The Teacher does not abolish the law; He relocates its battlefield. The prohibition against murder expands into a prohibition against harboring hatred; the prohibition against adultery expands into a prohibition against looking with a will to possess. What is judged is no longer the visible act but the hidden intention.</p>
+  <p class="lang-en">Immanuel Kant, eighteen centuries later, would formulate something structurally similar in his <em>categorical imperative</em>: an action is moral not because its consequences are advantageous, nor because an external law forces it, but because the will itself aligns with a universal law we set for ourselves. This is a shift from heteronomy — obeying an outside authority out of fear of punishment or pursuit of reward — toward autonomy, where conscience becomes the highest judge. The difference matters: Kant arrives at autonomy through cold pure reason, while the shift in the Sermon on the Mount arrives there through a love that demands more than reason alone.</p>
+
+  <p class="lang-id">Psikoanalisis menambahkan lapisan penting di sini. Superego, dalam kerangka Freudian, adalah suara internal hasil internalisasi otoritas eksternal — orang tua, masyarakat, agama yang diajarkan secara dogmatis — dan sering kali beroperasi lewat rasa bersalah dan hukuman diri, bukan kebebasan. Nurani sejati, sebagaimana dibedakan oleh banyak psikolog eksistensial termasuk Rollo May, justru lahir dari keberanian menghadapi kebebasan dan tanggung jawab itu sendiri, bukan dari ketakutan akan hukuman batin. Pergeseran dari hukum eksternal ke motif internal, jika salah dibaca, bisa berubah menjadi mesin rasa bersalah yang lebih kejam daripada hukum lama — sebuah risiko yang layak diakui secara jujur, bukan ditutup-tutupi.</p>
+  <p class="lang-en">Psychoanalysis adds an important layer here. The superego, in the Freudian framework, is the internal voice formed by internalizing external authority — parents, society, dogmatically taught religion — and often operates through guilt and self-punishment rather than freedom. True conscience, as distinguished by many existential psychologists including Rollo May, is born instead from the courage to face freedom and responsibility themselves, not from fear of internal punishment. The shift from external law to internal motive, if misread, can become a guilt machine crueler than the old law — a risk worth naming honestly rather than glossing over.</p>
+
+  <hr class="divider">
+  <h3 class="lang-id h3-compact">Cintailah Musuhmu — Hukum Cinta Kasih yang Istimewa</h3>
+  <h3 class="lang-en h3-compact">Love Your Enemies — An Extraordinary Law of Love</h3>
+
+  <blockquote class="lang-id">"Kamu telah mendengar firman: Kasihilah sesamamu manusia dan bencilah musuhmu. Tetapi Aku berkata kepadamu: Kasihilah musuhmu dan berdoalah bagi mereka yang menganiaya kamu... Karena jikalau kamu mengasihi orang yang mengasihi kamu, apakah upahmu? Bukankah pemungut cukai juga berbuat demikian?"</blockquote>
+  <blockquote class="lang-en">"You have heard that it was said, 'Love your neighbor and hate your enemy.' But I tell you: love your enemies and pray for those who persecute you... If you love those who love you, what reward will you get? Are not even the tax collectors doing that?"</blockquote>
+
+  <p class="lang-id">Sulit melebih-lebihkan betapa brutalnya tuntutan ini bagi audiens aslinya. Ini bukan diucapkan kepada bangsa yang aman dan berdaulat, melainkan kepada rakyat Yahudi yang hidup di bawah pendudukan militer Romawi — dengan pajak yang mencekik, prajurit bersenjata di jalan-jalan mereka sendiri, dan ingatan kolektif tentang pemberontakan yang ditumpas secara berdarah. "Musuh" di sini bukan abstraksi filosofis; ia punya wajah, seragam, dan tombak. Menyuruh orang-orang semacam ini untuk secara aktif mengasihi — bukan sekadar menoleransi — penindas mereka sendiri adalah salah satu tuntutan etis paling ekstrem yang pernah dicatat dalam sejarah pemikiran manusia. Kata kerja yang dipakai, <em>agapate</em> (ἀγαπᾶτε, dari akar <em>agapē</em>), bukan kebetulan: bahasa Yunani punya setidaknya tiga kata berbeda untuk "cinta" — <em>erōs</em> untuk hasrat romantis, <em>philia</em> untuk kasih sayang persahabatan, dan <em>agapē</em> untuk cinta sebagai keputusan kehendak, bukan perasaan spontan. Perintah ini secara sengaja tidak menuntut kita <em>merasa</em> hangat pada musuh — sesuatu yang mustahil dipaksakan — melainkan menuntut kita <em>memilih</em> bertindak demi kebaikan mereka, sebuah tuntutan kehendak yang jauh lebih berat justru karena tidak bergantung pada emosi yang bisa reda atau menguat begitu saja.</p>
+  <p class="lang-id">Di sinilah letak jawaban paling telak terhadap kritik Nietzsche yang sudah kita bawa sejak Bab Tiga. Nietzsche menuduh moralitas semacam ini sebagai <em>moralitas budak</em> — pelarian orang lemah yang tidak sanggup membalas. Namun membalas kekerasan dengan kekerasan justru jalan yang jauh lebih mudah, lebih naluriah, dan lebih "kuat" secara naif: itulah yang dilakukan hampir setiap manusia dan hampir setiap peradaban sepanjang sejarah tanpa perlu usaha sadar apa pun. Yang benar-benar sulit, yang menuntut kekuatan kehendak jauh melampaui rata-rata, adalah menahan naluri balas dendam yang begitu wajar dan memilih kebaikan bagi orang yang justru berhak kau benci. René Girard akan menyebut ini sebagai satu-satunya jalan keluar sungguhan dari mesin kekerasan mimetik yang telah menjerat peradaban manusia sejak awal: bukan menekan hasrat membalas lewat represi, melainkan menggantinya secara sadar dengan hasrat yang berlawanan arah sepenuhnya.</p>
+
+  <p class="lead lang-en">It is hard to overstate how brutal this demand was for its original audience. This was not spoken to a safe, sovereign nation, but to a Jewish population living under Roman military occupation — under crushing taxation, armed soldiers in their own streets, and the collective memory of revolts drowned in blood. "Enemy" here was no philosophical abstraction; it had a face, a uniform, a spear. Telling people in that position to actively love — not merely tolerate — their own oppressors is one of the most extreme ethical demands ever recorded in the history of human thought. The verb used, <em>agapate</em> (ἀγαπᾶτε, from the root <em>agapē</em>), is no accident: Greek has at least three distinct words for "love" — <em>erōs</em> for romantic desire, <em>philia</em> for the affection of friendship, and <em>agapē</em> for love as an act of will rather than a spontaneous feeling. This command deliberately does not demand that we <em>feel</em> warmth toward an enemy — something impossible to force — but that we <em>choose</em> to act for their good, a demand of will that is harder precisely because it does not depend on emotion that can rise or fade on its own.</p>
+  <p class="lang-en">Here lies the sharpest possible answer to Nietzsche's critique, carried since Chapter Three. Nietzsche accused this kind of morality of being <em>slave morality</em> — the escape route of the weak, unable to strike back. But striking back is, in fact, the far easier, more instinctive, and more naively "strong" path: it is what nearly every human and nearly every civilization has done throughout history without any conscious effort at all. What is genuinely difficult, what demands a strength of will far above average, is restraining a perfectly natural urge for revenge and choosing good for someone who has, by any ordinary reckoning, earned your hatred. René Girard would call this the only real way out of the machine of mimetic violence that has trapped human civilization from the start: not suppressing the desire to retaliate through repression, but consciously replacing it with a desire pointed in the exact opposite direction.</p>
+
+  <div class="lexicon">
+    <span class="aside-label lang-id">STUDI KATA</span>
+    <span class="aside-label lang-en">WORD STUDY</span>
+    <p style="margin:8px 0 0;"><span class="greek">τὴν δεξιὰν σιαγόνα</span><span class="translit">tēn dexian siagona</span></p>
+    <span class="gloss lang-id">"...siapa yang menampar <em>pipi kananmu</em>..." — detail sepele ini ternyata sangat spesifik secara sosial. Sarjana Alkitab Walter Wink menunjukkan bahwa dalam budaya Timur Tengah kuno yang mayoritas menggunakan tangan kanan, satu-satunya cara memukul pipi kanan seseorang secara wajar adalah dengan <em>punggung tangan</em> — sebuah tamparan khas yang di masa itu bukan sekadar kekerasan fisik, melainkan penghinaan hierarkis yang sengaja dilakukan tuan kepada budak, penjajah kepada yang dijajah, atasan kepada bawahan, bukan pukulan antar setara. Dengan sengaja menyodorkan pipi kiri setelahnya, korban memaksa si penyerang untuk salah satu dari dua pilihan yang sama-sama tidak nyaman baginya: memukul dengan telapak tangan terbuka seperti kepada sesama yang setara (yang secara sosial berarti mengakui kesetaraan itu), atau berhenti sama sekali. Ini bukan kepasrahan; ini adalah perlawanan tanpa kekerasan yang menuntut martabat lewat cara yang sangat cerdik — sejalan persis dengan makna asli kata <em>praus</em> (lemah lembut) yang sudah kita bahas: kekuatan besar yang sepenuhnya terkendali, bukan ketiadaan kekuatan.</span>
+    <span class="gloss lang-en">"...whoever slaps you on the <em>right cheek</em>..." — this seemingly trivial detail turns out to be highly specific socially. Biblical scholar Walter Wink showed that in a predominantly right-handed ancient Near Eastern culture, the only natural way to strike someone's right cheek is with the <em>back of the hand</em> — a distinctive strike that at the time was not mere physical violence but a deliberate hierarchical insult, the kind a master gave a slave, an occupier gave the occupied, a superior gave an inferior — never a blow between equals. By deliberately offering the left cheek afterward, the victim forces the attacker into one of two equally uncomfortable choices: strike with an open palm as one would an equal (which socially concedes that equality), or stop entirely. This is not resignation; it is nonviolent resistance that demands dignity through a remarkably shrewd move — aligning exactly with the true meaning of <em>praus</em> (meek) already discussed: immense strength held fully under control, not the absence of strength.</span>
+  </div>
+
+  <p class="lang-id"><strong>Leo Tolstoy</strong> membaca bagian ini sebagai fondasi pasifisme radikalnya — perintah untuk tidak melawan kejahatan dengan kekerasan ia baca secara harfiah dan politis, bukan sekadar metafora spiritual. Tulisan Tolstoy tentang ini kelak memengaruhi langsung Mahatma Gandhi dalam merumuskan <em>satyagraha</em>, perlawanan tanpa kekerasan yang kemudian diwariskan pula ke gerakan hak-hak sipil Martin Luther King Jr. Ini adalah salah satu contoh paling nyata bagaimana satu ajaran etis melintasi batas agama, benua, dan abad — dari Galilea, ke Rusia, ke India, ke Amerika — tanpa harus melalui satu institusi keagamaan pun. Dan justru karena hukum cinta kasih ini begitu berat, begitu bertentangan dengan naluri paling dasar manusia untuk membalas dan mengelompokkan dunia menjadi kawan-lawan, ia tetap menjadi salah satu tuntutan etis paling revolusioner yang pernah diajarkan — bukan karena mudah dihidupi, melainkan justru karena nyaris mustahil.</p>
+  <p class="lang-en"><strong>Leo Tolstoy</strong> read this passage as the foundation of his radical pacifism — reading the command not to resist evil with violence literally and politically, not merely as spiritual metaphor. Tolstoy's writing on this would go on to directly influence Mahatma Gandhi in formulating <em>satyagraha</em>, nonviolent resistance, later inherited by Martin Luther King Jr.'s civil rights movement. It is one of the clearest examples of how a single ethical teaching can cross religion, continent, and century — from Galilee, to Russia, to India, to America — without passing through a single religious institution. And precisely because this law of love is so heavy, so contrary to the most basic human instinct to retaliate and to sort the world into friend and foe, it remains one of the most revolutionary ethical demands ever taught — not because it is easy to live, but because it is nearly impossible.</p>
+</section>
+
+<section class="chapter reveal" id="garam">
+  <div class="chapter-num mono lang-id">BAB LIMA</div>
+  <div class="chapter-num mono lang-en">CHAPTER FIVE</div>
+  <h2 class="lang-id">Garam, Terang, dan Kesalehan Tersembunyi</h2>
+  <h2 class="lang-en">Salt, Light, and Hidden Piety</h2>
+  <span class="kicker lang-id">Menjadi nyata di dunia tanpa menjadi tontonan</span>
+  <span class="kicker lang-en">Being real in the world without becoming a spectacle</span>
+
+  <p class="lead lang-id">"Kamu adalah garam dunia... kamu adalah terang dunia" — dua metafora yang dipilih dengan sangat cermat, dan yang maknanya baru terasa penuh ketika kita kembali ke bahasa aslinya. Kata Yunani yang diterjemahkan "garam", <em>halas</em> (ἅλας), merujuk pada zat yang di dunia kuno bukan sekadar bumbu, melainkan pengawet vital yang mencegah pembusukan dan bahkan dipakai sebagai alat tukar — akar dari kata "salary" (gaji) dalam bahasa Latin, <em>salarium</em>, berasal dari sini. Menjadi "garam dunia" bukan panggilan pasif untuk sekadar ada, melainkan peran aktif: menahan pembusukan moral dari dalam, bukan menonton dari luar.</p>
+  <p class="lang-id">Kata "terang", <em>phōs</em> (φῶς), sengaja dikontraskan dengan kata <em>kryptō</em> (κρύπτω, menyembunyikan) beberapa kalimat kemudian: "kota yang terletak di atas gunung tidak mungkin tersembunyi." Namun di sinilah letak paradoks yang tampak sepintas bertentangan dengan ajaran berikutnya — karena beberapa ayat kemudian, Guru yang sama justru memperingatkan agar amal, doa, dan puasa dilakukan diam-diam, jangan sampai diketahui tangan kiri apa yang dilakukan tangan kanan. Paradoks ini terpecahkan begitu kita memahami perbedaan motifnya: terang yang dimaksud bukan cahaya yang sengaja disorotkan untuk dipuji, melainkan cahaya yang mustahil disembunyikan karena ia adalah produk sampingan alami dari transformasi batin yang otentik — persis seperti kongruensi yang dibicarakan Carl Rogers pada Sabda "Suci Hatinya": seseorang yang telah selaras antara batin dan lakunya tidak perlu berusaha bersinar; ia bersinar begitu saja.</p>
+
+  <p class="lead lang-en">"You are the salt of the earth... you are the light of the world" — two carefully chosen metaphors whose meaning lands fully only when we return to the original language. The Greek word translated "salt," <em>halas</em> (ἅλας), referred in the ancient world not merely to a seasoning but to a vital preservative that prevented decay and even served as currency — the root of the Latin <em>salarium</em>, from which the English word "salary" descends. Being "salt of the earth" is not a passive call to simply exist, but an active role: holding back moral decay from within, not watching it from outside.</p>
+  <p class="lang-en">The word "light," <em>phōs</em> (φῶς), is deliberately contrasted a few sentences later with <em>kryptō</em> (κρύπτω, to hide): "a city set on a hill cannot be hidden." Yet here lies a paradox that seems to contradict what follows — because a few verses later, the same Teacher warns that almsgiving, prayer, and fasting should be done so quietly that the left hand does not know what the right hand is doing. The paradox dissolves once we see the difference in motive: the light meant here is not a spotlight deliberately aimed at oneself for praise, but light that is simply impossible to hide because it is the natural byproduct of authentic inner transformation — precisely the congruence Carl Rogers described under "Pure in Heart": someone whose inner life and outward conduct are aligned does not need to try to shine; they simply do.</p>
+
+  <div class="lexicon">
+    <span class="aside-label lang-id">STUDI KATA</span>
+    <span class="aside-label lang-en">WORD STUDY</span>
+    <p style="margin:8px 0 0;"><span class="greek">ὑποκριτής</span><span class="translit">hypokritēs</span></p>
+    <span class="gloss lang-id">Kata yang diterjemahkan "orang munafik" dalam ajaran tentang sedekah, doa, dan puasa (Matius 6:2, 5, 16) aslinya adalah istilah teater Yunani untuk "aktor panggung" — seseorang yang memakai topeng dan memerankan tokoh lain. Pilihan kata ini tajam secara sengaja: orang yang beramal demi dilihat orang sedang <em>memerankan</em> kesalehan, bukan menghidupinya. Lebih tajam lagi, kalimat "sesungguhnya mereka sudah mendapat upahnya" memakai kata <em>apechousin</em> (ἀπέχουσιν) — istilah akuntansi dagang yang berarti "lunas, kuitansi telah diberikan." Pujian manusia yang mereka kejar sudah dibayar penuh saat itu juga; tidak ada lagi yang tersisa untuk ditagih kemudian.</span>
+    <span class="gloss lang-en">The word translated "hypocrite" in the teaching on almsgiving, prayer, and fasting (Matthew 6:2, 5, 16) was originally Greek theater vocabulary for a "stage actor" — someone wearing a mask, playing a role. The word choice is deliberately sharp: a person who gives to be seen is <em>performing</em> righteousness rather than living it. Sharper still, the phrase "they have received their reward in full" uses <em>apechousin</em> (ἀπέχουσιν) — a commercial accounting term meaning "paid in full, receipt closed." The human applause they were chasing has already been paid out on the spot; nothing remains to be collected later.</span>
+  </div>
+
+  <blockquote class="lang-id">
+    "Bapa kami yang ada di sorga, dimuliakanlah nama-Mu; datanglah kerajaan-Mu; jadilah kehendak-Mu di atas bumi seperti di dalam sorga. Berilah kami rezeki pada hari ini, dan ampunilah kesalahan kami, seperti kami pun mengampuni yang bersalah kepada kami. Dan janganlah masukkan kami ke dalam percobaan, tetapi bebaskanlah kami dari yang jahat."
+    <span class="mono" style="display:block;margin-top:10px;font-size:0.75rem;font-style:normal;color:var(--ink-soft);">— Doa Bapa Kami, versi liturgi umum Indonesia (bdk. Matius 6:9–13; Lukas 11:2–4)</span>
+  </blockquote>
+  <blockquote class="lang-en">
+    "Our Father in heaven, hallowed be your name; your kingdom come; your will be done on earth as it is in heaven. Give us this day our daily bread, and forgive us our trespasses, as we forgive those who trespass against us. And lead us not into temptation, but deliver us from evil."
+    <span class="mono" style="display:block;margin-top:10px;font-size:0.75rem;font-style:normal;color:var(--ink-soft);">— The Lord's Prayer, traditional liturgical form (cf. Matthew 6:9–13; Luke 11:2–4)</span>
+  </blockquote>
+
+  <p class="lang-id">Di tengah instruksi tentang doa, Guru ini mengajarkan doa model — "Bapa Kami" — yang di dalamnya terselip satu kata Yunani paling misterius dalam seluruh Perjanjian Baru: <em>epiousios</em> (ἐπιούσιος), diterjemahkan "secukupnya" atau "harian" dalam permohonan "berilah kami pada hari ini makanan kami yang secukupnya." Kata ini begitu langka sehingga nyaris tidak ditemukan di naskah Yunani kuno mana pun di luar doa ini, dan para ahli bahasa masih memperdebatkan artinya secara harfiah — mungkin "untuk hari ini", mungkin "yang diperlukan untuk bertahan hidup", mungkin "untuk hari yang akan datang". Yang menarik, ketidakpastian filologis ini justru memperkuat, bukan melemahkan, pesan yang sudah kita jumpai di Bab Kedaulatan Saat Ini: bahkan doa model yang paling inti pun hanya meminta cukup untuk hari ini, tidak lebih.</p>
+  <p class="lang-en">In the middle of the teaching on prayer, this same Teacher gives a model prayer — the Lord's Prayer — containing one of the most mysterious Greek words in the entire New Testament: <em>epiousios</em> (ἐπιούσιος), translated "daily" in "give us this day our daily bread." The word is so rare that it is barely attested anywhere in ancient Greek literature outside this prayer, and linguists still debate its literal sense — perhaps "for today," perhaps "necessary for existence," perhaps "for the coming day." Interestingly, this philological uncertainty strengthens rather than weakens the message already encountered in the chapter on the Sovereignty of Now: even the most central model prayer asks only for enough for today, nothing more.</p>
+
+  <hr class="divider">
+  <p class="lang-id">Bagian ini ditutup dengan salah satu pernyataan paling tegas tentang pilihan hidup: "Tidak seorang pun dapat mengabdi kepada dua tuan... kamu tidak dapat mengabdi kepada Allah dan kepada Mamon." Kata "Mamon" (<em>mamōnas</em>, μαμωνᾶς) sebenarnya bukan kata Yunani asli, melainkan kata pinjaman dari bahasa Aram, <em>māmônā</em>, yang berarti kekayaan atau harta benda — namun di sini diperlakukan seolah nama diri, hampir seperti sosok ilahi tandingan. Kata kerja yang dipakai, <em>douleuein</em> (δουλεύειν), bukan sekadar "bekerja untuk", melainkan "diperbudak oleh" — akar katanya sama dengan <em>doulos</em>, budak. Ini bukan sekadar nasihat pengelolaan keuangan yang bijak; ini adalah gema langsung dari godaan ketiga di padang gurun — tawaran menguasai segala kerajaan dunia dengan tunduk pada sang penggoda. Mamon, dalam bacaan ini, adalah wajah harian dari godaan yang sama: bukan lagi tawaran satu kali di padang gurun yang sunyi, melainkan godaan yang terus berulang setiap hari dalam pilihan-pilihan kecil tentang uang, status, dan keamanan material.</p>
+  <p class="lang-en">This section closes with one of its most forceful statements about the shape of a life: "No one can serve two masters... you cannot serve God and Mammon." The word "Mammon" (<em>mamōnas</em>, μαμωνᾶς) is not actually Greek at all but an Aramaic loanword, <em>māmônā</em>, meaning wealth or property — yet here treated almost as a proper name, nearly a rival deity. The verb used, <em>douleuein</em> (δουλεύειν), means not merely "to work for" but "to be enslaved to" — sharing a root with <em>doulos</em>, slave. This is not simply wise financial advice; it is a direct echo of the third wilderness temptation — the offer of every kingdom of the world in exchange for submission to the tempter. Mammon, read this way, is the daily face of that same temptation: no longer a single offer in a silent wilderness, but one renewed every day in small choices about money, status, and material security.</p>
+</section>
+<section class="chapter reveal" id="waktu">
+  <div class="chapter-num mono lang-id">BAB ENAM</div>
+  <div class="chapter-num mono lang-en">CHAPTER SIX</div>
+  <h2 class="lang-id">Kedaulatan Saat Ini</h2>
+  <h2 class="lang-en">The Sovereignty of Now</h2>
+  <span class="kicker lang-id">Melepaskan cengkeraman pada masa depan</span>
+  <span class="kicker lang-en">Releasing the grip on the future</span>
+
+  <p class="lead lang-id">"Janganlah kamu khawatir akan hari esok, karena hari esok punya kekhawatirannya sendiri." Kalimat ini sering direduksi menjadi nasihat ringan untuk tidak terlalu banyak berpikir. Dibaca lebih dalam, ini adalah salah satu pernyataan filosofis paling tajam tentang hubungan manusia dengan waktu dan ilusi kendali. Kecemasan, dalam bacaan ini, lahir dari usaha manusia mengendalikan sesuatu yang secara mendasar tidak bisa dikendalikan: masa depan yang belum ada.</p>
+  <p class="lang-id">Para Stoik — Epictetus, Seneca, Marcus Aurelius — sampai pada kesimpulan struktural yang serupa lewat jalan yang berbeda: kegelisahan lahir dari mengerahkan energi pada hal-hal di luar kendali kita, bukan pada hal-hal yang benar-benar berada dalam kendali kita, yaitu penilaian dan respons batin kita sendiri. Dikotomi kendali Epictetus dan ajaran tentang burung-burung di udara yang tidak menabur maupun menuai, sama-sama mengarah pada satu titik: kebebasan psikologis dimulai ketika manusia berhenti mencoba menguasai apa yang tidak bisa dikuasainya.</p>
+
+  <p class="lead lang-en">"Do not worry about tomorrow, for tomorrow will worry about itself." This line is often flattened into casual advice against overthinking. Read more deeply, it is one of the sharpest philosophical statements about the human relationship with time and the illusion of control. Anxiety, in this reading, is born from the human effort to control something fundamentally uncontrollable: a future that does not yet exist.</p>
+  <p class="lang-en">The Stoics — Epictetus, Seneca, Marcus Aurelius — arrived at a structurally similar conclusion by a different route: distress comes from spending energy on things outside our control rather than the one thing genuinely within it — our own judgments and inner responses. Epictetus's dichotomy of control, and the teaching about birds in the sky that neither sow nor reap, both point to the same place: psychological freedom begins when a person stops trying to master what cannot be mastered.</p>
+
+  <p class="lang-id">Martin Heidegger memberi kosakata yang lebih berat untuk hal serupa lewat konsep <em>Sein-zum-Tode</em>, keberadaan-menuju-kematian: kesadaran otentik akan kefanaan justru membebaskan manusia dari kehidupan yang teralienasi dalam kesibukan sehari-hari (<em>das Man</em>, "orang banyak" yang anonim), dan mendorongnya untuk hidup penuh di masa kini yang konkret. Dalam tradisi Buddhis, ajaran tentang <em>anicca</em> — ketidakkekalan segala sesuatu — menuntun pada kesimpulan yang sejalan: penderitaan (dukkha) lahir dari kemelekatan pada sesuatu yang oleh sifatnya sendiri terus berubah, termasuk kemelekatan pada masa depan yang kita bayangkan. Tiga tradisi yang lahir di tempat dan zaman berbeda — Galilea, Athena-Roma, dan India kuno — bertemu pada satu titik yang sama: kebebasan batin adalah soal hubungan kita dengan waktu, bukan soal mengubah keadaan eksternal.</p>
+  <p class="lang-en">Martin Heidegger offered a heavier vocabulary for something similar with his concept of <em>Sein-zum-Tode</em>, being-toward-death: authentic awareness of mortality actually frees a person from the alienated life of everyday busyness (<em>das Man</em>, the anonymous "they"), pushing them toward living fully in the concrete present. In the Buddhist tradition, the teaching of <em>anicca</em> — the impermanence of all things — leads to a parallel conclusion: suffering (dukkha) arises from clinging to something that by its very nature keeps changing, including clinging to an imagined future. Three traditions born in different places and eras — Galilee, Athens-Rome, and ancient India — converge on the same point: inner freedom is a matter of our relationship with time, not a matter of changing external circumstances.</p>
+
+  <div class="aside">
+    <span class="aside-label lang-id">BUKAN PASRAH, TAPI HADIR</span>
+    <span class="aside-label lang-en">NOT RESIGNATION, BUT PRESENCE</span>
+    <p class="lang-id" style="margin:0;">Penting dibedakan: ajaran ini bukan seruan untuk berhenti merencanakan atau menjadi fatalistik. Baik Stoisisme, Buddhisme, maupun Khotbah di Bukit tetap mengakui pentingnya kerja dan tanggung jawab konkret hari ini — yang ditolak bukan perencanaan, melainkan kecemasan yang mencuri kehadiran kita di masa sekarang.</p>
+    <p class="lang-en" style="margin:0;">An important distinction: this is not a call to stop planning or to become fatalistic. Stoicism, Buddhism, and the Sermon on the Mount alike affirm the importance of concrete work and responsibility today — what is rejected is not planning, but the anxiety that steals our presence from the here and now.</p>
+  </div>
+</section>
+
+<section class="chapter reveal" id="pintu">
+  <div class="chapter-num mono lang-id">BAB TUJUH</div>
+  <div class="chapter-num mono lang-en">CHAPTER SEVEN</div>
+  <h2 class="lang-id">Menghakimi, Pintu Sempit, dan Fondasi yang Kokoh</h2>
+  <h2 class="lang-en">Judging, the Narrow Gate, and a Firm Foundation</h2>
+  <span class="kicker lang-id">Penutup khotbah: dari cara memandang sesama sampai cara membangun hidup</span>
+  <span class="kicker lang-en">The sermon's close: from how we see others to how we build a life</span>
+
+  <p class="lead lang-id">"Jangan kamu menghakimi, supaya kamu tidak dihakimi" membuka bagian penutup khotbah dengan salah satu gambar paling lucu sekaligus paling tajam dalam seluruh ajarannya: seseorang yang sibuk mengeluarkan <em>karphos</em> (κάρφος) — secuil serpihan atau sekam kecil — dari mata orang lain, sementara ada <em>dokos</em> (δοκός) — sebatang balok kayu besar penopang atap rumah — tersangkut di matanya sendiri. Kontras ukuran ini sengaja dibuat berlebihan sampai nyaris komikal, memaksa pendengar tertawa sekaligus tertohok. Kata kerja "menghakimi", <em>krinō</em> (κρίνω, akar dari kata "kritik" dan "kriteria"), bukan berarti dilarang berpikir kritis atau membedakan baik-buruk — melainkan larangan terhadap penghakiman yang menuntut standar lebih ketat pada orang lain daripada pada diri sendiri.</p>
+  <p class="lang-id">Menariknya, riset psikologi kontemporer memberi nama pada gejala persis yang digambarkan metafora balok-dan-selumbar ini: psikolog Emily Pronin menyebutnya <em>bias blind spot</em> — kecenderungan sistematis manusia untuk menyadari bias pada orang lain jauh lebih mudah daripada menyadari bias yang sama pada diri sendiri. Dua ribu tahun sebelum eksperimen psikologi modern ada, khotbah ini sudah menangkap pola yang sama lewat gambar yang jauh lebih hidup — sekaligus menyambungkan kembali ke Sabda pertama tentang kerendahan epistemik yang sudah kita bahas.</p>
+
+  <p class="lead lang-en">"Do not judge, so that you will not be judged" opens the sermon's closing section with one of its funniest yet sharpest images: someone busy removing a <em>karphos</em> (κάρφος) — a tiny splinter or speck of chaff — from another's eye, while a <em>dokos</em> (δοκός) — a massive roof-supporting beam — is lodged in their own. The disproportion is deliberately exaggerated to the point of near comedy, forcing the listener to laugh and wince at once. The verb "to judge," <em>krinō</em> (κρίνω, root of "critic" and "criterion"), does not forbid critical thinking or moral discernment — it forbids judgment that demands a stricter standard of others than of oneself.</p>
+  <p class="lang-en">Interestingly, contemporary psychology has given a name to exactly what this beam-and-splinter metaphor describes: psychologist Emily Pronin calls it the <em>bias blind spot</em> — the systematic human tendency to spot bias in others far more easily than the same bias in oneself. Two thousand years before modern psychological experiments existed, this sermon had already captured the same pattern in a far more vivid image — and in doing so loops back to the first Beatitude on epistemic humility already discussed.</p>
+
+  <hr class="divider">
+  <p class="lang-id"><strong>Aturan Emas</strong> — "segala sesuatu yang kamu kehendaki supaya orang perbuat kepadamu, perbuatlah demikian juga kepada mereka" — dirumuskan di sini dalam bentuk positif dan aktif, yang secara mengejutkan membedakannya dari rumusan serupa di tradisi lain. Konfusius, dalam <em>Analects</em> 15:24, merumuskan versi negatifnya: "jangan lakukan pada orang lain apa yang kamu sendiri tidak inginkan" — sebuah larangan menahan diri. Hillel Sang Tua, guru Yahudi yang sezaman, memberi jawaban nyaris identik ketika diminta merangkum seluruh Taurat sambil berdiri di atas satu kaki. Rumusan positif dalam khotbah ini menuntut lebih: bukan sekadar menahan diri dari kejahatan, melainkan secara aktif mengupayakan kebaikan bagi orang lain — pergeseran kecil dalam tata bahasa yang berimplikasi besar secara etis.</p>
+  <p class="lang-en">The <strong>Golden Rule</strong> — "in everything, do to others what you would have them do to you" — is framed here in positive, active form, which strikingly sets it apart from similar formulations elsewhere. Confucius, in <em>Analects</em> 15:24, gave the negative version: "do not impose on others what you yourself do not desire" — a restraint. Hillel the Elder, a contemporary Jewish sage, gave an almost identical answer when asked to summarize the entire Torah while standing on one foot. The positive formulation here demands more: not merely refraining from harm, but actively pursuing another's good — a small grammatical shift with large ethical implications.</p>
+
+  <div class="lexicon">
+    <span class="aside-label lang-id">STUDI KATA</span>
+    <span class="aside-label lang-en">WORD STUDY</span>
+    <p style="margin:8px 0 0;"><span class="greek">στενὴ πύλη</span><span class="translit">stenē pylē</span></p>
+    <span class="gloss lang-id">"Pintu yang sesak dan sempit" — <em>stenē</em> (στενή) berarti sempit, terjepit, atau susah dilalui, dikontraskan dengan <em>platys</em> dan <em>eurychōros</em> (εὐρύχωρος), "lebar dan lapang". Dibaca lewat lensa eksistensialis, pintu sempit adalah jalan pilihan otentik yang sulit dan sepi peminat, sementara jalan lebar adalah konformitas — hidup yang oleh Heidegger disebut tenggelam dalam <em>das Man</em>, "orang banyak" yang anonim, sebagaimana sudah disinggung pada Bab Kedaulatan Saat Ini.</span>
+    <span class="gloss lang-en">"The gate is narrow and the road is hard" — <em>stenē</em> (στενή) means narrow, constricted, difficult to pass through, contrasted with <em>platys</em> and <em>eurychōros</em> (εὐρύχωρος), "wide and spacious." Read through an existentialist lens, the narrow gate is the difficult, sparsely-chosen path of authentic choice, while the wide road is conformity — the life Heidegger called sinking into <em>das Man</em>, the anonymous "they," already touched on in the chapter on the Sovereignty of Now.</span>
+  </div>
+
+  <p class="lang-id">Khotbah ini kemudian memberi kriteria praktis untuk menilai guru dan nabi palsu: bukan lewat klaim otoritas atau penampilan mereka — "mereka datang kepadamu dengan menyamar seperti domba, tetapi sesungguhnya mereka adalah serigala buas" — melainkan lewat <em>karpos</em> (καρπός, buah): "setiap pohon yang baik menghasilkan buah yang baik... dari buahnyalah kamu akan mengenal mereka." Ini adalah epistemologi yang sangat pragmatis, jauh sebelum istilah itu diciptakan — sejalan dengan filsafat pragmatisme William James satu abad lalu, yang menilai kebenaran sebuah gagasan bukan dari kemegahan klaimnya, melainkan dari konsekuensi nyata yang dihasilkannya dalam kehidupan.</p>
+  <p class="lang-en">The sermon then gives a practical criterion for testing false teachers and prophets — not through their claims to authority or their appearance ("they come to you in sheep's clothing but inwardly are ravenous wolves") — but through <em>karpos</em> (καρπός, fruit): "every good tree bears good fruit... by their fruits you will know them." This is a strikingly pragmatic epistemology, centuries before the term was coined — aligned with William James's philosophy of pragmatism a century ago, which judged the truth of an idea not by the grandeur of its claims but by the real consequences it produced in a life.</p>
+
+  <blockquote class="lang-id">"Setiap orang yang mendengar perkataan-Ku ini dan melakukannya, ia sama dengan orang yang bijaksana, yang mendirikan rumahnya di atas batu (<em>petra</em>)." — bukan mendengar atau mengagumi, melainkan melakukan.</blockquote>
+  <blockquote class="lang-en">"Everyone who hears these words of mine and acts on them is like a wise man who built his house on rock (<em>petra</em>)" — not merely hearing or admiring, but doing.</blockquote>
+
+  <p class="lang-id">Khotbah di Bukit ditutup bukan dengan ringkasan doktrin, melainkan dengan sebuah perumpamaan arsitektural: rumah yang dibangun di atas <em>petra</em> (πέτρα, batu cadas yang kokoh) bertahan menghadapi badai, sementara rumah di atas <em>ammos</em> (ἄμμος, pasir lepas) runtuh total begitu hujan turun dan banjir naik — dan yang membedakan keduanya bukan seberapa indah rumah itu terlihat, melainkan fondasi yang tak terlihat di bawahnya. Søren Kierkegaard akan mengenali gerakan ini persis: perbedaan antara kekaguman estetis terhadap sebuah gagasan dan lompatan subjektif untuk benar-benar menghidupinya. Filsafat yang hanya dikagumi tanpa dijalani, bagi Kierkegaard, adalah rumah yang dibangun di atas pasir — betapapun elegan arsitekturnya di atas kertas.</p>
+  <p class="lang-en">The Sermon on the Mount closes not with a summary of doctrine but with an architectural parable: a house built on <em>petra</em> (πέτρα, solid bedrock) withstands the storm, while a house on <em>ammos</em> (ἄμμος, loose sand) collapses entirely once the rain falls and the floods rise — and what separates the two is not how beautiful the house looks, but the invisible foundation beneath it. Søren Kierkegaard would recognize this move exactly: the difference between aesthetic admiration of an idea and the subjective leap of actually living it. A philosophy only admired but never practiced, for Kierkegaard, is a house built on sand — however elegant its architecture looks on paper.</p>
+</section>
+
+<section class="chapter reveal" id="perumpamaan">
+  <div class="chapter-num mono lang-id">BAB DELAPAN</div>
+  <div class="chapter-num mono lang-en">CHAPTER EIGHT</div>
+  <h2 class="lang-id">Perumpamaan sebagai Eksperimen Pikiran</h2>
+  <h2 class="lang-en">Parables as Thought Experiments</h2>
+  <span class="kicker lang-id">Ketika cerita berbuat lebih dari sekadar mengajar (di luar Khotbah di Bukit)</span>
+  <span class="kicker lang-en">When a story does more than teach (beyond the Sermon on the Mount)</span>
+
+  <p class="lead lang-id">Perumpamaan bukanlah ilustrasi sederhana untuk mempermudah doktrin abstrak. Mereka adalah bentuk sastra dengan fungsi filosofis tersendiri — dirancang untuk mengganggu, bukan menenangkan; membuka pertanyaan, bukan menutupnya dengan jawaban rapi.</p>
+  <p class="lang-id"><strong>Anak yang Hilang</strong> <span class="mono" style="font-size:0.8rem;color:var(--ink-soft);">(Lukas 15:11–32)</span> adalah salah satu potret paling awal dan paling utuh tentang alienasi dan individuasi dalam sastra dunia. Sang anak bungsu, dengan menuntut warisannya lebih awal dan pergi ke negeri jauh, secara harfiah memerankan pemisahan diri dari sumber — sebuah gerakan psikologis yang oleh Jung disebut sebagai tahap awal individuasi, momen ego memisahkan diri dari matriks asalnya untuk menemukan dirinya sendiri, sering kali lewat kehancuran. Titik nadirnya — duduk di antara babi-babi, jauh dari segala yang pernah ia kenal — adalah apa yang oleh mistikus disebut "malam gelap jiwa": bukan hukuman, melainkan prasyarat bagi kesadaran baru. Yang mengejutkan justru bukan pertobatan si anak, melainkan reaksi sang ayah — berlari menyambut sebelum kata maaf sempat terucap sepenuhnya, dan kemarahan sang kakak yang merasa keadilan dilanggar oleh belas kasihan. Kisah ini sengaja dibiarkan terbuka: kita tidak pernah tahu apakah sang kakak akhirnya masuk ke pesta itu.</p>
+
+  <p class="lead lang-en">Parables are not simple illustrations that make abstract doctrine easier to swallow. They are a literary form with their own philosophical function — designed to disturb rather than soothe, to open a question rather than close it with a tidy answer.</p>
+  <p class="lang-en">The <strong>Prodigal Son</strong> <span class="mono" style="font-size:0.8rem;color:var(--ink-soft);">(Luke 15:11–32)</span> is one of the earliest and most complete portraits of alienation and individuation in world literature. The younger son, by demanding his inheritance early and leaving for a distant country, literally enacts a separation from the source — a psychological movement Jung called an early stage of individuation, the moment the ego splits from its originating matrix to find itself, often through ruin. His lowest point — sitting among pigs, far from everything he once knew — is what mystics call the "dark night of the soul": not punishment, but a precondition for new awareness. What shocks is not the son's repentance but the father's reaction — running to meet him before the apology is even finished — and the elder brother's fury, who feels justice violated by mercy. The story is deliberately left open: we never learn whether the elder brother finally joins the feast.</p>
+
+  <p class="lang-id"><strong>Orang Samaria yang Baik Hati</strong> <span class="mono" style="font-size:0.8rem;color:var(--ink-soft);">(Lukas 10:25–37)</span> bekerja sebagai eksperimen pikiran etis dalam pengertian yang sangat modern — mirip dengan "trolley problem" dalam filsafat moral kontemporer, tetapi jauh lebih tajam secara sosial. Yang membuat perumpamaan ini menggigit bukan sekadar pesan "tolonglah sesama", melainkan pilihan tokohnya: orang Samaria, kelompok yang dibenci dan dianggap sesat secara agama oleh audiens Yahudi asli cerita ini, justru menjadi teladan moral — sementara imam dan orang Lewi, figur otoritas keagamaan, melangkahi korban yang terluka. Ini adalah serangan langsung terhadap logika tribalisme keagamaan: kewajiban moral tidak berhenti di batas identitas kelompok.</p>
+  <p class="lang-en">The <strong>Good Samaritan</strong> <span class="mono" style="font-size:0.8rem;color:var(--ink-soft);">(Luke 10:25–37)</span> functions as an ethical thought experiment in a very modern sense — not unlike the "trolley problem" in contemporary moral philosophy, but far sharper socially. What makes this parable bite is not simply the message "help your neighbor," but the choice of characters: the Samaritan, a group despised and considered religiously heretical by the story's original Jewish audience, becomes the moral exemplar — while the priest and the Levite, figures of religious authority, step over the wounded man. It is a direct assault on the logic of religious tribalism: moral obligation does not stop at the border of group identity.</p>
+
+  <p class="lang-id"><strong>Talenta</strong> <span class="mono" style="font-size:0.8rem;color:var(--ink-soft);">(Matius 25:14–30)</span> dan <strong>Penabur</strong> <span class="mono" style="font-size:0.8rem;color:var(--ink-soft);">(Matius 13:1–23; Markus 4:1–20; Lukas 8:4–15)</span> sering dibaca sebagai pembenaran teologis untuk etos kerja, padahal secara filosofis mereka lebih dekat pada gagasan eksistensialis tentang tanggung jawab radikal: manusia tidak dihakimi karena kegagalannya, melainkan karena penolakannya untuk mencoba sama sekali — hamba yang mengubur talentanya dihukum bukan karena hasilnya sedikit, melainkan karena ia bertindak dari rasa takut, bukan dari keberanian mengambil risiko. Jean-Paul Sartre akan menyebut ini sebagai <em>mauvaise foi</em>, iman buruk — menyembunyikan kebebasan dan tanggung jawab di balik alasan-alasan yang tampak masuk akal.</p>
+  <p class="lang-en">The <strong>Talents</strong> <span class="mono" style="font-size:0.8rem;color:var(--ink-soft);">(Matthew 25:14–30)</span> and the <strong>Sower</strong> <span class="mono" style="font-size:0.8rem;color:var(--ink-soft);">(Matthew 13:1–23; Mark 4:1–20; Luke 8:4–15)</span> are often read as theological justification for a work ethic, but philosophically they sit closer to the existentialist idea of radical responsibility: a person is judged not for failing, but for refusing to try at all — the servant who buries his talent is condemned not because his yield was small, but because he acted out of fear rather than the courage to risk. Jean-Paul Sartre would call this <em>mauvaise foi</em>, bad faith — hiding freedom and responsibility behind reasons that sound plausible.</p>
+</section>
+
+<section class="chapter reveal" id="lintas">
+  <div class="chapter-num mono lang-id">BAB SEMBILAN</div>
+  <div class="chapter-num mono lang-en">CHAPTER NINE</div>
+  <h2 class="lang-id">Titik Temu Lintas Peradaban</h2>
+  <h2 class="lang-en">A Confluence of Civilizations</h2>
+  <span class="kicker lang-id">Mata air yang sama, muncul di banyak tempat</span>
+  <span class="kicker lang-en">The same spring, surfacing in many places</span>
+
+  <p class="lead lang-id">Jika inti pesan ini benar-benar universal, kita mestinya menemukan gemanya di tempat-tempat yang tidak pernah bersentuhan dengan Kekristenan sama sekali. Dan memang begitu.</p>
+  <p class="lang-id">Dalam Buddhisme, konsep <em>karuna</em> — welas asih aktif terhadap penderitaan semua makhluk, tanpa membedakan kelayakan — bergerak pada arah yang nyaris identik dengan "murah hati" dalam Sabda Bahagia, meski lahir dari kerangka metafisika yang sama sekali berbeda: bukan dari relasi dengan Tuhan pribadi, melainkan dari pemahaman tentang saling-ketergantungan (pratityasamutpada) semua fenomena. Dalam Taoisme, gagasan <em>wu wei</em> — tindakan tanpa memaksa, mengalir bersama tatanan alami alih-alih melawannya — bergema dengan seruan untuk melepas kecemasan akan hari esok dan tidak menghakimi orang lain terlebih dahulu. Dalam tasawuf Sufi, tradisi seperti Rumi dan Al-Hallaj berbicara tentang fana — peleburan ego di hadapan cinta ilahi — yang secara struktural sejajar dengan gagasan "kehilangan nyawa untuk menemukannya".</p>
+  <p class="lang-id">Filsafat Ubuntu dari Afrika Selatan, yang dirangkum lewat ungkapan "umuntu ngumuntu ngabantu" — seseorang adalah seseorang melalui orang lain — menawarkan kritik yang berbeda arah namun saling melengkapi terhadap individualisme modern: martabat manusia tidak berdiri sendiri, melainkan dijalin lewat komunitas dan pengakuan bersama. Uskup Desmond Tutu menggunakan kerangka ini untuk membangun Komisi Kebenaran dan Rekonsiliasi Afrika Selatan pasca-apartheid — sebuah penerapan politis nyata dari prinsip "membawa damai" yang jauh lebih sistemik daripada rekonsiliasi personal semata.</p>
+  <p class="lang-id">Baruch Spinoza, meski ditolak keras oleh ortodoksi Yahudi dan Kristen pada masanya karena pandangan panteistiknya, sampai pada ketenangan batin (<em>acquiescentia</em>) lewat jalur rasional murni: memahami diri sebagai bagian dari satu substansi tunggal, alam semesta itu sendiri, membebaskan manusia dari perbudakan pada emosi dan hasrat yang tidak terkendali. Jalan Spinoza berbeda total dari jalan iman, tetapi tujuan akhirnya — kebebasan dari perbudakan batin — terasa mengejutkan mirip.</p>
+
+  <p class="lead lang-en">If the core of this message is truly universal, we should find its echo in places that never had any contact with Christianity at all. And indeed we do.</p>
+  <p class="lang-en">In Buddhism, the concept of <em>karuna</em> — active compassion toward the suffering of all beings, without regard to worthiness — moves in a nearly identical direction to "the merciful" in the Beatitudes, though born from an entirely different metaphysical framework: not from relationship with a personal God, but from understanding the interdependence (pratityasamutpada) of all phenomena. In Taoism, the notion of <em>wu wei</em> — action without forcing, flowing with the natural order rather than fighting it — resonates with the call to release anxiety about tomorrow and to withhold judgment of others. In Sufi mysticism, figures like Rumi and Al-Hallaj speak of fana — the dissolution of ego before divine love — structurally parallel to the idea of "losing one's life to find it."</p>
+  <p class="lang-en">Ubuntu philosophy from Southern Africa, captured in the phrase "umuntu ngumuntu ngabantu" — a person is a person through other people — offers a differently angled but complementary critique of modern individualism: human dignity does not stand alone but is woven through community and mutual recognition. Archbishop Desmond Tutu used this framework to build South Africa's post-apartheid Truth and Reconciliation Commission — a real political application of "peacemaking" far more systemic than personal reconciliation alone.</p>
+  <p class="lang-en">Baruch Spinoza, though harshly rejected by both Jewish and Christian orthodoxy of his time for his pantheistic views, arrived at inner peace (<em>acquiescentia</em>) through a purely rational route: understanding the self as part of one single substance, the universe itself, frees a person from enslavement to uncontrolled emotion and desire. Spinoza's path is entirely different from the path of faith, yet the destination — freedom from inner bondage — feels surprisingly similar.</p>
+
+  <div class="aside">
+    <span class="aside-label lang-id">MENGAPA KONVERGENSI INI PENTING</span>
+    <span class="aside-label lang-en">WHY THIS CONVERGENCE MATTERS</span>
+    <p class="lang-id" style="margin:0;">Konvergensi lintas tradisi ini bukan bukti bahwa satu tradisi "benar" dan yang lain hanya meniru. Ia justru menunjukkan sesuatu yang lebih menarik: bahwa persoalan-persoalan eksistensial manusia — ego, penderitaan, waktu, sesama — cukup universal sehingga pikiran manusia, di tempat dan zaman yang sama sekali terpisah, sampai pada wawasan yang serupa secara independen.</p>
+    <p class="lang-en" style="margin:0;">This cross-tradition convergence is not proof that one tradition is "right" and the others merely imitate it. It points to something more interesting: that human existential concerns — ego, suffering, time, the other — are universal enough that human minds, in entirely separate places and eras, arrived at similar insight independently.</p>
+  </div>
+</section>
+
+<section class="chapter reveal" id="epilog">
+  <div class="chapter-num mono lang-id">EPILOG</div>
+  <div class="chapter-num mono lang-en">EPILOGUE</div>
+  <h2 class="lang-id">Sebuah Teks yang Hidup</h2>
+  <h2 class="lang-en">A Living Text</h2>
+  <span class="kicker lang-id">Ruang yang sengaja dibiarkan terbuka</span>
+  <span class="kicker lang-en">A space deliberately left open</span>
+
+  <p class="lead lang-id">Membaca Khotbah di Bukit dan Dataran sebagai teks filosofis, bukan sekadar dogma, tidak membuatnya lebih kecil. Justru sebaliknya: ia menjadi lebih besar, karena kini ia harus mempertanggungjawabkan dirinya bukan lewat otoritas institusional, melainkan lewat kekuatan argumennya sendiri — diuji oleh Nietzsche, diperdalam oleh Jung, dihidupkan kembali oleh Tolstoy dan Gandhi, dan digemakan secara independen oleh para bijak di Kapilavastu, Chang'an, dan Isfahan.</p>
+  <p class="lang-id">Ini bukan sinkretisme yang menyamakan semua tradisi menjadi satu bubur tanpa perbedaan. Perbedaan metafisik antar tradisi ini nyata dan layak dihormati apa adanya. Yang ditawarkan webbook ini lebih sederhana: sebuah ruang untuk membaca ulang, tanpa harus lebih dulu setuju atau menolak, dan membiarkan pertanyaan-pertanyaan besar tentang penderitaan, ego, waktu, dan sesama tetap terbuka — karena barangkali di situlah letak kesetiaan yang paling jujur pada teks aslinya: teks yang lebih senang mengajukan pertanyaan daripada menutup semuanya dengan jawaban akhir.</p>
+
+  <p class="lead lang-en">Reading the Sermon on the Mount and the Plain as a philosophical text, not merely dogma, does not make it smaller. If anything, it grows larger — because it must now answer for itself not through institutional authority, but through the strength of its own argument: tested by Nietzsche, deepened by Jung, revived by Tolstoy and Gandhi, and echoed independently by sages in Kapilavastu, Chang'an, and Isfahan.</p>
+  <p class="lang-en">This is not a syncretism that flattens every tradition into one indistinct blend. The metaphysical differences between these traditions are real and deserve to be honored as they are. What this webbook offers is simpler: a space to reread, without needing to agree or reject beforehand, and to let the great questions of suffering, ego, time, and the other remain open — because perhaps that is the most honest fidelity to the original text: one that always preferred raising a question to closing everything with a final answer.</p>
+
+  <hr class="divider">
+  <p class="lang-id mono" style="font-size:0.85rem;color:var(--ink-soft);">Referensi utama: A. Schweitzer, <em>The Quest of the Historical Jesus</em>; J.D. Crossan, <em>The Historical Jesus</em>; M. Borg, <em>Meeting Jesus Again for the First Time</em>; B. Ehrman, <em>Jesus, Interrupted</em>; T. Holland, <em>Dominion</em>; J.B. Peterson, ceramah Alkitab tentang Godaan di Padang Gurun; F. Dostoevsky, <em>The Brothers Karamazov</em> (bab "Sang Inkuisitor Agung"); R. Girard, <em>Things Hidden Since the Foundation of the World</em>; F. Nietzsche, <em>On the Genealogy of Morality</em>; E. Fromm, <em>Escape from Freedom</em> &amp; <em>To Have or to Be</em>; C.G. Jung, <em>Aion</em> &amp; <em>Answer to Job</em>; I. Kant, <em>Groundwork of the Metaphysics of Morals</em>; M. Heidegger, <em>Being and Time</em>; L. Tolstoy, <em>The Kingdom of God Is Within You</em>; W. Wink, <em>Jesus and Nonviolence: A Third Way</em>; S. Kierkegaard, <em>Concluding Unscientific Postscript</em>; W. James, <em>Pragmatism</em>; E. Pronin, riset tentang <em>bias blind spot</em>; Konfusius, <em>Analects</em>; M.L. King Jr., <em>Letter from Birmingham Jail</em>; V. Havel, <em>The Power of the Powerless</em>; Epictetus, <em>Enchiridion</em>; teks Yunani Perjanjian Baru (Nestle-Aland/UBS) untuk seluruh studi kata; teks-teks Dhammapada dan Tao Te Ching.</p>
+  <p class="lang-en mono" style="font-size:0.85rem;color:var(--ink-soft);">Primary references: A. Schweitzer, <em>The Quest of the Historical Jesus</em>; J.D. Crossan, <em>The Historical Jesus</em>; M. Borg, <em>Meeting Jesus Again for the First Time</em>; B. Ehrman, <em>Jesus, Interrupted</em>; T. Holland, <em>Dominion</em>; J.B. Peterson, Biblical lecture series on the Wilderness Temptation; F. Dostoevsky, <em>The Brothers Karamazov</em> ("The Grand Inquisitor"); R. Girard, <em>Things Hidden Since the Foundation of the World</em>; F. Nietzsche, <em>On the Genealogy of Morality</em>; E. Fromm, <em>Escape from Freedom</em> &amp; <em>To Have or to Be</em>; C.G. Jung, <em>Aion</em> &amp; <em>Answer to Job</em>; I. Kant, <em>Groundwork of the Metaphysics of Morals</em>; M. Heidegger, <em>Being and Time</em>; L. Tolstoy, <em>The Kingdom of God Is Within You</em>; W. Wink, <em>Jesus and Nonviolence: A Third Way</em>; S. Kierkegaard, <em>Concluding Unscientific Postscript</em>; W. James, <em>Pragmatism</em>; E. Pronin's research on the <em>bias blind spot</em>; Confucius, <em>Analects</em>; M.L. King Jr., <em>Letter from Birmingham Jail</em>; V. Havel, <em>The Power of the Powerless</em>; Epictetus, <em>Enchiridion</em>; the Greek New Testament (Nestle-Aland/UBS) for all word studies; the Dhammapada and Tao Te Ching.</p>
+</section>
+
+<footer>
+  <p class="mono lang-id">RUANG BACA · Ditulis untuk dibaca ulang, bukan diselesaikan sekali duduk.</p>
+  <p class="mono lang-en">RUANG BACA · Written to be reread, not finished in one sitting.</p>
+</footer>
+<script>
+/* =========================================================
+   RUANG BACA - INTERACTIVE SCRIPT ENGINE
+   ========================================================= */
+
+// Bilingual Toggle
+function toggleLang(){
+  document.body.classList.toggle('show-en');
+  var isEn = document.body.classList.contains('show-en');
+  document.getElementById('langBtn').textContent = isEn ? 'ID' : 'EN';
+  localStorage.setItem('rb-lang', isEn ? 'en' : 'id');
+}
+
+// TOC Drawer Handlers
+function toggleToc(){
+  var toc = document.getElementById('tocDrawer');
+  var backdrop = document.getElementById('drawerBackdrop');
+  var isOpen = toc.classList.contains('open');
+
+  if(isOpen){
+    toc.classList.remove('open');
+    document.getElementById('tocBtn').classList.remove('active');
+    backdrop.classList.remove('active');
+  } else {
+    toc.classList.add('open');
+    document.getElementById('tocBtn').classList.add('active');
+    backdrop.classList.add('active');
+  }
+}
+
+function closeAllDrawers(){
+  document.getElementById('tocDrawer').classList.remove('open');
+  document.getElementById('tocBtn').classList.remove('active');
+  document.getElementById('drawerBackdrop').classList.remove('active');
+}
+
+// Initialization on DOM Load
+(function init(){
+  if(localStorage.getItem('rb-lang') === 'en'){
+    document.body.classList.add('show-en');
+    document.getElementById('langBtn').textContent = 'ID';
+  }
+})();
+
+// Reading Progress Bar
+window.addEventListener('scroll', function(){
+  var h = document.documentElement;
+  var scrolled = (h.scrollTop) / (h.scrollHeight - h.clientHeight) * 100;
+  var bar = document.getElementById('progress');
+  if(bar){ bar.style.width = scrolled + '%'; }
+}, {passive:true});
+
+// Reveal on scroll observer
+var observer = new IntersectionObserver(function(entries){
+  entries.forEach(function(e){
+    if(e.isIntersecting){ e.target.classList.add('visible'); }
+  });
+}, {threshold:0.08});
+
+document.querySelectorAll('.reveal').forEach(function(el){
+  observer.observe(el);
+  setTimeout(function(){ el.classList.add('visible'); }, 1000);
+});
+
+// ESC key closes drawer
+window.addEventListener('keydown', function(e){
+  if(e.key === 'Escape'){ closeAllDrawers(); }
+});
+</script>
+</body>
+</html>
