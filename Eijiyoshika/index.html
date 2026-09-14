@@ -1,0 +1,656 @@
+<!DOCTYPE html>
+<html lang="id" data-lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Lingkaran Pedang / The Circle of the Sword</title>
+<meta name="description" content="Lingkaran Pedang / The Circle of the Sword — Edisi Sintesis bilingual ID/EN karya Eiji Yoshikawa." />
+<meta property="og:title" content="Lingkaran Pedang / The Circle of the Sword" />
+<meta property="og:description" content="Lingkaran Pedang / The Circle of the Sword — Edisi Sintesis bilingual ID/EN karya Eiji Yoshikawa." />
+<meta property="og:type" content="website" />
+<meta name="twitter:card" content="summary_large_image" />
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Shippori+Mincho:wght@400;500;600;700&family=Literata:ital,opsz,wght@0,7..72,400;0,7..72,500;1,7..72,400;1,7..72,500&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<script>
+  (function(){
+    try{
+      var l = localStorage.getItem('rb-lang') || 'id';
+      document.documentElement.setAttribute('data-lang', l);
+    }catch(e){}
+  })();
+</script>
+<style>
+  :root{
+    --bg:#faf6ec;
+    --bg-alt:#f2e9d8;
+    --ink:#221c17;
+    --orange:#c1631f;
+    --maroon:#7a2431;
+    --green:#3f5c46;
+    --line: rgba(34,28,23,0.15);
+    --font-title:'Shippori Mincho', serif;
+    --font-body:'Literata', serif;
+    --font-mono:'IBM Plex Mono', monospace;
+  }
+  *{box-sizing:border-box;}
+  html{scroll-behavior:smooth;}
+  body{margin:0;background:var(--bg);color:var(--ink);font-family:var(--font-body);font-size:18px;line-height:1.8;}
+  ::selection{background:var(--orange);color:var(--bg);}
+  .wrap{max-width:700px;margin:0 auto;padding:0 28px;}
+  .t-id, .t-en{display:block;}
+  html[data-lang="id"] .t-en{display:none;}
+  html[data-lang="en"] .t-id{display:none;}
+  a{color:inherit;}
+
+  /* HERO CSS EMBLEM (60% SCALE, CENTERED, WITH PROPORTIONAL SPACING) */
+  .hero-emblem-wrap{
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    width:100%;
+    margin:0 auto 34px;
+    padding:6px 0;
+  }
+  .loader {
+    --size: 0.6px;
+    width: calc(32 * var(--size));
+    height: calc(32 * var(--size));
+    position: relative;
+    border-radius: 50%;
+    color: var(--maroon);
+    animation: fill 1s ease-in infinite alternate;
+  }
+  .loader::before,
+  .loader::after {
+    content: '';
+    position: absolute;
+    height: 100%;
+    width: 100%;
+    border-radius: 50%;
+    left: calc(48 * var(--size));
+    top: 0;
+    animation: fill 0.9s ease-in infinite alternate;
+  }
+  .loader::before{ color: var(--orange); }
+  .loader::after {
+    left: auto;
+    right: calc(48 * var(--size));
+    animation-duration: 1.1s;
+    color: var(--green);
+  }
+  @keyframes fill {
+    0% { box-shadow: 0 0 0 calc(2 * var(--size)) inset; }
+    100% { box-shadow: 0 0 0 calc(10 * var(--size)) inset; }
+  }
+
+  /* FLOATING LANG TOGGLE */
+  .lang-toggle{
+    position:fixed;top:18px;right:18px;z-index:200;
+    font-family:var(--font-mono);font-size:12px;letter-spacing:0.04em;
+    background:var(--bg);border:1px solid var(--ink);border-radius:20px;
+    display:flex;overflow:hidden;box-shadow:0 2px 8px rgba(0,0,0,0.08);
+  }
+  .lang-toggle button{
+    border:none;background:transparent;padding:8px 14px;cursor:pointer;
+    font-family:var(--font-mono);font-size:12px;color:var(--ink);opacity:0.5;
+    transition:background-color .2s ease, opacity .2s ease, color .2s ease;
+  }
+  .lang-toggle button.active{opacity:1;background:var(--maroon);color:var(--bg);}
+
+  /* FLOATING TOC */
+  .toc-fab{
+    position:fixed;bottom:22px;right:22px;z-index:200;
+    width:52px;height:52px;border-radius:50%;
+    background:var(--maroon);color:var(--bg);border:none;cursor:pointer;
+    display:flex;align-items:center;justify-content:center;
+    box-shadow:0 4px 14px rgba(0,0,0,0.22);
+    font-size:20px;
+  }
+  .toc-fab span{display:block;width:20px;height:2px;background:var(--bg);position:relative;}
+  .toc-fab span::before,.toc-fab span::after{content:'';position:absolute;left:0;width:20px;height:2px;background:var(--bg);}
+  .toc-fab span::before{top:-6px;}
+  .toc-fab span::after{top:6px;}
+  .toc-panel{
+    position:fixed;bottom:84px;right:22px;z-index:199;
+    background:var(--bg);border:1px solid var(--line);border-radius:10px;
+    box-shadow:0 10px 30px rgba(0,0,0,0.18);
+    padding:14px 10px;min-width:220px;
+    transform:translateY(12px) scale(0.98);opacity:0;pointer-events:none;
+    transition:all .25s ease;
+  }
+  .toc-panel.open{transform:translateY(0) scale(1);opacity:1;pointer-events:auto;}
+  .toc-panel a{
+    display:block;padding:9px 12px;border-radius:6px;text-decoration:none;
+    font-family:var(--font-mono);font-size:12.5px;color:var(--ink);
+    transition:background-color .15s ease, color .15s ease;
+  }
+  .toc-panel a:hover{background:var(--bg-alt);color:var(--maroon);}
+
+  /* HERO */
+  .hero{min-height:90vh;display:flex;flex-direction:column;justify-content:center;
+    background:
+      radial-gradient(ellipse at 18% 15%, rgba(193,99,31,0.13), transparent 55%),
+      radial-gradient(ellipse at 85% 80%, rgba(63,92,70,0.14), transparent 55%),
+      var(--bg);
+    border-bottom:1px solid var(--line); padding:110px 0 80px;}
+  .hero-label{font-family:var(--font-mono);font-size:13px;color:var(--maroon);margin-bottom:20px;letter-spacing:0.03em;}
+  .hero h1{font-family:var(--font-title);font-weight:600;font-size:clamp(2.4rem,6vw,4rem);line-height:1.15;margin:0 0 24px;max-width:13ch;color:var(--ink);}
+  .hero h1 em{font-style:normal;color:var(--maroon);}
+  .hero p.lede{font-family:var(--font-body);font-style:italic;font-size:1.15rem;color:#4a4238;max-width:50ch;margin:0 0 34px;}
+  .hero .meta{font-family:var(--font-mono);font-size:12px;color:#79705f;letter-spacing:0.02em;}
+
+  section{padding:86px 0;border-bottom:1px solid var(--line);}
+  section.prolog{background:var(--bg-alt);}
+  section.prolog .wrap{max-width:620px;}
+  section.prolog p{font-family:var(--font-body);font-style:italic;color:#4a4238;font-size:1.08rem;margin:0 0 18px;max-width:58ch;}
+  section.prolog .marker{font-family:var(--font-mono);font-size:11.5px;color:var(--maroon);margin-bottom:16px;letter-spacing:0.05em;}
+
+  .chapter-locator{font-family:var(--font-mono);font-size:12px;color:#79705f;margin-bottom:14px;letter-spacing:0.01em;}
+  section h2{font-family:var(--font-title);font-weight:600;font-size:clamp(1.9rem,4.4vw,2.6rem);margin:0 0 10px;line-height:1.2;max-width:15ch;color:var(--ink);}
+  section h2 span.sub{display:block;font-family:var(--font-body);font-style:italic;font-weight:400;font-size:1.02rem;color:#5a5245;margin-top:14px;max-width:44ch;}
+  section p{margin:0 0 20px;max-width:66ch;}
+  .divider-quote{font-family:var(--font-title);font-weight:500;font-style:normal;font-size:1.3rem;color:var(--maroon);max-width:32ch;margin:38px 0;line-height:1.5;}
+  .part-mark{
+    text-align:left;font-family:var(--font-mono);font-size:11.5px;letter-spacing:0.16em;
+    text-transform:uppercase;color:var(--green);margin:52px 0 18px;
+    padding-top:18px;border-top:1px dashed var(--line);
+  }
+  .interlude{padding:52px 0;background:var(--bg-alt);border-bottom:1px solid var(--line);}
+  .interlude .wrap{max-width:600px;}
+  .interlude p{font-family:var(--font-body);font-style:italic;color:#4a4238;font-size:1.05rem;margin:0;max-width:58ch;}
+  .interlude .glyph{font-family:var(--font-mono);color:var(--orange);font-size:13px;margin-bottom:12px;}
+
+  /* TRANSITION & SEPARATION ABOVE BAB PUNCAK */
+  .interlude-climax{
+    padding:56px 0 60px;
+    background:var(--bg-alt);
+    border-bottom:1px solid var(--line);
+    margin-bottom:38px;
+  }
+  .interlude-climax .glyph{
+    font-family:var(--font-mono);
+    color:var(--maroon);
+    font-size:15px;
+    margin-bottom:14px;
+    letter-spacing:0.2em;
+  }
+
+  section.climax{background:#f0e6da;border-top:1px solid var(--line);padding:92px 0;}
+  section.climax h2{color:var(--maroon);}
+
+  footer{padding:90px 0 130px;background:var(--bg-alt);}
+  footer h2{font-family:var(--font-title);font-weight:600;font-size:clamp(1.7rem,4vw,2.2rem);max-width:17ch;margin:0 0 24px;color:var(--ink);}
+  footer p{max-width:60ch;}
+  footer .sign{margin-top:46px;font-family:var(--font-mono);font-size:12px;color:#79705f;}
+
+  .reveal{opacity:0;transform:translateY(12px);transition:opacity 0.6s ease, transform 0.6s ease;}
+  .reveal.is-visible{opacity:1;transform:translateY(0);}
+  @media (max-width:640px){body{font-size:17px;} .toc-panel{right:10px;min-width:190px;} .toc-fab{right:14px;} .lang-toggle{right:14px;top:14px;}}
+</style>
+</head>
+<body>
+
+<div class="lang-toggle">
+  <button id="btn-id" class="active">ID</button>
+  <button id="btn-en">EN</button>
+</div>
+
+<button class="toc-fab" id="tocFab" aria-label="Daftar Isi"><span></span></button>
+<nav class="toc-panel" id="tocPanel">
+  <a href="#bab1"><span class="t-id">Sang Kanselir</span><span class="t-en">The Chancellor</span></a>
+  <a href="#bab2"><span class="t-id">Sang Adik</span><span class="t-en">The Younger Brother</span></a>
+  <a href="#bab3"><span class="t-id">Sang Pelayan Sandal</span><span class="t-en">The Sandal-Bearer</span></a>
+  <a href="#bab4"><span class="t-id">Sang Pengembara</span><span class="t-en">The Wanderer</span></a>
+  <a href="#bab5"><span class="t-id">Sang Penenun</span><span class="t-en">The Weaver</span></a>
+  <a href="#penutup"><span class="t-id">Penutup</span><span class="t-en">Closing</span></a>
+</nav>
+
+<header class="hero">
+  <div class="wrap">
+    <!-- CSS LOADER RELOCATED AS HERO MAIN PAGE EMBLEM, CENTERED ALIGNMENT, 60% SIZE WITH PROPORTIONAL SPACING -->
+    <div class="hero-emblem-wrap reveal">
+      <div class="loader" aria-hidden="true" title="Tiga Zaman / Three Eras"></div>
+    </div>
+    <div class="hero-label reveal"><span class="t-id">RUANG BACA — EDISI SINTESIS</span><span class="t-en">RUANG BACA — SYNTHESIS EDITION</span></div>
+    <h1 class="reveal">
+      <span class="t-id">Lingkaran <em>Pedang</em></span>
+      <span class="t-en">The Circle of the <em>Sword</em></span>
+    </h1>
+    <p class="lede reveal">
+      <span class="t-id">Empat manusia, tiga zaman, satu roda yang sama: bagaimana kekuasaan direbut dengan angkuh, dipertahankan dengan cerdik, lalu — ketika tak ada lagi yang tersisa untuk ditaklukkan — diserahkan kepada pertanyaan paling sunyi tentang diri sendiri.</span>
+      <span class="t-en">Four men, three ages, one same wheel: how power is seized with arrogance, held with cunning, then — once nothing remains to conquer — surrendered to the quietest question of all, the question of oneself.</span>
+    </p>
+    <div class="meta reveal"><span class="t-id">Estimasi bacaan: ±60 menit · edisi gabungan, bilingual ID/EN</span><span class="t-en">Reading time: ±60 minutes · combined edition, bilingual ID/EN</span></div>
+  </div>
+</header>
+
+<section class="prolog">
+  <div class="wrap">
+    <div class="marker reveal"><span class="t-id">PROLOG</span><span class="t-en">PROLOGUE</span></div>
+    <p class="reveal">
+      <span class="t-id">Tidak banyak penulis yang berani mengambil seribu tahun sejarah sebuah bangsa dan memampatkannya menjadi wajah-wajah manusia. Eiji Yoshikawa melakukannya bukan dengan menciptakan sejarah baru, melainkan dengan mendengarkan ulang gumaman lama: catatan istana yang membusuk pelan-pelan, kronik perang saudara yang penuh darah dan siasat, dan babad seorang pengembara pedang yang akhirnya berhenti mencari musuh dan mulai mencari dirinya sendiri.</span>
+      <span class="t-en">Few writers dare to take a thousand years of a nation's history and compress it into human faces. Eiji Yoshikawa did so not by inventing new history, but by listening again to old murmurs: court records rotting slowly from within, chronicles of civil war thick with blood and scheming, and the record of a wandering swordsman who finally stopped searching for enemies and began searching for himself.</span>
+    </p>
+    <p class="reveal">
+      <span class="t-id">Halaman-halaman berikut tidak membaca ketiga kisah ini sebagai rangkaian peristiwa, melainkan sebagai empat riwayat batin yang kebetulan terjadi di panggung sejarah: seorang kanselir yang lupa dari mana ia berasal, seorang adik yang tak pernah cukup dimengerti kakaknya, seorang pelayan sandal yang menaklukkan sebuah negeri, dan seorang pengembara yang, setelah membunuh lebih dari enam puluh orang, memilih menghabiskan sisa hidupnya belajar diam.</span>
+      <span class="t-en">The pages that follow do not read these three stories as a sequence of events, but as four inner biographies that happened to unfold on history's stage: a chancellor who forgot where he came from, a younger brother never quite understood by his own elder brother, a sandal-bearer who conquered a nation, and a wanderer who, after killing more than sixty men, chose to spend the rest of his life learning silence.</span>
+    </p>
+  </div>
+</section>
+
+<section id="bab1">
+  <div class="wrap">
+    <div class="chapter-locator reveal"><span class="t-id">BAB I · 1118–1181 · Kyoto, Rokuhara, Gunung Hiei, Fukuhara, Nara, Kumano</span><span class="t-en">PART I · 1118–1181 · Kyoto, Rokuhara, Mount Hiei, Fukuhara, Nara, Kumano</span></div>
+    <h2 class="reveal">
+      <span class="t-id">Lonceng yang Berbunyi untuk Semua Orang<span class="sub">Taira no Kiyomori, dan kekuasaan yang lupa dari mana ia datang</span></span>
+      <span class="t-en">The Bell That Tolls for Everyone<span class="sub">Taira no Kiyomori, and a power that forgot where it came from</span></span>
+    </h2>
+
+    <p class="reveal">
+      <span class="t-id">Sebelum ada Kiyomori, ada sebuah zaman yang sudah membusuk dari dalam. Di Kyoto penghujung era Heian, para bangsawan istana hidup dalam ilusi puisi dan kemewahan, mengukur derajat seseorang dari kehalusan syair dan ketepatan aroma dupa yang ia pilih — sementara di lereng Gunung Hiei, para pendeta pejuang, sōhei, dari Kuil Enryaku-ji bertindak layaknya berandalan bersorban, turun ke kota membawa tandu suci, mikoshi, untuk mengintimidasi istana setiap kali tuntutan mereka tak dipenuhi. Pesta pora, mabuk sake, dan pemerasan berbalut jubah suci menjadi pemandangan yang lumrah — sebuah metafora yang tepat untuk menggambarkan elite politik dan spiritual Jepang yang sedang mabuk oleh privilesenya sendiri. Di tengah kemabukan itu, klan-klan samurai seperti Taira dan Minamoto hanya diperlakukan sebagai anjing penjaga kelas rendah — otot bersenjata yang dipanggil saat dibutuhkan dan diabaikan begitu tugasnya selesai. Represi itulah yang, perlahan-lahan, menyulut ambisi seorang pemuda bernama Taira no Kiyomori untuk menjungkirbalikkan seluruh tatanan.</span>
+      <span class="t-en">Before there was Kiyomori, there was an age already rotting from within. In Kyoto at the end of the Heian era, court aristocrats lived inside an illusion of poetry and luxury, measuring a person's worth by the elegance of their verse and the precision of the incense they chose — while on the slopes of Mount Hiei, the warrior-monks, sōhei, of Enryaku-ji Temple behaved like armed thugs in robes, descending on the capital carrying sacred palanquins, mikoshi, to intimidate the court whenever their demands went unmet. Feasting, drunkenness on sake, and extortion dressed in holy cloth were an everyday sight — an apt metaphor for a political and spiritual elite drunk on its own privilege. Amid that drunkenness, warrior clans like the Taira and Minamoto were treated as nothing more than low-caste guard dogs — armed muscle summoned when needed and ignored the moment the task was done. It was that repression which, slowly, lit the ambition of a young man named Taira no Kiyomori to overturn the entire order.</span>
+    </p>
+
+    <p class="reveal">
+      <span class="t-id">Ada satu bisikan yang mengiringi seluruh hidup Kiyomori tanpa pernah benar-benar dikonfirmasi: bahwa ibunya, Gion no Nyōgo, pernah menjadi selir Kaisar Shirakawa, dan bahwa Kiyomori sendiri barangkali anak kandung sang kaisar, bukan anak biologis ayah resminya. Benar atau tidak, bisikan itu tampak membentuk sesuatu yang dalam pada dirinya — keyakinan diam-diam bahwa darah istana sesungguhnya mengalir dalam tubuhnya, dan bahwa segala yang ia lakukan sepanjang hidup bukan merebut yang bukan haknya, melainkan mengambil kembali yang seharusnya sudah menjadi miliknya sejak lahir. Klan Taira sudah lama mengabdi pada istana sebagai penjaga keamanan dan penindas pemberontakan provinsi, tetapi tetap dipandang sebelah mata oleh bangsawan Kyoto — kasar, bau kuda, tak pantas duduk semeja dengan penyair dan menteri. Perjuangan batin Kiyomori bukan soal bertahan di medan perang, yang baginya relatif mudah, melainkan soal diterima di ruang yang dirancang khusus untuk menolaknya.</span>
+      <span class="t-en">One whisper trailed Kiyomori's entire life without ever being confirmed: that his mother, Gion no Nyōgo, had once been a concubine of Emperor Shirakawa, and that Kiyomori himself might be the emperor's own son, not the biological child of his official father. True or not, the whisper seems to have shaped something deep in him — a quiet conviction that imperial blood truly ran in his veins, and that everything he did in his life was not seizing what wasn't his, but reclaiming what should have been his since birth. The Taira clan had long served the court as guardians of order and suppressors of provincial revolt, yet were still looked down upon by Kyoto's aristocracy — crude, smelling of horses, unfit to sit at the same table as poets and ministers. Kiyomori's inner struggle was never about surviving the battlefield, which came easily enough to him, but about being accepted into a room specifically designed to reject him.</span>
+    </p>
+
+    <p class="reveal">
+      <span class="t-id">Bagi Kiyomori, jalan naik bukanlah sekadar adu pedang di lapangan terbuka, melainkan permainan catur psikologis di koridor istana. Dua pemberontakan membuka jalannya. Dalam Pemberontakan Hōgen (1156), perselisihan suksesi takhta memaksa klan Taira dan Minamoto — untuk sementara — bertarung di sisi yang sama, dan Kiyomori belajar cepat bagaimana memanfaatkan retaknya faksi-faksi di dalam keluarga kekaisaran yang saling berebut pengaruh di sekitar Kaisar Go-Shirakawa. Tiga tahun kemudian, ketika sekutu lama itu saling berhadapan dalam Pemberontakan Heiji (1159), Kiyomori kebetulan sedang berziarah ke Kumano saat kericuhan pecah, dan kembali tepat waktu untuk menumpas balik pasukan Minamoto no Yoshitomo — kemenangan yang lebih banyak ditentukan oleh manuver politik di belakang layar daripada kekuatan pedang semata. Di titik inilah keputusan paling menentukan — dan paling ironis — dalam hidupnya diambil: alih-alih mengeksekusi seluruh keturunan Yoshitomo sesuai kelaziman zaman itu, ia membiarkan hidup salah satu putranya yang masih remaja dan mengasingkannya ke Izu. Anak itu bernama Minamoto no Yoritomo. Belas kasihan itu adalah benih yang, dua puluh tahun kemudian, akan menumbangkan seluruh klannya sendiri.</span>
+      <span class="t-en">For Kiyomori, the road upward was never mere swordplay on an open field, but a game of psychological chess played in the corridors of the court. Two rebellions opened his path. In the Hōgen Rebellion (1156), a dispute over imperial succession forced the Taira and Minamoto clans to fight — briefly — on the same side, and Kiyomori learned quickly how to exploit the cracks between factions jostling for influence around the retired Emperor Go-Shirakawa. Three years later, when those same allies turned on each other in the Heiji Rebellion (1159), Kiyomori happened to be on pilgrimage to Kumano when the unrest broke out, returning just in time to crush the forces of Minamoto no Yoshitomo — a victory owed more to backroom political maneuvering than to the sword alone. It was here that the most decisive, and most ironic, decision of his life was made: rather than execute the entirety of Yoshitomo's line as custom demanded, he let one of his teenage sons live, exiling him to Izu instead. That boy's name was Minamoto no Yoritomo. That mercy was a seed which, twenty years later, would bring down his entire clan.</span>
+    </p>
+
+    <p class="reveal">
+      <span class="t-id">Dari sana kariernya melesat hingga tahun 1167 ia diangkat sebagai Daijō-daijin, Kanselir Agung — untuk pertama kalinya dipegang oleh seseorang dari kalangan prajurit. Tetapi intrik tertinggi Kiyomori bukan lagi soal pedang: ia menikahkan putri-putrinya ke garis kekaisaran, dan pada 1180 cucunya sendiri dinaikkan takhta sebagai Kaisar Antoku yang baru berusia tiga tahun — sebuah kudeta genetik yang menggeser sumber kekuasaannya dari baja ke darah biru, secara efektif menjadikannya diktator bayangan tanpa perlu lagi menghunus satu pedang pun. Putrinya, Tokuko — kelak dikenal sebagai Kenreimon-in — dinikahkan ke Kaisar Takakura sebagai bagian dari rencana besar itu, tetapi Tokuko sendiri digambarkan mencintai suaminya dengan tulus, sesuatu yang jarang terjadi dalam pernikahan politik istana. Ambisi dan kasih sayang, untuk sesaat, berjalan berdampingan.</span>
+      <span class="t-en">From there his career soared until, in 1167, he was appointed Daijō-daijin, Chancellor of the Realm — the first time the post had ever been held by someone from the warrior class. But Kiyomori's highest intrigue was no longer a matter of swords: he married his daughters into the imperial line, and in 1180 his own grandson was placed on the throne as the three-year-old Emperor Antoku — a genetic coup that shifted the source of his power from steel to royal blood, effectively making him a shadow dictator without ever drawing a blade again. His daughter Tokuko — later known as Kenreimon-in — was married to Emperor Takakura as part of that grand design, yet Tokuko herself is described as loving her husband sincerely, a rarity in a court marriage built for politics. For a moment, ambition and affection walked side by side.</span>
+    </p>
+
+    <p class="reveal">
+      <span class="t-id">Tetapi cinta di bawah kekuasaan absolut jarang seindah itu. Giō, penari kesayangan Kiyomori selama bertahun-tahun, dibuang begitu saja ketika ia menemukan penari lain yang lebih muda, Hotoke-Gozen, dan memindahkan seluruh perhatiannya tanpa secuil pun rasa bersalah. Potret itu — seorang perempuan yang habis dipakai lalu disingkirkan semudah mengganti hiasan ruangan — adalah wajah paling menakutkan dari kekuasaan yang tak lagi mengenal batas. Yang membuat kisah ini bertahan dalam ingatan bukan kepedihan Giō semata, melainkan keputusannya: ia memotong rambutnya sendiri dan menjadi biksuni, memilih keluar sepenuhnya dari dunia yang memperlakukannya sebagai barang milik. Bertahun-tahun kemudian, Hotoke-Gozen sendiri — perempuan yang dulu merebut tempat Giō — akan mengambil jalan yang sama persis, begitu ia sadar bahwa nasib yang menimpa pendahulunya hanya soal waktu sebelum menimpanya juga. Bagi keduanya, mencukur rambut bukan tanda menyerah, melainkan bentuk pemberontakan eksistensial paling tinggi yang tersedia bagi perempuan di zaman itu — merebut kembali kendali atas hidup mereka sendiri dari genggaman seorang lelaki yang tak pernah perlu memintanya.</span>
+      <span class="t-en">But love under absolute power is rarely so gentle. Giō, Kiyomori's favored dancer for years, was cast aside the moment he discovered a younger dancer, Hotoke-Gozen, and shifted his full attention to her without a flicker of guilt. That image — a woman used up and discarded as easily as a room's ornament — is the most frightening face of power that no longer recognizes limits. What keeps this story alive in memory is not Giō's grief alone, but her decision: she cut her own hair and became a nun, choosing to step entirely outside a world that treated her as property. Years later, Hotoke-Gozen herself — the woman who had once taken Giō's place — would walk the very same path, once she realized that her predecessor's fate was only a matter of time before it became her own. For both women, cutting their hair was not surrender but the highest existential rebellion available to a woman of that age — reclaiming control over their own lives from the grip of a man who never once had to ask.</span>
+    </p>
+
+    <p class="reveal">
+      <span class="t-id">Namun tahun yang sama membawa keputusan yang oleh sejarawan dianggap kesalahan taktis terbesarnya: memindahkan ibu kota dari Kyoto ke Fukuhara, kota pelabuhan kecil dekat Kobe sekarang, tempat ia telah lama membangun ambisi dagangnya dengan Dinasti Song di Tiongkok. Langkah itu memutusnya dari basis kekuatan simbolisnya sendiri dan dibatalkan hanya beberapa bulan kemudian. Tak lama setelah itu, menanggapi pemberontakan para biksu bersenjata di Nara, ia memerintahkan pembakaran kompleks Kuil Tōdai-ji dan Kōfuku-ji — penistaan yang tak termaafkan di mata rakyat, dan sejak hari itu doa-doa provinsi perlahan berbalik mendukung klan Minamoto yang sedang bangkit di timur.</span>
+      <span class="t-en">Yet that same year brought a decision historians consider his greatest tactical error: moving the capital from Kyoto to Fukuhara, a small port town near present-day Kobe, where he had long nursed trade ambitions with Song-dynasty China. The move cut him off from his own symbolic base of power and was reversed within months. Shortly after, responding to a revolt by armed monks in Nara, he ordered the burning of the Tōdai-ji and Kōfuku-ji temple complexes — a sacrilege the people never forgave, and from that day the provinces' prayers slowly turned toward the rising Minamoto clan in the east.</span>
+    </p>
+
+    <p class="reveal">
+      <span class="t-id">Yang membuat kejatuhan ini terasa begitu tragis adalah betapa jauhnya jarak antara Kiyomori muda dan Kiyomori di puncak kekuasaannya. Pemuda yang dulu muak melihat korupsi istana dan bertekad mengangkat martabat samurai yang direndahkan sebagai anjing penjaga, kini justru memimpin klan yang meniru persis gaya hidup dekaden para bangsawan yang dulu ia benci — menghitamkan gigi mengikuti mode istana, mengenakan sutra berlapis-lapis, dan menjelma tiran yang jauh lebih kejam daripada bangsawan mana pun yang pernah mereka gantikan. Nilai etis yang paling keras diajarkan babak ini adalah mujō: bahwa keangkuhan dan keterpisahan seorang penguasa dari penderitaan rakyatnya adalah benih pasti bagi kehancurannya sendiri. Klan Taira tidak hancur karena klan Minamoto lebih kuat di medan perang; mereka hancur karena membusuk dari dalam, jauh sebelum satu pedang pun terhunus di Dan-no-ura.</span>
+      <span class="t-en">What makes this fall feel so tragic is the sheer distance between the young Kiyomori and the Kiyomori at the height of his power. The young man once sickened by court corruption, determined to raise the dignity of samurai treated as guard dogs, now led a clan that mimicked precisely the decadent lifestyle of the aristocrats he once despised — blackening their teeth in court fashion, draping themselves in layers of silk, and becoming tyrants far crueler than any noble house they had replaced. The harshest ethical lesson this chapter teaches is mujō: that a ruler's arrogance and detachment from his people's suffering is the surest seed of his own ruin. The Taira did not fall because the Minamoto were stronger on the battlefield; they fell because they had rotted from within, long before a single sword was drawn at Dan-no-ura.</span>
+    </p>
+
+    <p class="divider-quote reveal"><span class="t-id">Watak yang membawanya naik adalah watak yang sama yang membutakannya di puncak.</span><span class="t-en">The very nature that carried him upward was the same nature that blinded him at the summit.</span></p>
+
+    <p class="reveal">
+      <span class="t-id">Kiyomori muda adalah orang yang disiplin membaca peluang — sabar menghitung siapa yang perlu dirangkul dan siapa yang perlu disingkirkan. Disiplin itu luruh seiring usia dan kekuasaan: dalam catatan-catatan sezaman ia digambarkan kian temperamental, gampang tersinggung oleh kritik, mulai memerintah lewat rasa takut ketimbang legitimasi. Putra sulungnya, Taira no Shigemori, adalah kompas moral klan yang tersiksa oleh pertentangan batin antara oya-kō — bakti seorang anak pada ayahnya — dan chū, kesetiaan pada Kaisar yang ayahnya sendiri perlahan kudeta dari dalam. Berulang kali ia memohon Kiyomori menahan diri, terjepit di antara dua kesetiaan yang saling meniadakan, dan ketika ia wafat muda, catatan-catatan sezaman menyiratkan bahwa yang menghancurkannya bukan luka fisik, melainkan jiwa yang remuk menanggung beban dosa ayahnya sendiri — suara moral dalam keluarga yang padam lebih dulu, meninggalkan Kiyomori tanpa pengekang batin yang tersisa. Istrinya, Taira no Tokiko, yang dikenang sebagai Nun Nii, adalah figur yang cukup berpengaruh untuk ikut mengasuh cucu mereka — dan kesetiaan itu terbukti sampai titik paling menghancurkan: di Dan-no-ura, ketika segalanya telah kalah, Tokiko sendiri yang memeluk sang cucu dan terjun bersamanya ke laut, memilih tenggelam bersama daripada menyerahkannya hidup-hidup pada musuh.</span>
+      <span class="t-en">The young Kiyomori was a disciplined reader of opportunity — patient in calculating whom to embrace and whom to remove. That discipline eroded with age and power: contemporary records describe him growing increasingly volatile, easily wounded by criticism, ruling more through fear than legitimacy. His eldest son, Taira no Shigemori, was the clan's moral compass, tormented by the conflict between oya-kō — a child's devotion to his father — and chū, loyalty to the very Emperor his father was slowly deposing from within. Again and again he begged Kiyomori for restraint, caught between two loyalties that canceled each other out, and when he died young, contemporary accounts suggest what destroyed him was not physical injury but a soul crushed under the weight of his own father's sins — the family's moral voice extinguished first, leaving Kiyomori with no inner restraint left at all. His wife, Taira no Tokiko, remembered as the Nun of the Second Rank, was influential enough to help raise their grandson — and her loyalty proved itself at the most devastating moment: at Dan-no-ura, with everything already lost, it was Tokiko herself who embraced the boy and leapt with him into the sea, choosing to drown together rather than hand him over alive to the enemy.</span>
+    </p>
+
+    <p class="reveal">
+      <span class="t-id">Kiyomori sendiri tak sempat menyaksikan keruntuhan itu. Ia wafat pada 1181 karena demam tinggi, tepat ketika Perang Genpei baru meletus, dan menurut catatan Heike Monogatari, kata-kata terakhirnya bukan penyesalan, melainkan perintah agar kepala Yoritomo dipenggal dan diletakkan di makamnya — defiansi sampai napas terakhir dari seorang lelaki yang tak pernah benar-benar berhenti merasa dirinya benar. Anak yang ia ampuni empat belas tahun sebelumnya sudah tumbuh menjadi ancaman yang tak lagi bisa ia hentikan — dan warisan sesungguhnya dari lonceng Gion Shōja bukan sekadar peringatan tentang kefanaan, melainkan tentang bagaimana kebaikan hati yang salah tempat bisa menjadi kesalahan paling mahal dalam sejarah.</span>
+      <span class="t-en">Kiyomori himself never lived to witness that collapse. He died in 1181 of a raging fever, just as the Genpei War was breaking out, and according to the Tale of the Heike, his last words were not remorse but an order that Yoritomo's head be severed and placed upon his grave — defiance to his final breath from a man who never truly stopped believing himself right. The boy he had pardoned fourteen years earlier had grown into a threat he could no longer stop — and the true legacy of the bell of Gion Shōja is not merely a warning about impermanence, but a lesson in how mercy placed in the wrong spot can become history's most expensive mistake.</span>
+    </p>
+  </div>
+</section>
+
+<section id="bab2">
+  <div class="wrap">
+    <div class="chapter-locator reveal"><span class="t-id">BAB II · 1159–1189 · Kurama, Ichi-no-Tani, Yashima, Dan-no-ura, Kamakura, Hiraizumi</span><span class="t-en">PART II · 1159–1189 · Kurama, Ichi-no-Tani, Yashima, Dan-no-ura, Kamakura, Hiraizumi</span></div>
+    <h2 class="reveal">
+      <span class="t-id">Yang Dicintai Semua Orang, Kecuali Kakaknya Sendiri<span class="sub">Minamoto no Yoshitsune, dan kejeniusan yang tak berguna di ruang yang salah</span></span>
+      <span class="t-en">Loved by Everyone Except His Own Brother<span class="sub">Minamoto no Yoshitsune, and a genius that counted for nothing in the wrong room</span></span>
+    </h2>
+
+    <p class="reveal">
+      <span class="t-id">Kehidupan Yoshitsune sejak bayi sudah ditentukan oleh pengorbanan seorang perempuan: ibunya, Tokiwa Gozen, yang setelah suaminya kalah dan tewas dalam Heiji, memilih menyerahkan diri kepada pihak pemenang — sebagian catatan bahkan menyebutnya masuk ke rumah tangga Kiyomori sendiri — semata demi menyelamatkan nyawa ketiga putranya, termasuk Yoshitsune yang masih bayi. Ia tumbuh mengetahui bahwa hidupnya adalah hasil pengorbanan yang tak pernah benar-benar bisa dibayar, dan barangkali sebagian dari keberaniannya yang nyaris nekat di medan perang kelak lahir dari keinginan membuktikan bahwa pengorbanan itu tidak sia-sia. Dititipkan di Kuil Kurama di pinggiran Kyoto, ia tumbuh dengan bakat militer yang nyaris tak masuk akal — cepat membaca medan, berani mengambil risiko yang oleh jenderal lain dianggap gila, naluri melihat celah di mana orang lain hanya melihat tembok.</span>
+      <span class="t-en">Yoshitsune's life was shaped from infancy by one woman's sacrifice: his mother, Tokiwa Gozen, who after her husband's defeat and death in the Heiji Rebellion chose to surrender herself to the victors — some accounts even place her within Kiyomori's own household — solely to save the lives of her three sons, including the infant Yoshitsune. He grew up knowing his life was the product of a debt that could never truly be repaid, and perhaps some of his near-reckless courage on the battlefield was born from a need to prove that sacrifice had not been wasted. Placed at Kurama Temple on the outskirts of Kyoto, he grew into a military talent that bordered on the unreasonable — reading terrain instantly, taking risks other generals called insane, an instinct for seeing gaps where everyone else saw only walls.</span>
+    </p>
+
+    <p class="reveal">
+      <span class="t-id">Ia bergabung dengan pemberontakan Yoritomo pada 1180 dan dalam hitungan tahun menjadi jenderal paling ditakuti pihak Minamoto. Di Ichi-no-Tani (1184), ia memimpin sekelompok kecil pasukan menuruni tebing curam Hiyodorigoe yang oleh pihak Taira dianggap mustahil dilalui pasukan berkuda — serangan dari arah yang tak pernah diperhitungkan lawan. Setahun kemudian di Yashima, taktik serupa kembali membuahkan kemenangan telak. Puncaknya adalah Dan-no-ura (1185), pertempuran laut yang menuntaskan klan Taira selamanya — menurut sejumlah catatan, ia memerintahkan pasukannya menyerang para pendayung perahu musuh, bukan hanya prajuritnya, pelanggaran etika perang laut yang dianggap tak ksatria namun efektif secara telak. Kaisar Antoku yang masih kanak-kanak tenggelam bersama neneknya dalam pertempuran ini, membawa serta salah satu dari tiga pusaka suci kekaisaran ke dasar laut.</span>
+      <span class="t-en">He joined Yoritomo's uprising in 1180 and within years became the most feared general on the Minamoto side. At Ichi-no-Tani (1184), he led a small force down the sheer Hiyodorigoe cliff, a descent the Taira considered impossible for mounted troops — an attack from a direction the enemy had never accounted for. A year later at Yashima, a similar tactic again produced a crushing victory. The climax came at Dan-no-ura (1185), the naval battle that finished the Taira clan forever — by some accounts, he ordered his men to strike the enemy's boatmen rather than only their warriors, a violation of naval combat etiquette considered unchivalrous yet devastatingly effective. The child-emperor Antoku drowned with his grandmother in this battle, carrying one of the three sacred imperial treasures down to the sea floor with him.</span>
+    </p>
+
+    <p class="reveal">
+      <span class="t-id">Justru setelah kemenangan gemilang itulah keretakan dengan Yoritomo dimulai. Yoshitsune menerima gelar kehormatan dari Kaisar Go-Shirakawa tanpa izin lebih dulu dari kakaknya — pelanggaran protokol yang, bagi Yoritomo yang tengah membangun rezim militer independen dari campur tangan istana, terbaca sebagai ancaman. Ketika Yoshitsune datang ke Kamakura untuk memberi penghormatan, Yoritomo bahkan menolak mengizinkannya masuk kota, memaksanya menunggu di Koshigoe — penghinaan yang menandai titik tanpa jalan kembali.</span>
+      <span class="t-en">It was precisely after that glittering victory that the rift with Yoritomo began. Yoshitsune accepted an honorary court title from Emperor Go-Shirakawa without first seeking his brother's permission — a breach of protocol that, to a Yoritomo busy building a military regime independent of court interference, read as a threat. When Yoshitsune came to Kamakura to pay his respects, Yoritomo refused to even let him enter the city, forcing him to wait at Koshigoe — a humiliation that marked the point of no return.</span>
+    </p>
+
+    <p class="divider-quote reveal"><span class="t-id">Ia memenangkan setiap pertempuran, lalu kalah pada satu-satunya pertarungan yang benar-benar berarti: memenangkan hati kakaknya sendiri.</span><span class="t-en">He won every battle, then lost the only fight that ever truly mattered: winning his own brother's heart.</span></p>
+
+    <p class="reveal">
+      <span class="t-id">Kisah cintanya yang paling dikenang, dan paling menyayat, adalah dengan Shizuka Gozen, seorang penari shirabyōshi yang menjadi pendampingnya di masa jaya sekaligus menemaninya dalam pelarian pertama. Ketika rombongan mereka terpisah di tengah pengejaran, Shizuka tertangkap dan dibawa ke Kamakura, tempat Yoritomo memaksanya menari di hadapan seluruh istana meski ia tengah mengandung anak Yoshitsune. Ketika bayi itu lahir laki-laki, Yoritomo memerintahkan bayi tersebut dibunuh, memastikan tak ada garis keturunan Yoshitsune yang kelak bisa menuntut balas. Dinyatakan buron oleh kakaknya sendiri, Yoshitsune melarikan diri ke Ōshū, mencari perlindungan Fujiwara no Hidehira di Hiraizumi. Namun setelah Hidehira wafat, putranya Yasuhira, di bawah tekanan besar dari Yoritomo, berbalik mengkhianati tamu yang seharusnya ia lindungi.</span>
+      <span class="t-en">His most remembered, and most heartbreaking, romance was with Shizuka Gozen, a shirabyōshi dancer who was his companion in his glory days and who accompanied him through his first flight. When their party was scattered mid-pursuit, Shizuka was captured and brought to Kamakura, where Yoritomo forced her to dance before the entire court even as she carried Yoshitsune's child. When the baby was born a boy, Yoritomo ordered the infant killed, ensuring no bloodline of Yoshitsune's could ever rise to claim vengeance. Declared an outlaw by his own brother, Yoshitsune fled to Ōshū, seeking the protection of Fujiwara no Hidehira in Hiraizumi. But after Hidehira's death, his son Yasuhira, under immense pressure from Yoritomo, turned and betrayed the very guest he was sworn to protect.</span>
+    </p>
+
+    <p class="reveal">
+      <span class="t-id">Pada 1189, di kediaman Koromogawa, pasukan Yasuhira mengepung tempat tinggal Yoshitsune. Menurut legenda yang paling banyak diceritakan ulang, pengawal setianya, biksu-prajurit Benkei, berdiri sendirian di jembatan menahan gelombang penyerang hingga tubuhnya tertancap panah dan tetap berdiri tegak — memberi waktu bagi Yoshitsune untuk mengakhiri hidup istrinya, Putri Kawagoe, dan anak perempuan mereka, sebelum melakukan seppuku di dalam. Tindakan itu, oleh etika samurai, dianggap belas kasih terakhir agar keduanya tak jatuh ke tangan musuh — tetapi tetap tercatat sebagai salah satu adegan paling gelap dalam seluruh kisah. Di luar ikatan darah maupun asmara, ada pula kesetiaan Benkei: bukan cinta romantis, melainkan sesuatu yang oleh banyak pembaca dianggap setara dengannya — seorang lelaki yang memilih mati berdiri demi memberi waktu bagi tuan yang ia sayangi melebihi nyawanya sendiri. Begitu populernya kesedihan atas nasib Yoshitsune sehingga ia melahirkan istilah hōgan-biiki dalam bahasa Jepang — kecenderungan budaya untuk berpihak pada yang kalah namun mulia, bertahan hingga kesenian Noh, Kabuki, dan sastra populer berabad-abad sesudahnya.</span>
+      <span class="t-en">In 1189, at the Koromogawa residence, Yasuhira's forces laid siege to Yoshitsune's dwelling. According to the most retold legend, his loyal retainer, the warrior-monk Benkei, stood alone on the bridge holding back wave after wave of attackers until his body, pierced through with arrows, still stood upright — buying Yoshitsune the time to end the lives of his wife, the Lady Kawagoe, and their daughter, before committing seppuku inside. By samurai ethics, that act was considered a final mercy sparing them from falling into enemy hands — yet it remains one of the darkest scenes in the entire epic. Beyond blood and romance, there is also Benkei's loyalty: not romantic love, but something many readers consider its equal — a man who chose to die standing in order to buy time for a master he loved more than his own life. So beloved was the grief over Yoshitsune's fate that it gave rise to the Japanese term hōgan-biiki — a cultural tendency to side with the noble loser — enduring through Noh, Kabuki, and popular literature for centuries after.</span>
+    </p>
+  </div>
+</section>
+
+<div class="interlude reveal">
+  <div class="wrap">
+    <div class="glyph">◆</div>
+    <p>
+      <span class="t-id">Yoritomo mendirikan Keshogunan Kamakura pada 1192, memisahkan kekuasaan militer dari istana untuk pertama kalinya. Tetapi pemerintahan yang rapuh ini, tanpa institusi yang cukup kuat mengikat provinsi, perlahan retak selama tiga abad — hingga Perang Onin (1467) meledakkan Jepang menjadi ratusan wilayah yang saling menyerang. Zaman Negara-Negara Berperang telah dimulai, dan di tengahnyalah seorang anak petani tanpa nama akan lahir.</span>
+      <span class="t-en">Yoritomo founded the Kamakura Shogunate in 1192, separating military power from the court for the first time. But this fragile government, lacking institutions strong enough to bind the provinces together, slowly cracked apart over three centuries — until the Ōnin War (1467) shattered Japan into hundreds of warring territories. The Age of Warring States had begun, and into its midst a nameless farmer's son would be born.</span>
+    </p>
+  </div>
+</div>
+
+<section id="bab3">
+  <div class="wrap">
+    <div class="chapter-locator reveal"><span class="t-id">BAB III · 1537–1598 · Nakamura, Kiyosu, Gifu, Himeji, Takamatsu, Yamazaki, Osaka, Odawara, Nagoya (Hizen), Semenanjung Korea, Fushimi</span><span class="t-en">PART III · 1537–1598 · Nakamura, Kiyosu, Gifu, Himeji, Takamatsu, Yamazaki, Osaka, Odawara, Nagoya (Hizen), the Korean Peninsula, Fushimi</span></div>
+    <h2 class="reveal">
+      <span class="t-id">Dari Bayang Monyet ke Singgasana Matahari<span class="sub">Toyotomi Hideyoshi, dan keping yang tak pernah cukup untuk mengisi luka masa kecilnya</span></span>
+      <span class="t-en">From the Shadow of a Monkey to the Throne of the Sun<span class="sub">Toyotomi Hideyoshi, and a wound from childhood no amount of glory could ever fill</span></span>
+    </h2>
+
+    <p class="reveal">
+      <span class="t-id">Hideyoshi lahir di Nakamura, provinsi Owari, dari keluarga petani tanpa marga, tanpa apa pun yang bisa diwariskan selain tubuh kecil dan wajah yang oleh orang-orang sezamannya — termasuk Nobunaga sendiri — dijuluki menyerupai monyet. Dalam masyarakat yang begitu ketat membedakan kelas berdasarkan kelahiran, ejekan itu bukan sekadar gurauan; ia pengingat harian tentang batas yang seharusnya tak pernah bisa ia lampaui. Justru dari titik paling rendah itulah kepribadiannya terbentuk: bukan kekuatan fisik atau garis keturunan, melainkan kecepatan membaca orang lain dan kemauan melakukan hal-hal kecil dengan sempurna sampai orang berkuasa tak punya pilihan selain memperhatikannya. Kisah yang paling sering diceritakan — bagaimana ia menghangatkan sandal Nobunaga di balik jubahnya sendiri di tengah dinginnya malam — barangkali telah dibumbui legenda, tetapi ia menangkap inti seluruh strategi hidupnya: melakukan lebih dari yang diminta, tepat pada momen paling terlihat.</span>
+      <span class="t-en">Hideyoshi was born in Nakamura, Owari province, into a farming family with no surname and nothing to inherit but a small frame and a face his contemporaries — Nobunaga included — nicknamed monkey-like. In a society that drew class lines so strictly by birth, the taunt was no mere joke; it was a daily reminder of a boundary he was never meant to cross. It was precisely from that lowest point that his character was forged: not physical strength or bloodline, but a speed for reading other people and a willingness to do small things perfectly until powerful men had no choice but to notice him. The most retold story — how he warmed Nobunaga's sandals inside his own robe on a cold night — may well be embellished legend, but it captures the essence of his entire life strategy: doing more than what was asked, at the exact moment it would be seen.</span>
+    </p>
+
+    <p class="reveal">
+      <span class="t-id">Pernikahannya dengan Nene — perempuan dari keluarga samurai kelas menengah yang jauh lebih terhormat daripada asal-usulnya sendiri — sering disebut sebagai pernikahan cinta yang tak lazim untuk zamannya, dilangsungkan bertahun-tahun sebelum ia menjadi siapa-siapa. Berbeda dari kebanyakan pernikahan politik para daimyo, hubungan mereka tumbuh menjadi kemitraan sungguhan: Nene dikenal berani menegurnya langsung, dipercaya mengelola diplomasi dengan istri-istri jenderal lain, dan tetap menjadi figur yang ia hormati bahkan setelah kekuasaannya mengumpulkan banyak selir di sekelilingnya.</span>
+      <span class="t-en">His marriage to Nene — a woman from a mid-ranking samurai family far more respectable than his own origins — is often called a love match unusual for its time, entered into years before he was anyone at all. Unlike most daimyo marriages built for politics, their relationship grew into a genuine partnership: Nene was known to scold him directly, was trusted to manage diplomacy with other generals' wives, and remained a figure he respected even after his rising power surrounded him with many concubines.</span>
+    </p>
+
+    <p class="reveal">
+      <span class="t-id">Setelah membuktikan diri lewat tugas-tugas kecil di Kiyosu, Hideyoshi mendapat kepercayaan besar pertamanya ketika, menurut legenda, ia membangun benteng Sunomata dalam semalam di wilayah musuh — prestasi logistik yang lebih penting daripada kehebatan bertarungnya, dan sejak itu Nobunaga mulai memberinya komando lapangan sungguhan. Kariernya matang di kampanye Chūgoku, tempat ia menunjukkan bakat yang jarang dimiliki panglima lain: kesabaran psikologis. Pengepungan Tottori (1581) ia menangkan lewat kelaparan yang direncanakan cermat — sebelumnya ia diam-diam memborong seluruh stok beras di sekitar dengan harga tinggi. Setahun kemudian di Takamatsu, ia membendung sungai di sekitar benteng dan membanjirinya secara sengaja, mengubah medan perang menjadi danau.</span>
+      <span class="t-en">After proving himself through small tasks at Kiyosu, Hideyoshi earned his first great trust when, legend says, he built the Sunomata fortress overnight in enemy territory — a feat of logistics more significant than any battlefield skill, and from then on Nobunaga began giving him real field command. His career matured during the Chūgoku campaign, where he displayed a talent rare among generals: psychological patience. He won the siege of Tottori (1581) through carefully engineered starvation — having quietly bought up all the surrounding rice stock at inflated prices beforehand. A year later at Takamatsu, he dammed the rivers around the fortress and deliberately flooded it, turning the battlefield into a lake.</span>
+    </p>
+
+    <p class="reveal">
+      <span class="t-id">Tak satu pun dari kelicikan itu murni miliknya sendiri. Di sisinya berdiri dua otak yang oleh orang-orang sezamannya dijuluki "Dua Ahli Strategi Agung": Takenaka Hanbei dan Kuroda Kanbei. Hanbei direkrut lewat kesabaran yang menyerupai legenda — Hideyoshi konon mendatangi pertapaan gunungnya berkali-kali sebelum sang ahli strategi yang sakit-sakitan itu bersedia meninggalkan klan Saitō dan mengabdi padanya, mengajarkan Hideyoshi bahwa kecerdikan sejati kadang membutuhkan kesabaran yang jauh lebih lama daripada kesabaran menghangatkan sandal. Hanbei wafat karena tuberkulosis di tengah pengepungan Miki pada 1579, sebelum sempat menyaksikan puncak karier orang yang ia besarkan lewat pemikiran — sebuah duka yang jarang dicatat namun nyata. Kuroda Kanbei mengisi kekosongan itu dengan cara yang lebih keras: setahun lebih dulu, saat diutus bernegosiasi dengan pemberontak Araki Murashige, ia dikhianati dan dikurung dalam penjara bawah tanah selama setahun penuh, dianggap mati atau berkhianat oleh Nobunaga sendiri — yang bahkan sempat memerintahkan putra Kanbei dibunuh sebagai sandera, hanya diselamatkan lewat campur tangan diam-diam Hanbei. Kanbei keluar dari penjara itu cacat fisik namun jauh lebih tajam pikirannya, dan kelak menjadi otak di balik manuver-manuver tercepat Hideyoshi — begitu tajam sehingga di kemudian hari baik Hideyoshi maupun Ieyasu diam-diam mencurigainya, khawatir kecerdasan seorang Kanbei, jika diberi ambisi yang cukup, bisa merebut seluruh negeri untuk dirinya sendiri.</span>
+      <span class="t-en">None of that cunning was purely his own. At his side stood two minds contemporaries called the "Two Great Strategists": Takenaka Hanbei and Kuroda Kanbei. Hanbei was won over through a patience bordering on legend — Hideyoshi reportedly visited his mountain retreat again and again before the frail strategist agreed to leave the Saitō clan and serve him, teaching Hideyoshi that true cunning sometimes demands far more patience than warming a sandal ever did. Hanbei died of tuberculosis in the midst of the siege of Miki in 1579, never living to see the peak of the career he had shaped through pure intellect — a grief rarely recorded yet entirely real. Kuroda Kanbei filled that void in a far harsher way: a year earlier, sent to negotiate with the rebel Araki Murashige, he was betrayed and locked in an underground cell for a full year, presumed dead or traitorous by Nobunaga himself — who even ordered Kanbei's own son killed as a hostage, saved only by Hanbei's quiet intervention. Kanbei emerged from that prison physically crippled but far sharper in mind, later becoming the brain behind Hideyoshi's fastest maneuvers — so sharp that both Hideyoshi and, later, Ieyasu privately feared him, worried that a mind like Kanbei's, given enough ambition, could seize the entire country for himself.</span>
+    </p>
+
+    <p class="reveal">
+      <span class="t-id">Lalu datang malam yang mengubah segalanya. Pada 21 Juni 1582, saat Hideyoshi mengepung Takamatsu, Nobunaga dikhianati dan dibunuh oleh Akechi Mitsuhide di Kuil Honnō-ji. Hideyoshi mendapat kabar itu lebih dulu daripada pihak musuh yang sedang ia kepung — dan dengan kepala dingin luar biasa, ia menyembunyikan berita kematian Nobunaga, buru-buru menegosiasikan gencatan senjata dengan klan Mōri yang masih belum tahu apa-apa, lalu menarik seluruh pasukannya secepat mungkin. Yang terjadi berikutnya, Chūgoku Ōgaeshi, pawai balik raksasa sejauh lebih dari dua ratus kilometer ditempuh hanya dalam beberapa hari — kecepatan yang oleh lawannya dianggap mustahil secara logistik. Tiga belas hari setelah kematian Nobunaga, di Yamazaki, ia menghancurkan pasukan Mitsuhide dan menuntaskan balas dendam yang seharusnya menjadi hak jenderal senior lain yang jauh dari medan saat itu — sebab Shibata Katsuie masih terikat pertempuran di utara dan Tokugawa Ieyasu sedang melintasi wilayah asing dengan pengawalan minim. Kesigapannya bertemu keberuntungan dalam hitungan jam yang nyaris tak masuk akal.</span>
+      <span class="t-en">Then came the night that changed everything. On 21 June 1582, while Hideyoshi besieged Takamatsu, Nobunaga was betrayed and killed by Akechi Mitsuhide at Honnō-ji Temple. Hideyoshi received the news before the very enemy he was besieging did — and with extraordinary composure, he concealed Nobunaga's death, hastily negotiated a truce with the still-oblivious Mōri clan, then withdrew his entire army as fast as possible. What followed, the Chūgoku Ōgaeshi, a colossal return march of more than two hundred kilometers covered in mere days, was a speed his enemies considered logistically impossible. Thirteen days after Nobunaga's death, at Yamazaki, he crushed Mitsuhide's forces and claimed a revenge that should have belonged to other senior generals far from the field at the time — since Shibata Katsuie was still tied down fighting in the north and Tokugawa Ieyasu was crossing foreign territory with a bare escort. His readiness met luck within a window of hours that barely made sense.</span>
+    </p>
+
+    <p class="reveal">
+      <span class="t-id">Kemenangan itu memberinya modal untuk memenangkan pertarungan berikutnya di meja perundingan: Konferensi Kiyosu, tempat ia mendorong pengangkatan cucu bayi Nobunaga sebagai pewaris simbolis, sementara kekuasaan riil jatuh ke tangannya sendiri, mengalahkan pengaruh Katsuie sebelum satu pedang pun terhunus. Katsuie akhirnya dikalahkan sungguhan di Shizugatake (1583) — dan bersamanya turut tewas Oichi, saudari Nobunaga, yang telah menjadi istri keduanya di Kastil Kitanoshō. Terhadap rival berikutnya, Tokugawa Ieyasu, setelah Komaki-Nagakute (1584) berakhir tanpa pemenang jelas, Hideyoshi memilih merangkul ketimbang menghancurkan — bahkan mengirim ibunya sendiri, Naka, sebagai sandera kehormatan untuk meyakinkan Ieyasu bergabung sebagai sekutu. Keputusan itu, penuh kasih pada sang ibu sekaligus perhitungan politik dingin, kelak terbukti sebagai kesalahan paling menentukan dalam warisannya.</span>
+      <span class="t-en">That victory gave him the capital to win the next contest at the negotiating table: the Kiyosu Conference, where he pushed for Nobunaga's infant grandson to be named symbolic heir, while real power fell into his own hands, defeating Katsuie's influence before a single sword was drawn. Katsuie was finally beaten for real at Shizugatake (1583) — and with him died Oichi, Nobunaga's sister, who had become his second wife at Kitanoshō Castle. Against his next rival, Tokugawa Ieyasu, after Komaki-Nagakute (1584) ended without a clear winner, Hideyoshi chose to embrace rather than destroy — even sending his own mother, Naka, as an honored hostage to convince Ieyasu to join as an ally. That decision, full of genuine love for his mother yet coldly calculated politically, would later prove the most decisive mistake of his entire legacy.</span>
+    </p>
+
+    <p class="reveal">
+      <span class="t-id">Kemenangan di Shizugatake juga melahirkan sebuah legenda tersendiri: tujuh prajurit muda yang bertarung paling gigih di hari itu, dikenang sejarah sebagai "Tujuh Tombak Shizugatake," dan dua di antaranya akan mengiringi seluruh sisa hidup Hideyoshi. Katō Kiyomasa dan Fukushima Masanori adalah kerabat jauh dan kenalan masa kecilnya dari Owari, dibesarkan dalam lingkaran kepercayaannya sejak sebelum ia menjadi siapa-siapa, dan tumbuh menjadi jenderal-jenderal yang lebih mempercayai keringat dan pedang ketimbang meja perundingan. Di sisi lain lingkaran itu berdiri Maeda Toshiie, sahabat seperjuangan sejak zaman mengabdi pada Nobunaga, satu dari sedikit orang yang kesetiaannya pada Hideyoshi tak pernah sekalipun goyah — dan yang kelak, di ranjang kematian Hideyoshi, dipercaya sebagai salah satu wali bagi putranya yang masih kanak-kanak. Ketiganya tampak seperti jaminan bahwa warisan Hideyoshi akan aman di tangan orang-orang yang mencintainya secara tulus, bukan sekadar tunduk pada kekuasaannya — sebuah jaminan yang, bertahun-tahun kemudian, akan diuji dengan cara paling pahit.</span>
+      <span class="t-en">The victory at Shizugatake also birthed its own legend: seven young warriors who fought hardest that day, remembered in history as the "Seven Spears of Shizugatake," two of whom would accompany Hideyoshi for the rest of his life. Katō Kiyomasa and Fukushima Masanori were distant relatives and childhood acquaintances of his from Owari, raised inside his circle of trust since before he was anyone at all, growing into generals who trusted sweat and steel far more than any negotiating table. Standing at another edge of that circle was Maeda Toshiie, a comrade-in-arms since their days serving Nobunaga, one of the very few whose loyalty to Hideyoshi never once wavered — and who, at Hideyoshi's deathbed, would be entrusted as one of the guardians of his young son. The three of them looked like proof that Hideyoshi's legacy would rest safely in the hands of men who loved him sincerely, not merely bowed to his power — a proof that, years later, would be tested in the most bitter way.</span>
+    </p>
+
+    <p class="reveal">
+      <span class="t-id">Tahun 1585 ia diangkat Kampaku, Regent Kekaisaran — jabatan tertinggi yang pernah dipegang siapa pun berdarah bukan bangsawan, sesuatu yang bisa ia capai hanya dengan merekayasa silsilahnya sendiri, mengklaim keturunan Fujiwara — kebohongan kecil yang mengungkap luka besar yang tak pernah sembuh sejak masa kanak-kanaknya di Nakamura. Dua tahun kemudian, kampanye Kyūshū (1587) menundukkan klan Shimazu di ujung selatan negeri, dan pada 1590, pengepungan Odawara menundukkan klan Hōjō yang kuat di timur — menuntaskan penyatuan Jepang untuk pertama kalinya sejak berabad-abad.</span>
+      <span class="t-en">In 1585 he was appointed Kampaku, Imperial Regent — the highest post ever held by a man of non-noble blood, something he could only achieve by fabricating his own lineage, claiming descent from the Fujiwara — a small lie exposing a large wound that had never healed since his childhood in Nakamura. Two years later, the Kyūshū campaign (1587) subdued the Shimazu clan at the nation's southern tip, and in 1590 the siege of Odawara crushed the powerful Hōjō clan in the east — completing the unification of Japan for the first time in centuries.</span>
+    </p>
+
+    <p class="reveal">
+      <span class="t-id">Di puncak kekuasaan itu, ada satu orang lagi yang membentuk sisi Hideyoshi yang jarang disorot: Sen no Rikyū, empu upacara minum teh yang menjadi penasihat estetikanya. Di bawah bimbingan Rikyū, Hideyoshi yang gemar pamer — pemilik ruang minum teh berlapis emas yang menyilaukan — belajar juga menghargai wabi-sabi, kesahajaan yang justru menemukan keindahan dalam ketidaksempurnaan dan kesunyian. Kontradiksi itu — kemewahan emas berdampingan dengan mangkuk teh retak yang dipuja karena kesederhanaannya — barangkali menggambarkan Hideyoshi lebih jujur daripada catatan perang mana pun. Namun bahkan kedekatan itu berakhir tragis: pada 1591, tahun yang sama dengan kematian putranya Tsurumatsu, Hideyoshi memerintahkan Rikyū melakukan seppuku, atas alasan yang tak pernah sepenuhnya jelas — sebagian menyebut sebuah patung kayu dirinya yang dipajang di gerbang kuil dianggap tak sopan, sebagian lain menduga kecemburuan atas pengaruh Rikyū yang mulai menyaingi pengaruhnya sendiri. Dua kematian di tahun yang sama itu — seorang anak dan seorang guru batin — tampak menjadi titik pecahnya sesuatu dalam diri Hideyoshi yang tak pernah tersambung kembali.</span>
+      <span class="t-en">At the height of that power stood one more figure who shaped a rarely noticed side of Hideyoshi: Sen no Rikyū, the tea master who became his aesthetic advisor. Under Rikyū's guidance, Hideyoshi the showman — owner of a blindingly gold-leafed tea room — also learned to cherish wabi-sabi, the austerity that finds beauty precisely in imperfection and silence. That contradiction — gilded excess standing beside a cracked tea bowl prized for its plainness — perhaps portrays Hideyoshi more honestly than any war record ever could. Yet even that closeness ended in tragedy: in 1591, the same year his son Tsurumatsu died, Hideyoshi ordered Rikyū to commit seppuku, for reasons never fully clear — some point to a wooden statue of himself displayed at a temple gate deemed disrespectful, others suspect jealousy over an influence beginning to rival his own. Two deaths in the same year — a child and a spiritual teacher — seem to mark the point where something inside Hideyoshi broke and never reconnected.</span>
+    </p>
+
+    <p class="divider-quote reveal"><span class="t-id">Kerinduannya akan pengakuan membawanya ke puncak; kerinduannya akan keturunan yang menghancurkannya di sana.</span><span class="t-en">His hunger for recognition carried him to the summit; his hunger for an heir destroyed him there.</span></p>
+
+    <p class="reveal">
+      <span class="t-id">Namun di puncak itulah luka lamanya kembali terbuka, kali ini lewat jalan yang berbeda. Hubungannya dengan selir paling berpengaruhnya, Chacha — kelak Yodo-dono, putri Oichi dan Azai Nagamasa, panglima yang tewas dalam pengepungan yang melibatkan pasukan di bawah komandonya sendiri — dibayangi sesuatu yang tak pernah diucapkan: ia secara tidak langsung terlibat dalam kematian kedua orang tua perempuan yang kelak menjadi ibu dari anak biologisnya. Kematian putra pertamanya, Tsurumatsu, pada 1591 di usia dua tahun meruntuhkan sesuatu dalam dirinya yang tak pernah sepenuhnya pulih.</span>
+      <span class="t-en">Yet it was at the summit that his old wound reopened, this time through a different door. His relationship with his most influential consort, Chacha — later Yodo-dono, daughter of Oichi and Azai Nagamasa, a commander who died in a siege involving forces under his own command — was shadowed by something never spoken aloud: he was indirectly involved in the deaths of both parents of the woman who would become the mother of his biological son. The death of his first son, Tsurumatsu, in 1591 at age two, broke something in him that never fully healed.</span>
+    </p>
+
+    <p class="reveal">
+      <span class="t-id">Duka itulah yang oleh banyak sejarawan diduga mempercepat keputusan paling merusak dalam seluruh kariernya. Hanya beberapa bulan setelah pemakaman Tsurumatsu, Hideyoshi mengumumkan rencana yang oleh siapa pun di sekelilingnya dianggap megalomania murni: menaklukkan Semenanjung Korea, lalu Dinasti Ming di Tiongkok, lalu — dalam surat-suratnya sendiri — bahkan India. Di balik ambisi yang terdengar seperti igauan itu ada perhitungan yang lebih dingin: ia baru saja menyatukan ratusan ribu prajurit dari klan-klan yang selama satu abad saling membantai, dan tak seorang pun tahu ke mana harus menyalurkan energi dan kesetiaan pasukan sebesar itu begitu tak ada lagi musuh domestik untuk diperangi. Menyerang ke luar adalah, dalam logika kekuasaannya, jauh lebih aman daripada membiarkan ratusan ribu pedang menganggur di dalam negeri.</span>
+      <span class="t-en">That grief is what many historians believe accelerated the most destructive decision of his entire career. Only months after Tsurumatsu's funeral, Hideyoshi announced a plan that everyone around him considered pure megalomania: conquering the Korean Peninsula, then the Ming Dynasty in China, then — in his own letters — even India. Behind an ambition that sounded like delirium lay a colder calculation: he had just unified hundreds of thousands of soldiers from clans that had slaughtered one another for a century, and no one knew where to channel the energy and loyalty of a force that size once there was no more domestic enemy left to fight. Striking outward was, in the logic of his power, far safer than leaving hundreds of thousands of idle swords at home.</span>
+    </p>
+
+    <p class="reveal">
+      <span class="t-id">Invasi pertama, Bunroku no Eki, mendarat di Busan pada musim semi 1592 dan pada awalnya berjalan hampir sempurna: dalam hitungan minggu, pasukan Jepang menembus Hanseong (Seoul) lalu Pyongyang, sebuah kecepatan penaklukan yang nyaris menyamai pawai kilat Hideyoshi sendiri di masa muda. Namun kecepatan itu ditopang oleh persaingan yang beracun antara dua jenderal garis depan: Konishi Yukinaga, seorang daimyo Kristen yang lebih menyukai jalan negosiasi, dan Katō Kiyomasa — salah satu dari Tujuh Tombak Shizugatake yang telah mengiringi Hideyoshi sejak muda — yang justru mendorong pasukannya semakin jauh ke utara mengejar kemuliaan pribadi, hingga hampir menembus perbatasan Manchuria demi mengejar seorang pangeran Korea yang sudah lama menghilang. Persaingan pribadi dua orang inilah yang mulai meretakkan koordinasi seluruh kampanye dari dalam.</span>
+      <span class="t-en">The first invasion, the Bunroku Campaign, landed at Busan in the spring of 1592 and initially went almost perfectly: within weeks, Japanese forces pushed through Hanseong (Seoul) and then Pyongyang, a speed of conquest that nearly matched Hideyoshi's own lightning marches in his youth. But that speed was propped up by a poisonous rivalry between two frontline generals: Konishi Yukinaga, a Christian daimyo who preferred the path of negotiation, and Katō Kiyomasa — one of the Seven Spears of Shizugatake who had accompanied Hideyoshi since his youth — who instead pushed his troops ever further north chasing personal glory, nearly reaching the Manchurian border in pursuit of a long-vanished Korean prince. It was this personal rivalry between the two that began to crack the entire campaign's coordination from within.</span>
+    </p>
+
+    <p class="reveal">
+      <span class="t-id">Keretakan itu diperparah oleh dua kekuatan yang tak sepenuhnya diperhitungkan Hideyoshi dari istananya yang jauh di Nagoya, Hizen — pangkalan raksasa yang ia bangun khusus untuk mengawasi perang dari seberang laut. Di darat, pasukan rakyat Korea yang tak terlatih namun tak kenal lelah, para uibyeong atau "pasukan benar," terus mengganggu jalur logistik Jepang dari balik bukit dan hutan. Di laut, Laksamana Yi Sun-sin — dengan kapal kura-kura lapis bajanya yang jauh lebih unggul dari kapal Jepang mana pun — menghancurkan armada pasokan Jepang berkali-kali, memutus jalur suplai yang seharusnya menopang pasukan darat yang sudah terlalu jauh menembus wilayah asing. Ketika Dinasti Ming akhirnya mengirim bala bantuan besar-besaran pada awal 1593, pasukan Jepang yang kehabisan logistik terpaksa mundur ke pesisir selatan, dan perang pun membeku menjadi kebuntuan berkepanjangan.</span>
+      <span class="t-en">That crack was worsened by two forces Hideyoshi never fully accounted for from his distant headquarters at Nagoya, Hizen — a giant base he built specifically to oversee the war from across the sea. On land, untrained but tireless Korean militias, the uibyeong or "righteous armies," kept harassing Japanese supply lines from behind hills and forests. At sea, Admiral Yi Sun-sin — with turtle ships far superior to any Japanese vessel — repeatedly annihilated Japan's supply fleets, cutting the lifeline that was meant to sustain ground forces already stretched too far into foreign territory. When the Ming Dynasty finally sent massive reinforcements in early 1593, the logistically starved Japanese army was forced back to the southern coast, and the war froze into prolonged stalemate.</span>
+    </p>
+
+    <p class="reveal">
+      <span class="t-id">Perundingan damai yang menyusul (1593–1596) berubah menjadi tragikomedi diplomatik: tuntutan Hideyoshi — menikahkan puterinya sendiri dengan kaisar Tiongkok, membagi Semenanjung Korea menjadi dua — begitu jauh dari kenyataan di lapangan sehingga para perunding di kedua belah pihak, termasuk penerjemah dari kubu Konishi, akhirnya memalsukan dokumen "penyerahan diri" dari pihak Ming demi menyelamatkan muka semua orang. Ketika kebohongan itu terbongkar pada 1596, kemarahan Hideyoshi meledak, dan ia memerintahkan invasi kedua, Keichō no Eki, pada 1597 — kali ini jauh lebih brutal, ditandai dengan perintah mengumpulkan hidung dan telinga korban sebagai pengganti kepala untuk dihitung sebagai bukti jasa perang, yang kemudian dikuburkan di Kyoto dalam sebuah gundukan yang hingga kini masih berdiri, dikenal sebagai Mimizuka, Gundukan Telinga.</span>
+      <span class="t-en">The peace negotiations that followed (1593–1596) turned into a diplomatic tragicomedy: Hideyoshi's demands — marrying his own daughter to the Chinese emperor, dividing the Korean Peninsula in two — were so detached from reality on the ground that negotiators on both sides, including Konishi's own translator, eventually forged a "surrender" document from the Ming side just to save everyone's face. When that deception was uncovered in 1596, Hideyoshi's fury exploded, and he ordered a second invasion, the Keichō Campaign, in 1597 — this time far more brutal, marked by an order to collect the noses and ears of the dead in place of heads as proof of military merit, later buried in Kyoto under a mound still standing today, known as Mimizuka, the Mound of Ears.</span>
+    </p>
+
+    <p class="reveal">
+      <span class="t-id">Invasi kedua ini pun tak pernah benar-benar berhasil. Yi Sun-sin, yang sempat dipecat akibat fitnah politik di istananya sendiri lalu dipanggil kembali dalam keadaan darurat, mencatat salah satu kemenangan laut paling legendaris dalam sejarah di Selat Myeongnyang (1597) — menghancurkan armada Jepang yang berjumlah lebih dari seratus kapal hanya dengan tiga belas kapalnya sendiri. Perang membeku kembali menjadi kebuntuan berdarah di sepanjang pesisir selatan Korea, tanpa satu jengkal pun wilayah yang benar-benar berhasil dipertahankan Jepang, sampai kematian Hideyoshi di Fushimi pada September 1598 akhirnya memberi Dewan Lima Tetua alasan untuk memerintahkan penarikan penuh seluruh pasukan.</span>
+      <span class="t-en">This second invasion, too, never truly succeeded. Yi Sun-sin, briefly dismissed after political slander at his own court then recalled in an emergency, recorded one of the most legendary naval victories in history at the Strait of Myeongnyang (1597) — destroying a Japanese fleet of more than a hundred ships with only thirteen of his own. The war froze again into a bloody stalemate along Korea's southern coast, with not a single stretch of territory truly held by Japan, until Hideyoshi's death at Fushimi in September 1598 finally gave the Council of Five Elders reason to order a full withdrawal of all forces.</span>
+    </p>
+
+    <p class="reveal">
+      <span class="t-id">Perang yang tak pernah punya tujuan yang jelas selain memuaskan luka pribadi dan menyalurkan kelebihan energi militer itu menghabiskan ratusan ribu nyawa di kedua belah pihak tanpa hasil apa pun bagi Jepang — dan pulang membawa sesuatu yang jauh lebih berbahaya bagi warisan Hideyoshi daripada kekalahan itu sendiri: kepahitan. Katō Kiyomasa dan Fukushima Masanori, yang telah mempertaruhkan nyawa mereka bertahun-tahun di medan perang asing yang mustahil dimenangkan, pulang untuk mendapati bahwa Ishida Mitsunari dan para administrator lain di Osaka yang tak pernah menginjak tanah Korea justru mendapat pujian dan pengaruh yang lebih besar di istana. Kebencian antara faksi prajurit garis depan dan faksi birokrat istana ini bukan sekadar gesekan kecil — ia adalah retakan yang, dua tahun kemudian, akan membelah dua Jepang di Sekigahara, dengan Kiyomasa dan Fukushima memilih berdiri di pihak Tokugawa Ieyasu semata-mata karena tak sanggup lagi berdiri sejajar dengan Mitsunari.</span>
+      <span class="t-en">A war that never had a clear purpose beyond satisfying a private wound and channeling surplus military energy consumed hundreds of thousands of lives on both sides with nothing to show for Japan — and it brought home something far more dangerous to Hideyoshi's legacy than defeat itself: bitterness. Katō Kiyomasa and Fukushima Masanori, who had staked their lives for years on a foreign battlefield impossible to win, came home to find Ishida Mitsunari and other Osaka administrators who had never set foot in Korea receiving greater praise and influence at court. The resentment between the frontline warrior faction and the court bureaucrat faction was no small friction — it was a fault line that, two years later, would split Japan in two at Sekigahara, with Kiyomasa and Fukushima choosing to stand with Tokugawa Ieyasu simply because they could no longer stand beside Mitsunari.</span>
+    </p>
+
+    <p class="reveal">
+      <span class="t-id">Di tengah kekacauan perang yang jauh itu, tragedi domestik yang tak kalah gelap justru terjadi di rumahnya sendiri. Ketika Hideyori lahir pada 1593 dari rahim Chacha, kerinduan Hideyoshi akan keturunan yang dulu membuatnya begitu pengasih berubah menjadi ketakutan posesif yang mengerikan. Dua tahun kemudian ia mengorbankan keponakannya sendiri, Hidetsugu — yang telah ia besarkan seperti anak dan tunjuk sebagai pewaris resmi sejak sebelum Hideyori lahir — memerintahkannya melakukan seppuku, diikuti pembantaian seluruh istri dan anak-anaknya, demi memastikan jalan bagi darah dagingnya sendiri tak terganjal siapa pun. Perang di luar negeri dan pembantaian di dalam istana, keduanya lahir dari akar yang sama: seorang lelaki tua yang tak lagi sanggup membedakan antara melindungi warisannya dan menghancurkan segala yang menghalanginya.</span>
+      <span class="t-en">Amid that distant war's chaos, a domestic tragedy no less dark was unfolding in his own house. When Hideyori was born in 1593 from Chacha's womb, Hideyoshi's longing for an heir, which had once made him so tender, curdled into a terrifying possessive fear. Two years later he sacrificed his own nephew, Hidetsugu — whom he had raised like a son and named official heir before Hideyori's birth — ordering him to commit seppuku, followed by the slaughter of his entire wife and children, to ensure the path for his own bloodline was cleared of anyone in its way. The war abroad and the massacre at home both grew from the same root: an old man no longer able to tell the difference between protecting his legacy and destroying everything standing in its path.</span>
+    </p>
+
+    <p class="reveal">
+      <span class="t-id">Hideyoshi wafat di Kastil Fushimi pada 1598, meninggalkan pesan-pesan putus asa kepada Dewan Lima Tetua untuk melindungi putranya yang baru berusia lima tahun. Warisan institusionalnya — katanagari, survei tanah nasional yang memisahkan permanen kelas petani dari samurai — akan membentuk struktur sosial Jepang selama dua setengah abad berikutnya, jauh melampaui usianya sendiri. Tetapi warisan darahnya tidak seberuntung itu: dua tahun setelah kematiannya, di Sekigahara, segala yang ia bangun runtuh ke tangan orang yang justru pernah ia pilih untuk dirangkul, bukan dihancurkan.</span>
+      <span class="t-en">Hideyoshi died at Fushimi Castle in 1598, leaving desperate messages to the Council of Five Elders to protect his five-year-old son. His institutional legacy — katanagari, the national land surveys that permanently separated the farming class from the samurai — would shape Japan's social structure for the next two and a half centuries, far outliving him. But his bloodline was not so fortunate: two years after his death, at Sekigahara, everything he built collapsed into the hands of the very man he had once chosen to embrace rather than destroy.</span>
+    </p>
+  </div>
+</section>
+
+<div class="interlude reveal">
+  <div class="wrap">
+    <div class="glyph">◆</div>
+    <p>
+      <span class="t-id">Kematian Hideyoshi menyisakan kekosongan yang pecah tepat di sepanjang garis retak yang telah lama terbentuk sejak perang Korea: di satu sisi Tokugawa Ieyasu, ditopang jenderal-jenderal garis depan seperti Katō Kiyomasa dan Fukushima Masanori yang masih menyimpan dendam pada istana; di sisi lain Ishida Mitsunari, administrator setia yang tak pernah diragukan kesetiaannya pada mendiang tuannya, tetapi juga tak pernah dimaafkan oleh mereka yang telah bertaruh nyawa di seberang laut. Kedua kubu bertemu di Sekigahara, 21 Oktober 1600 — dan sebagian pasukan yang berbalik memihak Ieyasu di tengah pertempuran itu adalah orang-orang yang kesetiaannya pada Toyotomi telah lama retak sejak kepulangan mereka dari Korea. Kemenangan Ieyasu melahirkan Keshogunan Tokugawa dan membawa damai mendadak ke negeri yang selama beberapa generasi hanya mengenal perang, menyisakan ratusan ribu prajurit tanpa tuan — sebagian dari mereka bekas pasukan Toyotomi yang kalah — yang kini harus mencari alasan baru untuk hidup.</span>
+      <span class="t-en">Hideyoshi's death left a vacuum that split exactly along the fault line long formed since the Korean war: on one side, Tokugawa Ieyasu, backed by frontline generals like Katō Kiyomasa and Fukushima Masanori who still nursed grievances against the court; on the other, Ishida Mitsunari, a loyal administrator whose devotion to his late lord was never in question, yet never forgiven by those who had staked their lives across the sea. The two camps met at Sekigahara, 21 October 1600 — and some of the troops who switched to Ieyasu's side mid-battle were men whose loyalty to the Toyotomi had long cracked since their return from Korea. Ieyasu's victory birthed the Tokugawa Shogunate and brought sudden peace to a land that had known nothing but war for generations, leaving behind hundreds of thousands of masterless soldiers — many of them defeated former Toyotomi troops — who now had to find a new reason to live.</span>
+    </p>
+  </div>
+</div>
+
+<section id="bab4">
+  <div class="wrap">
+    <div class="chapter-locator reveal"><span class="t-id">BAB IV · ±1584–1645 · Sekigahara, Himeji, Kyoto (Ichijōji), Lembah Yagyū, Hotengahara, Ganryū-jima, Kumamoto</span><span class="t-en">PART IV · c.1584–1645 · Sekigahara, Himeji, Kyoto (Ichijōji), the Yagyū Valley, Hotengahara, Ganryū Island, Kumamoto</span></div>
+    <h2 class="reveal">
+      <span class="t-id">Dayung Kayu dan Kesunyian yang Dipilih<span class="sub">Miyamoto Musashi, dan pedang yang berhenti mencari musuh</span></span>
+      <span class="t-en">A Wooden Oar and a Chosen Silence<span class="sub">Miyamoto Musashi, and a sword that stopped searching for enemies</span></span>
+    </h2>
+
+    <p class="reveal">
+      <span class="t-id">Sebelum ada Musashi, ada Takezo — dan Takezo, dalam bulan-bulan setelah Sekigahara, adalah binatang yang diburu. Ia selamat dari pertempuran yang kalah, pulang ke desa yang menolaknya, dan yang tersisa dari dirinya hanyalah kemarahan: perisai yang ia pasang di atas ketakutan dan kekosongan identitas yang tak sanggup ia hadapi telanjang. Dunia baginya terbelah dua secara mutlak — membunuh atau dibunuh — dan pedang di tangannya bukan jalan kebijaksanaan, melainkan sekadar alat pemuas dahaga bertahan hidup tanpa kompas moral sama sekali. Sebagian dari kemarahan itu berakar jauh sebelum perang, dari rumah: hubungannya dengan ayahnya, Shinmen Munisai, digambarkan penuh ketegangan sejak kecil, seorang ayah keras yang menuntut kesempurnaan teknik pedang tanpa banyak kehangatan. Warga desa dan aparat yang memburunya dengan tombak dan jerat hanya memperkuat satu-satunya bahasa yang ia kenal: melawan.</span>
+      <span class="t-en">Before there was Musashi, there was Takezo — and Takezo, in the months after Sekigahara, was a hunted animal. He survived a losing battle, came home to a village that rejected him, and all that remained of him was rage: a shield he raised over a fear and an empty identity he could not face bare. The world for him split absolutely in two — kill or be killed — and the sword in his hand was not a path to wisdom, only a tool to satisfy the thirst for survival, with no moral compass whatsoever. Some of that rage was rooted long before the war, at home: his relationship with his father, Shinmen Munisai, is described as tense since childhood, a harsh father demanding perfect swordsmanship with little warmth. The villagers and officials who hunted him with spears and snares only reinforced the one language he knew: fighting back.</span>
+    </p>
+
+    <p class="reveal">
+      <span class="t-id">Yang menghentikan Takezo bukan kekuatan yang lebih besar, melainkan seorang biksu bernama Takuan Sōhō, yang mendekatinya bukan dengan kelembutan, melainkan dengan terapi kejut ala Zen — keras, tanpa ampun, tetapi berakar pada welas asih yang dalam. Takuan menggantung Takezo di sebatang pohon kriptomeria selama berhari-hari, membiarkannya berteriak minta dibunuh ketika harga dirinya sudah hancur total, dan dengan sengaja mengabaikan teriakan itu. Pelajaran yang ia paksakan begitu sederhana sekaligus begitu kejam: menyerah pada kematian itu mudah, bahkan pengecut; hidup untuk sebuah tujuan yang lebih luhur adalah ujian sesungguhnya bagi seorang lelaki. Di ambang lapar dan ambang maut itulah, untuk pertama kalinya, Takezo menangisi hidupnya sendiri dan benar-benar ingin hidup.</span>
+      <span class="t-en">What stopped Takezo was not a greater force but a monk named Takuan Sōhō, who approached him not with gentleness but with a Zen shock therapy — harsh, merciless, yet rooted in deep compassion. Takuan hung Takezo from a cryptomeria tree for days, letting him scream to be killed once his pride had utterly shattered, and deliberately ignoring those screams. The lesson he forced was as simple as it was cruel: surrendering to death is easy, even cowardly; living for a higher purpose is a man's true test. On the edge of starvation and death, for the first time, Takezo wept for his own life and truly wanted to live.</span>
+    </p>
+
+    <p class="reveal">
+      <span class="t-id">Penyelamatan fisik itu lalu diikuti karantina spiritual yang jauh lebih panjang: tiga tahun terkurung di menara buku Kastil Himeji. Takuan tahu energi liar semacam itu tak bisa sekadar ditekan; ia harus dialihkan. Dipaksa membaca literatur klasik, sejarah, dan filsafat Tiongkok-Jepang dalam kesunyian total, Takezo perlahan "mati" secara simbolis — ego hewaninya kelaparan sampai padam, sementara pengetahuannya meluas hingga ia sampai pada satu pengakuan yang mengguncang: semesta ini terlalu luas untuk ditaklukkan hanya dengan otot dan pedang. Ketika ia keluar dari menara itu, Takuan memberinya nama baru — Miyamoto Musashi — sebuah pembaptisan pencerahan. Takezo si berandalan telah tiada; yang tersisa adalah seorang pencari kebenaran.</span>
+      <span class="t-en">That physical rescue was followed by a far longer spiritual quarantine: three years locked in the book tower of Himeji Castle. Takuan knew wild energy like that could not simply be suppressed; it had to be redirected. Forced to read classical literature, history, and Chinese-Japanese philosophy in total silence, Takezo slowly "died" in a symbolic sense — his animal ego starved until it went out, while his knowledge widened until he arrived at one shaking realization: the universe is too vast to be conquered by muscle and sword alone. When he emerged from that tower, Takuan gave him a new name — Miyamoto Musashi — a baptism into enlightenment. Takezo the thug was gone; what remained was a seeker of truth.</span>
+    </p>
+
+    <p class="reveal">
+      <span class="t-id">Namun pencerahan bukan garis akhir, melainkan awal ujian yang lebih halus. Dalam pengembaraannya, musha shugyō, Musashi menantang perguruan demi perguruan — para ahli tombak di Hōzōin, ahli rantai-sabit Baiken, dan yang paling menentukan, klan Yoshioka di Kyoto, perguruan pedang paling dihormati kota itu. Setelah mengalahkan kepala perguruan lalu adiknya, ia dihadapkan pengkhianatan: seluruh murid Yoshioka menyergapnya beramai-ramai di Ichijōji, memaksanya membantai puluhan orang sekaligus demi bertahan hidup. Titik baliknya bukan kemenangan itu sendiri, melainkan yang ia lihat sesudahnya — darah seorang bocah, Yoshioka Matashichirō, yang terpaksa ia bunuh di tengah kekacauan itu. Di hadapan tubuh kecil itu, Musashi menyadari sesuatu yang tak terbantahkan: puncak ilmu pedang yang hanya mengandalkan dominasi teknis adalah kebodohan yang tragis. Kebencian dan kejayaan fisik, ia pahami untuk pertama kalinya, hanyalah ilusi.</span>
+      <span class="t-en">But enlightenment was not a finish line, only the beginning of a subtler trial. On his wandering pilgrimage, musha shugyō, Musashi challenged school after school — the spear masters of Hōzōin, the chain-and-sickle expert Baiken, and most decisively, the Yoshioka clan of Kyoto, the city's most respected school of the sword. After defeating its head master and then his younger brother, he faced betrayal: the entire remaining body of Yoshioka students ambushed him at once at Ichijōji, forcing him to cut down dozens at once just to survive. The turning point was not the victory itself, but what he saw afterward — the blood of a child, Yoshioka Matashichirō, whom he was forced to kill in the chaos. Standing over that small body, Musashi understood something undeniable: the height of swordsmanship built only on technical dominance is a tragic foolishness. Hatred and physical glory, he grasped for the first time, are only illusions.</span>
+    </p>
+
+    <p class="divider-quote reveal"><span class="t-id">Setiap kemenangan hanya membawanya pada kekosongan yang baru.</span><span class="t-en">Every victory only carried him toward a new emptiness.</span></p>
+
+    <p class="reveal">
+      <span class="t-id">Berdampingan dengan luka itu, ada cermin gelap yang mengajarkan Musashi apa yang harus ia hindari: Matahachi, kawan masa kecil yang menempuh jalan berlawanan. Di setiap kesempatan, Matahachi menyerah — pada kelemahan fisik, pada godaan dua perempuan yang silih berganti mengisi hidupnya, pada kebohongan demi kebohongan yang ia rangkai untuk membenarkan dirinya sendiri. Bagi Musashi, Matahachi bukan objek untuk dihina. Setiap kali ia menyaksikan kejatuhan moral sahabatnya itu, yang muncul bukan rasa jijik, melainkan kecemasan yang bercampur empati — sebab Matahachi mengingatkannya betapa tipisnya batas antara menjadi tuan bagi diri sendiri dan menjadi budak nafsu semata. Dalam artian itu, Matahachi mengajarkan sesuatu yang tak bisa diajarkan Takuan sekalipun: kerendahan hati untuk tak pernah merasa telah selesai.</span>
+      <span class="t-en">Alongside that wound stood a dark mirror teaching Musashi exactly what to avoid: Matahachi, a childhood friend who walked the opposite path. At every turn, Matahachi surrendered — to physical weakness, to the temptations of two women who drifted in and out of his life, to lie after lie strung together to justify himself. To Musashi, Matahachi was never an object of contempt. Each time he witnessed his old friend's moral collapse, what rose in him was not disgust but an anxious empathy — because Matahachi reminded him how thin the line truly was between mastering oneself and becoming a slave to mere appetite. In that sense, Matahachi taught him something even Takuan could not: the humility to never believe oneself finished.</span>
+    </p>
+
+    <p class="part-mark reveal"><span class="t-id">Otsu — Yin di Antara Dua Pedang</span><span class="t-en">Otsu — Yin Between Two Swords</span></p>
+
+    <p class="reveal">
+      <span class="t-id">Jika Matahachi mengajarkan Musashi kerapuhan macam apa yang harus ia hindari, ada satu sosok lain yang mengajarkannya kelembutan macam apa yang boleh ia terima tanpa harus tunduk padanya sepenuhnya: Otsu — perempuan yang, secara kebetulan, dulunya bertunangan dengan Matahachi sendiri sebelum ditinggalkan begitu saja, dan yang sejak itu mencintai Musashi dengan kesetiaan yang nyaris tak masuk akal. Musashi mencintainya — itu tak pernah benar-benar disangkal dalam kisah ini — tetapi ia selalu melarikan diri setiap kali jarak mereka menyempit. Pelarian itu bukan kedinginan hati, melainkan ketakutan yang jauh lebih dalam: ia sadar bahwa memiliki cinta Otsu berarti menambatkan jiwanya pada kenyamanan duniawi, menghentikan pencariannya sendiri akan Jalan Pedang. Yoshikawa tak pernah memberi kisah ini penutup romantis ala dongeng. Otsu tetap menjadi sisi lembut, yin, yang menyeimbangkan pedang keras Musashi yang yang — dan penantiannya yang tanpa syarat, tahun demi tahun, diam-diam melatih Musashi memahami welas asih yang tak bisa diajarkan lewat pedang mana pun. Apakah penantian itu tragedi pengorbanan yang tak pernah tuntas, atau justru bentuk cinta tertinggi di mana dua jiwa telah menyatu secara batin tanpa perlu keterikatan fisik — pertanyaan itu sengaja dibiarkan terbuka, sebagaimana kehidupan nyata jarang memberi jawaban rapi.</span>
+      <span class="t-en">If Matahachi taught Musashi what fragility to avoid, one other figure taught him what tenderness he was allowed to receive without having to submit to it entirely: Otsu — a woman who, as it happens, had once been engaged to Matahachi himself before being abandoned outright, and who from then on loved Musashi with a loyalty that bordered on the unreasonable. Musashi loved her — this is never truly denied in the story — yet he always fled the moment the distance between them narrowed. That flight was not coldness of heart but a far deeper fear: he knew that possessing Otsu's love meant anchoring his soul to worldly comfort, halting his own search for the Way of the Sword. Yoshikawa never gives this story a fairy-tale romantic ending. Otsu remains the soft side, the yin, balancing Musashi's hard yang blade — and her unconditional waiting, year after year, quietly trained Musashi to understand a compassion no sword could ever teach. Whether that waiting was an unfinished tragedy of sacrifice, or the highest form of love in which two souls had already merged inwardly without needing physical attachment, is a question deliberately left open — much as real life rarely offers a tidy answer.</span>
+    </p>
+
+    <p class="reveal">
+      <span class="t-id">Kelembutan yang ia pelajari dari penantian Otsu itulah, barangkali, yang membuatnya cukup rendah hati untuk menerima pukulan telak berikutnya — bukan dari pedang lawan mana pun, melainkan dari setangkai bunga peoni.</span>
+      <span class="t-en">It was perhaps that very tenderness, learned from Otsu's waiting, which left him humble enough to absorb the next decisive blow — not from any rival's blade, but from a single stalk of peony.</span>
+    </p>
+
+    <p class="reveal">
+      <span class="t-id">Membara oleh ego untuk menantang Yagyū Sekishusai, pendiri aliran Yagyū Shinkage-ryū yang di masa tuanya telah menanggalkan identitas sebagai petarung haus darah dan memilih menyatu dengan taman serta kehalusan seni, Musashi datang ke lembah Yagyū dengan niat berduel. Sang guru tua tak pernah menemuinya. Sebagai jawaban, ia hanya mengirimkan setangkai peoni yang baru saja dipotongnya sendiri. Musashi mengamati bekas potongan pada tangkai itu, dan tubuhnya gemetar: sayatannya begitu halus, begitu sempurna, hingga serat-serat lembut tanaman itu tak sedikit pun rusak. Ia tahu, sebagaimana setiap pendekar tahu, bahwa pedang yang diayunkan dengan ambisi atau niat membunuh — sakki — akan selalu meninggalkan jejak paksaan, sekecil apa pun benda yang dipotongnya. Potongan sesempurna itu hanya mungkin lahir dari mushin, pikiran yang benar-benar kosong dari keinginan untuk memotong — pedang, tangan, dan bunga melebur jadi satu ritme alam, pedang yang telah berevolusi dari alat penghancur menjadi instrumen keselarasan. Menghadapi kelembutan itu, Musashi mengalami kekalahan tanpa sehelai pedang pun terhunus: ia sadar jika nekat berduel, ia tak akan berhadapan dengan daging dan tulang, melainkan dengan alam semesta itu sendiri — dan pedangnya sendiri, ia akui dalam hati, masih berbau darah dan ambisi. Ia menundukkan kepala, mengurungkan niatnya, dan pergi dari lembah itu dengan kerendahan hati yang sama sekali baru.</span>
+      <span class="t-en">Burning with ego to challenge Yagyū Sekishusai, founder of the Yagyū Shinkage-ryū who in his old age had shed his identity as a blood-hungry fighter to become one with his garden and the refinements of art, Musashi arrived in the Yagyū valley intending to duel. The old master never met him. Instead, he sent only a single peony stalk he had just cut himself. Musashi examined the cut on that stalk, and his body trembled: the incision was so fine, so perfect, that not a single delicate fiber of the plant had been torn. He knew, as every swordsman knows, that a blade swung with ambition or killing intent — sakki — always leaves a mark of force, no matter how small the object it cuts. A cut that perfect could only be born of mushin, a mind utterly empty of any desire to cut — sword, hand, and flower merging into a single rhythm of nature, a blade that had evolved from an instrument of destruction into one of harmony. Facing that gentleness, Musashi suffered defeat without a single blade drawn: he understood that if he dared duel, he would face not flesh and bone but the universe itself — and his own sword, he admitted inwardly, still smelled of blood and ambition. He bowed his head, abandoned his challenge, and left the valley with an entirely new humility.</span>
+    </p>
+
+    <p class="reveal">
+      <span class="t-id">Dari kerendahan hati itulah babak paling menentukan dalam pembentukan jiwanya dimulai: bukan di medan duel, melainkan di ladang tandus Hotengahara, tempat ia memilih menetap dan bertani bersama seorang bocah yang ia asuh, Miyamoto Iori. Di sanalah ia menemukan bahwa mengayunkan pedang untuk membunuh jauh lebih mudah dan instan dibanding mengayunkan cangkul untuk merawat kehidupan. Sepanjang pengembaraannya, pedangnya berfungsi sebagai satsujinken — alat pencabut nyawa untuk bertahan hidup dan membuktikan dominasi. Menumbuhkan benih dari tanah yang semula mati menggeser pemahamannya secara mendasar: kekuatan sejati bukan pada kemampuan menghancurkan, melainkan pada kemampuan melindungi dan menyelaraskan kehidupan — katsujinken, pedang yang menghidupkan. Di medan duel, kemauan keras dan teknik bisa mengalahkan lawan; tetapi di ladang, pedang tertajam dan tekad terkuat sama sekali tak berdaya membelah banjir, mengusir kekeringan, atau mempercepat datangnya musim semi. Alam memaksanya menanggalkan arogansi yang tersisa, memunculkan kerendahan hati yang jauh lebih murni daripada yang bisa diajarkan oleh kekalahan di tangan manusia mana pun. Pertarungan masa mudanya lahir dari ritme reaktif — membalas serangan dengan ketegangan; bertani menuntut kesabaran yang sepenuhnya tunduk pada ritme bumi, melembutkan ilmu pedangnya menjadi gerakan yang mengalir tanpa tegangan ego. Dan hidup berdampingan dengan Iori serta petani desa yang berjuang melawan kemiskinan mengembalikan sisi kemanusiaannya — ia tak lagi ronin yang terasing dalam gelembung ambisi sendiri, melainkan seseorang yang kembali terhubung dengan penderitaan bersama dan tanggung jawab sosial.</span>
+      <span class="t-en">From that humility began the most decisive chapter in the shaping of his soul: not on a dueling ground, but on the barren fields of Hotengahara, where he chose to settle and farm alongside a boy he took in, Miyamoto Iori. There he discovered that swinging a sword to kill is far easier and swifter than swinging a hoe to nurture life. Throughout his wandering, his sword had functioned as satsujinken — an instrument for taking life, for survival and proving dominance. Growing seed from soil that once seemed dead fundamentally shifted his understanding: true strength lies not in the capacity to destroy but in the capacity to protect and harmonize life — katsujinken, the life-giving sword. On a dueling ground, willpower and technique can defeat an opponent; but in a field, the sharpest blade and the strongest resolve are utterly powerless to part a flood, banish a drought, or hasten the coming of spring. Nature forced him to shed what arrogance remained, birthing a humility far purer than any defeat at human hands could ever teach. His fighting in youth was born of a reactive rhythm — answering attack with tension; farming demanded a patience wholly submissive to the earth's own rhythm, softening his swordsmanship into movement that flowed free of ego's tension. And living alongside Iori and village farmers struggling against poverty restored his humanity — he was no longer a ronin isolated in his own bubble of ambition, but someone reconnected to shared suffering and social responsibility.</span>
+    </p>
+
+    <p class="reveal">
+      <span class="t-id">Ketika akhirnya ia meletakkan cangkulnya dan melangkah menuju Pulau Ganryū untuk menghadapi Sasaki Kojirō pada 1612, Musashi bukan lagi seniman bela diri yang haus pembuktian. Ia telah menjadi seperti alam itu sendiri: kosong dari niat membunuh, setenang air yang dalam, tak tergoyahkan oleh provokasi apa pun. Duel itu, pada akhirnya, bukan sekadar adu presisi fisik, melainkan benturan dua filosofi eksistensial. Kojirō tiba dengan pakaian sutra mewah, representasi keterikatannya pada status dan validasi eksternal — ia bertarung untuk membuktikan superioritas, dan keterikatan pada hasil itu membuatnya reaktif, terbebani tuntutan untuk tampil sempurna. Musashi datang dengan pakaian sederhana dan rambut acak-acakan, telah melampaui ilusi kemenangan ego lewat isolasi panjang dan penyelarasan dengan ritme alam — pikirannya merdeka dari kecemasan akan hidup atau mati, bebas bereaksi murni sesuai kebutuhan momen.</span>
+      <span class="t-en">When he finally set down his hoe and walked toward Ganryū Island to face Sasaki Kojirō in 1612, Musashi was no longer a martial artist hungry for proof. He had become like nature itself: empty of killing intent, still as deep water, unshaken by any provocation. That duel, in the end, was not merely a contest of physical precision but a collision of two existential philosophies. Kojirō arrived in luxurious silk, an embodiment of his attachment to status and external validation — he fought to prove superiority, and that attachment to outcome made him reactive, burdened by the demand to appear flawless. Musashi arrived in plain clothes with disheveled hair, having transcended the illusion of ego's victory through long isolation and alignment with nature's rhythm — his mind free of any anxiety over life or death, free to react purely to what the moment required.</span>
+    </p>
+
+    <p class="reveal">
+      <span class="t-id">Ia sengaja datang terlambat berjam-jam — bagi Kojirō yang begitu mengagungkan kehormatan dan formalitas samurai, keterlambatan itu penghinaan tajam yang menggerogoti ketenangan batinnya jauh sebelum pedang terhunus. Alih-alih katana baja, Musashi meraut sebilah dayung perahu sepanjang perjalanan menuju pulau, dengan presisi menjadikannya sedikit lebih panjang dari nodachi Kojirō — menetralisir satu-satunya keunggulan jangkauan lawannya, sekaligus menghancurkan harga dirinya: menghadapi pendekar legendaris yang hanya bersenjatakan sisa kayu adalah penghinaan yang memicu kemarahan fatal. Dan ketika Kojirō menghunus pedangnya lalu membuang sarungnya ke laut karena murka, Musashi melontarkan serangan mental terakhir: seorang pemenang, katanya, tak akan pernah membuang sarung pedangnya. Kalimat itu memecah fokus Kojirō di detik paling krusial. Sabetan Tsubame Gaeshi andalannya hanya memotong ikat kepala Musashi, meleset karena posisi berdiri dan silau matahari laut telah diperhitungkan lebih dulu; dayung kayu Musashi, sebaliknya, mendarat dengan gravitasi dan kekuatan murni yang bebas dari ketegangan emosi apa pun. Penguasaan teknis tertinggi, pada akhirnya, tetap tunduk pada kendali mutlak atas pikiran.</span>
+      <span class="t-en">He deliberately arrived hours late — to a Kojirō who so revered samurai honor and formality, that lateness was a sharp insult eroding his inner calm long before any blade was drawn. Instead of a steel katana, Musashi had carved a boat oar during the crossing to the island, precisely shaping it slightly longer than Kojirō's nodachi — neutralizing his opponent's only advantage in reach, while shattering his pride at the same time: facing a legendary swordsman armed with nothing but scrap wood was an insult that lit a fatal rage. And when Kojirō drew his blade and, in fury, threw his scabbard into the sea, Musashi delivered his final mental blow: a true winner, he said, never throws away his own scabbard. That single line shattered Kojirō's focus at the most crucial second. His signature Tsubame Gaeshi cut only grazed Musashi's headband, missing because his stance and the sea's glare had already been calculated in advance; Musashi's wooden oar, by contrast, landed with pure gravity and force, entirely free of emotional tension. The highest technical mastery, in the end, still bows to absolute command over the mind.</span>
+    </p>
+
+    <p class="divider-quote reveal"><span class="t-id">Ketika membunuh tak lagi jadi ukuran seorang lelaki, satu-satunya medan yang tersisa adalah dirinya sendiri.</span><span class="t-en">Once killing is no longer the measure of a man, the only battlefield left is himself.</span></p>
+
+    <p class="reveal">
+      <span class="t-id">Setelah Ganryū-jima, tak ada lagi duel yang perlu ia menangkan. Ia menarik diri ke dalam disiplin seni — lukisan tinta, patung, kaligrafi, taman — menerapkan kejernihan dan ketepatan yang sama yang dulu ia gunakan di medan duel. Dari empat tokoh dalam kisah ini, Musashi tetap satu-satunya yang catatan hidupnya nyaris kosong dari asmara yang terkonsumasi: ia tak pernah menikah, tak meninggalkan anak kandung, kekosongan yang terasa seperti pilihan sadar, bukan kebetulan nasib — cinta yang ia curahkan lebih banyak tertuju pada disiplin itu sendiri. Namun kasihnya pada Iori yang ia besarkan meski bukan darah dagingnya, dan penantian Otsu yang tak pernah ia balas penuh, membuktikan bahwa pelepasannya bukan ketiadaan rasa, melainkan rasa yang dipilih untuk tak pernah dimiliki.</span>
+      <span class="t-en">After Ganryū-jima, there was no longer any duel left for him to win. He withdrew into the discipline of art — ink painting, sculpture, calligraphy, gardens — applying the same clarity and precision he had once used on the dueling ground. Of the four figures in this story, Musashi remains the only one whose life record is nearly empty of a love ever consummated: he never married, left no children of his own blood, an emptiness that feels like a conscious choice rather than an accident of fate — love he poured, instead, into the discipline itself. Yet his affection for Iori, whom he raised though not of his own blood, and Otsu's waiting, which he never fully returned, prove that his detachment was not the absence of feeling, but a feeling chosen never to be possessed.</span>
+    </p>
+
+    <p class="reveal">
+      <span class="t-id">Pada bentuk akhirnya, Musashi menjadi manusia yang utuh justru karena tiga elemen yang tampak saling bertentangan: kemarahan masa mudanya memberinya ketahanan dan keberanian fisik; kesabaran Otsu melunakkan hatinya agar tak pernah benar-benar menjadi monster pembunuh; dan kelemahan Matahachi memberinya kerendahan hati untuk tak pernah merasa lebih unggul dari manusia biasa. Di penghujung hidupnya, dalam kesendirian Gua Reigandō dekat Kumamoto, ia menuliskan Go Rin no Sho, Kitab Lima Cincin, membekukan seumur hidup disiplinnya menjadi warisan bagi orang-orang yang bahkan tak pernah ia temui. Ia bukan lagi sekadar ronin atau ahli pedang, melainkan seorang filsuf yang menemukan keheningan sempurna di tengah riuh rendahnya dunia — dan kesendirian yang dulu terasa seperti kekurangan, di akhir, terasa seperti satu-satunya jalan yang masuk akal.</span>
+      <span class="t-en">In his final form, Musashi became a whole human being precisely because of three seemingly contradictory elements: the rage of his youth gave him endurance and physical courage; Otsu's patience softened his heart so he would never truly become a killing monster; and Matahachi's weakness gave him the humility to never feel superior to ordinary people. At the end of his life, in the solitude of Reigandō Cave near Kumamoto, he wrote the Go Rin no Sho, the Book of Five Rings, freezing a lifetime of discipline into a legacy for people he would never meet. He was no longer merely a ronin or a swordsman, but a philosopher who found perfect stillness amid the world's noise — and the solitude that once felt like a lack, by the end, felt like the only path that made any sense.</span>
+    </p>
+  </div>
+</section>
+
+<!-- JEMBATAN HISTORIS & SEPARASI RAPI DI ATAS BAB PUNCAK DENGAN MARGIN-BOTTOM PROPORSIONAL -->
+<div class="interlude interlude-climax reveal">
+  <div class="wrap">
+    <div class="glyph">◆ ◆ ◆</div>
+    <p>
+      <span class="t-id">Dua setengah abad kedamaian di bawah Keshogunan Tokugawa akhirnya runtuh saat gerbang Jepang dibuka paksa ke dunia luar. Restorasi Meiji membubarkan kelas samurai selamanya — pedang tak lagi disandang di pinggang, digantikan oleh pabrik, senapan, dan mesin cetak. Namun jiwa dan pergulatan manusia dari tiga zaman itu tidak lenyap; mereka menunggu seorang pencerita yang sanggup merajutnya kembali sebagai cermin bagi bangsanya sendiri.</span>
+      <span class="t-en">Two and a half centuries of peace under the Tokugawa Shogunate finally collapsed when Japan's gates were forced open to the outside world. The Meiji Restoration dissolved the samurai class forever — swords no longer worn at the hip, replaced by factories, rifles, and printing presses. Yet the spirit and human struggles of those three eras never vanished; they awaited a storyteller who could weave them whole once more as a mirror for his own nation.</span>
+    </p>
+  </div>
+</div>
+
+<section class="climax" id="bab5">
+  <div class="wrap">
+    <div class="chapter-locator reveal"><span class="t-id">PUNCAK · 1892–1962</span><span class="t-en">CLIMAX · 1892–1962</span></div>
+    <h2 class="reveal">
+      <span class="t-id">Sang Penenun yang Memberi Cermin pada Bangsa yang Kalah<span class="sub">Eiji Yoshikawa, dan warisan yang tak pernah selesai menemukan pembacanya</span></span>
+      <span class="t-en">The Weaver Who Gave a Defeated Nation a Mirror<span class="sub">Eiji Yoshikawa, and a legacy still finding its readers</span></span>
+    </h2>
+
+    <p class="reveal">
+      <span class="t-id">Garis yang menghubungkan tiga zaman ini akhirnya bermuara pada satu orang: Eiji Yoshikawa, lahir di Yokohama dari keluarga yang jatuh miskin ketika usaha penyulingan sake ayahnya bangkrut — pengalaman kejatuhan sosial yang, secara diam-diam, menggemakan tema-tema yang kelak ia tulis berulang kali. Ia tidak menciptakan sejarah-sejarah ini dari kekosongan; ia mewarisi bahan mentah dari kronik lama seperti Heike Monogatari dan catatan Azuma Kagami, lalu menuliskannya ulang sebagai novel bersambung di surat kabar harian — bentuk yang bisa dijangkau tukang becak maupun pegawai kantor, bukan hanya cendekiawan istana.</span>
+      <span class="t-en">The thread connecting these three ages finally converges on one man: Eiji Yoshikawa, born in Yokohama into a family that fell into poverty when his father's sake-brewing business collapsed — an experience of social descent that quietly echoes through the themes he would write again and again. He did not conjure these histories from nothing; he inherited raw material from old chronicles like the Tale of the Heike and the Azuma Kagami records, then rewrote them as serialized newspaper novels — a form reachable by rickshaw drivers and office clerks alike, not only court scholars.</span>
+    </p>
+
+    <p class="reveal">
+      <span class="t-id"><em>Musashi</em> mulai dimuat bersambung di Asahi Shimbun pada 1935, tepat ketika Jepang bergerak semakin dalam ke arus militerisasi. Tetapi daya tahan sesungguhnya trilogi ini justru terbukti sesudah perang berakhir: di tengah reruntuhan, pendudukan, dan krisis identitas nasional pasca-1945, kisah tentang petani yang naik jadi penguasa, dan pendekar yang berhenti membunuh untuk mulai membangun dirinya, memberi bangsa yang kalah sebuah cermin — bukan cermin kejayaan militer, melainkan cermin ketekunan dan disiplin diri yang bisa dipegang siapa pun, di zaman apa pun. Dari Heike, ia mewariskan kerendahan hati dalam kemenangan. Dari Taiko, ketangguhan di tengah kesulitan. Dari Musashi, disiplin membangun ulang diri sendiri.</span>
+      <span class="t-en"><em>Musashi</em> began its serialized run in the Asahi Shimbun in 1935, just as Japan drifted ever deeper into militarization. But the trilogy's true staying power proved itself only after the war ended: amid the ruins, the occupation, and the national identity crisis after 1945, a story of a farmer risen to ruler, and a swordsman who stopped killing to begin building himself, gave a defeated nation a mirror — not a mirror of military glory, but of the perseverance and self-discipline anyone could hold onto, in any age. From Heike, he bequeathed humility in victory. From Taiko, resilience amid hardship. From Musashi, the discipline of rebuilding oneself.</span>
+    </p>
+
+    <p class="reveal">
+      <span class="t-id">Yoshikawa mengubah para samurai dari sosok romantis kekerasan menjadi cetak biru manusia biasa — bagaimana hidup dengan integritas, fokus, dan kekuatan yang tenang di tengah dunia yang terus berubah di bawah kaki mereka, persis seperti dunia yang sedang dibangun ulang oleh para pembacanya sendiri.</span>
+      <span class="t-en">Yoshikawa transformed samurai from romanticized figures of violence into a blueprint for ordinary people — how to live with integrity, focus, and quiet strength in a world constantly shifting beneath their feet, precisely the world his own readers were then trying to rebuild.</span>
+    </p>
+  </div>
+</section>
+
+<footer id="penutup">
+  <div class="wrap">
+    <h2 class="reveal"><span class="t-id">Dari Pedang yang Membunuh ke Pedang yang Menghidupkan</span><span class="t-en">From a Sword That Kills to a Sword That Gives Life</span></h2>
+
+    <p class="reveal">
+      <span class="t-id">Kiyomori lupa dari mana ia berasal begitu ia sampai ke puncak. Yoshitsune tak pernah cukup memahami dunia politik yang mengelilingi kejeniusannya. Hideyoshi mengingat asalnya terlalu keras hingga ketakutan itu sendiri yang akhirnya merusaknya. Dan Musashi, satu-satunya di antara mereka yang tak pernah memegang kekuasaan besar, justru yang paling dekat menemukan kedamaian — karena ia satu-satunya yang berhenti bertarung melawan dunia dan mulai bertarung melawan dirinya sendiri.</span>
+      <span class="t-en">Kiyomori forgot where he came from the moment he reached the summit. Yoshitsune never quite understood the political world surrounding his own genius. Hideyoshi remembered his origins too fiercely, until that very fear was what destroyed him. And Musashi, the only one among them who never held great power, came closest of all to finding peace — because he alone stopped fighting the world and began fighting himself.</span>
+    </p>
+
+    <p class="reveal">
+      <span class="t-id">Garis merah yang sesungguhnya merajut seluruh epik ini, dari Heike hingga Musashi, bukan sekadar kronologi tiga zaman, melainkan evolusi diam-diam tentang apa yang disebut kemenangan: dari penaklukan yang brutal menuju penaklukan atas ego sendiri. Pesan pamungkas yang bisa ditarik dari ketiganya sederhana sekaligus berat: kejayaan militer, status sosial, dan ambisi duniawi, secepat apa pun ia diraih, pada akhirnya adalah ilusi yang fana. Kekuatan sejati dan kedamaian yang bertahan tidak diukur dari seberapa banyak musuh yang berhasil ditumbangkan, melainkan dari kesanggupan seseorang mengalahkan musuh yang paling sulit dijangkau: dirinya sendiri.</span>
+      <span class="t-en">The true red thread stitching this entire epic together, from Heike to Musashi, is not merely a chronology of three ages, but a quiet evolution in what counts as victory: from the brutal conquest of others toward the conquest of one's own ego. The final message drawn from all three is simple yet heavy: military glory, social status, and worldly ambition, however swiftly won, are in the end fleeting illusions. True strength and lasting peace are not measured by how many enemies have been felled, but by one's capacity to defeat the hardest enemy to reach at all — oneself.</span>
+    </p>
+
+    <p class="reveal">
+      <span class="t-id">Tiga babak dalam kisah ini bisa dibaca sebagai tiga tahap pendewasaan yang sama, hanya dengan skala berbeda. Heike adalah fase keangkuhan dan kehancuran: kekuasaan absolut yang dibangun di atas penindasan dan dipupuk oleh kesombongan, cepat atau lambat, akan hancur oleh kebusukannya sendiri — klan Taira tidak runtuh karena kalah kuat, melainkan karena ego telah memutus empati mereka pada penderitaan orang lain. Taiko adalah fase ambisi dan rasionalitas: lewat Hideyoshi, kemauan keras, kecerdasan, dan empati strategis terbukti sanggup mengubah nasib seorang anak petani menjadi pemersatu bangsa — tetapi bahkan warisan sebesar itu pun retak tak lama setelah kematiannya, sebuah pengingat bahwa pencapaian material, betapa pun megah, selalu punya tanggal kedaluwarsa. Dan Musashi adalah fase pencerahan dan keheningan, kesimpulan spiritual dari keduanya: setelah memotret dua zaman penuh darah, jawabannya bukan senjata yang lebih tajam, melainkan pedang yang dialihkan fungsinya — dari alat pencabut nyawa menjadi alat untuk memotong kesombongan, amarah, dan ketakutan di dalam diri sendiri. Kemenangan tertinggi, pada akhirnya, dicapai justru ketika seseorang tak lagi punya hasrat untuk membuktikan superioritasnya kepada dunia.</span>
+      <span class="t-en">The three parts of this story can be read as three stages of the same maturing, only at different scales. Heike is the phase of arrogance and destruction: absolute power built on oppression and fed by pride will, sooner or later, collapse from its own rot — the Taira clan did not fall because they were outmatched in strength, but because ego had severed their empathy for the suffering of others. Taiko is the phase of ambition and reason: through Hideyoshi, willpower, intelligence, and strategic empathy proved able to turn a farmer's son into the unifier of a nation — yet even a legacy that vast cracked not long after his death, a reminder that material achievement, however magnificent, always carries an expiration date. And Musashi is the phase of enlightenment and silence, the spiritual conclusion of both that came before: after portraying two blood-soaked ages, the answer was never a sharper weapon, but a sword repurposed entirely — from an instrument that takes life into one that cuts through pride, rage, and fear within oneself. Ultimate victory, in the end, is achieved precisely when a person no longer feels the need to prove superiority to the world.</span>
+    </p>
+
+    <p class="reveal">
+      <span class="t-id">Yoshikawa tidak menulis ketiga kisah ini dalam ruang hampa. Ia menuliskannya di tengah trauma pergolakan Jepang modern — menjelang, selama, dan sesudah Perang Dunia Kedua — dan menyaksikan sendiri bagaimana militerisme dan ambisi ekspansi membawa kehancuran total bagi bangsanya sendiri, sebuah pengulangan nyaris sempurna dari tragedi klan Heike yang ia tuliskan ulang. Garis merah dari seluruh karyanya, dibaca dalam terang itu, terasa seperti resep penyembuhan bagi trauma tersebut: pedang kekuasaan harus berevolusi dari satsujinken, pedang yang membunuh, menjadi katsujinken, pedang yang melindungi dan menghidupkan. Manusia, dalam pandangannya, hanya akan bertahan dan menemukan kedamaian jika bersedia menanggalkan keangkuhannya, kembali membumi seperti seorang petani yang menanam benih di tanah yang tampak mati, dan hidup selaras dengan ritme alam tanpa perlu menaklukkannya.</span>
+      <span class="t-en">Yoshikawa did not write these three stories in a vacuum. He wrote them amid the trauma of modern Japan's upheaval — before, during, and after the Second World War — and saw with his own eyes how militarism and expansionist ambition brought total ruin upon his own nation, an almost perfect repetition of the very Taira tragedy he was rewriting. The red thread running through his entire body of work, read in that light, feels like a prescription for healing that trauma: the sword of power must evolve from satsujinken, the sword that kills, into katsujinken, the sword that protects and gives life. Human beings, in his view, will only survive and find peace if they are willing to shed their arrogance, return to the earth like a farmer planting seed in soil that looks dead, and live in harmony with nature's rhythm without needing to conquer it.</span>
+    </p>
+
+    <p class="reveal">
+      <span class="t-id">Barangkali itulah sebabnya empat riwayat ini tetap relevan jauh dari pantai Jepang, jauh dari abad ketika mereka ditulis. Setiap orang, pada akhirnya, akan melewati versinya sendiri dari babak-babak ini — masa ketika kekuasaan direbut dengan angkuh, masa ketika ia dipertahankan dengan cerdik, dan masa ketika, setelah semua pertempuran usai, yang tersisa hanyalah pertanyaan paling sunyi: siapa aku, ketika tak ada lagi yang perlu kutaklukkan selain diriku sendiri?</span>
+      <span class="t-en">Perhaps that is why these four life stories remain relevant far from Japan's shores, far from the century in which they were written. Everyone, in the end, passes through their own version of these chapters — a time when power is seized with arrogance, a time when it is held with cunning, and a time when, once every battle is over, all that remains is the quietest question of all: who am I, when there is nothing left to conquer but myself?</span>
+    </p>
+
+    <div class="sign reveal">
+      <span class="t-id">RUANG BACA · Edisi Sintesis · Sintesis disusun dari kronik Heike Monogatari, Taiko, dan Musashi trilogi oleh Eiji Yoshikawa</span>
+      <span class="t-en">RUANG BACA · Synthesis Edition · Synthesized from the chronicles of the Heike Monogatari, and the Taiko and Musashi trilogy by Eiji Yoshikawa</span>
+    </div>
+  </div>
+</footer>
+
+<script>
+  document.addEventListener('DOMContentLoaded', function(){
+    // reveal on scroll
+    var els = document.querySelectorAll('.reveal');
+    var io = new IntersectionObserver(function(entries){
+      entries.forEach(function(e){ if(e.isIntersecting){ e.target.classList.add('is-visible'); io.unobserve(e.target); } });
+    }, {threshold:0.01});
+    els.forEach(function(el){ io.observe(el); });
+    function revealAll(){ els.forEach(function(el){ el.classList.add('is-visible'); }); }
+    setTimeout(revealAll, 1200);
+
+    // language toggle
+    var btnId = document.getElementById('btn-id');
+    var btnEn = document.getElementById('btn-en');
+    function setLang(lang){
+      document.documentElement.setAttribute('data-lang', lang);
+      try{ localStorage.setItem('rb-lang', lang); }catch(e){}
+      btnId.classList.toggle('active', lang === 'id');
+      btnEn.classList.toggle('active', lang === 'en');
+    }
+    var current = document.documentElement.getAttribute('data-lang') || 'id';
+    setLang(current);
+    btnId.addEventListener('click', function(){ setLang('id'); });
+    btnEn.addEventListener('click', function(){ setLang('en'); });
+
+    // floating TOC
+    var fab = document.getElementById('tocFab');
+    var panel = document.getElementById('tocPanel');
+    fab.addEventListener('click', function(e){
+      e.stopPropagation();
+      panel.classList.toggle('open');
+    });
+    panel.querySelectorAll('a').forEach(function(a){
+      a.addEventListener('click', function(){
+        revealAll();
+        setTimeout(function(){ panel.classList.remove('open'); }, 150);
+      });
+    });
+    document.addEventListener('click', function(e){
+      if(!panel.contains(e.target) && !fab.contains(e.target)){ panel.classList.remove('open'); }
+    });
+  });
+</script>
+
+</body>
+</html>
