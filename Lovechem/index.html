@@ -1,0 +1,1646 @@
+<!DOCTYPE html>
+<html lang="id" data-lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Mengapa Kita Jatuh Cinta: Neurobiologi & Psikologi Relasi — Ruang Baca Ilmiah</title>
+<meta name="description" content="Eksplorasi saintifik mendalam tentang biologi ketertarikan, kimia otak, luka masa lalu, dinamika perselingkuhan fisik-emosional, dan protokol pemulihan trauma relasi menurut neurosains dan psikologi modern.">
+<meta property="og:title" content="Mengapa Kita Jatuh Cinta: Neurobiologi & Psikologi Relasi">
+<meta property="og:description" content="Eksplorasi saintifik mendalam tentang biologi ketertarikan, kimia otak, luka masa lalu, dinamika perselingkuhan fisik-emosional, dan protokol pemulihan trauma relasi menurut neurosains dan psikologi modern.">
+<meta property="og:type" content="article">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,400;0,9..144,500;0,9..144,600;1,9..144,400;1,9..144,500&family=Literata:ital,opsz,wght@0,7..72,400;0,7..72,500;0,7..72,600;1,7..72,400&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+:root{
+  --paper:         #FBF3EC;
+  --paper-deep:    #F3E4D6;
+  --card:          #FFFCF8;
+  --card-alt:      #F8EFE6;
+  --ink:           #2B211D;
+  --ink-soft:      #4A3B34;
+  --ink-faint:     #8A7368;
+  --accent-1:      #C1502E;
+  --accent-1-deep: #96391E;
+  --accent-1-pale: #F5E1D6;
+  --accent-2:      #1F6F6B;
+  --accent-2-soft: #CFE8E6;
+  --accent-2-deep: #134D4A;
+  --accent-3:      #8A5A44;
+  --line:          rgba(43,33,29,0.13);
+  --line-strong:   rgba(43,33,29,0.25);
+  --shadow:        0 14px 44px rgba(43,33,29,0.09);
+  --shadow-sm:     0 4px 14px rgba(43,33,29,0.05);
+  --maxw:          780px;
+}
+*{box-sizing:border-box;}
+html{scroll-behavior:smooth;}
+body{
+  margin:0; background:var(--paper); color:var(--ink-soft);
+  font-family:'Literata', Georgia, serif; font-size:18px; line-height:1.75;
+  -webkit-font-smoothing:antialiased;
+}
+h1,h2,h3,h4,.chapter-title{font-family:'Fraunces', serif; color:var(--ink); font-weight:500; margin:0;}
+.eyebrow, .meta-row, table th, .badge, .yr, .reading-pill, .stat-num{font-family:'IBM Plex Mono', monospace;}
+p{margin:0 0 22px;}
+a{color:var(--accent-2); text-decoration:none; transition:color 0.2s ease;}
+a:hover{color:var(--accent-1); text-decoration:underline;}
+
+/* ===== Reading Progress & Navigation Bar ===== */
+#progress-bar-container{position:fixed; top:0; left:0; width:100%; height:4px; background:rgba(43,33,29,0.06); z-index:1100;}
+#progress{height:100%; width:0%; background:linear-gradient(90deg, var(--accent-1), #E6683C); transition:width 0.15s ease-out;}
+
+#top-nav{
+  position:fixed; top:4px; left:0; width:100%;
+  backdrop-filter:blur(12px); -webkit-backdrop-filter:blur(12px);
+  background:rgba(251, 243, 236, 0.94);
+  border-bottom:1px solid var(--line);
+  padding:8px 20px; display:flex; justify-content:space-between; align-items:center;
+  gap:14px; z-index:1000; font-family:'IBM Plex Mono', monospace; font-size:12px;
+}
+.nav-left{display:flex; align-items:center; gap:12px; color:var(--ink-faint); flex:1; min-width:0;}
+.nav-title{
+  font-family:'Fraunces', serif; font-weight:600; color:var(--ink);
+  font-size:clamp(13px, 1.6vw, 15px); line-height:1.25;
+  white-space:nowrap; overflow:visible; text-overflow:clip; flex-shrink:0;
+}
+.nav-right{display:flex; align-items:center; gap:10px; flex-shrink:0;}
+
+.pill-btn{
+  background:var(--card); color:var(--ink); border:1px solid var(--line-strong);
+  border-radius:24px; padding:6px 14px; font-family:'IBM Plex Mono',monospace;
+  font-size:12px; cursor:pointer; display:inline-flex; align-items:center; gap:6px;
+  transition:all 0.2s ease; box-shadow:var(--shadow-sm);
+}
+.pill-btn:hover{border-color:var(--accent-1); color:var(--accent-1); transform:translateY(-1px);}
+.pill-btn.lang-flag-btn{
+  padding:5px 12px; font-size:16px; line-height:1; min-width:38px; justify-content:center;
+}
+
+#toc-toggle{
+  position:fixed; bottom:24px; right:22px; z-index:900;
+  background:var(--ink); color:var(--paper); border:none; border-radius:30px;
+  padding:10px 18px; font-family:'IBM Plex Mono',monospace; font-size:13px; font-weight:500;
+  box-shadow:var(--shadow); cursor:pointer; display:flex; align-items:center; gap:10px;
+  transition:all 0.2s ease;
+}
+#toc-toggle:hover{background:var(--accent-1); transform:translateY(-2px); box-shadow:0 18px 48px rgba(43,33,29,0.18);}
+.toc-time-badge{
+  background:rgba(255,255,255,0.18); color:var(--paper);
+  font-size:11.5px; padding:2px 8px; border-radius:12px; font-family:'IBM Plex Mono', monospace;
+  font-weight:600; white-space:nowrap;
+}
+#toc-toggle:hover .toc-time-badge{background:rgba(255,255,255,0.28);}
+
+#lang-toggle-float{
+  position:fixed; bottom:24px; left:22px; z-index:900;
+  background:var(--card); color:var(--ink); border:1.5px solid var(--line-strong);
+  border-radius:50%; width:46px; height:46px; padding:0; display:flex; align-items:center; justify-content:center;
+  font-size:20px; line-height:1; box-shadow:var(--shadow); cursor:pointer;
+  transition:all 0.2s ease;
+}
+#lang-toggle-float:hover{background:var(--accent-1-pale); border-color:var(--accent-1); transform:scale(1.08);}
+
+#toc-panel{
+  position:fixed; bottom:80px; right:22px; z-index:899; width:min(350px, 88vw);
+  max-height:68vh; overflow-y:auto; background:var(--card); border-radius:18px;
+  box-shadow:var(--shadow); padding:20px 22px; transform:translateY(14px) scale(0.96);
+  opacity:0; pointer-events:none; transition:all 0.28s cubic-bezier(0.16, 1, 0.3, 1);
+  border:1px solid var(--line);
+}
+#toc-panel.open{opacity:1; transform:translateY(0) scale(1); pointer-events:auto;}
+.toc-drawer-header{
+  display:flex; justify-content:space-between; align-items:center;
+  padding-bottom:12px; margin-bottom:12px; border-bottom:1px solid var(--line);
+  font-family:'IBM Plex Mono', monospace; font-size:11.5px;
+}
+.toc-drawer-title{color:var(--ink-faint); text-transform:uppercase; letter-spacing:0.06em;}
+.toc-drawer-eta{color:var(--accent-1); font-weight:600;}
+#toc-panel a{
+  display:flex; justify-content:space-between; align-items:center;
+  padding:9px 0; color:var(--ink-soft); text-decoration:none;
+  font-size:14.5px; border-bottom:1px dotted var(--line); transition:all 0.2s ease;
+}
+#toc-panel a:hover{color:var(--accent-1); padding-left:4px;}
+#toc-panel a:last-child{border-bottom:none;}
+#toc-panel a .toc-time{font-family:'IBM Plex Mono', monospace; font-size:11px; color:var(--ink-faint);}
+#toc-panel .toc-heading{
+  font-family:'IBM Plex Mono',monospace; font-size:11px; letter-spacing:0.12em;
+  text-transform:uppercase; color:var(--accent-1); margin:18px 0 6px; font-weight:600;
+}
+#toc-panel .toc-heading:first-child{margin-top:0;}
+
+/* ===== Interactive Reading Mode (Deep Research vs Core Insights) ===== */
+.mode-switch-wrapper{
+  display:flex; justify-content:center; margin:24px auto 0; max-width:var(--maxw);
+}
+.mode-switch{
+  display:inline-flex; background:var(--paper-deep); border-radius:24px; padding:4px;
+  border:1px solid var(--line);
+}
+.mode-btn{
+  border:none; background:transparent; padding:6px 16px; border-radius:20px;
+  font-family:'IBM Plex Mono', monospace; font-size:12px; color:var(--ink-faint);
+  cursor:pointer; transition:all 0.2s ease;
+}
+.mode-btn.active{
+  background:var(--card); color:var(--accent-1-deep); font-weight:600;
+  box-shadow:0 2px 6px rgba(43,33,29,0.08);
+}
+
+/* ===== hero visual & styling ===== */
+.hero{max-width:var(--maxw); margin:40px auto 0; padding:60px 24px 44px; text-align:center;}
+.hero-loader{width:130px; height:130px; margin:0 auto 28px; display:flex; align-items:center; justify-content:center;}
+
+.loader {
+  --color-1: #2F2D2D; --color-2: #615757; --color-3: rgba(78, 63, 63, 0.2);
+  --color-4: #0002; --color-5: #fff; --color-6: #fff6;
+  --color-7: #ffc400; --color-8: #ffae00; --color-9: #784814;
+  --color-10: rgba(195, 83, 83, 0.13); --size: 1.4px;
+  width: calc(100 * var(--size)); height: calc(100 * var(--size));
+  display: block; margin: auto; position: relative; background: var(--color-1);
+  border-radius: 50%; box-sizing: border-box;
+  transform-origin: calc(170 * var(--size)) calc(50 * var(--size));
+  border: calc(4 * var(--size)) solid var(--color-2);
+  box-shadow: calc(3 * var(--size)) calc(4 * var(--size)) var(--color-3) inset,
+    0 0 calc(6 * var(--size)) var(--color-4) inset;
+  animation: panmov 0.5s ease-in-out infinite alternate;
+}
+.loader::before {
+  content: ''; position: absolute; left: 50%; top: 50%;
+  transform: translate(-50%, -50%) skew(-15deg, 15deg) rotate(-15deg);
+  width: calc(55 * var(--size)); height: calc(53 * var(--size)); background: var(--color-5);
+  background-image:
+    radial-gradient(circle calc(3 * var(--size)), var(--color-6) 90%, transparent 10%),
+    radial-gradient(circle calc(12 * var(--size)), var(--color-7) 90%, transparent 10%),
+    radial-gradient(circle calc(12 * var(--size)), var(--color-8) 100%, transparent 0);
+  background-repeat: no-repeat;
+  background-position: calc(-4 * var(--size)) calc(-6 * var(--size)),
+    calc(-2 * var(--size)) calc(-2 * var(--size)), calc(-1 * var(--size)) calc(-1 * var(--size));
+  box-shadow: calc(-2 * var(--size)) calc(-3 * var(--size)) var(--color-4) inset,
+    0 0 calc(4 * var(--size)) var(--color-3) inset;
+  border-radius: 47% 36% 50% 50% / 49% 45% 42% 44%;
+  animation: ylmov 0.7s ease-in-out infinite alternate;
+}
+.loader::after {
+  content: ''; position: absolute; left: 100%; top: calc(48 * var(--size));
+  height: calc(15 * var(--size)); width: calc(70 * var(--size)); background: var(--color-9);
+  border-radius: 0 calc(8 * var(--size)) calc(8 * var(--size)) 0;
+  box-shadow: calc(3 * var(--size)) 0 calc(3 * var(--size)) var(--color-10) inset;
+  transform: rotate(5deg) translateX(calc(3 * var(--size)));
+}
+@keyframes panmov{0%,10%{transform:rotate(5deg);}90%,100%{transform:rotate(-5deg);}}
+@keyframes ylmov{to{border-radius:50% 36% 50% 50% / 49% 50% 45% 45%;
+  background-position: calc(-2 * var(--size)) calc(-4 * var(--size)),
+    calc(2 * var(--size)) calc(2 * var(--size)), calc(1 * var(--size)) calc(1 * var(--size));}}
+
+.eyebrow{font-size:12.5px; letter-spacing:0.14em; text-transform:uppercase; color:var(--accent-2); font-weight:600;}
+.hero h1{font-size:clamp(32px, 6.5vw, 48px); line-height:1.18; margin-top:16px;}
+.hero h1 .accent{font-style:italic; color:var(--accent-1); font-weight:400;}
+.subtitle{font-size:18px; color:var(--ink-faint); margin-top:18px; max-width:600px; margin-left:auto; margin-right:auto; line-height:1.6;}
+
+.stats-bar{
+  display:grid; grid-template-columns:repeat(auto-fit, minmax(130px, 1fr));
+  gap:12px; max-width:680px; margin:28px auto 0; padding:16px 20px;
+  background:var(--card); border:1px solid var(--line); border-radius:16px;
+  box-shadow:var(--shadow-sm);
+}
+.stat-item{text-align:center;}
+.stat-num{font-size:18px; font-weight:600; color:var(--accent-1); display:block;}
+.stat-label{font-size:11.5px; color:var(--ink-faint); text-transform:uppercase; letter-spacing:0.06em; font-family:'IBM Plex Mono', monospace;}
+
+.scroll-cue{margin-top:40px; font-size:12px; color:var(--ink-faint); letter-spacing:0.05em; font-family:'IBM Plex Mono', monospace;}
+.scroll-cue .line{display:block; width:1px; height:34px; background:var(--line); margin:0 auto 10px; position:relative; overflow:hidden;}
+.scroll-cue .line::after{content:''; position:absolute; top:-100%; left:0; width:100%; height:100%;
+  background:var(--accent-1); animation:cue 2s ease-in-out infinite;}
+@keyframes cue{50%{top:100%;}100%{top:100%;}}
+
+.disclaimer{max-width:var(--maxw); margin:0 auto 16px; padding:0 24px; text-align:center;
+  font-size:14px; color:var(--ink-faint); font-style:italic;}
+
+/* ===== Table of Contents Section ===== */
+.toc-section{max-width:var(--maxw); margin:48px auto; padding:0 24px;}
+.toc-section h2{font-size:24px; margin-bottom:20px; display:flex; justify-content:space-between; align-items:baseline;}
+.toc-section h2 span.total-time{font-family:'IBM Plex Mono', monospace; font-size:13px; color:var(--accent-2); font-weight:normal;}
+.toc-list{list-style:none; padding:0; margin:0;}
+.toc-list li{border-bottom:1px solid var(--line);}
+.toc-list a{display:flex; justify-content:space-between; align-items:center; gap:14px; padding:16px 6px;
+  text-decoration:none; color:var(--ink); font-size:16.5px; transition:padding 0.2s ease;}
+.toc-list a:hover{padding-left:12px; color:var(--accent-1);}
+.toc-list a span.tn{font-family:'IBM Plex Mono',monospace; color:var(--accent-1); font-size:13px; min-width:28px;}
+.toc-list a span.duration{font-family:'IBM Plex Mono', monospace; font-size:12px; color:var(--ink-faint); margin-left:auto;}
+.toc-list .part-label{font-family:'IBM Plex Mono',monospace; font-size:11px; letter-spacing:0.12em;
+  text-transform:uppercase; color:var(--accent-2); margin:28px 0 6px; font-weight:600;}
+.toc-list .part-label:first-child{margin-top:0;}
+
+hr.div{border:none; border-top:1px solid var(--line); max-width:var(--maxw); margin:0 auto;}
+
+/* ===== Chapter Sections ===== */
+.chapter{max-width:var(--maxw); margin:0 auto; padding:100px 24px 40px;
+  opacity:0; transform:translateY(20px); transition:opacity 0.7s ease, transform 0.7s ease;}
+.chapter.visible{opacity:1; transform:translateY(0);}
+.chapter-num-row{display:flex; align-items:center; gap:12px;}
+.pulse-dot{width:9px; height:9px; border-radius:50%; background:var(--accent-1); flex:none;
+  box-shadow:0 0 0 0 rgba(193,80,46,0.5); animation:pulse 2.2s ease-in-out infinite;}
+@keyframes pulse{0%{box-shadow:0 0 0 0 rgba(193,80,46,0.45);}70%{box-shadow:0 0 0 9px rgba(193,80,46,0);}100%{box-shadow:0 0 0 0 rgba(193,80,46,0);}}
+.reading-badge{
+  font-family:'IBM Plex Mono', monospace; font-size:11.5px; color:var(--accent-2-deep);
+  background:var(--accent-2-soft); padding:3px 10px; border-radius:12px; margin-left:auto;
+}
+
+.chapter-title{font-size:clamp(26px, 5.2vw, 36px); margin-top:14px; line-height:1.24;}
+.chapter-sub{color:var(--ink-faint); font-size:16.5px; margin-top:12px; line-height:1.6;}
+.experts{
+  font-family:'IBM Plex Mono',monospace; font-size:12px; color:var(--accent-2); margin-top:14px;
+  background:rgba(31,111,107,0.06); padding:6px 12px; border-radius:8px; display:inline-block;
+}
+.chapter-body{margin-top:36px;}
+.chapter-body h3{font-size:22px; margin-top:48px; margin-bottom:18px; display:flex; align-items:baseline; gap:12px;}
+.chapter-body h3 .letter{font-family:'IBM Plex Mono',monospace; font-size:13.5px; color:var(--accent-1); font-weight:600;}
+.substep{font-family:'Fraunces',serif; font-size:18px; color:var(--accent-2); margin:30px 0 12px; font-style:italic; font-weight:500;}
+p.dropcap:first-letter{font-family:'Fraunces',serif; font-size:3.5em; float:left; line-height:0.82;
+  padding:6px 12px 0 0; color:var(--accent-1); font-weight:600;}
+
+/* ===== Science Callout, Quotes, Tables & Flows ===== */
+.citation{font-size:13.5px; color:var(--accent-1-deep); font-family:'IBM Plex Mono', monospace; font-weight:500;}
+.science-card{
+  background:var(--card); border:1px solid var(--line); border-left:4px solid var(--accent-2);
+  border-radius:14px; padding:22px 24px; margin:32px 0; box-shadow:var(--shadow-sm);
+}
+.science-card h4{
+  font-size:13px; text-transform:uppercase; letter-spacing:0.08em; color:var(--accent-2);
+  font-family:'IBM Plex Mono',monospace; margin-bottom:8px; display:flex; align-items:center; gap:8px;
+}
+.science-card .paper-title{font-style:italic; font-weight:600; color:var(--ink); margin-bottom:6px; display:block; font-size:15px;}
+.science-card p{font-size:16px; line-height:1.68; margin-bottom:0;}
+
+.pull{border-left:3.5px solid var(--accent-1); padding:8px 0 8px 24px; margin:36px 0; font-family:'Fraunces',serif;
+  font-style:italic; font-size:20px; color:var(--ink); line-height:1.55;}
+.pull cite{display:block; font-family:'IBM Plex Mono',monospace; font-style:normal; font-size:12px;
+  color:var(--accent-2); margin-top:10px;}
+.pull .note{display:block; font-family:'Literata',serif; font-style:normal; font-size:15px;
+  color:var(--ink-faint); margin-top:6px; line-height:1.5;}
+
+.callout{background:var(--card); border:1px solid var(--line); border-radius:14px; padding:24px 26px;
+  margin:32px 0; box-shadow:var(--shadow-sm);}
+.callout h4{font-size:13.5px; text-transform:uppercase; letter-spacing:0.08em; color:var(--accent-1);
+  font-family:'IBM Plex Mono',monospace; margin-bottom:10px; font-weight:600;}
+.callout p:last-child{margin-bottom:0;}
+
+ul.checklist{list-style:none; padding:0; margin:26px 0;}
+ul.checklist li{padding:14px 0 14px 34px; position:relative; border-bottom:1px dashed var(--line); font-size:17px;}
+ul.checklist li:last-child{border-bottom:none;}
+ul.checklist li::before{content:'✓'; position:absolute; left:0; top:14px; color:var(--accent-2); font-weight:700;}
+
+.flow{margin:36px 0;}
+.flow-title{font-family:'IBM Plex Mono',monospace; font-size:12px; text-transform:uppercase;
+  letter-spacing:0.08em; color:var(--ink-faint); margin-bottom:14px; font-weight:600;}
+.flow-row{display:flex; align-items:stretch; gap:12px;}
+.flow-box{flex:1; background:var(--card); border:1px solid var(--line); border-radius:14px;
+  padding:18px 16px; text-align:center; box-shadow:var(--shadow-sm);}
+.flow-box.alt{background:var(--accent-2-soft); border-color:var(--accent-2);}
+.flow-box.warn{background:var(--accent-1-pale); border-color:var(--accent-1);}
+.flow-box b{display:block; font-family:'Fraunces',serif; font-size:16px; color:var(--ink); margin-bottom:4px;}
+.flow-box span{font-size:13.5px; color:var(--ink-faint); line-height:1.4; display:block;}
+.flow-arrow{display:flex; align-items:center; justify-content:center; color:var(--accent-1); font-size:22px;}
+@media(max-width:600px){.flow-row{flex-direction:column;} .flow-row > .flow-arrow{transform:rotate(90deg); margin:4px 0;}}
+
+.table-cap{font-family:'IBM Plex Mono',monospace; font-size:12px; text-transform:uppercase;
+  letter-spacing:0.06em; color:var(--ink-faint); margin-bottom:10px; font-weight:600;}
+.matrix-wrap{overflow-x:auto; margin:0 0 32px; border-radius:14px; border:1px solid var(--line); box-shadow:var(--shadow-sm);}
+table.matrix{width:100%; border-collapse:collapse; font-size:15px; background:var(--card);}
+table.matrix th{background:var(--accent-1-pale); color:var(--accent-1-deep); text-align:left;
+  padding:14px 18px; font-size:12px; text-transform:uppercase; letter-spacing:0.05em;}
+table.matrix td{padding:14px 18px; border-top:1px solid var(--line); vertical-align:top; line-height:1.6;}
+
+/* Interactive quick diagnostic widget */
+.quiz-box{
+  background:var(--card); border:1.5px solid var(--accent-2); border-radius:16px;
+  padding:26px 28px; margin:36px 0; box-shadow:var(--shadow);
+}
+.quiz-header{font-family:'Fraunces', serif; font-size:20px; color:var(--ink); margin-bottom:6px;}
+.quiz-sub{font-size:14.5px; color:var(--ink-faint); margin-bottom:20px;}
+.quiz-options{display:grid; grid-template-columns:1fr 1fr; gap:12px;}
+@media(max-width:600px){.quiz-options{grid-template-columns:1fr;}}
+.quiz-btn{
+  background:var(--paper); border:1px solid var(--line); border-radius:12px; padding:14px 16px;
+  text-align:left; cursor:pointer; font-family:'Literata', serif; font-size:14.5px; color:var(--ink-soft);
+  transition:all 0.2s ease;
+}
+.quiz-btn:hover{border-color:var(--accent-2); background:var(--card); transform:translateY(-2px);}
+.quiz-btn.selected{border-color:var(--accent-1); background:var(--accent-1-pale); color:var(--accent-1-deep); font-weight:600;}
+.quiz-result{
+  margin-top:20px; padding:16px 18px; background:var(--paper-deep); border-radius:12px;
+  font-size:15px; display:none; line-height:1.6; border-left:4px solid var(--accent-1);
+}
+
+/* Epilogue and Reference List */
+.epilog{max-width:var(--maxw); margin:0 auto; padding:110px 24px 60px; text-align:center;
+  opacity:0; transform:translateY(20px); transition:opacity 0.7s ease, transform 0.7s ease;}
+.epilog.visible{opacity:1; transform:translateY(0);}
+.epilog h2{font-size:clamp(26px, 5vw, 34px); margin:16px 0 24px;}
+.sign{font-family:'Fraunces',serif; font-style:italic; color:var(--accent-1); margin-top:30px; font-size:18px;}
+
+.refs{padding-left:22px; font-size:14.5px; color:var(--ink-soft); line-height:1.7;}
+.refs li{margin-bottom:14px;}
+.refs li strong{color:var(--ink);}
+.refs .doi{font-family:'IBM Plex Mono', monospace; font-size:11.5px; color:var(--accent-2);}
+
+footer{max-width:var(--maxw); margin:0 auto; padding:50px 24px 100px; text-align:center;
+  font-size:13px; color:var(--ink-faint); font-family:'IBM Plex Mono',monospace; border-top:1px solid var(--line);}
+
+/* Bilingual Data Attributes */
+[data-lang="id"] .lang-en{display:none !important;}
+[data-lang="en"] .lang-id{display:none !important;}
+
+@media (prefers-reduced-motion: reduce){
+  .chapter, .epilog{transition:none;}
+  .loader, .pulse-dot, .scroll-cue .line::after{animation:none;}
+}
+</style>
+</head>
+<body>
+
+<div id="progress-bar-container">
+  <div id="progress"></div>
+</div>
+
+<header id="top-nav">
+  <div class="nav-left">
+    <span class="nav-title">
+      <span class="lang-id">Mengapa Kita Jatuh Cinta</span>
+      <span class="lang-en">Why We Fall in Love</span>
+    </span>
+    <span class="reading-pill" id="live-eta">📖 ~44 min read</span>
+  </div>
+  <div class="nav-right">
+    <button class="pill-btn lang-flag-btn" id="lang-toggle-top" aria-label="Ganti Bahasa / Switch Language" title="Ganti Bahasa / Switch Language">
+      <span class="lang-id">🇬🇧</span>
+      <span class="lang-en">🇮🇩</span>
+    </button>
+  </div>
+</header>
+
+<button id="toc-toggle" aria-expanded="false" aria-controls="toc-panel" title="Daftar Isi & Sisa Waktu Membaca">
+  <span><span class="lang-id">☰ Daftar Isi</span><span class="lang-en">☰ Contents</span></span>
+  <span class="toc-time-badge" id="float-toc-eta">⏱ sisa ~44 mnt</span>
+</button>
+
+<button id="lang-toggle-float" aria-label="Ganti Bahasa / Switch Language" title="Ganti Bahasa / Switch Language">
+  <span class="lang-id">🇬🇧</span><span class="lang-en">🇮🇩</span>
+</button>
+
+<nav id="toc-panel">
+  <div class="toc-drawer-header">
+    <span class="toc-drawer-title"><span class="lang-id">Peta Baca & Estimasi</span><span class="lang-en">Reading Map & Time</span></span>
+    <span class="toc-drawer-eta" id="toc-panel-eta">~44 mnt tersisa (0%)</span>
+  </div>
+  <div class="toc-heading"><span class="lang-id">Bagian I · Neurokimiawi</span><span class="lang-en">Part I · Neurochemistry</span></div>
+  <a href="#bab1">
+    <span><span class="lang-id">Bab 1 — Neurobiologi Ketertarikan</span><span class="lang-en">Ch. 1 — Neurobiology of Attraction</span></span>
+    <span class="toc-time">5 m</span>
+  </a>
+  <a href="#bab2">
+    <span><span class="lang-id">Bab 2 — Teori Matching Wound</span><span class="lang-en">Ch. 2 — The Matching Wound Theory</span></span>
+    <span class="toc-time">5 m</span>
+  </a>
+
+  <div class="toc-heading"><span class="lang-id">Bagian II · Psikologi & Konflik</span><span class="lang-en">Part II · Psychology & Conflict</span></div>
+  <a href="#bab3">
+    <span><span class="lang-id">Bab 3 — Peta Emosi & Gaya Keikatan</span><span class="lang-en">Ch. 3 — Attachment Styles</span></span>
+    <span class="toc-time">5 m</span>
+  </a>
+  <a href="#bab4">
+    <span><span class="lang-id">Bab 4 — Biologi Pertengkaran</span><span class="lang-en">Ch. 4 — The Biology of Fighting</span></span>
+    <span class="toc-time">5 m</span>
+  </a>
+
+  <div class="toc-heading"><span class="lang-id">Bagian III · Protokol Pemulihan & Krisis</span><span class="lang-en">Part III · Recovery & Crisis Protocols</span></div>
+  <a href="#bab5">
+    <span><span class="lang-id">Bab 5 — Pertolongan Pertama Konflik</span><span class="lang-en">Ch. 5 — Conflict First Aid</span></span>
+    <span class="toc-time">4 m</span>
+  </a>
+  <a href="#bab6">
+    <span><span class="lang-id">Bab 6 — Rewiring the Heart</span><span class="lang-en">Ch. 6 — Rewiring the Heart</span></span>
+    <span class="toc-time">5 m</span>
+  </a>
+  <a href="#bab7">
+    <span><span class="lang-id">Bab 7 — Growth Partnership</span><span class="lang-en">Ch. 7 — Growth Partnership</span></span>
+    <span class="toc-time">5 m</span>
+  </a>
+  <a href="#bab8">
+    <span><span class="lang-id">Bab 8 — Anatomi Perselingkuhan & Resolusi</span><span class="lang-en">Ch. 8 — Infidelity & Betrayal Resolution</span></span>
+    <span class="toc-time">6 m</span>
+  </a>
+
+  <div class="toc-heading"><span class="lang-id">Praktis & Referensi</span><span class="lang-en">Practice & References</span></div>
+  <a href="#cheatsheet">
+    <span><span class="lang-id">Cheat-Sheet Resolusi Konflik</span><span class="lang-en">Conflict Cheat-Sheet</span></span>
+    <span class="toc-time">2 m</span>
+  </a>
+  <a href="#epilog">
+    <span><span class="lang-id">Epilog: Cinta sebagai Latihan</span><span class="lang-en">Epilogue: Love as Practice</span></span>
+    <span class="toc-time">2 m</span>
+  </a>
+  <a href="#pustaka">
+    <span><span class="lang-id">Daftar Pustaka Ilmiah</span><span class="lang-en">Scientific Bibliography</span></span>
+    <span class="toc-time">Ref</span>
+  </a>
+</nav>
+
+<section class="hero">
+  <div class="hero-loader"><span class="loader" style="--size:1.3px;"></span></div>
+  <span class="eyebrow">
+    <span class="lang-id">Neurosains Relasional · Psikologi Keikatan · Biologi Evolusioner</span>
+    <span class="lang-en">Relational Neuroscience · Attachment Psychology · Evolutionary Biology</span>
+  </span>
+  <h1>
+    <span class="lang-id">Mengapa Kita Jatuh Cinta<br><span class="accent">pada Orang yang Tepat (atau Salah)</span></span>
+    <span class="lang-en">Why We Fall in Love<br><span class="accent">with the Right Person (or the Wrong One)</span></span>
+  </h1>
+  <p class="subtitle">
+    <span class="lang-id">Sains di balik debaran jantung, luka masa kecil yang saling mengunci, dan protokol neuroplastisitas untuk merawat cinta agar tetap hidup.</span>
+    <span class="lang-en">The science behind racing pulses, interlocking childhood wounds, and neuroplasticity protocols to keep love alive and flourishing.</span>
+  </p>
+
+  <div class="stats-bar">
+    <div class="stat-item">
+      <span class="stat-num">8</span>
+      <span class="stat-label"><span class="lang-id">Bab Sains</span><span class="lang-en">Science Chs</span></span>
+    </div>
+    <div class="stat-item">
+      <span class="stat-num">~44 Min</span>
+      <span class="stat-label"><span class="lang-id">Estimasi Baca</span><span class="lang-en">Est. Read Time</span></span>
+    </div>
+    <div class="stat-item">
+      <span class="stat-num">26+</span>
+      <span class="stat-label"><span class="lang-id">Studi Peer-Reviewed</span><span class="lang-en">Peer-Reviewed</span></span>
+    </div>
+    <div class="stat-item">
+      <span class="stat-num">5</span>
+      <span class="stat-label"><span class="lang-id">Protokol Klinis</span><span class="lang-en">Clinical Protocols</span></span>
+    </div>
+  </div>
+
+  <div class="scroll-cue">
+    <span class="line"></span>
+    <span class="lang-id">gulir untuk memulai penyelidikan</span>
+    <span class="lang-en">scroll to begin the inquiry</span>
+  </div>
+</section>
+
+<p class="disclaimer">
+  <span class="lang-id">Monograf ini merangkum temuan neurobiologi, pencitraan fMRI, dan psikologi klinis teruji (Gottman, Fisher, Porges, Swart, Johnson, Perel) — ditulis sebagai kompas, bukan penghakiman.</span>
+  <span class="lang-en">This monograph synthesizes neurobiology, fMRI imaging findings, and clinically-validated relational psychology (Gottman, Fisher, Porges, Swart, Johnson, Perel) — written as a compass, not a verdict.</span>
+</p>
+
+<!-- Table of Contents -->
+<section class="toc-section" id="daftar-isi">
+  <h2>
+    <span><span class="lang-id">Daftar Isi & Durasi Baca</span><span class="lang-en">Table of Contents & Reading Times</span></span>
+    <span class="total-time">Total ~44 Menit</span>
+  </h2>
+  <ul class="toc-list">
+    <li class="part-label"><span class="lang-id">Bagian I — Magnetisme Biologis & Misteri Chemistry</span><span class="lang-en">Part I — Biological Magnetism & the Mystery of Chemistry</span></li>
+    <li>
+      <a href="#bab1">
+        <span><span class="lang-id">Neurobiologi Ketertarikan: Ketika Otak Dibajak</span><span class="lang-en">The Neurobiology of Attraction: When the Brain is Hijacked</span></span>
+        <span class="duration">~5 min</span>
+        <span class="tn">01</span>
+      </a>
+    </li>
+    <li>
+      <a href="#bab2">
+        <span><span class="lang-id">Teori Matching Wound: Daya Tarik Luka yang Setara</span><span class="lang-en">The Matching Wound Theory: Attracting Equal Wounds</span></span>
+        <span class="duration">~5 min</span>
+        <span class="tn">02</span>
+      </a>
+    </li>
+
+    <li class="part-label"><span class="lang-id">Bagian II — Anatomi Konflik & Pemicu Trauma</span><span class="lang-en">Part II — The Anatomy of Conflict & Trauma Triggers</span></li>
+    <li>
+      <a href="#bab3">
+        <span><span class="lang-id">Peta Emosi & Gaya Keikatan (Attachment Styles)</span><span class="lang-en">Emotional Maps & Attachment Styles</span></span>
+        <span class="duration">~5 min</span>
+        <span class="tn">03</span>
+      </a>
+    </li>
+    <li>
+      <a href="#bab4">
+        <span><span class="lang-id">Biologi Pertengkaran: Amigdala & Teori Polivagal</span><span class="lang-en">The Biology of Fighting: Amygdala & Polyvagal Theory</span></span>
+        <span class="duration">~5 min</span>
+        <span class="tn">04</span>
+      </a>
+    </li>
+
+    <li class="part-label"><span class="lang-id">Bagian III — Pemulihan, Adaptasi & Resolusi Pengkhianatan</span><span class="lang-en">Part III — Recovery, Adaptation & Betrayal Resolution</span></li>
+    <li>
+      <a href="#bab5">
+        <span><span class="lang-id">Pertolongan Pertama Saat Konflik (3-Stage Protocol)</span><span class="lang-en">First Aid in Conflict (3-Stage Protocol)</span></span>
+        <span class="duration">~4 min</span>
+        <span class="tn">05</span>
+      </a>
+    </li>
+    <li>
+      <a href="#bab6">
+        <span><span class="lang-id">Rewiring the Heart: Neuroplastisitas Relasional</span><span class="lang-en">Rewiring the Heart: Relational Neuroplasticity</span></span>
+        <span class="duration">~5 min</span>
+        <span class="tn">06</span>
+      </a>
+    </li>
+    <li>
+      <a href="#bab7">
+        <span><span class="lang-id">Adaptasi Berkelanjutan & Growth Partnership</span><span class="lang-en">Sustained Adaptation & Growth Partnership</span></span>
+        <span class="duration">~5 min</span>
+        <span class="tn">07</span>
+      </a>
+    </li>
+    <li>
+      <a href="#bab8">
+        <span><span class="lang-id">Anatomi Perselingkuhan: Fisik vs Emosional, Dampak Somatik & Protokol Rekonsiliasi</span><span class="lang-en">The Anatomy of Infidelity: Physical vs Emotional, Somatic Impact & Reconciliation</span></span>
+        <span class="duration">~6 min</span>
+        <span class="tn">08</span>
+      </a>
+    </li>
+
+    <li class="part-label"><span class="lang-id">Lampiran & Rujukan</span><span class="lang-en">Appendix & References</span></li>
+    <li>
+      <a href="#cheatsheet">
+        <span><span class="lang-id">Cheat-Sheet Resolusi Konflik Harian</span><span class="lang-en">Daily Conflict Resolution Cheat-Sheet</span></span>
+        <span class="duration">~2 min</span>
+        <span class="tn">＋</span>
+      </a>
+    </li>
+    <li>
+      <a href="#epilog">
+        <span><span class="lang-id">Epilog: Cinta sebagai Latihan, Bukan Nasib</span><span class="lang-en">Epilogue: Love as Practice, Not Fate</span></span>
+        <span class="duration">~2 min</span>
+        <span class="tn">－</span>
+      </a>
+    </li>
+    <li>
+      <a href="#pustaka">
+        <span><span class="lang-id">Daftar Pustaka Ilmiah & Studi Terpilih</span><span class="lang-en">Scientific Bibliography & Selected Studies</span></span>
+        <span class="duration">Ref</span>
+        <span class="tn">↷</span>
+      </a>
+    </li>
+  </ul>
+</section>
+
+<hr class="div">
+
+<!-- ============ BAGIAN I ============ -->
+
+<section class="chapter" id="bab1">
+  <div class="chapter-head">
+    <div class="chapter-num-row">
+      <span class="pulse-dot"></span>
+      <span class="eyebrow"><span class="lang-id">Bab 01</span><span class="lang-en">Chapter 01</span></span>
+      <span class="reading-badge">⏱ ~5 min read</span>
+    </div>
+    <h2 class="chapter-title">
+      <span class="lang-id">Neurobiologi Ketertarikan — Ketika Otak Mengambil Alih Hati</span>
+      <span class="lang-en">The Neurobiology of Attraction — When the Brain Hijacks the Heart</span>
+    </h2>
+    <p class="chapter-sub">
+      <span class="lang-id">Cinta pada pandangan pertama bukan misteri mistis. Ia adalah lonjakan neurokimiawi masif yang, jika dipindai lewat fMRI, mengaktifkan sirkuit ganjaran yang sama persis dengan zat adiktif berkadar tinggi.</span>
+      <span class="lang-en">Love at first sight is no mystical enigma. It is a massive neurochemical cascade that, under fMRI scanning, lights up the exact reward circuitry activated by high-potency addictive substances.</span>
+    </p>
+    <div class="experts">Helen Fisher, Ph.D. · Semir Zeki · Donatella Marazziti · Claus Wedekind</div>
+  </div>
+
+  <div class="chapter-body">
+    <h3 id="b1-1"><span class="letter">1.1</span>
+      <span class="lang-id">Tiga Sistem Otak dalam Percintaan (Helen Fisher)</span>
+      <span class="lang-en">The Three Brain Systems of Romance (Helen Fisher)</span>
+    </h3>
+    <p class="dropcap lang-id">Antropolog biologis Dr. Helen Fisher dari Rutgers University mengidentifikasi bahwa evolusi membekali manusia dengan tiga sistem neurobiologis terpisah namun saling berkait dalam urusan asmara: <em>Lust</em> (hasrat seksual), <em>Attraction</em> (ketertarikan romantis/limerence), dan <em>Attachment</em> (keterikatan jangka panjang). Ketiganya dioperasikan oleh neurotransmiter dan hormon yang sama sekali berbeda.</p>
+    <p class="dropcap lang-en">Biological anthropologist Dr. Helen Fisher of Rutgers University discovered that evolution equipped humans with three distinct yet interconnected brain systems for mating: <em>Lust</em> (sexual drive), <em>Attraction</em> (romantic obsession/limerence), and <em>Attachment</em> (deep long-term pair bonding). Each system is mediated by an entirely different chemical cocktail.</p>
+
+    <p class="lang-id">Ketika kita berkata "aku merasakan chemistry yang hebat dengannya", otak kita sebetulnya sedang membanjiri sirkuit mesolimbik dopamin. Ventral Tegmental Area (VTA) dan Nucleus Accumbens — pabrik antisipasi ganjaran primitif — menyala terang. Ini bukan sekadar kenikmatan (<em>liking</em>), melainkan dorongan obsesif (<em>craving / wanting</em>) (Berridge & Robinson, 2003). Inilah sebabnya seseorang sanggup menatap layar ponsel selama berjam-jam demi sebuah notifikasi: secara neurokimiawi, otak berada pada kondisi identik dengan pejudi yang menunggu keluarnya jackpot.</p>
+    <p class="lang-en">When we say "we share incredible chemistry," our brain is actually flooding the mesolimbic dopamine pathway. The Ventral Tegmental Area (VTA) and Nucleus Accumbens — primitive reward and anticipation engines — fire furiously. This is not merely <em>liking</em>, but raw obsessive wanting (Berridge & Robinson, 2003). This is why someone can stare at a blank phone screen for hours waiting for a ping: neurochemically, the brain mirrors a gambler awaiting the next slot payoff.</p>
+
+    <div class="science-card">
+      <h4><span class="lang-id">🔬 Studi Seminal: Serotonin & Obsesi</span><span class="lang-en">🔬 Seminal Study: Serotonin & Obsession</span></h4>
+      <span class="paper-title">Marazziti, D., Akiskal, H. S., Rossi, A., & Cassano, G. B. (1999). Alteration of the platelet serotonin transporter in romantic love. <em>Psychological Medicine</em>.</span>
+      <p><span class="lang-id">Penelitian Dr. Donatella Marazziti di University of Pisa menemukan bahwa individu yang sedang dalam fase awal jatuh cinta intens (kurang dari 6 bulan) mengalami penurunan kepadatan transporter serotonin (SERT) platelet hingga <strong>40%</strong> — level abnormal yang identik dengan pasien penderita Obsessive-Compulsive Disorder (OCD) yang belum terobati. Hal ini menjelaskan mengapa orang yang dimabuk asmara menghabiskan 85–95% waktu terjaga mereka hanya untuk memikirkan sang kekasih.</span>
+      <span class="lang-en">Dr. Donatella Marazziti's team at the University of Pisa discovered that individuals in the early throes of passionate love (under 6 months) had their platelet serotonin transporter (SERT) density plummet by <strong>40%</strong> — an abnormal deficit identical to unmedicated Obsessive-Compulsive Disorder (OCD) patients. This directly accounts for why infatuated lovers spend 85–95% of their waking hours consumed by involuntary thoughts of their partner.</span></p>
+    </div>
+
+    <h3 id="b1-2"><span class="letter">1.2</span>
+      <span class="lang-id">Deaktivasi Kognitif: Bukti Saintifik "Cinta Itu Buta"</span>
+      <span class="lang-en">Cognitive Deactivation: The Scientific Proof that "Love is Blind"</span>
+    </h3>
+    <p class="lang-id">Apakah pepatah kuno bahwa cinta membutakan akal sehat terbukti secara biologis? Pemindaian neuro-imaging oleh Profesor Semir Zeki dan Andreas Bartels di University College London (2000, 2004) menjawabnya dengan tegas: <em>Ya</em>.</p>
+    <p class="lang-en">Is the age-old proverb that love is blind scientifically real? Neuro-imaging scans conducted by Professor Semir Zeki and Andreas Bartels at University College London (2000, 2004) proved it conclusively: <em>Yes</em>.</p>
+
+    <p class="lang-id">Ketika partisipan melihat foto orang yang sangat mereka cintai, terjadi <strong>deaktivasi fungsional selektif</strong> pada:</p>
+    <p class="lang-en">When participants viewed photographs of their beloved, fMRI revealed <strong>selective functional deactivation</strong> in:</p>
+
+    <ul class="checklist">
+      <li><strong><span class="lang-id">Amigdala (Amygdala):</span><span class="lang-en">Amygdala:</span></strong> <span class="lang-id">Pusat alarm bahaya, rasa takut, dan kewaspadaan sosial meredup drastis. Pasangan dipandang bebas dari potensi ancaman.</span><span class="lang-en">The core vigilance and fear-detection hub drops its guard drastically. The partner is stripped of perceived threat.</span></li>
+      <li><strong><span class="lang-id">Medial Prefrontal Cortex & Temporoparietal Junction:</span><span class="lang-en">Medial Prefrontal Cortex & Temporoparietal Junction:</span></strong> <span class="lang-id">Wilayah yang bertugas melakukan penilaian kritis sosial (<em>critical mentalizing</em>) dan skeptisisme moral dinonaktifkan. Otak secara harfiah kehilangan kapasitas untuk menghakimi kekurangan atau tanda bahaya (<em>red flags</em>) pada diri pasangan.</span><span class="lang-en">The circuits responsible for critical social judgment, doubt, and moral skepticism are suppressed. The brain literally loses its faculty to weigh red flags or flaws.</span></li>
+    </ul>
+
+    <blockquote class="pull">
+      <span class="lang-id">Otak yang sedang jatuh cinta tidak sekadar bersemangat; ia secara aktif melumpuhkan perangkat penilaian risikonya. Seleksi alam merancang mekanisme ini agar dua insan bersedia mendekat tanpa dicengkeram kecurigaan.</span>
+      <span class="lang-en">A brain in love is not merely enthusiastic; it actively suspends its risk-assessment apparatus. Natural selection engineered this blind spot so two strangers would merge without paralysis by suspicion.</span>
+      <cite>Bartels & Zeki (2004) · NeuroImage</cite>
+      <span class="note"><span class="lang-id">Itulah alasan rasional mengapa nasihat orang luar kerap ditolak mentah-mentah oleh mereka yang sedang di puncak limerence.</span><span class="lang-en">This explains why outside counsel is routinely dismissed by those standing at the peak of acute limerence.</span></span>
+    </blockquote>
+
+    <h3 id="b1-3"><span class="letter">1.3</span>
+      <span class="lang-id">Debaran vs. Ketenangan: Chemistry atau Alarm Sistem Saraf?</span>
+      <span class="lang-en">Racing Pulse vs. Calm: Chemistry or Nervous System Alarm?</span>
+    </h3>
+    <p class="lang-id">Banyak orang modern keliru mendefinisikan cinta sejati sebagai sensasi "kupu-kupu di perut" (<em>butterflies in the stomach</em>), jantung yang berdegup kencang, dan ketidakpastian yang menegangkan. Namun secara fisiologis, sensasi ini adalah perwujudan aktivasi <strong>Sympathetic Nervous System (SNS)</strong> — respon <em>fight-or-flight</em> yang dimediasi oleh lonjakan norepinefrin dan kortisol.</p>
+    <p class="lang-en">Many modern daters mistake intense butterflies, stomach flips, and frantic anticipation for "soulmate chemistry." Yet biologically, these sensations represent <strong>Sympathetic Nervous System (SNS)</strong> arousal — the identical fight-or-flight pathway mediated by surges of norepinephrine and cortisol.</p>
+
+    <div class="flow">
+      <div class="flow-title"><span class="lang-id">Dekonstruksi Sinyal Somatik</span><span class="lang-en">Deconstructing Somatic Signals</span></div>
+      <div class="flow-row">
+        <div class="flow-box warn">
+          <b><span class="lang-id">Debaran Liar & Cemas</span><span class="lang-en">Frantic Heart Racing</span></b>
+          <span><span class="lang-id">Norepinefrin + Aktivasi Simpatik. Kerap dipicu oleh ketidakpastian / ambiguitas figur yang mirip trauma lama.</span><span class="lang-en">Norepinephrine + Sympathetic surge. Often triggered by unpredictability mirroring old relational trauma.</span></span>
+        </div>
+        <div class="flow-arrow">≠</div>
+        <div class="flow-box alt">
+          <b><span class="lang-id">Ketenangan Ventral Vagal</span><span class="lang-en">Ventral Vagal Safety</span></b>
+          <span><span class="lang-id">Oksitosin + Saraf Vagus Parasimpatis. Detak jantung melambat, otot rahang rileks, rasa aman & damai.</span><span class="lang-en">Oxytocin + Parasympathetic Vagus. Heart rate stabilizes, jaw softens, profound somatic safety.</span></span>
+        </div>
+      </div>
+    </div>
+
+    <p class="lang-id">Ironisnya, bagi seseorang yang tumbuh dalam lingkungan keluarga yang kacau atau tidak konsisten, ketenangan ventral vagal ini sering disalahartikan sebagai "hambar" atau "kurang chemistry". Padahal, yang dirindukan amigdala mereka sebenarnya bukan cinta, melainkan <em>familiaritas dari kecemasan</em>.</p>
+    <p class="lang-en">Ironically, for individuals raised in chaotic or emotionally inconsistent households, this ventral vagal calm is frequently misinterpreted as "boring" or "lacking chemistry." What their amygdala actually craves is not connection, but the <em>familiarity of relational anxiety</em>.</p>
+
+    <h3 id="b1-4"><span class="letter">1.4</span>
+      <span class="lang-id">Kode Kimia Tersembunyi: Gen MHC & Feromon</span>
+      <span class="lang-en">Hidden Chemical Signatures: MHC Genes & Olfaction</span>
+    </h3>
+    <p class="lang-id">Di luar kesadaran visual, tubuh kita melakukan kalkulasi genetik lewat aroma. Dalam eksperimen klasik <em>Sweaty T-Shirt Study</em> oleh Claus Wedekind (1995, *Proc. R. Soc. B*), para wanita diminta mencium kaus katun yang telah dikenakan pria selama dua malam tanpa wewangian. Hasilnya konsisten: wanita tertarik pada aroma pria yang memiliki gen <strong>Major Histocompatibility Complex (MHC / HLA)</strong> yang paling berbeda dengan gen mereka sendiri. Perbedaan profil imun ini secara evolusioner menjamin keturunan memiliki sistem kekebalan tubuh yang lebih tangguh dan mencegah perkawinan sedarah.</p>
+    <p class="lang-en">Beneath conscious visual aesthetics, human bodies perform rapid immunological calculations through scent. In Claus Wedekind's classic <em>Sweaty T-Shirt Study</em> (1995, *Proc. R. Soc. B*), women evaluated unperfumed cotton t-shirts worn by men for two consecutive nights. The finding was unambiguous: women consistently preferred the scent of men whose <strong>Major Histocompatibility Complex (MHC/HLA)</strong> immune genes differed most from their own, maximizing offspring immunological resilience and preventing inbreeding depression.</p>
+  </div>
+</section>
+
+<hr class="div">
+
+<section class="chapter" id="bab2">
+  <div class="chapter-head">
+    <div class="chapter-num-row">
+      <span class="pulse-dot"></span>
+      <span class="eyebrow"><span class="lang-id">Bab 02</span><span class="lang-en">Chapter 02</span></span>
+      <span class="reading-badge">⏱ ~5 min read</span>
+    </div>
+    <h2 class="chapter-title">
+      <span class="lang-id">Teori Matching Wound — Kita Menarik Orang yang Setara Lukanya</span>
+      <span class="lang-en">The Matching Wound Theory — We Attract Wounds Equal to Our Own</span>
+    </h2>
+    <p class="chapter-sub">
+      <span class="lang-id">Otak bawah sadar tidak memilih pasangan berdasarkan siapa yang paling logis membuat kita bahagia. Ia memilih siapa yang paling fasih berbicara dalam dialek rasa sakit masa kecil kita.</span>
+      <span class="lang-en">The subconscious mind never selects a partner based on who is most logically equipped to make us happy. It seeks the person most fluent in the emotional dialect of our childhood pain.</span>
+    </p>
+    <div class="experts">Dr. Tara Swart · Harville Hendrix, Ph.D. · Jeffrey Young, Ph.D. (Schema Therapy)</div>
+  </div>
+
+  <div class="chapter-body">
+    <h3 id="b2-1"><span class="letter">2.1</span>
+      <span class="lang-id">Cetak Biru Imago & Resonansi Neuroplastik</span>
+      <span class="lang-en">The Imago Blueprint & Neuroplastic Resonance</span>
+    </h3>
+    <p class="dropcap lang-id">Neurosaintis Dr. Tara Swart (MIT & King's College London) memaparkan premis yang mencengangkan: dalam relasi romantis, manusia tidak menarik apa yang secara sadar mereka inginkan, melainkan seseorang yang memiliki <em>kedalaman luka emosional yang setara</em> dengan diri mereka sendiri. Teori ini bersinergi dengan karya legendaris Harville Hendrix tentang <strong>Imago Relationship Therapy</strong>.</p>
+    <p class="dropcap lang-en">Neuroscientist Dr. Tara Swart (MIT & King's College London) reveals a startling truth: in romantic attachments, humans rarely attract what their conscious ego demands. Instead, we gravitate toward individuals carrying an <em>identical depth of psychological wounding</em>. This directly validates Harville Hendrix's foundational work on <strong>Imago Relationship Therapy</strong>.</p>
+
+    <p class="lang-id">Otak purba kita (limbik) menyimpan cetak biru komposit dari seluruh pengasuh primer masa kecil kita — mencakup sifat hangat mereka sekaligus cara mereka mengabaikan, menuntut, atau mempermalukan kita. Secara evolusioner, amigdala kita memiliki dorongan kompulsi pengulangan (Freud: <em>Wiederholungszwang</em>): kita memilih orang yang memiliki kekurangan serupa orang tua kita dengan harapan bahwa kali ini, di masa dewasa, kita berhasil "memperbaiki" situasi tersebut dan akhirnya mendapatkan cinta tanpa syarat yang dulu luput.</p>
+    <p class="lang-en">Our primitive limbic brain retains a composite blueprint of our primary caregivers — preserving both their warmth and their moments of rejection, control, or emotional neglect. Subconsciously, the psyche engages in repetition compulsion: we select partners bearing the exact emotional deficits of our parents in a desperate bid to re-stage the childhood theater and finally secure the unconditional attunement we were once denied.</p>
+
+    <div class="science-card">
+      <h4><span class="lang-id">📚 Terapi Skema: Schema Chemistry</span><span class="lang-en">📚 Schema Therapy: Schema Chemistry</span></h4>
+      <span class="paper-title">Young, J. E., Klosko, J. S., & Weishaar, M. E. (2003). <em>Schema Therapy: A Practitioner's Guide</em>.</span>
+      <p><span class="lang-id">Dr. Jeffrey Young menemukan fenomena <em>Schema Chemistry</em>: ketertarikan kilat yang luar biasa kuat biasanya terjadi saat skema maladaptif dini (Early Maladaptive Schemas) seseorang terkunci pas dengan skema pasangannya. Contoh: Seseorang dengan skema <em>Defectiveness/Abandonment</em> (merasa diri cacat/takut ditinggal) akan merasa magnetisme tak tertahankan pada sosok dengan skema <em>Emotional Deprivation/Entitlement</em> (dingin, menjaga jarak, narsistik). Mereka saling melengkapi drama psikis masing-masing.</span>
+      <span class="lang-en">Dr. Jeffrey Young documented <em>Schema Chemistry</em>: hyper-intense, instantaneous attraction almost universally occurs when one partner's Early Maladaptive Schema locks seamlessly into the other's. Example: An individual possessing an <em>Abandonment/Defectiveness</em> schema experiences magnetic pull toward someone manifesting an <em>Emotional Deprivation</em> or <em>Entitlement</em> schema (aloof, emotionally distant). They unconsciously complete each other's unresolved internal tragedy.</span></p>
+    </div>
+
+    <h3 id="b2-2"><span class="letter">2.2</span>
+      <span class="lang-id">Tarian Anxious dan Avoidant: Mengapa Saling Mengunci?</span>
+      <span class="lang-en">The Anxious-Avoidant Dance: Why They Lock Together</span>
+    </h3>
+    <p class="lang-id">Pasangan yang paling umum dan paling rentan terjebak dalam siklus toksik berkepanjangan adalah perpaduan antara <strong>Anxious Attachment</strong> dan <strong>Dismissive-Avoidant Attachment</strong>. Di permukaan, mereka tampak bertolak belakang, tetapi sebenarnya mereka adalah dua sisi dari satu koin luka yang sama: <em>ketidakmampuan mempercayai bahwa cinta yang aman itu nyata</em>.</p>
+    <p class="lang-en">The most pervasive, volatile pairing in modern couples is the magnetic trap between <strong>Anxious Attachment</strong> and <strong>Dismissive-Avoidant Attachment</strong>. On the surface they look polar opposite, yet they represent two faces of the exact same underlying wound: <em>the fundamental inability to trust that safe, attuned love exists</em>.</p>
+
+    <div class="flow">
+      <div class="flow-title"><span class="lang-id">Siklus Tak Berujung (The Infinite Infinity Loop)</span><span class="lang-en">The Endless Infinity Loop</span></div>
+      <div class="flow-row">
+        <div class="flow-box">
+          <b><span class="lang-id">1. Anxious Merasa Terancam</span><span class="lang-en">1. Anxious Detects Threat</span></b>
+          <span><span class="lang-id">Jeda respons / tatapan dingin memicu attachment panic. Respon: membanjiri teks, menuntut afeksi, mengkritik.</span><span class="lang-en">Delayed text / flat affect triggers abandonment panic. Response: protest behavior, flooding, demanding reassurance.</span></span>
+        </div>
+        <div class="flow-arrow">→</div>
+        <div class="flow-box warn">
+          <b><span class="lang-id">2. Avoidant Merasa Tercekik</span><span class="lang-en">2. Avoidant Feels Smothered</span></b>
+          <span><span class="lang-id">Tuntutan diartikan sebagai invasi batas diri & kegagalan. Respon: membisu (stonewalling), kabur, menutup emosi.</span><span class="lang-en">Demands register as boundary intrusion and criticism. Response: stonewalling, withdrawing into isolation.</span></span>
+        </div>
+        <div class="flow-arrow">→</div>
+        <div class="flow-box alt">
+          <b><span class="lang-id">3. Ledakan Putus-Sambung</span><span class="lang-en">3. Escalation & Repair Void</span></b>
+          <span><span class="lang-id">Penarikan diri avoidant melipatgandakan panik anxious; siklus trauma bonding berulang kembali.</span><span class="lang-en">Avoidant withdrawal intensifies anxious terror; the intermittent reinforcement cycle cements the trauma bond.</span></span>
+        </div>
+      </div>
+    </div>
+
+    <h3 id="b2-3"><span class="letter">2.3</span>
+      <span class="lang-id">Jebakan Familiaritas: Mengapa Hubungan Sehat Terasa Menakutkan?</span>
+      <span class="lang-en">The Familiarity Trap: Why Healthy Relationships Feel Terrifying</span>
+    </h3>
+    <p class="lang-id">Bagi sistem saraf manusia, <em>aman</em> sering kali disamakan dengan <em>familiar</em>. Jika seseorang dibesarkan dalam rumah tangga di mana penerimaan selalu bersyarat pada prestasi atau kepatuhan mutlak, kehadiran pasangan yang tulus mencintai tanpa syarat akan memicu <strong>disonansi kognitif dan somatik</strong>. Otak curiga: "Di mana jebakannya? Kapan dia akan menusuk dari belakang?"</p>
+    <p class="lang-en">To the human autonomic nervous system, <em>safety</em> is routinely conflated with <em>predictability</em>. If someone grew up in an environment where affection was conditional upon performance or vigilance, an emotionally available, warm partner introduces acute <strong>cognitive and somatic dissonance</strong>. The subconscious panics: "Where is the catch? When does the trap spring?"</p>
+
+    <p class="lang-id">Inilah asal-usul dari <em>self-sabotage</em> dalam hubungan: memprovokasi pertengkaran, berselingkuh emosional, atau tiba-tiba merasa "kehilangan rasa cinta" tepat ketika hubungan bergerak menuju komitmen yang stabil dan damai.</p>
+    <p class="lang-en">This is the neurological origin of relational self-sabotage: picking irrational fights, engineering artificial drama, or abruptly claiming to have "lost feelings" right at the threshold of peaceful, mature commitment.</p>
+  </div>
+</section>
+
+<hr class="div">
+
+<!-- ============ BAGIAN II ============ -->
+
+<section class="chapter" id="bab3">
+  <div class="chapter-head">
+    <div class="chapter-num-row">
+      <span class="pulse-dot"></span>
+      <span class="eyebrow"><span class="lang-id">Bab 03</span><span class="lang-en">Chapter 03</span></span>
+      <span class="reading-badge">⏱ ~5 min read</span>
+    </div>
+    <h2 class="chapter-title">
+      <span class="lang-id">Peta Emosi & Gaya Keikatan Dewasa (Adult Attachment)</span>
+      <span class="lang-en">Emotional Maps & Adult Attachment Styles</span>
+    </h2>
+    <p class="chapter-sub">
+      <span class="lang-id">Gaya keikatan bukanlah kepribadian kaku, melainkan strategi neurobiologis bertahan hidup yang dipelajari tubuh di masa kanak-kanak saat menghadapi krisis keterhubungan.</span>
+      <span class="lang-en">Attachment styles are not fixed personality traits, but neurobiological survival adaptations wired during infancy to navigate relational threat.</span>
+    </p>
+    <div class="experts">John Bowlby · Mary Ainsworth · Bartholomew & Horowitz · Amir Levine</div>
+  </div>
+
+  <div class="chapter-body">
+    <h3 id="b3-1"><span class="letter">3.1</span>
+      <span class="lang-id">Kuadran Bartholomew & Horowitz</span>
+      <span class="lang-en">The Bartholomew & Horowitz 4-Quadrant Model</span>
+    </h3>
+    <p class="dropcap lang-id">Pada tahun 1991, psikolog Kim Bartholomew dan Leonard Horowitz menyempurnakan teori Bowlby dan Hazan-Shaver dengan memetakan gaya keikatan dewasa ke dalam dua sumbu fundamental: <strong>Model Diri (Kecemasan / Anxiety)</strong> dan <strong>Model Orang Lain (Penghindaran / Avoidance)</strong>.</p>
+    <p class="dropcap lang-en">In 1991, psychologists Kim Bartholomew and Leonard Horowitz refined Bowlby's paradigm by organizing adult attachment along two orthogonal axes: <strong>Model of Self (Attachment Anxiety)</strong> and <strong>Model of Other (Attachment Avoidance)</strong>.</p>
+
+    <p class="table-cap"><span class="lang-id">Matriks Empat Gaya Keikatan Dewasa</span><span class="lang-en">Matrix of the Four Adult Attachment Styles</span></p>
+    <div class="matrix-wrap">
+      <table class="matrix">
+        <thead>
+          <tr>
+            <th><span class="lang-id">Gaya Keikatan</span><span class="lang-en">Attachment Style</span></th>
+            <th><span class="lang-id">Model Diri & Orang Lain</span><span class="lang-en">Self & Other Model</span></th>
+            <th><span class="lang-id">Strategi Regulasi Saraf</span><span class="lang-en">Neural Regulatory Strategy</span></th>
+            <th><span class="lang-id">Manifestasi dalam Hubungan</span><span class="lang-en">Relational Behavior</span></th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><strong>Secure (Aman)</strong></td>
+            <td><span class="lang-id">Diri (+) / Orang Lain (+)</span><span class="lang-en">Self (+) / Other (+)</span></td>
+            <td><span class="lang-id">Fleksibel, parasimpatis dominan, ko-regulasi efektif</span><span class="lang-en">Flexible, parasympathetic balance, effective co-regulation</span></td>
+            <td><span class="lang-id">Nyaman dengan keintiman maupun otonomi; mengkomunikasikan kebutuhan secara terbuka tanpa manipulasi.</span><span class="lang-en">Comfortable with intimacy and independence; expresses needs directly without punitive games.</span></td>
+          </tr>
+          <tr>
+            <td><strong>Anxious-Preoccupied</strong></td>
+            <td><span class="lang-id">Diri (-) / Orang Lain (+)</span><span class="lang-en">Self (-) / Other (+)</span></td>
+            <td><span class="lang-id">Hiperaktivasi sistem saraf (Hyperactivating Strategy)</span><span class="lang-en">Hyperactivating neural strategy; chronic sympathetic arousal</span></td>
+            <td><span class="lang-id">Waspada berlebih terhadap sinyal penolakan; butuh kepastian konstan; harga diri tergantung pada kehadiran pasangan.</span><span class="lang-en">Hyper-vigilant to micro-rejections; compulsive reassurance seeking; self-worth tethered to partner status.</span></td>
+          </tr>
+          <tr>
+            <td><strong>Dismissive-Avoidant</strong></td>
+            <td><span class="lang-id">Diri (+) / Orang Lain (-)</span><span class="lang-en">Self (+) / Other (-)</span></td>
+            <td><span class="lang-id">Deaktivasi sistem saraf (Deactivating Strategy)</span><span class="lang-en">Deactivating neural strategy; suppression of attachment needs</span></td>
+            <td><span class="lang-id">Kemandirian semu kompulsif; mematikan empati saat konflik; menganggap kebutuhan emosional pasangan sebagai tanda kelemahan.</span><span class="lang-en">Compulsive pseudo-independence; emotional numbing during conflict; views emotional vulnerability as defect.</span></td>
+          </tr>
+          <tr>
+            <td><strong>Fearful-Avoidant (Disorganized)</strong></td>
+            <td><span class="lang-id">Diri (-) / Orang Lain (-)</span><span class="lang-en">Self (-) / Other (-)</span></td>
+            <td><span class="lang-id">Kolaps regulasi; pergantian cepat simpatik & dorsal vagal</span><span class="lang-en">Regulatory collapse; rapid oscillating fight-freeze states</span></td>
+            <td><span class="lang-id">Dinamika "mendekat-menjauh" (push-pull); sangat mendambakan keintiman tapi panik ketika terlalu dekat; riwayat trauma relasional mendalam.</span><span class="lang-en">Chaotic push-pull dynamic; desperate longing for closeness paired with panic when intimacy deepens; deep relational trauma.</span></td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <!-- Mini interactive self-reflection tool -->
+    <div class="quiz-box" id="attachment-quickcheck">
+      <div class="quiz-header">
+        <span class="lang-id">🧠 Refleksi Mandiri: Deteksi Reaksi Otomatis Saat Hubungan Tegang</span>
+        <span class="lang-en">🧠 Self-Reflection: Automatic Reaction When Tension Arises</span>
+      </div>
+      <div class="quiz-sub">
+        <span class="lang-id">Klik opsi yang paling mewakili respons pertama tubuh Anda ketika pasangan tidak membalas pesan berjam-jam:</span>
+        <span class="lang-en">Select the option that best mirrors your body's instinct when your partner goes silent for hours:</span>
+      </div>
+      <div class="quiz-options">
+        <button class="quiz-btn" onclick="selectQuiz(1, this)">
+          <strong>A.</strong> <span class="lang-id">Dada sesak, cemas hebat, mengirim teks berulang untuk memastikan tidak ada yang salah.</span>
+          <span class="lang-en">Chest tightens, acute anxiety, sending multiple texts to check if something is wrong.</span>
+        </button>
+        <button class="quiz-btn" onclick="selectQuiz(2, this)">
+          <strong>B.</strong> <span class="lang-id">Merasa kesal lalu langsung mematikan notifikasi, menyibukkan diri dan bersikap acuh.</span>
+          <span class="lang-en">Irritation followed by turning off notifications, diving into work, pretending not to care.</span>
+        </button>
+        <button class="quiz-btn" onclick="selectQuiz(3, this)">
+          <strong>C.</strong> <span class="lang-id">Panik ingin menelepon, tapi semenit kemudian merasa ingin memblokir kontaknya karena merasa tidak aman.</span>
+          <span class="lang-en">Panic urge to call, followed minutes later by an impulse to block them out of fear.</span>
+        </button>
+        <button class="quiz-btn" onclick="selectQuiz(4, this)">
+          <strong>D.</strong> <span class="lang-id">Berpikir mungkin dia sedang sibuk; melanjutkan aktivitas dan berencana menanyakannya nanti malam dengan tenang.</span>
+          <span class="lang-en">Assumes they are busy; continues day peacefully, planning to ask with gentle curiosity later.</span>
+        </button>
+      </div>
+      <div class="quiz-result" id="quiz-ans-1">
+        <strong><span class="lang-id">Indikasi Gaya Anxious:</span><span class="lang-en">Anxious Profile Indicator:</span></strong>
+        <span class="lang-id">Sistem saraf Anda menyalakan alarm ditinggalkan (<em>abandonment panic</em>). Kortisol melonjak dan menuntut tindakan cepat untuk memulihkan koneksi. Kunci pemulihan Anda: self-soothing fisik sebelum mengirim pesan.</span>
+        <span class="lang-en">Your nervous system triggers abandonment panic. Cortisol surges and demands immediate action to restore connection. Your recovery key: somatic self-soothing before sending messages.</span>
+      </div>
+      <div class="quiz-result" id="quiz-ans-2">
+        <strong><span class="lang-id">Indikasi Gaya Dismissive-Avoidant:</span><span class="lang-en">Avoidant Profile Indicator:</span></strong>
+        <span class="lang-id">Sistem saraf Anda memilih strategi disosiasi / penutupan emosi (<em>deactivation</em>). Rasa sakit diubah menjadi apatisme untuk melindungi diri dari kerentanan. Kunci pemulihan Anda: menyadari bahwa butuh orang lain bukan sebuah kelemahan.</span>
+        <span class="lang-en">Your nervous system activates emotional deactivation. Pain is converted into apathy to safeguard vulnerability. Your recovery key: acknowledging that relational needs are not defects.</span>
+      </div>
+      <div class="quiz-result" id="quiz-ans-3">
+        <strong><span class="lang-id">Indikasi Gaya Fearful-Avoidant (Disorganized):</span><span class="lang-en">Disorganized Profile Indicator:</span></strong>
+        <span class="lang-id">Anda mengalami paradoks biologi: figur keterikatan adalah sumber keamanan sekaligus sumber ancaman. Amigdala Anda berganti antara menyerang dan membeku. Kunci pemulihan: regulasi trauma bertahap melalui batas aman.</span>
+        <span class="lang-en">You experience an attachment paradox: the bonding figure is simultaneously the source of safety and perceived threat. Recovery key: progressive trauma stabilization with predictable boundaries.</span>
+      </div>
+      <div class="quiz-result" id="quiz-ans-4">
+        <strong><span class="lang-id">Indikasi Gaya Secure:</span><span class="lang-en">Secure Profile Indicator:</span></strong>
+        <span class="lang-id">Sistem saraf ventral vagal Anda stabil. Ketidakhadiran pasangan tidak diterjemahkan sebagai penolakan eksistensial, melainkan realitas hidup yang wajar.</span>
+        <span class="lang-en">Your ventral vagal system holds stability. Partner latency is not interpreted as existential rejection, but as normal daily life circumstance.</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<hr class="div">
+
+<section class="chapter" id="bab4">
+  <div class="chapter-head">
+    <div class="chapter-num-row">
+      <span class="pulse-dot"></span>
+      <span class="eyebrow"><span class="lang-id">Bab 04</span><span class="lang-en">Chapter 04</span></span>
+      <span class="reading-badge">⏱ ~5 min read</span>
+    </div>
+    <h2 class="chapter-title">
+      <span class="lang-id">Biologi Pertengkaran — Saat Amigdala Membajak Hubungan</span>
+      <span class="lang-en">The Biology of Fighting — When the Amygdala Hijacks the Relationship</span>
+    </h2>
+    <p class="chapter-sub">
+      <span class="lang-id">Ketika detak jantung melampaui 100 denyut per menit, prefrontal cortex berhenti berfungsi. Kita bukan lagi sedang berdebat dengan pasangan, melainkan bertempur melawan sistem saraf purba kita sendiri.</span>
+      <span class="lang-en">Once heart rate climbs past 100 beats per minute, the prefrontal cortex shuts down. We are no longer conversing with a lover, but battling our own reptilian nervous system.</span>
+    </p>
+    <div class="experts">John Gottman, Ph.D. · Julie Schwartz Gottman, Ph.D. · Stephen Porges, Ph.D.</div>
+  </div>
+
+  <div class="chapter-body">
+    <h3 id="b4-1"><span class="letter">4.1</span>
+      <span class="lang-id">Diffuse Physiological Arousal (DPA) & Flooding Gottman</span>
+      <span class="lang-en">Diffuse Physiological Arousal (DPA) & Gottman's Flooding</span>
+    </h3>
+    <p class="dropcap lang-id">Selama empat dekade riset di <em>Love Lab</em> Universitas Washington, Dr. John Gottman dan Dr. Robert Levenson merekam ribuan pasangan yang sedang bertengkar dengan elektroda kardiovaskular, sensor keringat kulit, dan kamera mikro-ekspresi. Salah satu penemuan paling fundamental mereka adalah konsep <strong>Flooding</strong> atau <em>Diffuse Physiological Arousal (DPA)</em>.</p>
+    <p class="dropcap lang-en">Over four decades at the University of Washington <em>Love Lab</em>, Dr. John Gottman and Dr. Robert Levenson monitored thousands of couples in conflict using cardiovascular electrodes, galvanic skin sensors, and micro-expression coders. Their most transformative clinical discovery was <strong>Flooding</strong>, formally termed <em>Diffuse Physiological Arousal (DPA)</em>.</p>
+
+    <div class="callout">
+      <h4><span class="lang-id">Threshold Kritis: 100 BPM</span><span class="lang-en">The Critical 100 BPM Threshold</span></h4>
+      <p><span class="lang-id">Begitu detak jantung salah satu pasangan melampaui <strong>100 denyut per menit (BPM)</strong> (kecuali pada atlet dengan resting rate sangat rendah, di mana 80-85 BPM sudah memicu DPA), terjadi pergeseran biologis dramatis: darah dialihkan dari korteks serebral ke otot-otot besar untuk bersiap lari atau bertarung. Pada titik ini, kapasitas mendengarkan turun hingga <strong>80%</strong>, persepsi visual menyempit (tunnel vision), dan otak hanya mampu memproses input sebagai ancaman ofensif. Melanjutkan diskusi dalam kondisi flooded secara saintifik adalah kesia-siaan yang dijamin berakhir destruktif.</span>
+      <span class="lang-en">The moment a partner's heart rate surges past <strong>100 beats per minute (BPM)</strong> (or 80-85 BPM in elite endurance athletes), a drastic bio-mechanical shift occurs: blood is siphoned away from the cerebral cortex directly into large muscle groups for fight-or-flight. At this junction, auditory processing capacity drops by <strong>80%</strong>, visual fields narrow into tunnel perception, and all incoming data is processed strictly as existential threat. Continuing verbal engagement past 100 BPM is mathematically guaranteed to cause damage.</span></p>
+    </div>
+
+    <h3 id="b4-2"><span class="letter">4.2</span>
+      <span class="lang-id">Hierarki Polivagal Stephen Porges dalam Relasi</span>
+      <span class="lang-en">Stephen Porges' Polyvagal Hierarchy in Relationships</span>
+    </h3>
+    <p class="lang-id">Dr. Stephen Porges menjelaskan bahwa sistem saraf otonom beroperasi menurut prinsip filogenetik tiga tingkat, yang selalu memindai rasa aman tanpa sadar (<em>Neuroception</em>):</p>
+    <p class="lang-en">Dr. Stephen Porges demonstrated that the autonomic nervous system operates along an evolutionary three-tiered ladder, continuously scanning for cues of danger outside conscious thought (<em>Neuroception</em>):</p>
+
+    <div class="flow">
+      <div class="flow-title"><span class="lang-id">Tiga Keadaan Sistem Saraf Sesuai Teori Polivagal</span><span class="lang-en">The Polyvagal Hierarchy of Threat Response</span></div>
+      <div class="flow-row">
+        <div class="flow-box alt">
+          <b><span class="lang-id">1. Ventral Vagal</span><span class="lang-en">1. Ventral Vagal</span></b>
+          <span><span class="lang-id">Aman, Terhubung, Sosial. Tatapan hangat, otot wajah fleksibel, intonasi suara melodis (prosody). Hubungan terasa intim.</span><span class="lang-en">Safety & Social Engagement. Warm eye contact, facial nuance, melodic vocal prosody. Empathy is active.</span></span>
+        </div>
+        <div class="flow-arrow">↓</div>
+        <div class="flow-box warn">
+          <b><span class="lang-id">2. Sympathetic Mobilization</span><span class="lang-en">2. Sympathetic</span></b>
+          <span><span class="lang-id">Fight-or-Flight. Tubuh tegang, nada suara meninggi, kata-kata cepat & tajam. Menyerang atau membela diri.</span><span class="lang-en">Fight or Flight. Adrenaline surge, raised volume, sharp accusatory words. Defensive and combative.</span></span>
+        </div>
+        <div class="flow-arrow">↓</div>
+        <div class="flow-box">
+          <b><span class="lang-id">3. Dorsal Vagal Collapse</span><span class="lang-en">3. Dorsal Vagal</span></b>
+          <span><span class="lang-id">Freeze & Shutdown. Wajah tanpa ekspresi (flat affect), pandangan kosong, membisu (stonewalling), mati rasa somatik.</span><span class="lang-en">Freeze & Shutdown. Total stonewalling, glazed eyes, emotional numbness, somatic immobilization.</span></span>
+        </div>
+      </div>
+    </div>
+
+    <h3 id="b4-3"><span class="letter">4.3</span>
+      <span class="lang-id">Empat Penunggang Kiamat Relasi & Beban Allostatic</span>
+      <span class="lang-en">The Four Horsemen & Allostatic Load</span>
+    </h3>
+    <p class="lang-id">Gottman mengidentifikasi empat pola komunikasi fatal yang memprediksi perceraian dengan akurasi <strong>93.6%</strong>:</p>
+    <p class="lang-en">Gottman codified four lethal interactional habits that forecast divorce with <strong>93.6%</strong> statistical accuracy:</p>
+
+    <ul class="checklist">
+      <li><strong><span class="lang-id">1. Kritik Menyerang Pribadi (Criticism):</span><span class="lang-en">1. Character Criticism:</span></strong> <span class="lang-id">Bukan mengeluhkan perilaku spesifik, melainkan mendefinisikan cacat karakter: "Kamu memang selalu egois!"</span><span class="lang-en">Attacking the partner's global character rather than citing a specific behavior: "You're just selfish!"</span></li>
+      <li><strong><span class="lang-id">2. Penghinaan (Contempt — Prediktor Terkuat):</span><span class="lang-en">2. Contempt (The Lethal Predictor):</span></strong> <span class="lang-id">Sarkasme, memutar bola mata, ejekan, mencemooh dari posisi superioritas moral. Penelitian menemukan bahwa pasangan yang kerap menerima penghinaan mengalami penurunan imunitas fisik drastis dan lebih sering menderita infeksi virus.</span><span class="lang-en">Eye-rolling, mockery, sarcasm, sneering from moral superiority. Studies revealed that partners subjected to chronic contempt suffer suppressed immune function and higher rates of infectious illnesses.</span></li>
+      <li><strong><span class="lang-id">3. Sikap Defensif (Defensiveness):</span><span class="lang-en">3. Defensiveness:</span></strong> <span class="lang-id">Memposisikan diri sebagai korban yang tak bersalah dan membalikkan kesalahan: "Aku terlambat kan gara-gara kamu tadi lambat!"</span><span class="lang-en">Innocent-victim posture and counter-blaming: "I wouldn't be late if you hadn't delayed us!"</span></li>
+      <li><strong><span class="lang-id">4. Membisu Total (Stonewalling):</span><span class="lang-en">4. Stonewalling:</span></strong> <span class="lang-id">Menutup diri total, mengabaikan pasangan, memutuskan kontak mata — perwujudan kolaps dorsal vagal.</span><span class="lang-en">Withdrawing entirely, breaking eye contact, stone-faced silence — the physiological signature of dorsal vagal collapse.</span></li>
+    </ul>
+  </div>
+</section>
+
+<hr class="div">
+
+<!-- ============ BAGIAN III ============ -->
+
+<section class="chapter" id="bab5">
+  <div class="chapter-head">
+    <div class="chapter-num-row">
+      <span class="pulse-dot"></span>
+      <span class="eyebrow"><span class="lang-id">Bab 05</span><span class="lang-en">Chapter 05</span></span>
+      <span class="reading-badge">⏱ ~4 min read</span>
+    </div>
+    <h2 class="chapter-title">
+      <span class="lang-id">Protokol De-eskalasi: Pertolongan Pertama Saat Terbakar Emosi</span>
+      <span class="lang-en">De-escalation Protocol: First Aid When Flooded with Anger</span>
+    </h2>
+    <p class="chapter-sub">
+      <span class="lang-id">Tindakan paling cerdas saat badai amigdala memuncak justru tampak paling tidak heroik: berhenti berbicara, berpisah ruang, dan menurunkan biokimia stres tubuh.</span>
+      <span class="lang-en">The most courageous action when an amygdala firestorm peaks looks deceptively quiet: cease talking, separate spaces, and biologically metabolize stress hormones.</span>
+    </p>
+    <div class="experts">Nonviolent Communication (Marshall Rosenberg) · Gottman Softened Startup · Beata Ditzen (Oxytocin Protocol)</div>
+  </div>
+
+  <div class="chapter-body">
+    <h4 class="substep"><span class="lang-id">Tahap 1: Jeda 20–30 Menit (Metabolic Clearance)</span><span class="lang-en">Stage 1: The 20–30 Minute Metabolic Clearance</span></h4>
+    <p class="dropcap lang-id">Ketika salah satu pihak merasakan tanda awal flooding (otot rahang mengeras, nafas memburu, dorongan menyindir), segera ucapkan kalimat kode yang disepakati: <em>"Sistem sarafku sedang penuh. Aku butuh jeda 25 menit agar aku tidak melukai hubungan kita."</em></p>
+    <p class="dropcap lang-en">The second either partner feels visceral flooding (clenched jaw, shallow chest panting, urge to sting), execute the agreed safety phrase: <em>"My nervous system is in red alert. I need a 25-minute pause so I do not wound our connection."</em></p>
+
+    <div class="callout">
+      <h4><span class="lang-id">Aturan Mutlak Selama Jeda 20 Menit</span><span class="lang-en">Absolute Rules During the 20-Minute Bio-Cooling</span></h4>
+      <p><span class="lang-id"><strong>DILARANG:</strong> Merenungkan betapa jahatnya pasangan, menyusun skrip argumen balasan, atau curhat di media sosial. Hal ini hanya akan memompa adrenalin kembali.</span><br>
+      <span class="lang-id"><strong>WAJIB:</strong> Aktivitas fisiologis murni: pernapasan fisiologis (<em>physiological sigh</em>: 2 hirupan pendek lewat hidung, 1 hembusan panjang lewat mulut), mencuci wajah dengan air dingin (memicu <em>Mammalian Dive Reflex</em> yang memperlambat denyut jantung), atau berjalan kaki tanpa ponsel.</span>
+      <span class="lang-en"><strong>FORBIDDEN:</strong> Ruminating on your partner's flaws, drafting mental cross-examinations, or doomscrolling. This will re-trigger epinephrine cascades.</span><br>
+      <span class="lang-en"><strong>MANDATORY:</strong> Somatic resetting: physiological sigh (double nasal inhale, prolonged mouth exhale), splash ice water on face (engaging the <em>Mammalian Dive Reflex</em> to drop heart rate), or phone-free ambulation.</span></p>
+    </div>
+
+    <h4 class="substep"><span class="lang-id">Tahap 2: Softened Startup Berbasis NVC</span><span class="lang-en">Stage 2: NVC-Based Softened Startup</span></h4>
+    <p class="lang-id">Riset Gottman membuktikan bahwa <strong>96%</strong> dari hasil percakapan 15 menit dapat diprediksi hanya dari cara percakapan tersebut dibuka pada 3 menit pertama. Gunakan formula Nonviolent Communication (NVC) yang menghilangkan pemicu defensif:</p>
+    <p class="lang-en">Gottman's clinical data proves that <strong>96%</strong> of a 15-minute conflict outcome can be reliably predicted from the tone of its first 3 minutes. Apply the Nonviolent Communication (NVC) template to bypass defensive walls:</p>
+
+    <div class="matrix-wrap">
+      <table class="matrix">
+        <thead>
+          <tr>
+            <th><span class="lang-id">Struktur</span><span class="lang-en">Structure</span></th>
+            <th><span class="lang-id">Formula Kalimat</span><span class="lang-en">Syntax Formula</span></th>
+            <th><span class="lang-id">Contoh Konkret</span><span class="lang-en">Concrete Example</span></th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><strong>1. Fakta Objektif</strong></td>
+            <td><span class="lang-id">"Ketika terjadi [kejadian tanpa kata 'selalu/tidak pernah']..."</span><span class="lang-en">"When [objective event without 'always/never'] occurred..."</span></td>
+            <td><span class="lang-id">"Ketika kamu belum sempat membalas pesanku selama 4 jam tadi..."</span><span class="lang-en">"When you were unable to reply to my text for 4 hours earlier..."</span></td>
+          </tr>
+          <tr>
+            <td><strong>2. Perasaan Somatik</strong></td>
+            <td><span class="lang-id">"Aku merasa [emosi rentan, bukan tuduhan]..."</span><span class="lang-en">"I felt [vulnerable emotion, not disguised blame]..."</span></td>
+            <td><span class="lang-id">"Aku merasa cemas dan merasa tidak diprioritaskan..."</span><span class="lang-en">"I felt a wave of anxiety and felt disconnected..."</span></td>
+          </tr>
+          <tr>
+            <td><strong>3. Kebutuhan Dasar</strong></td>
+            <td><span class="lang-id">"Karena aku membutuhkan [kebutuhan relasional]..."</span><span class="lang-en">"Because my need is for [relational safety/clarity]..."</span></td>
+            <td><span class="lang-id">"Karena kepastian kabar penting untuk rasa amanku..."</span><span class="lang-en">"Because knowing your whereabouts gives me relational reassurance..."</span></td>
+          </tr>
+          <tr>
+            <td><strong>4. Permintaan Aksi</strong></td>
+            <td><span class="lang-id">"Bisakah lain kali kita [solusi positif konkret]?"</span><span class="lang-en">"Would you be open to [concrete future action]?"</span></td>
+            <td><span class="lang-id">"Bisakah lain kali kirimkan pesan 5 detik jika ada rapat mendadak?"</span><span class="lang-en">"Could you send a 5-second text if an unexpected meeting runs late?"</span></td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</section>
+
+<hr class="div">
+
+<section class="chapter" id="bab6">
+  <div class="chapter-head">
+    <div class="chapter-num-row">
+      <span class="pulse-dot"></span>
+      <span class="eyebrow"><span class="lang-id">Bab 06</span><span class="lang-en">Chapter 06</span></span>
+      <span class="reading-badge">⏱ ~5 min read</span>
+    </div>
+    <h2 class="chapter-title">
+      <span class="lang-id">Rewiring the Heart — Neuroplastisitas Relasional</span>
+      <span class="lang-en">Rewiring the Heart — Relational Neuroplasticity</span>
+    </h2>
+    <p class="chapter-sub">
+      <span class="lang-id">Otak tidak berhenti berkembang di usia dewasa. Sirkuit keikatan lama dapat diprogram ulang melalui latihan ko-regulasi fisik yang teratur dan berulang.</span>
+      <span class="lang-en">Adult brains retain lifelong neuroplasticity. Old attachment traumas can be physically rewired through repeated, deliberate practices of somatic co-regulation.</span>
+    </p>
+    <div class="experts">Jim Coan, Ph.D. · Barbara Fredrickson, Ph.D. · Wendy Troxel, Ph.D.</div>
+  </div>
+
+  <div class="chapter-body">
+    <h3 id="b6-1"><span class="letter">6.1</span>
+      <span class="lang-id">Eksperimen Genggaman Tangan Jim Coan</span>
+      <span class="lang-en">Jim Coan's Hand-Holding Threat Reduction Study</span>
+    </h3>
+    <p class="dropcap lang-id">Dr. James Coan dari University of Virginia melakukan eksperimen fMRI monumental (2006, *Psychological Science*): 16 wanita menikah ditempatkan dalam pemindai otak di bawah ancaman sengatan listrik ringan. Ketika dihadapkan pada ancaman sendirian, amigdala dan anterior insular cortex (sirkuit nyeri dan kecemasan) menyala terang benderang. Ketika mereka menggenggam tangan orang asing, aktivasi ancaman sedikit mereda.</p>
+    <p class="dropcap lang-en">Dr. James Coan at the University of Virginia conducted a groundbreaking fMRI trial (2006, *Psychological Science*): 16 married women underwent functional neuro-imaging while anticipating an imminent mild electric shock. Alone, their hypothalamus, anterior insula, and dorsal anterior cingulate lit up intensely. Holding a stranger's hand yielded moderate attenuation.</p>
+
+    <p class="lang-id">Namun, ketika mereka <strong>menggenggam tangan suami yang memiliki hubungan bahagia</strong>, respons stres dan rasa sakit di otak merosot mendekati nol. Sentuhan kulit orang yang aman bertindak sebagai <em>external neural regulator</em> — sistem saraf manusia berevolusi untuk membagi beban metabolik kecemasan secara biologis dengan pasangannya (<em>Social Baseline Theory</em>).</p>
+    <p class="lang-en">However, when they <strong>held the hand of their loving spouse</strong>, the neural threat response plunged toward baseline. The physical touch of a safe attachment figure acts as a direct neurochemical damper — proving that the human brain evolved to outsource metabolic stress regulation to trusted partners (<em>Social Baseline Theory</em>).</p>
+
+    <h3 id="b6-2"><span class="letter">6.2</span>
+      <span class="lang-id">Tiga Protokol Somatik Ko-Regulasi Harian</span>
+      <span class="lang-en">Three Daily Somatic Co-Regulation Protocols</span>
+    </h3>
+
+    <ul class="checklist">
+      <li>
+        <strong><span class="lang-id">1. Pelukan 20 Detik (The 20-Second Full-Ventral Hug):</span><span class="lang-en">1. The 20-Second Full-Ventral Hug:</span></strong>
+        <span class="lang-id">Berdiri berpelukan dada-ke-dada tanpa berbicara selama minimal 20 detik penuh. Saraf vagus merespons tekanan dada konstan ini dengan melepaskan oksitosin dan menurunkan kortisol serum secara terukur. Jangan lepas sebelum kedua pasangan merasakan hela napas panjang spontan.</span>
+        <span class="lang-en">Embrace chest-to-chest in complete silence for a full 20 seconds. The vagus nerve responds to gentle chest compression by prompting oxytocin secretion and dropping baseline cortisol. Do not disengage until both partners experience a spontaneous deep exhale.</span>
+      </li>
+      <li>
+        <strong><span class="lang-id">2. Pernapasan Sinkron 4–6:</span><span class="lang-en">2. Synchronized 4–6 Breathing:</span></strong>
+        <span class="lang-id">Duduk berhadapan, satu tangan di dada pasangan dan satu tangan di dada sendiri. Tarik napas bersamaan 4 detik, buang napas perlahan 6 detik selama 3 menit. Ini menyinkronkan variabilitas denyut jantung (HRV) kedua insan ke frekuensi resonansi yang sama (Helm et al., 2012).</span>
+        <span class="lang-en">Sit facing one another, one hand placed over the partner's heart, one on your own. Inhale together for 4 seconds, exhale smoothly for 6 seconds for 3 minutes. This phase-locks Heart Rate Variability (HRV) into mutual parasympathetic resonance (Helm et al., 2012).</span>
+      </li>
+      <li>
+        <strong><span class="lang-id">3. Micro-Moments of Positivity Resonance (Barbara Fredrickson):</span><span class="lang-en">3. Micro-Moments of Positivity Resonance:</span></strong>
+        <span class="lang-id">Tiga menit tatap mata lembut tanpa gangguan gawai di pagi hari, diakhiri dengan satu apresiasi spesifik: <em>"Aku sangat menghargai caramu tersenyum dan menyeduh teh untukku tadi pagi."</em></span>
+        <span class="lang-en">Three minutes of uninterrupted soft gaze without digital devices each morning, sealed with one granular appreciation: <em>"I deeply appreciated how gently you brought me tea this morning."</em></span>
+      </li>
+    </ul>
+  </div>
+</section>
+
+<hr class="div">
+
+<section class="chapter" id="bab7">
+  <div class="chapter-head">
+    <div class="chapter-num-row">
+      <span class="pulse-dot"></span>
+      <span class="eyebrow"><span class="lang-id">Bab 07</span><span class="lang-en">Chapter 07</span></span>
+      <span class="reading-badge">⏱ ~5 min read</span>
+    </div>
+    <h2 class="chapter-title">
+      <span class="lang-id">Adaptasi Berkelanjutan & Growth Partnership</span>
+      <span class="lang-en">Sustained Adaptation & Growth Partnership</span>
+    </h2>
+    <p class="chapter-sub">
+      <span class="lang-id">Cinta menginginkan kedekatan yang menenteramkan, tetapi gairah membutuhkan jarak dan misteri. Memadukan keduanya adalah seni tertinggi relasi dewasa.</span>
+      <span class="lang-en">Love yearns for comforting closeness, but desire requires distance and otherness. Reconciling both is the pinnacle of adult relational craftsmanship.</span>
+    </p>
+    <div class="experts">Esther Perel · Andrew Huberman, Ph.D. · Jordan B. Peterson, Ph.D.</div>
+  </div>
+
+  <div class="chapter-body">
+    <h3 id="b7-1"><span class="letter">7.1</span>
+      <span class="lang-id">Esther Perel: Paradoks Keintiman & Gairah</span>
+      <span class="lang-en">Esther Perel: The Paradox of Intimacy & Desire</span>
+    </h3>
+    <p class="dropcap lang-id">Dalam karyanya yang diakui secara global, <em>Mating in Captivity</em>, psikoterapis relasional Esther Perel membongkar ilusi terbesar pernikahan modern: keyakinan bahwa semakin kita transparan, menyatu, dan menempel pada pasangan, semakin besar pula gairah seksual yang dihasilkan. Realitas psikologisnya justru bertolak belakang.</p>
+    <p class="dropcap lang-en">In her globally celebrated treatise, <em>Mating in Captivity</em>, psychotherapist Esther Perel shatters the core romantic myth of our era: the belief that total transparency, enmeshment, and clinging inevitably fuel fiery desire. The human psyche operates on the exact opposite logic.</p>
+
+    <blockquote class="pull">
+      <span class="lang-id">Cinta mencari kedekatan; hasrat membutuhkan jarak. Hasrat membutuhkan jembatan untuk diseberangi, ruang untuk merindukan, dan misteri tentang siapa pasangan Anda ketika ia sedang bersinar dalam dunianya sendiri.</span>
+      <span class="lang-en">Love seeks closeness; desire needs space. Desire requires a bridge to cross, territory to long for, and the thrilling mystery of who your partner is when immersed in their own autonomy.</span>
+      <cite>Esther Perel</cite>
+      <span class="note"><span class="lang-id">Ketika dua orang melebur menjadi satu (enmeshment), tidak ada lagi orang kedua yang bisa dirindukan atau diinginkan.</span><span class="lang-en">When two individuals fuse into an indivisible unit, there is no second person left to desire or seek.</span></span>
+    </blockquote>
+
+    <p class="lang-id">Perel juga mengajukan tesis yang membebaskan: dalam hubungan jangka panjang yang berlangsung puluhan tahun, setiap orang akan menjalani <strong>tiga atau empat pernikahan</strong> — dan jika beruntung, semuanya bersama orang yang sama. Kita terus bermutasi seiring pertambahan usia dan pengalaman hidup. Pertanyaan krusialnya: saat versi lama hubungan Anda mati, bersediakah Anda saling menegosiasikan "pernikahan baru" dengan orang yang kini telah berubah tersebut?</p>
+    <p class="lang-en">Perel proposes an immensely liberating premise: across multi-decade partnerships, every couple will live through <strong>three or four distinct marriages</strong> — and with dedication, all of them with the same partner. Humans continuously morph through life stages. The real challenge is: when an old iteration of your marriage expires, are you willing to actively negotiate a fresh covenant with the transformed person before you?</p>
+
+    <h3 id="b7-2"><span class="letter">7.2</span>
+      <span class="lang-id">Sains Dopamin Huberman: Mengatasi "Passion Fatigue"</span>
+      <span class="lang-en">Huberman's Dopamine Dynamics: Overcoming Passion Fatigue</span>
+    </h3>
+    <p class="lang-id">Neurobiologis Dr. Andrew Huberman dari Stanford School of Medicine menerangkan mekanisme neurokimia di balik berakhirnya fase bulan madu. Dalam 12–18 bulan pertama, pelepasan dopamin yang tinggi menyebabkan <em>downregulation</em> reseptor D2. Penurunan sensasi euforia ini <strong>bukan tanda cinta telah pudar</strong>, melainkan mekanisme homeostasis tubuh untuk melindungi sistem kardiovaskular dari kelelahan kronis.</p>
+    <p class="lang-en">Stanford neurobiologist Dr. Andrew Huberman explains the molecular engine behind the end of the honeymoon phase. After 12–18 months of intense dopaminergic stimulation, brain circuits naturally downregulate D2 receptor density. This decline in raw euphoria is <strong>not evidence of falling out of love</strong>, but a vital homeostatic adaptation protecting the organism from chronic cardiovascular exhaustion.</p>
+
+    <p class="lang-id">Untuk menjaga sirkuit reward tetap terstimulasi secara berkelanjutan:</p>
+    <p class="lang-en">To maintain sustainable dopamine baseline renewal in established relationships:</p>
+
+    <ul class="checklist">
+      <li><strong><span class="lang-id">Novelty & Joint Effort:</span><span class="lang-en">Novelty & Joint Effort:</span></strong> <span class="lang-id">Lakukan aktivitas baru yang menantang secara fisik bersama (misal: hiking jalur baru, belajar bahasa baru, olahraga bersama). Dopamin tidak dilepaskan oleh kenyamanan pasif, melainkan oleh usaha dan friksi positif yang dipecahkan bersama.</span><span class="lang-en">Embark on novel, physically demanding activities together (new trail hiking, unfamiliar culinary masterclasses, training). Dopamine is not released by passive relaxation, but by shared friction and conquerable obstacles.</span></li>
+      <li><strong><span class="lang-id">Optic Flow saat Konflik:</span><span class="lang-en">Optic Flow in Discussion:</span></strong> <span class="lang-id">Bahas masalah sulit sambil berjalan kaki berdampingan di luar ruangan. Pergerakan pemandangan yang lewat (<em>optic flow</em>) secara biologis menekan aktivitas amigdala dan memicu pemikiran lateral yang solutif.</span><span class="lang-en">Conduct difficult negotiations while walking side-by-side outdoors. Bilateral optical flow physically suppresses amygdalar firing while unlocking creative lateral problem-solving.</span></li>
+    </ul>
+
+    <h3 id="b7-3"><span class="letter">7.3</span>
+      <span class="lang-id">Jordan Peterson: Wadah Komitmen & Bahaya Kepahitan</span>
+      <span class="lang-en">Jordan Peterson: The Marital Crucible & Peril of Resentment</span>
+    </h3>
+    <p class="lang-id">Psikolog klinis Dr. Jordan Peterson menekankan fungsi psikologis komitmen seumur hidup: komitmen bukan rantai pengekang, melainkan dinding kokoh sebuah wadah kimiawi. Ketika opsi untuk "lari dari pintu belakang" ditutup secara sadar, kedua pasangan dipaksa untuk tidak menyembunyikan masalah kecil. Ratusan negosiasi domestik kecil yang dilakukan dengan kejujuran tanpa kompromi adalah satu-satunya benteng pertahanan melawan racun nomor satu relasi: <strong>kepahitan yang terpendam (unspoken resentment)</strong>.</p>
+    <p class="lang-en">Clinical psychologist Dr. Jordan Peterson articulates the structural utility of unwavering commitment: marriage is not a cage, but the fortified walls of a crucible. By deliberately bolting the emergency exit, both partners are compelled to address micro-tensions immediately. Hundreds of granular, honest domestic negotiations are the only viable antidote against the deadliest relational poison: <strong>unspoken festering resentment</strong>.</p>
+  </div>
+</section>
+
+<hr class="div">
+
+<section class="chapter" id="bab8">
+  <div class="chapter-head">
+    <div class="chapter-num-row">
+      <span class="pulse-dot"></span>
+      <span class="eyebrow"><span class="lang-id">Bab 08</span><span class="lang-en">Chapter 08</span></span>
+      <span class="reading-badge">⏱ ~6 min read</span>
+    </div>
+    <h2 class="chapter-title">
+      <span class="lang-id">Anatomi Perselingkuhan: Fisik, Emosional, Dampak Somatik & Protokol Rekonsiliasi</span>
+      <span class="lang-en">The Anatomy of Infidelity: Physical vs Emotional, Somatic Trauma & Reconciliation Protocols</span>
+    </h2>
+    <p class="chapter-sub">
+      <span class="lang-id">Perselingkuhan jarang sekali semata tentang seks atau pasangan resmi. Ia adalah krisis identitas eksistensial, pencarian bagian diri yang terasingkan, dan goncangan traumatis yang menuntut navigasi klinis presisi.</span>
+      <span class="lang-en">Infidelity is rarely just about sex or the primary partner. It is an existential identity crisis, a quest for an exiled self, and a catastrophic traumatic shock demanding surgical clinical navigation.</span>
+    </p>
+    <div class="experts">Esther Perel · Dr. Gabor Maté · Dr. Shirley Glass · Ronnie Janoff-Bulman, Ph.D. · John Gottman, Ph.D.</div>
+  </div>
+
+  <div class="chapter-body">
+    <h3 id="b8-1"><span class="letter">8.1</span>
+      <span class="lang-id">Spektrum Pengkhianatan: Fisik vs Emosional (Dr. Shirley Glass)</span>
+      <span class="lang-en">The Spectrum of Betrayal: Physical vs Emotional (Dr. Shirley Glass)</span>
+    </h3>
+    <p class="dropcap lang-id">Dalam psikologi perkawinan modern, kontribusi psikolog klinis Dr. Shirley Glass (2003) melalui karyanya <em>Not Just Friends</em> menetapkan metafora arsitektur paling fundamental dalam memahami pengkhianatan: <strong>Dinding dan Jendela (Walls and Windows)</strong>.</p>
+    <p class="dropcap lang-en">In modern marital psychology, the landmark work of clinical psychologist Dr. Shirley Glass (2003) in <em>Not Just Friends</em> established the defining spatial metaphor for understanding betrayal: <strong>Walls and Windows</strong>.</p>
+
+    <div class="callout">
+      <h4><span class="lang-id">Metafora Arsitektur Shirley Glass: Dinding & Jendela</span><span class="lang-en">Shirley Glass's Architectural Blueprint: Walls & Windows</span></h4>
+      <p><span class="lang-id">Dalam relasi berkomitmen yang sehat, terdapat sebuah <strong>jendela kaca besar transparansi</strong> di antara kedua pasangan di mana pikiran, ketakutan, dan kerentanan dibagikan secara bebas; sementara sebuah <strong>dinding pelindung yang kokoh</strong> memisahkan mereka berdua dari pihak luar. Perselingkuhan dimulai bukan ketika dua tubuh bersentuhan di tempat tidur, melainkan saat salah satu pasangan mulai membangun <em>dinding rahasia</em> terhadap pasangannya sendiri, lalu membuka <em>jendela intim</em> ke arah pihak ketiga.</span>
+      <span class="lang-en">In a thriving committed union, a <strong>panoramic glass window of transparency</strong> spans between the partners where thoughts, vulnerabilities, and anxieties are freely witnessed; simultaneously, a <strong>solid protective wall</strong> separates the couple from the outside world. Infidelity begins not when bodies collide in a bedroom, but the exact instant a partner constructs a <em>wall of secrecy</em> toward their spouse while opening an <em>intimate window</em> toward a third party.</span></p>
+    </div>
+
+    <p class="lang-id">Riset klinis membagi spektrum pengkhianatan menjadi dua polaritas utama yang sering kali beririsan:</p>
+    <p class="lang-en">Clinical research categorizes the betrayal spectrum into two primary, frequently overlapping vectors:</p>
+
+    <p class="table-cap"><span class="lang-id">Komparasi Klinis: Perselingkuhan Fisik vs Emosional</span><span class="lang-en">Clinical Matrix: Physical vs Emotional Infidelity</span></p>
+    <div class="matrix-wrap">
+      <table class="matrix">
+        <thead>
+          <tr>
+            <th><span class="lang-id">Dimensi</span><span class="lang-en">Dimension</span></th>
+            <th><span class="lang-id">Perselingkuhan Fisik (Seksual)</span><span class="lang-en">Physical Infidelity (Sexual)</span></th>
+            <th><span class="lang-id">Perselingkuhan Emosional (Afektif)</span><span class="lang-en">Emotional Infidelity (Affective)</span></th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><strong>Definisi & Titik Mula</strong></td>
+            <td><span class="lang-id">Pelanggaran batas erotis/tubuh. Sering dipicu desakan dorongan seksual instan atau oportunistis.</span><span class="lang-en">Violation of erotic/bodily boundaries. Frequently triggered by opportunistic sexual arousal or thrill-seeking.</span></td>
+            <td><span class="lang-id">Pengalihan energi emosional, curahan rahasia terdalam, dan keterikatan afektif eksklusif kepada orang lain dengan menyembunyikannya dari pasangan.</span><span class="lang-en">Redirection of affective investment, intimate confessions, and private emotional bandwidth to an outsider while concealing it from the partner.</span></td>
+          </tr>
+          <tr>
+            <td><strong>Manifestasi Digital</strong></td>
+            <td><span class="lang-id">Pertemuan fisik rahasia, sexting eksplisit, booking hotel tersembunyi.</span><span class="lang-en">Clandestine physical rendezvous, explicit sexting, concealed reservations.</span></td>
+            <td><span class="lang-id"><em>Micro-cheating</em>: Chat larut malam, menghapus riwayat pesan, membagi keluhan rumah tangga pada orang lain ("istri/suamiku tidak memahamiku").</span><span class="lang-en"><em>Micro-cheating</em>: Late-night private texting, archiving chat histories, sharing marital grievances ("my spouse doesn't understand me").</span></td>
+          </tr>
+          <tr>
+            <td><strong>Dampak Traumatis pada Korban</strong></td>
+            <td><span class="lang-id">Memicu rasa jijik somatik mendalam, ancaman infeksi biologis, dan perbandingan citra tubuh (body-image crisis).</span><span class="lang-en">Triggers visceral somatic disgust, biological safety fears, and acute bodily comparison crises.</span></td>
+            <td><span class="lang-id">Runtuhnya rasa aman keikatan (attachment safety). Korban merasa "posisi batinnya digantikan" dan sahabat sejatinya telah diculik.</span><span class="lang-en">Shatters primary attachment safety. The betrayed partner feels their sacred internal role replaced and their confidant stolen.</span></td>
+          </tr>
+          <tr>
+            <td><strong>Tingkat Penyangkalan (Denial)</strong></td>
+            <td><span class="lang-id">Relatif sulit disangkal begitu bukti material biologis/visual ditemukan.</span><span class="lang-en">Difficult to rationalize once material or visual evidence surfaces.</span></td>
+            <td><span class="lang-id">Sangat tinggi melalui <em>gaslighting</em>: "Kami cuma teman baik, kamu saja yang terlalu posesif dan paranoid!"</span><span class="lang-en">Extremely high via chronic gaslighting: "We are just close colleagues, you are being completely paranoid and controlling!"</span></td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <h3 id="b8-2"><span class="letter">8.2</span>
+      <span class="lang-id">Perspektif Gabor Maté: Perselingkuhan sebagai Coping Trauma & Pelarian Diri</span>
+      <span class="lang-en">Dr. Gabor Maté's Lens: Infidelity as Trauma Coping & Alienation</span>
+    </h3>
+    <p class="dropcap lang-id">Psikiater dan pakar trauma dunia, Dr. Gabor Maté, dalam adikaryanya <em>In the Realm of Hungry Ghosts</em> dan <em>The Myth of Normal</em>, mengajukan aksioma revolusioner tentang perilaku kompulsi manusia: <em>"Pertanyaannya bukanlah mengapa perilakunya destruktif, melainkan di mana rasa sakitnya?" (Not why the addiction, but why the pain?)</em></p>
+    <p class="dropcap lang-en">World-renowned trauma specialist and physician Dr. Gabor Maté, in his seminal works <em>In the Realm of Hungry Ghosts</em> and <em>The Myth of Normal</em>, articulates a transformative axiom on human compulsive behaviors: <em>"The question is never why the addiction, but why the pain?"</em></p>
+
+    <blockquote class="pull">
+      <span class="lang-id">Sering kali, perselingkuhan bukanlah tanda bahwa seseorang membenci pasangannya, melainkan manifestasi putus asa dari seseorang yang tidak tahan dengan kehampaan batinnya sendiri. Dopamin dari rahasia terlarang digunakan sebagai anestesi untuk mengebalkan rasa mati rasa (numbness) eksistensial.</span>
+      <span class="lang-en">Frequently, infidelity is not an indictment that someone despises their spouse, but the desperate symptom of an individual unable to tolerate their own inner void. The dopamine surge of a forbidden secret is deployed as a pharmaceutical anesthetic against existential numbness.</span>
+      <cite>Dr. Gabor Maté & Esther Perel</cite>
+      <span class="note"><span class="lang-id">Menemukan akar trauma pelaku bukanlah pembenaran moral (exoneration), melainkan pembedahan saintifik agar siklus tidak terulang.</span><span class="lang-en">Excavating trauma roots is never a moral pardon (exoneration), but a clinical prerequisite to halt generational repetition.</span></span>
+    </blockquote>
+
+    <p class="lang-id">Menurut Gabor Maté, terdapat korelasi neurobiologis kuat antara luka masa kanak-kanak dan kerentanan berselingkuh di usia dewasa:</p>
+    <p class="lang-en">According to Maté, profound neurodevelopmental pathways connect developmental trauma with adult infidelity vulnerabilities:</p>
+
+    <ul class="checklist">
+      <li>
+        <strong><span class="lang-id">1. Konflik Autentisitas vs Keikatan (Authenticity vs. Attachment):</span><span class="lang-en">1. The Authenticity vs. Attachment Dilemma:</span></strong>
+        <span class="lang-id">Ketika seorang anak tumbuh di lingkungan keluarga di mana ia hanya disayangi jika ia menjadi "anak penurut" atau "anak berprestasi", ia terpaksa menekan emosi aslinya demi kelangsungan attachment. Di usia dewasa, individu ini hidup dalam kepura-puraan kepatuhan domestik yang melelahkan. Perselingkuhan menjadi ruang rahasia bawah sadar pertama di mana ia merasa tidak harus "menjadi anak baik" — sebuah pemberontakan kekanak-kanakan untuk merenggut kembali otonomi yang hilang.</span>
+        <span class="lang-en">When a child grows up where love is contingent upon being the "flawless caretaker" or "obedient achiever," they suppress authentic instincts to preserve attachment bonds. In adulthood, domestic compliance becomes suffocating. An affair often represents their subconscious rebellion against the duty of being "good" — a desperate grasp at forfeited agency.</span>
+      </li>
+      <li>
+        <strong><span class="lang-id">2. Regulasi Diri yang Rapuh & Lapar Dopamin Transgresif:</span><span class="lang-en">2. Impaired Self-Regulation & Transgressive Dopamine:</span></strong>
+        <span class="lang-id">Otak yang mengalami pengabaian emosional kronis memiliki reseptor endorfin dan dopamin yang kurang padat di striatum ventral. Transgresi (melanggar aturan, bahaya tertangkap, fantasi terlarang) memicu lonjakan norepinefrin dan dopamin masif yang menstimulasi sistem saraf yang selama ini lesu, menciptakan ilusi sementara bahwa dirinya "akhirnya hidup seutuhnya".</span>
+        <span class="lang-en">Brains subjected to childhood emotional neglect exhibit lower baseline dopamine and endogenous opioid tone in the ventral striatum. Transgression (rule-breaking, danger of discovery, taboo eroticism) sparks an adrenaline-dopamine avalanche that temporarily shocks an otherwise desensitized nervous system into feeling vitalized.</span>
+      </li>
+      <li>
+        <strong><span class="lang-id">3. Fear of Deep Intimacy (Pre-emptive Abandonment):</span><span class="lang-en">3. Fear of Deep Intimacy (Pre-emptive Abandonment):</span></strong>
+        <span class="lang-id">Individu dengan gaya <em>avoidant</em> atau trauma penolakan kerap merasa ngeri saat keintiman dengan pasangan sah menjadi terlalu dalam dan rentan. Memelihara hubungan rahasia di samping menjadi "sekoci pengaman" psikologis: sebuah strategi defensif agar dirinya tidak pernah sepenuhnya bergantung 100% pada satu orang saja.</span>
+        <span class="lang-en">Individuals carrying severe avoidant or relational neglect trauma feel suffocated as intimacy with the primary spouse deepens into absolute vulnerability. Harboring a side connection functions as a psychological escape hatch — ensuring they are never wholly dependent upon one single human being.</span>
+      </li>
+    </ul>
+
+    <h3 id="b8-3"><span class="letter">8.3</span>
+      <span class="lang-id">Neurobiologi Betrayal Trauma: Runtuhnya Asumsi Realitas (Ronnie Janoff-Bulman)</span>
+      <span class="lang-en">The Neurobiology of Betrayal Trauma: Shattered Assumptions (Ronnie Janoff-Bulman)</span>
+    </h3>
+    <p class="lang-id">Mengapa perselingkuhan terasa begitu menghancurkan secara fisik pada pihak yang dikhianati? Mengapa korban perselingkuhan sering kali menunjukkan skor klinis setara penderita <strong>Gangguan Stres Pascatrauma (PTSD)</strong>?</p>
+    <p class="lang-en">Why is discovering betrayal experienced as a catastrophic bodily shock? Why do betrayed partners frequently score identically to clinical cohorts suffering acute <strong>Post-Traumatic Stress Disorder (PTSD)</strong>?</p>
+
+    <div class="science-card">
+      <h4><span class="lang-id">Neurosains Klinis</span><span class="lang-en">Clinical Neuroscience</span> · Janoff-Bulman (1992) & Herman (1997)</h4>
+      <span class="paper-title">Shattered Assumptions Theory: Epistemological Collapse Following Interpersonal Betrayal</span>
+      <p><span class="lang-id">Profesor psikologi Ronnie Janoff-Bulman mendokumentasikan bahwa manusia membangun kesehatan mentalnya di atas tiga asumsi dasar: (1) Dunia ini pada dasarnya baik dan teratur; (2) Hidup ini memiliki makna dan keadilan; (3) Diri saya berharga dan aman dalam ikatan orang terkasih. Saat pengkhianatan terungkap, ketiga pilar ini roboh seketika. Korban tidak hanya terluka oleh tindakan pasangannya; <strong>arsitektur realitas masa lalunya terhapus</strong>: <em>"Jika lima tahun terakhir pernikahan ini penuh kebohongan, apa lagi dalam hidupku yang palsu? Bagaimana aku bisa mempercayai mataku sendiri?"</em></span>
+      <span class="lang-en">Psychology professor Ronnie Janoff-Bulman demonstrated that human psychological equilibrium rests upon three cardinal assumptions: (1) The world is benevolent and predictable; (2) Events possess coherence and justice; (3) The self is worthy and secure in intimate sanctuary. Upon uncovering betrayal, all three pillars undergo catastrophic demolition. The victim does not merely grieve an indiscretion; <strong>their epistemological compass of the past is rewritten</strong>: <em>"If the last five years were co-authored in deceit, what else in my reality was an illusion? How can I ever trust my own sensory perception?"</em></span></p>
+    </div>
+
+    <p class="lang-id">Secara somatik dan neurofisiologis (seperti yang diulas Dr. Gabor Maté dalam <em>When the Body Says No</em>):</p>
+    <p class="lang-en">Somatically and neurophysiologically (synthesized by Dr. Gabor Maté in <em>When the Body Says No</em>):</p>
+
+    <div class="flow">
+      <div class="flow-title"><span class="lang-id">Rantai Kolaps Somatik Betrayal Trauma</span><span class="lang-en">Somatic Cascade of Betrayal Trauma</span></div>
+      <div class="flow-row">
+        <div class="flow-box warn">
+          <b>Discovery Shock</b>
+          <span><span class="lang-id">Hiper-stimulasi amigdala mendadak; pelepasan adrenalin masif; mual vagal lambung akut.</span><span class="lang-en">Acute amygdalar spike; massive epinephrine surge; severe gastrointestinal vagal nausea.</span></span>
+        </div>
+        <div class="flow-arrow">→</div>
+        <div class="flow-box alt">
+          <b>Cognitive Intrusions</b>
+          <span><span class="lang-id">Kilas balik visual berulang (intrusive imagery); obsesi meneliti detail pesan & waktu.</span><span class="lang-en">Recurrent intrusive visuals; compulsive chronological interrogations & digital forensics.</span></span>
+        </div>
+        <div class="flow-arrow">→</div>
+        <div class="flow-box">
+          <b>Hyper-Vigilance</b>
+          <span><span class="lang-id">Insomnia parah; denyut jantung resting naik 20-30 bpm; ketidakmampuan makan atau tenang.</span><span class="lang-en">Severe insomnia; resting heart rate elevated 20-30 bpm; inability to rest or digest.</span></span>
+        </div>
+        <div class="flow-arrow">→</div>
+        <div class="flow-box warn">
+          <b>Allostatic Crash</b>
+          <span><span class="lang-id">Kelelahan adrenal, depresi seluler, penurunan daya tahan imun, lonjakan penanda inflamasi CRP.</span><span class="lang-en">Adrenal depletion, cellular depression, compromised immune defense, CRP inflammatory spike.</span></span>
+        </div>
+      </div>
+    </div>
+
+    <h3 id="b8-4"><span class="letter">8.4</span>
+      <span class="lang-id">Tiga Fase Resolusi & Rekonsiliasi (Esther Perel & Protokol Gottman)</span>
+      <span class="lang-en">The Three Phases of Clinical Resolution (Esther Perel & Gottman Trust Revival)</span>
+    </h3>
+    <p class="dropcap lang-id">Esther Perel, dalam karyanya yang diakui secara global <em>The State of Affairs: Rethinking Infidelity</em>, menegaskan bahwa pasangan yang selamat dan bertumbuh pasca-perselingkuhan tidak pernah kembali ke kondisi lama. Mereka mengakui fakta tak terbantahkan: <strong>Pernikahan pertama mereka telah mati. Pertanyaannya: Apakah mereka bersedia membangun pernikahan kedua bersama orang yang sama?</strong></p>
+    <p class="dropcap lang-en">Esther Perel, in her globally celebrated volume <em>The State of Affairs: Rethinking Infidelity</em>, posits that couples who emerge resilient and transformed after betrayal never restore the status quo ante. They confront an immutable reality: <strong>Their first marriage is dead. The pivotal question is: Would they like to create a second marriage together?</strong></p>
+
+    <!-- Interactive Tool: Detective vs Investigative Questions -->
+    <div class="quiz-box" id="perel-question-tool">
+      <div class="quiz-header">
+        <span class="lang-id">🧭 Navigasi Percakapan Esther Perel: Pertanyaan Detektif vs Investigatif</span>
+        <span class="lang-en">🧭 Esther Perel's Inquiry Compass: Detective vs Investigative Questions</span>
+      </div>
+      <div class="quiz-sub">
+        <span class="lang-id">Pilihan pertanyaan setelah terbongkarnya perselingkuhan menentukan apakah luka akan membusuk atau bertransformasi menjadi kesadaran. Klik pertanyaan di bawah untuk melihat analisis klinisnya:</span>
+        <span class="lang-en">The questions chosen in the aftermath of betrayal dictate whether trauma festers or evolves into lucidity. Select a question below to reveal clinical analysis:</span>
+      </div>
+      <div class="quiz-options">
+        <button class="quiz-btn" onclick="selectQuiz(10, this)">
+          <strong>1.</strong> <span class="lang-id">"Di mana kalian bertemu? Posisi apa yang kalian lakukan? Apakah dia lebih hebat dariku?"</span>
+          <span class="lang-en">"Where did you meet? What positions did you do? Was the sex better than with me?"</span>
+        </button>
+        <button class="quiz-btn" onclick="selectQuiz(11, this)">
+          <strong>2.</strong> <span class="lang-id">"Apa yang perselingkuhan itu berikan kepadamu yang selama ini hilang dalam hidupmu?"</span>
+          <span class="lang-en">"What did this affair grant you that was dormant or lost in your own life?"</span>
+        </button>
+        <button class="quiz-btn" onclick="selectQuiz(12, this)">
+          <strong>3.</strong> <span class="lang-id">"Apakah kamu mencintainya? Dan apa arti hubungan kita bagimu saat kamu bersamanya?"</span>
+          <span class="lang-en">"Did you love them? And what did our marriage mean to you while you were with them?"</span>
+        </button>
+        <button class="quiz-btn" onclick="selectQuiz(13, this)">
+          <strong>4.</strong> <span class="lang-id">"Kapan terakhir kali kamu memikirkannya hari ini? Kenapa kamu tidak bisa melupakannya seketika?!"</span>
+          <span class="lang-en">"When did you last think of them today? Why can't you just erase them right this minute?!"</span>
+        </button>
+      </div>
+
+      <div class="quiz-result" id="quiz-ans-10">
+        <strong><span class="lang-id">⚠️ Pertanyaan Detektif (Merusak & Memperparah PTSD):</span><span class="lang-en">⚠️ Detective Inquiry (Trauma-Inducing & Destructive):</span></strong>
+        <span class="lang-id">Esther Perel memperingatkan: Pertanyaan detail anatomis dan kronologis adalah racun. Detail visual tersebut akan menancap di amigdala korban sebagai <em>intrusive imagery</em> permanen yang menghantui setiap kali mereka mencoba berhubungan intim di masa depan. Rasa ingin tahu ini wajar, tetapi jawabannya tidak pernah menyembuhkan.</span>
+        <span class="lang-en">Esther Perel cautions: Inquiring into forensic physical details is toxic poison. Graphic anatomical specifics imprint upon the victim's amygdala as indelible intrusive cinema, contaminating future physical intimacy for years. Natural curiosity must be redirected away from somatic forensics.</span>
+      </div>
+
+      <div class="quiz-result" id="quiz-ans-11">
+        <strong><span class="lang-id">✨ Pertanyaan Investigatif Eksistensial (Menyembuhkan):</span><span class="lang-en">✨ Investigative Existential Inquiry (Generative Healing):</span></strong>
+        <span class="lang-id">Ini adalah pertanyaan kunci. Perselingkuhan sering kali bukan tentang mencari orang lain, melainkan <em>mencari versi lain dari diri sendiri</em> yang telah lama terkubur oleh rutinitas, tanggung jawab, dan kepatuhan. Pertanyaan ini memindahkan fokus dari rivalitas pihak ketiga ke penemuan diri yang jujur.</span>
+        <span class="lang-en">This is the generative inquiry. Affairs are seldom about seeking another partner, but about <em>seeking another version of oneself</em> long buried beneath domestic domesticity, duty, and compliance. This shifts the crucible from petty jealousy to authentic psychological autopsy.</span>
+      </div>
+
+      <div class="quiz-result" id="quiz-ans-12">
+        <strong><span class="lang-id">✨ Pertanyaan Penyingkap Makna Relasional:</span><span class="lang-en">✨ Relational Meaning-Making Inquiry:</span></strong>
+        <span class="lang-id">Membantu membedakan antara cinta sejati dengan fantasi transgresif sementara. Banyak pelaku perselingkuhan mengakui bahwa saat bersama orang ketiga, mereka tidak membenci pasangan sahnya; mereka justru mengalami disosiasi batin yang menyedihkan antara realitas dan ilusi pelarian.</span>
+        <span class="lang-en">Clarifies the boundary between authentic emotional bond and transgressive ephemeral fantasy. Many unfaithful partners acknowledge they never ceased loving their spouse; rather, they inhabited a dissociative split between daily reality and intoxicating escapism.</span>
+      </div>
+
+      <div class="quiz-result" id="quiz-ans-13">
+        <strong><span class="lang-id">⚠️ Tuntutan Amnesia Instan (Tidak Realistis):</span><span class="lang-en">⚠️ Demanding Instant Amnesia (Unrealistic):</span></strong>
+        <span class="lang-id">Memaksa pelaku untuk "langsung lupa 100%" memicu rasa bersalah palsu dan kebohongan baru. Penutupan emosi membutuhkan proses berduka atas ilusi yang hilang. Yang harus dituntut adalah <em>pemutusan kontak mutlak dan transparansi perilaku</em>, bukan kontrol totalitarian atas isi pikiran spontan.</span>
+        <span class="lang-en">Demanding that a partner instantly erase neural memories generates deceptive compliance and new layers of shame. Emotional detachment requires mourning the collapse of a fantasy. The non-negotiable imperative is <em>radical boundary enforcement and behavioral transparency</em>, not Orwellian thought control.</span>
+      </div>
+    </div>
+
+    <p class="table-cap"><span class="lang-id">Tiga Fase Terstruktur Pemulihan Hubungan Pasca-Pengkhianatan</span><span class="lang-en">Three Structured Clinical Phases of Post-Betrayal Recovery</span></p>
+
+    <div class="flow">
+      <div class="flow-title"><span class="lang-id">Peta Jalan Klinis Rekonsiliasi (Gottman & Perel)</span><span class="lang-en">Clinical Roadmap of Betrayal Recovery</span></div>
+      <div class="flow-row">
+        <div class="flow-box warn">
+          <b>Fase 1: Penanganan Krisis (Atone)</b>
+          <span><span class="lang-id">Pemutusan kontak total; transparansi radikal; pengakuan 100% akuntabilitas tanpa 'gaslighting' atau defensif.</span><span class="lang-en">Total zero-contact; radical operational transparency; 100% unilateral accountability without defensiveness.</span></span>
+        </div>
+        <div class="flow-arrow">→</div>
+        <div class="flow-box alt">
+          <b>Fase 2: Makna & Penyelarasan (Attune)</b>
+          <span><span class="lang-id">Menampung kepedihan korban berulang kali; mengidentifikasi luka masa lalu; menggali apa arti perselingkuhan.</span><span class="lang-en">Holding partner's pain repeatedly; identifying underlying trauma; dissecting what the affair signified.</span></span>
+        </div>
+        <div class="flow-arrow">→</div>
+        <div class="flow-box">
+          <b>Fase 3: Pernikahan Baru (Attach)</b>
+          <span><span class="lang-id">Menegakkan batas baru; mengubur pernikahan lama secara sadar; mendesain perjanjian cinta babak kedua.</span><span class="lang-en">Establishing new boundary architecture; consciously burying the old marriage; co-authoring a mature second covenant.</span></span>
+        </div>
+      </div>
+    </div>
+
+    <p class="lang-id">Secara rinci, ketiga fase ini dioperasionalisasikan sebagai berikut:</p>
+    <p class="lang-en">In granular practice, these three phases are operationalized as follows:</p>
+
+    <ul class="checklist">
+      <li>
+        <strong><span class="lang-id">Fase 1 · Manajemen Krisis Akut & Protokol Keamanan (Crisis Management):</span><span class="lang-en">Phase 1 · Acute Crisis Management & Emotional Safety:</span></strong>
+        <span class="lang-id">Pelaku wajib memutus seluruh bentuk kontak dengan pihak ketiga seketika dan tanpa kompromi (<em>absolute zero-contact rule</em>). Jika berhubungan dengan rekan kerja, langkah pemindahan divisi atau pengunduran diri harus dipertimbangkan secara serius. Pelaku wajib memberikan transparansi sukarela penuh (akses jadwal dan komunikasi) tanpa mengeluh kehilangan privasi, sebagai tanda bahwa ia memahami betapa hancurnya rasa aman korban. Penting: Jangan menuntut korban untuk segera memaafkan; pengampunan prematur sebelum rasa sakit tuntas diproses hanyalah penundaan trauma.</span>
+        <span class="lang-en">The unfaithful partner must terminate all contact with the affair partner instantly and irreversibly (<em>absolute zero-contact</em>). If in the workplace, transfer or resignation must be weighed with gravity. Voluntary transparency of digital devices and schedules must be gifted without resentment, demonstrating reverence for the partner's shattered safety. Crucially: never demand premature forgiveness; forgiveness prior to thorough emotional metabolization is mere dissociation.</span>
+      </li>
+      <li>
+        <strong><span class="lang-id">Fase 2 · Penyingkapan Makna & Validasi Somatik (Meaning-Making & Attunement):</span><span class="lang-en">Phase 2 · Meaning-Making & Somatic Attunement:</span></strong>
+        <span class="lang-id">Pelaku harus mampu duduk mendengarkan ledakan emosi korban tanpa menyela, membela diri, atau mengatakan "Tapi kan itu sudah lewat!". Gottman menyebut ini fase <em>Atone & Attune</em>: kemampuan menampung kepedihan pasangan berulang kali hingga amigdala korban meyakini bahwa pasangannya kini benar-benar memahami luka yang ia sebabkan. Di tahap ini, eksplorasi trauma masa kecil (perspektif Gabor Maté) dilakukan untuk mengidentifikasi mengapa pelaku memilih cara destruktif ini untuk menyelesaikan krisis batinnya.</span>
+        <span class="lang-en">The betraying partner must cultivate the somatic fortitude to sit in the presence of the betrayed's rage and despair without retort or defensiveness. Gottman terms this <em>Atone & Attune</em>: holding the partner's grief repeatedly until the victim's nervous system registers that their anguish is fully comprehended. Simultaneously, developmental wounds (Maté's trauma framework) are excavated to illuminate why the unfaithful partner turned to dissociation and betrayal.</span>
+      </li>
+      <li>
+        <strong><span class="lang-id">Fase 3 · Rekonstruksi & Komitmen Baru (Creating the New Union):</span><span class="lang-en">Phase 3 · Reconstruction & Co-Creating the New Union:</span></strong>
+        <span class="lang-id">Ketika badai histeria akut mereda, kedua insan dihadapkan pada pilihan eksistensial: berpisah secara damai dan matang, atau saling memilih kembali dengan kontrak relasi yang baru. Menghidupkan kembali keintiman erotis dan percakapan jujur tanpa rahasia. Pasangan yang berhasil melewati fase ini sering kali melaporkan bahwa relasi kedua mereka jauh lebih intim, otentik, dan tahan banting dibanding relasi pertama mereka yang naif.</span>
+        <span class="lang-en">As autonomic panic subsides, both partners stand before an existential juncture: parting with conscious honor, or re-choosing each other under an entirely renewed relational compact. Erotic intimacy and radical transparency are reintroduced. Couples navigating this crucible to completion routinely attest that their second union is vastly more profound, authentic, and durable than their initial naive arrangement.</span>
+      </li>
+    </ul>
+  </div>
+</section>
+
+<hr class="div">
+
+<section class="chapter" id="cheatsheet">
+  <div class="chapter-head">
+    <div class="chapter-num-row">
+      <span class="pulse-dot"></span>
+      <span class="eyebrow"><span class="lang-id">Panduan Lapangan</span><span class="lang-en">Field Guide</span></span>
+      <span class="reading-badge">⏱ ~2 min read</span>
+    </div>
+    <h2 class="chapter-title"><span class="lang-id">Cheat-Sheet Resolusi Konflik Pasangan</span><span class="lang-en">Couple Conflict Resolution Cheat-Sheet</span></h2>
+  </div>
+
+  <div class="chapter-body">
+    <div class="callout">
+      <h4><span class="lang-id">Skenario 1 · Pasangan Tiba-Tiba Diam Membisu (Stonewalling / Freeze)</span><span class="lang-en">Scenario 1 · Partner Abruptly Shuts Down (Stonewalling / Freeze)</span></h4>
+      <p><span class="lang-id"><strong>❌ Jangan:</strong> Membentak, mengetuk meja, atau mengirim puluhan teks berisi "Kamu kenapa sih?!"</span><br>
+      <span class="lang-id"><strong>✅ Lakukan:</strong> Turunkan volume suara, beri ruang fisik, dan ucapkan: <em>"Aku melihat kamu sedang overwhelmed. Aku tidak akan memaksamu bicara sekarang. Aku akan duduk di ruang tamu dan menunggu sampai kamu siap."</em></span>
+      <span class="lang-en"><strong>❌ Avoid:</strong> Shouting, demanding immediate answers, or sending 20 consecutive frantic messages.</span><br>
+      <span class="lang-en"><strong>✅ Apply:</strong> Lower your volume, soften your body, and state: <em>"I can see your system is overloaded. I will not push you to talk right now. I will be in the next room whenever you feel ready."</em></span></p>
+    </div>
+
+    <div class="callout">
+      <h4><span class="lang-id">Skenario 2 · Pasangan Menyerang dengan Tuntutan Panik (Attachment Protest)</span><span class="lang-en">Scenario 2 · Partner Attacks with Urgent Protest Panic</span></h4>
+      <p><span class="lang-id"><strong>❌ Jangan:</strong> Mengabaikan, memutar mata, atau membalas dengan "Kamu drama sekali!"</span><br>
+      <span class="lang-id"><strong>✅ Lakukan:</strong> Kenali ketakutan di balik amarahnya: <em>"Aku mendengar betapa pentingnya hal ini bagimu. Aku ingin mendengarkannya dengan kepala dingin. Beri aku 15 menit untuk membasuh muka, lalu aku siap menyimak seutuhnya."</em></span>
+      <span class="lang-en"><strong>❌ Avoid:</strong> Scoffing, rolling eyes, or dismissing: "You are being completely neurotic!"</span><br>
+      <span class="lang-en"><strong>✅ Apply:</strong> Acknowledge the underlying terror: <em>"I hear how vital this is to you. I want to give you my full attention. Give me 15 minutes to splash water on my face, and I will be fully present to listen."</em></span></p>
+    </div>
+
+    <div class="callout">
+      <h4><span class="lang-id">Skenario 3 · Terjebak Saling Menyalahkan Masa Lalu (Kitchen-Sinking)</span><span class="lang-en">Scenario 3 · Trapped in Historic Score-Keeping (Kitchen-Sinking)</span></h4>
+      <p><span class="lang-id"><strong>❌ Jangan:</strong> Meladeni daftar kesalahan 3 tahun lalu.</span><br>
+      <span class="lang-id"><strong>✅ Lakukan:</strong> Terapkan teknik <em>Containment</em>: <em>"Topik itu penting, tapi bisakah kita selesaikan satu isu spesifik hari ini terlebih dahulu sebelum beranjak ke isu lainnya?"</em></span>
+      <span class="lang-en"><strong>❌ Avoid:</strong> Counter-listing their missteps from three years ago.</span><br>
+      <span class="lang-en"><strong>✅ Apply:</strong> Strict containment: <em>"That topic matters, but can we resolve this single specific item from today before we open another chapter?"</em></span></p>
+    </div>
+
+    <div class="callout">
+      <h4><span class="lang-id">Skenario 4 · Menghadapi Kecurigaan atau Keterbukaan tentang Ketidaksetiaan Emosional</span><span class="lang-en">Scenario 4 · Navigating Suspicion or Disclosure of Emotional Infidelity</span></h4>
+      <p><span class="lang-id"><strong>❌ Jangan:</strong> Melakukan <em>gaslighting</em> ("Kamu paranoid, kami cuma teman dekat biasa!") atau merampas ponsel secara agresif di tengah malam.</span><br>
+      <span class="lang-id"><strong>✅ Lakukan (Bagi yang Mencurigai):</strong> Fokus pada fakta batas yang dilanggar: <em>"Aku merasa terancam bukan karena kamu punya teman lawan jenis, melainkan karena ada percakapan dan keluhan pribadi kita yang kamu sembunyikan dariku di sana. Aku butuh keterbukaan jendela untuk merasa aman."</em></span><br>
+      <span class="lang-id"><strong>✅ Lakukan (Bagi yang Tergoda/Terlibat):</strong> Hentikan rasionalisasi dan akui erosi batas: <em>"Aku menyadari bahwa kedekatan ini telah melewati batas sehat dan menyakiti rasa amanmu. Aku akan mengambil jarak tegas dan menunjukkan transparansi penuh."</em></span>
+      <span class="lang-en"><strong>❌ Avoid:</strong> Gaslighting ("You are totally crazy and controlling, we're just friends!") or frantic 3 AM phone-snatching.</span><br>
+      <span class="lang-en"><strong>✅ Apply (For the Betrayed/Suspicious):</strong> Anchor strictly to boundary erosion: <em>"I feel threatened not by your colleague's existence, but because our private marital grievances and intimate bandwidth are being shared behind my back. I need transparency restored to feel safe."</em></span><br>
+      <span class="lang-en"><strong>✅ Apply (For the Partner):</strong> Halt defensiveness and honor the boundary breach: <em>"I recognize that this connection crossed a sacred threshold and jeopardized your safety. I will step back completely and demonstrate unconditional transparency."</em></span></p>
+    </div>
+  </div>
+</section>
+
+<hr class="div">
+
+<section class="epilog" id="epilog">
+  <div class="hero-loader" style="width:100px;height:100px;margin:0 auto 24px;"><span class="loader" style="--size:1px;"></span></div>
+  <span class="eyebrow"><span class="lang-id">Epilog</span><span class="lang-en">Epilogue</span></span>
+  <h2><span class="lang-id">Cinta sebagai Latihan, Bukan Nasib</span><span class="lang-en">Love as a Practice, Not Destiny</span></h2>
+  <p><span class="lang-id">Mungkin kesimpulan paling membebaskan dari seluruh khazanah neurosains dan psikologi modern adalah ini: <strong>cinta bukanlah sesuatu yang pasif menimpa kita dari langit, lalu bertahan atau hancur karena nasib semata.</strong> Cinta adalah keterampilan neurobiologis yang dapat diasah, dipelajari, dan diperbarui setiap hari.</span>
+  <span class="lang-en">Perhaps the most liberating epiphany gifted by modern neuroscience and clinical psychology is this: <strong>love is not a passive accident that befalls us from the heavens, destined to wither or endure by fate alone.</strong> Love is an active neurobiological skill — practiced, learned, and re-chosen each passing day.</span></p>
+
+  <p><span class="lang-id">Gaya keikatan yang terbentuk dari luka masa kecil bukanlah vonis mati; ia hanyalah titik awal sistem saraf kita. Yang membedakan pasangan yang bertahan puluhan tahun dari yang terhempas bukanlah tidak adanya pertengkaran — melainkan seberapa cepat mereka menyadari alarm tubuh mereka, membasuh amigdala mereka dengan ketenangan, dan bersedia menoleh kembali untuk saling memeluk.</span>
+  <span class="lang-en">The attachment blueprint conditioned by childhood wounds is no permanent life sentence; it is merely where our nervous system learned to start. What distinguishes couples who flourish across lifetimes is not the absence of rupture — but the grace and speed with which they honor their biological limits, cool their amygdala, and step forward once more to repair the bond.</span></p>
+
+  <p><span class="lang-id">Cinta yang matang bukan cinta yang bebas dari goresan. Ia adalah cinta yang tahu cara merawat lukanya bersama.</span>
+  <span class="lang-en">Mature love is not love unmarred by storms. It is love that possesses the wisdom to heal together.</span></p>
+  <p class="sign">— Sangoeroep · Ruang Baca Ilmiah</p>
+</section>
+
+<hr class="div">
+
+<section class="chapter" id="pustaka">
+  <div class="chapter-head">
+    <div class="chapter-num-row">
+      <span class="pulse-dot"></span>
+      <span class="eyebrow"><span class="lang-id">Rujukan Ilmiah</span><span class="lang-en">Bibliography</span></span>
+    </div>
+    <h2 class="chapter-title"><span class="lang-id">Daftar Pustaka & Jurnal Peer-Reviewed</span><span class="lang-en">Scientific Bibliography & Peer-Reviewed Journals</span></h2>
+  </div>
+
+  <div class="chapter-body">
+    <ol class="refs">
+      <li><strong>Bartels, A., & Zeki, S. (2000).</strong> The neural basis of romantic love. <em>NeuroReport</em>, 11(17), 3829–3834. <span class="doi">doi:10.1097/00001756-200011270-00046</span></li>
+      <li><strong>Bartels, A., & Zeki, S. (2004).</strong> The neural correlates of maternal and romantic love. <em>NeuroImage</em>, 21(3), 1155–1166. <span class="doi">doi:10.1016/j.neuroimage.2003.11.003</span></li>
+      <li><strong>Bartholomew, K., & Horowitz, L. M. (1991).</strong> Attachment styles among young adults: A test of a four-category model. <em>Journal of Personality and Social Psychology</em>, 61(2), 226–244.</li>
+      <li><strong>Coan, J. A., Schaefer, H. S., & Davidson, R. J. (2006).</strong> Lending a hand: Social regulation of the neural response to threat. <em>Psychological Science</em>, 17(12), 1032–1039.</li>
+      <li><strong>Ditzen, B., Schaer, M., Gabriel, B., Bodenmann, G., Ehlert, U., & Heinrichs, M. (2009).</strong> Intranasal oxytocin increases positive communication and reduces cortisol levels during couple conflict. <em>Biological Psychiatry</em>, 65(9), 728–731.</li>
+      <li><strong>Eisenberger, N. I., Lieberman, M. D., & Williams, K. D. (2003).</strong> Does rejection hurt? An fMRI study of social exclusion. <em>Science</em>, 302(5643), 290–292.</li>
+      <li><strong>Fisher, H. E., Aron, A., & Brown, L. L. (2005).</strong> Romantic love: An fMRI study of a neural mechanism for mate choice. <em>Journal of Comparative Neurology</em>, 493(1), 58–62.</li>
+      <li><strong>Fredrickson, B. L. (2013).</strong> <em>Love 2.0: Finding Happiness and Health in Moments of Connection</em>. Hudson Street Press.</li>
+      <li><strong>Glass, S. P., & Staeheli, J. C. (2003).</strong> <em>Not Just Friends: Rebuilding Trust and Recovering Your Sanity After Infidelity</em>. Free Press.</li>
+      <li><strong>Gottman, J. M., & Levenson, R. W. (2000).</strong> The timing of divorce: Predicting when a couple will divorce over a 14-year period. <em>Journal of Marriage and Family</em>, 62(3), 737–745.</li>
+      <li><strong>Gottman, J. M., & Silver, N. (2012).</strong> <em>What Makes Love Last?: How to Build Trust and Avoid Betrayal</em>. Simon & Schuster.</li>
+      <li><strong>Gottman, J. M., & Silver, N. (2015).</strong> <em>The Seven Principles for Making Marriage Work</em>. Harmony Books.</li>
+      <li><strong>Hendrix, H., & Hunt, H. L. (2019).</strong> <em>Getting the Love You Want: A Guide for Couples</em> (30th Anniversary Ed.). St. Martin's Griffin.</li>
+      <li><strong>Janoff-Bulman, R. (1992).</strong> <em>Shattered Assumptions: Towards a New Psychology of Trauma</em>. Free Press.</li>
+      <li><strong>Johnson, S. M. (2004).</strong> <em>The Practice of Emotionally Focused Couple Therapy: Creating Connection</em>. Brunner-Routledge.</li>
+      <li><strong>Levine, A., & Heller, R. (2010).</strong> <em>Attached: The New Science of Adult Attachment and How It Can Help You Find—and Keep—Love</em>. TarcherPerigee.</li>
+      <li><strong>Marazziti, D., Akiskal, H. S., Rossi, A., & Cassano, G. B. (1999).</strong> Alteration of the platelet serotonin transporter in romantic love. <em>Psychological Medicine</em>, 29(3), 741–745.</li>
+      <li><strong>Maté, G. (2003).</strong> <em>When the Body Says No: The Cost of Hidden Stress</em>. Vintage Canada.</li>
+      <li><strong>Maté, G. (2010).</strong> <em>In the Realm of Hungry Ghosts: Close Encounters with Addiction</em>. North Atlantic Books.</li>
+      <li><strong>Maté, G. (2022).</strong> <em>The Myth of Normal: Trauma, Illness and Healing in a Toxic Culture</em>. Avery / Penguin Random House.</li>
+      <li><strong>Perel, E. (2006).</strong> <em>Mating in Captivity: Unlocking Erotic Intelligence</em>. Harper Paperbacks.</li>
+      <li><strong>Perel, E. (2017).</strong> <em>The State of Affairs: Rethinking Infidelity</em>. Harper.</li>
+      <li><strong>Politi, P., Emanuele, E., Falcone, C., & Enzo, E. (2005).</strong> Elevated plasma nerve growth factor levels in romantic love. <em>Psychoneuroendocrinology</em>, 31(3), 288–294.</li>
+      <li><strong>Porges, S. W. (2011).</strong> <em>The Polyvagal Theory: Neurophysiological Foundations of Emotions, Attachment, Communication, and Self-regulation</em>. W. W. Norton & Co.</li>
+      <li><strong>Swart, T. (2019).</strong> <em>The Source: Open Your Mind, Change Your Life</em>. Harper Wave.</li>
+      <li><strong>Wedekind, C., Seebeck, T., Bettens, F., & Paepke, A. J. (1995).</strong> MHC-dependent mate preferences in humans. <em>Proceedings of the Royal Society of London B</em>, 260(1359), 245–249.</li>
+      <li><strong>Young, J. E., Klosko, J. S., & Weishaar, M. E. (2003).</strong> <em>Schema Therapy: A Practitioner's Guide</em>. Guilford Press.</li>
+      <li><strong>Young, L. J., & Wang, Z. (2004).</strong> The neurobiology of pair bonding. <em>Nature Neuroscience</em>, 7(10), 1048–1054.</li>
+    </ol>
+  </div>
+</section>
+
+<footer>
+  <p><span class="lang-id">Ruang Baca Ilmiah · Dikelola oleh Sangoeroep · Edisi Komprehensif 2026</span>
+  <span class="lang-en">Ruang Baca Scientific Reader · Curated by Sangoeroep · Comprehensive Edition 2026</span></p>
+  <p style="margin-top:8px; font-size:11px; opacity:0.7;">
+    <span class="lang-id">Semua kutipan berbasis jurnal peer-reviewed terdaftar di PubMed / CrossRef.</span>
+    <span class="lang-en">All citations referenced against peer-reviewed records in PubMed / CrossRef.</span>
+  </p>
+</footer>
+
+<script>
+  // ===== Synchronized Reading Time & Progress (Total 44 Menit) =====
+  const TOTAL_READING_MINUTES = 44;
+
+  // ===== Real-time Progress Bar & Synchronized Floating Guide ETA =====
+  const bar = document.getElementById('progress');
+  const liveEta = document.getElementById('live-eta');
+  const floatTocEta = document.getElementById('float-toc-eta');
+  const tocPanelEta = document.getElementById('toc-panel-eta');
+
+  function updateProgress(){
+    const h = document.documentElement;
+    const isEn = h.getAttribute('data-lang') === 'en';
+    const totalHeight = h.scrollHeight - h.clientHeight;
+    const scrolled = totalHeight > 0 ? (h.scrollTop / totalHeight) * 100 : 0;
+    const pct = isFinite(scrolled) ? Math.min(100, Math.max(0, scrolled)) : 0;
+    if (bar) bar.style.width = pct + '%';
+
+    // Countdown from TOTAL_READING_MINUTES (44 minutes)
+    const remainingRatio = Math.max(0, (100 - pct) / 100);
+    const remainingMin = Math.max(1, Math.round(TOTAL_READING_MINUTES * remainingRatio));
+
+    if (pct > 96) {
+      if (liveEta) liveEta.innerText = isEn ? '✨ Completed' : '✨ Selesai dibaca';
+      if (floatTocEta) floatTocEta.innerText = isEn ? '✨ Selesai' : '✨ Selesai';
+      if (tocPanelEta) tocPanelEta.innerText = isEn ? '✨ Completed (100%)' : '✨ Selesai dibaca (100%)';
+    } else {
+      if (liveEta) {
+        liveEta.innerText = isEn 
+          ? '📖 ' + Math.round(pct) + '% (~' + remainingMin + ' min left)'
+          : '📖 ' + Math.round(pct) + '% (sisa ~' + remainingMin + ' mnt)';
+      }
+      if (floatTocEta) {
+        floatTocEta.innerText = isEn ? '⏱ ~' + remainingMin + ' min' : '⏱ sisa ~' + remainingMin + ' mnt';
+      }
+      if (tocPanelEta) {
+        tocPanelEta.innerText = isEn 
+          ? '~' + remainingMin + ' min left (' + Math.round(pct) + '%)'
+          : '~' + remainingMin + ' mnt tersisa (' + Math.round(pct) + '%)';
+      }
+    }
+  }
+  window.addEventListener('DOMContentLoaded', updateProgress);
+  window.addEventListener('load', updateProgress);
+  document.addEventListener('scroll', updateProgress, {passive:true});
+  updateProgress();
+
+  // ===== Interactive TOC Drawer =====
+  const tocBtn = document.getElementById('toc-toggle');
+  const tocPanel = document.getElementById('toc-panel');
+  tocBtn.addEventListener('click', () => {
+    const open = tocPanel.classList.toggle('open');
+    tocBtn.setAttribute('aria-expanded', open);
+  });
+  document.querySelectorAll('#toc-panel a').forEach(a => {
+    a.addEventListener('click', () => {
+      tocPanel.classList.remove('open');
+      tocBtn.setAttribute('aria-expanded', 'false');
+    });
+  });
+  document.addEventListener('click', (e) => {
+    if (!tocPanel.contains(e.target) && !tocBtn.contains(e.target)) {
+      tocPanel.classList.remove('open');
+      tocBtn.setAttribute('aria-expanded', 'false');
+    }
+  });
+
+  // ===== Bilingual Language Switcher =====
+  function switchLang() {
+    const htmlEl = document.documentElement;
+    const current = htmlEl.getAttribute('data-lang') === 'id' ? 'en' : 'id';
+    htmlEl.setAttribute('data-lang', current);
+    htmlEl.setAttribute('lang', current);
+    updateProgress();
+  }
+  document.getElementById('lang-toggle-float').addEventListener('click', switchLang);
+  document.getElementById('lang-toggle-top').addEventListener('click', switchLang);
+
+  // ===== Interactive Diagnostic Check =====
+  function selectQuiz(num, btn) {
+    document.querySelectorAll('.quiz-btn').forEach(b => b.classList.remove('selected'));
+    btn.classList.add('selected');
+    document.querySelectorAll('.quiz-result').forEach(r => r.style.display = 'none');
+    const target = document.getElementById('quiz-ans-' + num);
+    if (target) {
+      target.style.display = 'block';
+    }
+  }
+  window.selectQuiz = selectQuiz;
+
+  // ===== Scroll-Reveal for Chapters =====
+  const chapters = document.querySelectorAll('.chapter, .epilog');
+  if ('IntersectionObserver' in window) {
+    const io = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('visible');
+          io.unobserve(entry.target);
+        }
+      });
+    }, {threshold: 0.01, rootMargin: '0px 0px -20px 0px'});
+    chapters.forEach(c => io.observe(c));
+  } else {
+    chapters.forEach(c => c.classList.add('visible'));
+  }
+  window.addEventListener('load', () => {
+    setTimeout(() => chapters.forEach(c => c.classList.add('visible')), 800);
+  });
+  document.querySelectorAll('#toc-panel a, .toc-list a').forEach(a => {
+    a.addEventListener('click', () => {
+      setTimeout(() => chapters.forEach(c => c.classList.add('visible')), 40);
+    });
+  });
+</script>
+</body>
+</html>
