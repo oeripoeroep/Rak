@@ -1,0 +1,966 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Lima Mercusuar Diri: Filosofi Kemauan & Kehendak Bebas</title>
+<meta name="description" content="Penelusuran filosofis tentang kemauan manusia dan kehendak bebas dalam sejarah pemikiran Barat lewat Schopenhauer, Kafka, Dostoevsky, Camus, dan Nietzsche.">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Lima Mercusuar Diri: Filosofi Kemauan & Kehendak Bebas">
+<meta property="og:description" content="Penelusuran filosofis tentang kemauan manusia dan kehendak bebas dalam sejarah pemikiran Barat lewat Schopenhauer, Kafka, Dostoevsky, Camus, dan Nietzsche.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,400;0,9..144,500;0,9..144,600;1,9..144,400;1,9..144,500&family=Literata:ital,opsz,wght@0,7..72,400;0,7..72,500;0,7..72,600;1,7..72,400&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+:root{
+  --paper:        #F4F7EF;
+  --paper-deep:   #E6ECE0;
+  --card:         #FCFEFA;
+  --ink:          #112014;
+  --ink-soft:     #253628;
+  --ink-faint:    #526652;
+  --accent-1:     #245C30;
+  --accent-1-deep:#13351B;
+  --accent-1-pale:#DCECDC;
+  --accent-2:     #4D6E44;
+  --accent-2-soft:#E2ECDB;
+  --accent-3:     #787932;
+  --accent-3-pale:#EFEECF;
+  --line:         rgba(20,48,25,0.18);
+  --shadow:       0 14px 40px rgba(18,36,20,0.09);
+  --maxw:         780px;
+  --serif-display:'Fraunces', serif;
+  --serif-body:   'Literata', serif;
+  --mono:         'IBM Plex Mono', monospace;
+}
+*{ box-sizing:border-box; }
+html{ scroll-behavior:smooth; }
+body{
+  margin:0;
+  background:var(--paper);
+  color:var(--ink);
+  font-family:var(--serif-body);
+  font-size:17.5px;
+  line-height:1.75;
+  -webkit-font-smoothing:antialiased;
+}
+h1,h2,h3,h4{ font-family:var(--serif-display); color:var(--ink); font-weight:500; margin:0; }
+p{ margin:0 0 1.25em; color:var(--ink-soft); }
+em{ font-style:italic; }
+strong{ color:var(--ink); font-weight:600; }
+a{ color:var(--accent-1-deep); text-decoration:none; }
+a:hover{ text-decoration:underline; }
+ul,ol{ margin:0 0 1.5em; padding-left:1.4em; color:var(--ink-soft); }
+li{ margin-bottom:0.6em; }
+
+#progress{ position:fixed; top:0; left:0; height:3px; width:0%; background:var(--accent-1); z-index:200; transition:width .1s linear; }
+
+#top-nav{
+  position:fixed; top:18px; right:18px; z-index:190;
+  display:flex; gap:8px; align-items:center;
+}
+.pill-btn{
+  font-family:var(--mono); font-size:12px; letter-spacing:.04em;
+  background:var(--card); border:1px solid var(--line); color:var(--ink-soft);
+  padding:8px 14px; border-radius:24px; cursor:pointer; box-shadow:var(--shadow);
+  transition:all .2s ease;
+}
+.pill-btn:hover{ border-color:var(--accent-1); color:var(--accent-1-deep); }
+
+#toc-panel{
+  position:fixed; top:0; right:0; height:100%; width:340px; max-width:86vw;
+  background:var(--card); border-left:1px solid var(--line); z-index:195;
+  padding:70px 24px 30px; transform:translateX(100%); transition:transform .3s ease;
+  overflow-y:auto; box-shadow:-10px 0 30px rgba(0,0,0,0.06);
+}
+#toc-panel.open{ transform:translateX(0); }
+.toc-group-title{ font-family:var(--mono); font-size:11px; letter-spacing:.1em; text-transform:uppercase; color:var(--accent-1-deep); margin:22px 0 8px; font-weight:600; }
+.toc-group-title:first-child{ margin-top:0; }
+#toc-panel a{ display:block; padding:7px 0; color:var(--ink-soft); font-size:14.5px; border-bottom:1px solid var(--line); }
+#toc-panel a:hover{ color:var(--accent-1-deep); padding-left:4px; }
+.toc-sublist{ padding-left:14px; font-size:12.5px; margin:4px 0 10px; font-family:var(--mono); }
+.toc-sublist a{ border-bottom:none; padding:3px 0; color:var(--ink-faint); }
+
+.hero{ padding:70px 24px 50px; text-align:center; position:relative; }
+.orb-wrap{ position:relative; width:120px; height:120px; margin:0 auto 26px; }
+.orb-ring{ position:absolute; inset:0; border:1px solid var(--accent-1); border-radius:50%; opacity:.35; animation:ringPulse 4s ease-in-out infinite; }
+.orb{ position:absolute; inset:22px; border-radius:50%; background:radial-gradient(circle at 35% 30%, var(--accent-2), var(--accent-1-deep)); box-shadow:0 0 40px rgba(47,107,60,.35); animation:orbBreathe 4s ease-in-out infinite; }
+@keyframes ringPulse{ 0%,100%{ transform:scale(1); opacity:.35; } 50%{ transform:scale(1.12); opacity:.12; } }
+@keyframes orbBreathe{ 0%,100%{ transform:scale(1); } 50%{ transform:scale(1.06); } }
+.hero .eyebrow{ font-family:var(--mono); font-size:12px; letter-spacing:.16em; text-transform:uppercase; color:var(--accent-1-deep); margin-bottom:16px; display:block; }
+.hero h1{ font-size:clamp(32px,5.5vw,50px); line-height:1.16; margin-bottom:18px; }
+.hero h1 .accent{ font-style:italic; font-weight:400; color:var(--accent-1); }
+.hero .subtitle{ max-width:60ch; margin:0 auto 24px; font-size:17.5px; color:var(--ink-soft); }
+.meta-row{ display:flex; justify-content:center; gap:14px; flex-wrap:wrap; font-family:var(--mono); font-size:12px; letter-spacing:.05em; color:var(--ink-faint); margin-bottom:30px; }
+.meta-row span{ padding:4px 12px; border:1px solid var(--line); border-radius:20px; background:var(--card); }
+.scroll-cue{ font-family:var(--mono); font-size:11.5px; letter-spacing:.08em; color:var(--ink-faint); display:flex; align-items:center; justify-content:center; gap:10px; }
+.scroll-cue .line{ width:26px; height:1px; background:var(--ink-faint); display:inline-block; }
+
+.wrap{ max-width:var(--maxw); margin:0 auto; padding:0 24px; }
+hr.div{ border:none; height:1px; background:linear-gradient(90deg,transparent,var(--line) 15%,var(--line) 85%,transparent); margin:0; }
+
+.toc-section{ padding:50px 24px 20px; max-width:var(--maxw); margin:0 auto; }
+.toc-section h2{ font-size:clamp(22px,3vw,28px); margin-bottom:20px; text-align:center; }
+.toc-list{ list-style:none; margin:0; padding:0; }
+.toc-list a{ display:flex; justify-content:space-between; gap:16px; align-items:baseline; padding:15px 4px; border-bottom:1px solid var(--line); text-decoration:none; color:var(--ink); transition:all .2s; }
+.toc-list a:hover{ padding-left:6px; color:var(--accent-1-deep); }
+.toc-list .tnum{ font-family:var(--mono); font-size:11px; color:var(--accent-1-deep); letter-spacing:.06em; min-width:70px; }
+.toc-list .ttitle{ flex:1; font-family:var(--serif-display); font-size:17px; }
+.toc-list .tsub{ font-family:var(--mono); font-size:10.5px; color:var(--ink-faint); text-transform:uppercase; letter-spacing:.05em; display:block; margin-top:3px; }
+
+.chapter{ max-width:var(--maxw); margin:0 auto; padding:90px 24px 30px; }
+.chapter-head{ margin-bottom:28px; }
+.chapter-num-row{ display:flex; align-items:center; gap:10px; margin-bottom:10px; }
+.pulse-dot{ width:8px; height:8px; border-radius:50%; background:var(--accent-1); flex-shrink:0; animation:dotPulse 2.4s ease-in-out infinite; }
+@keyframes dotPulse{ 0%,100%{ opacity:1; } 50%{ opacity:.35; } }
+.eyebrow{ font-family:var(--mono); font-size:11.5px; letter-spacing:.14em; text-transform:uppercase; color:var(--accent-1-deep); }
+.chapter-title{ font-size:clamp(26px,4vw,34px); line-height:1.2; margin-bottom:8px; }
+.chapter-sub{ font-style:italic; color:var(--ink-soft); font-size:16px; margin-bottom:10px; }
+.experts{ font-family:var(--mono); font-size:12px; color:var(--accent-1-deep); letter-spacing:.03em; }
+.chapter-body h3{ font-size:21px; margin:2.2em 0 .8em; font-family:var(--serif-display); color:var(--ink); }
+.chapter-body h4{ font-size:17.5px; margin:1.6em 0 .5em; font-family:var(--serif-display); color:var(--accent-1-deep); }
+p.dropcap::first-letter{ font-family:var(--serif-display); font-size:3.2em; float:left; line-height:.85; padding-right:.08em; padding-top:.03em; color:var(--accent-1-deep); font-weight:600; }
+
+/* In-chapter Philosophical Sub-Navigation */
+.phil-nav{
+  background:var(--card); border:1px solid var(--line); border-radius:12px;
+  padding:14px 16px; margin:24px 0 32px; box-shadow:var(--shadow);
+}
+.phil-nav-label{
+  font-family:var(--mono); font-size:10.5px; text-transform:uppercase; letter-spacing:.1em;
+  color:var(--ink-faint); margin-bottom:10px; display:flex; align-items:center; gap:6px;
+}
+.phil-nav-pills{
+  display:flex; flex-wrap:wrap; gap:6px;
+}
+.phil-nav-pill{
+  font-family:var(--mono); font-size:11.5px; padding:5px 11px; border-radius:18px;
+  background:var(--paper-deep); color:var(--ink-soft); border:1px solid var(--line);
+  text-decoration:none; transition:all .2s ease; white-space:nowrap;
+}
+.phil-nav-pill:hover{
+  background:var(--accent-1-pale); border-color:var(--accent-1); color:var(--accent-1-deep);
+  text-decoration:none;
+}
+
+/* Callout Boxes - Editorial UI Craftsmanship */
+.box{
+  border-radius:12px;
+  padding:1.85rem 2.1rem;
+  margin:2.4rem 0;
+  box-shadow:0 6px 24px rgba(18, 35, 20, 0.05);
+}
+.box-header{
+  display:flex;
+  justify-content:space-between;
+  align-items:baseline;
+  flex-wrap:wrap;
+  gap:.6rem;
+  margin-bottom:1.15rem;
+  padding-bottom:.85rem;
+  border-bottom:1px solid var(--line);
+}
+.box-title{
+  font-family:var(--serif-display);
+  font-size:1.24rem;
+  font-weight:600;
+  color:var(--ink);
+  letter-spacing:-0.01em;
+}
+.box-meta{
+  font-family:var(--mono);
+  font-size:.76rem;
+  letter-spacing:.08em;
+  text-transform:uppercase;
+  color:var(--accent-1-deep);
+  font-weight:600;
+}
+.box-scene{
+  font-style:italic;
+  font-size:1.02rem;
+  line-height:1.65;
+  color:var(--accent-1-deep);
+  padding:0.85rem 1.15rem;
+  background:rgba(36,92,48,0.06);
+  border-left:3px solid var(--accent-1);
+  border-radius:0 8px 8px 0;
+  margin-bottom:1.25rem;
+}
+.box p:last-child{ margin-bottom:0; }
+
+.box.bio{
+  background:var(--accent-2-soft);
+  border:1px solid rgba(77,110,68,0.25);
+  border-left:4px solid var(--accent-1-deep);
+}
+.box.bio .box-title{
+  color:var(--accent-1-deep);
+  font-size:1.05rem;
+}
+
+/* Kotak Karya Sastra 1: Terang Berkedalaman */
+.box.book{
+  background:linear-gradient(180deg, #FFFFFF 0%, var(--card) 100%);
+  border:1px solid rgba(20,48,25,0.22);
+  box-shadow:0 8px 26px -6px rgba(18, 35, 20, 0.08);
+}
+
+/* Kotak Karya Sastra 2: Latar Nuansa Tenang Beraksen */
+.box.work-alt{
+  background:linear-gradient(180deg, #F6FAF2 0%, var(--paper-deep) 100%);
+  border:1px solid rgba(36,92,48,0.30);
+  position:relative;
+  box-shadow:0 8px 26px -6px rgba(18, 35, 20, 0.09);
+}
+.box.work-alt::before{
+  content:'';
+  position:absolute;
+  top:0;
+  left:0;
+  width:100%;
+  height:3px;
+  border-radius:12px 12px 0 0;
+  background:linear-gradient(90deg, var(--accent-1), var(--accent-2));
+}
+
+.box.summary{
+  background:var(--accent-1-pale);
+  border:1px solid rgba(36,92,48,.25);
+  position:relative;
+}
+.box.summary::before{
+  content:'';
+  position:absolute;
+  top:0;
+  left:0;
+  width:100%;
+  height:3px;
+  border-radius:12px 12px 0 0;
+  background:linear-gradient(90deg,var(--accent-1),transparent);
+}
+.box.reflect{
+  background:var(--accent-3-pale);
+  border:1px solid rgba(120,121,50,.3);
+}
+.box.reflect .box-title{ color:var(--accent-3); }
+
+/* Soft Bridge Transition Callout */
+.soft-bridge{
+  margin:3.2rem 0 1.5rem;
+  padding:1.6rem 1.8rem;
+  border-radius:12px;
+  background:linear-gradient(135deg, var(--paper-deep) 0%, var(--accent-2-soft) 100%);
+  border:1px solid var(--line);
+  position:relative;
+}
+.soft-bridge .bridge-tag{
+  font-family:var(--mono);
+  font-size:10.5px;
+  letter-spacing:.12em;
+  text-transform:uppercase;
+  color:var(--accent-1-deep);
+  margin-bottom:8px;
+  display:block;
+  font-weight:600;
+}
+.soft-bridge h4{
+  font-family:var(--serif-display);
+  font-size:1.15rem;
+  margin:0 0 10px;
+  color:var(--ink);
+}
+.soft-bridge p{ margin:0; font-style:italic; font-size:16px; color:var(--ink-soft); }
+
+blockquote.pull{
+  border-left:3px solid var(--accent-1);
+  padding:.5em 0 .5em 1.4em;
+  margin:2.2em 0;
+  font-style:italic;
+  color:var(--ink);
+  font-size:1.12em;
+  line-height:1.6;
+}
+
+/* Flow Diagram */
+.flow{ background:var(--paper-deep); border:1px solid var(--line); border-radius:10px; padding:1.3rem 1.2rem; margin:2rem 0; }
+.flow-title{ font-family:var(--mono); font-size:.72rem; text-transform:uppercase; letter-spacing:.1em; color:var(--accent-1-deep); margin-bottom:1rem; font-weight:600; }
+.flow-row{ display:flex; align-items:stretch; gap:.6rem; flex-wrap:wrap; }
+.flow-box{ flex:1 1 130px; background:var(--card); border:1px solid var(--line); border-radius:8px; padding:.8rem .85rem; text-align:center; }
+.flow-box.alt{ background:var(--accent-2-soft); }
+.flow-box b{ display:block; font-family:var(--serif-display); font-size:.9rem; margin-bottom:.3rem; color:var(--ink); }
+.flow-box span{ font-family:var(--mono); font-size:.72rem; color:var(--ink-faint); line-height:1.4; display:block; }
+.flow-arrow{ display:flex; align-items:center; justify-content:center; font-family:var(--mono); color:var(--accent-1); font-size:1.1rem; flex:0 0 auto; }
+@media(max-width:560px){
+  .flow-row{ flex-direction:column; }
+  .flow-row > .flow-arrow{ transform:rotate(90deg); }
+}
+
+/* Matrix Table */
+.matrix-wrap{ overflow-x:auto; margin:1.5rem 0 2.2rem; }
+table.matrix{ width:100%; border-collapse:collapse; font-size:.88rem; min-width:600px; }
+table.matrix th{ background:var(--paper-deep); color:var(--accent-1-deep); padding:.85rem .95rem; text-align:left; font-family:var(--serif-display); font-weight:600; border-bottom:2px solid var(--line); }
+table.matrix td{ padding:.85rem .95rem; border-bottom:1px solid var(--line); vertical-align:top; color:var(--ink-soft); }
+
+.dialectic-pair{ display:grid; grid-template-columns:1fr auto 1fr; gap:.9rem; align-items:center; margin:1.7rem 0; font-size:.92rem; }
+.dialectic-side{ border-radius:8px; padding:1.1rem 1.25rem; }
+.dialectic-side:nth-child(1){ background:var(--accent-1-pale); }
+.dialectic-side:nth-child(3){ background:var(--accent-2-soft); }
+.dialectic-side .who{ font-family:var(--mono); font-size:.7rem; text-transform:uppercase; letter-spacing:.05em; color:var(--accent-1-deep); display:block; margin-bottom:.4rem; font-weight:600; }
+.dialectic-vs{ font-family:var(--serif-display); font-style:italic; color:var(--ink-faint); text-align:center; }
+@media(max-width:640px){
+  .dialectic-pair{ grid-template-columns:1fr; }
+  .dialectic-vs{ display:none; }
+}
+
+.checklist{ list-style:none; padding-left:0; }
+.checklist li{ position:relative; padding-left:1.5em; }
+.checklist li::before{ content:'—'; position:absolute; left:0; color:var(--accent-1); }
+
+.epilog{ max-width:var(--maxw); margin:0 auto; padding:80px 24px; text-align:center; }
+.epilog ol{ text-align:left; }
+.epilog .sign{ font-style:italic; margin-top:1.4em; color:var(--ink); }
+
+footer{ max-width:var(--maxw); margin:0 auto; padding:36px 24px 60px; border-top:1px solid var(--line); display:flex; justify-content:space-between; flex-wrap:wrap; gap:10px; font-family:var(--mono); font-size:11px; letter-spacing:.05em; color:var(--ink-faint); }
+</style>
+</head>
+<body>
+
+<div id="progress"></div>
+
+<div id="top-nav">
+  <button class="pill-btn" id="lang-toggle" type="button" aria-label="Switch language">EN</button>
+  <button class="pill-btn" id="toc-toggle" type="button" aria-expanded="false">☰ <span class="i18n" data-id="Navigasi Webbook" data-en="Webbook Navigation">Navigasi Webbook</span></button>
+</div>
+
+<nav id="toc-panel" aria-hidden="true">
+  <div class="toc-group-title i18n" data-id="Peta Awal" data-en="Starting Map">Peta Awal</div>
+  <a href="#prolog" class="i18n" data-id="Prolog: Mercusuar & Sejarah Kehendak" data-en="Prologue: Lighthouses & History of Will">Prolog: Mercusuar & Sejarah Kehendak</a>
+  <a href="#peta-kompas" class="i18n" data-id="Matriks Komparatif 5 Pemikir" data-en="Comparative Matrix of the 5 Thinkers">Matriks Komparatif 5 Pemikir</a>
+
+  <div class="toc-group-title i18n" data-id="Lima Mercusuar Kemauan" data-en="Five Lighthouses of Will">Lima Mercusuar Kemauan</div>
+  <a href="#schopenhauer">1. Arthur Schopenhauer</a>
+  <div class="toc-sublist">
+    <a href="#schopenhauer-hakikat">§1. Hakikat Kemauan Buta</a>
+    <a href="#schopenhauer-kebebasan">§2. Paradoks Kehendak Bebas</a>
+    <a href="#schopenhauer-buku">§3. The World as Will and Representation</a>
+    <a href="#schopenhauer-balans">§3b. Dilema Landak (Parerga)</a>
+    <a href="#schopenhauer-sejarah">§4. Titik Belok Sejarah Barat</a>
+    <a href="#schopenhauer-kompas">§5. Kompas Praktik Diri</a>
+  </div>
+
+  <a href="#kafka">2. Franz Kafka</a>
+  <div class="toc-sublist">
+    <a href="#kafka-hakikat">§1. Kemauan yang Dikebiri Sistem</a>
+    <a href="#kafka-kebebasan">§2. Ilusi Agensi & Birokrasi</a>
+    <a href="#kafka-buku">§3. The Metamorphosis</a>
+    <a href="#kafka-balans">§3b. Di Hadapan Hukum (Vor dem Gesetz)</a>
+    <a href="#kafka-sejarah">§4. Titik Belok Sejarah Barat</a>
+    <a href="#kafka-kompas">§5. Kompas Praktik Diri</a>
+  </div>
+
+  <a href="#dostoevsky">3. Fyodor Dostoevsky</a>
+  <div class="toc-sublist">
+    <a href="#dostoevsky-hakikat">§1. Svoevolye: Kehendak Liar Diri</a>
+    <a href="#dostoevsky-kebebasan">§2. Beban Ngeri Kehendak Bebas</a>
+    <a href="#dostoevsky-buku">§3. Crime and Punishment</a>
+    <a href="#dostoevsky-balans">§3b. Malam-Malam Putih (White Nights)</a>
+    <a href="#dostoevsky-sejarah">§4. Titik Belok Sejarah Barat</a>
+    <a href="#dostoevsky-kompas">§5. Kompas Praktik Diri</a>
+  </div>
+
+  <a href="#camus">4. Albert Camus</a>
+  <div class="toc-sublist">
+    <a href="#camus-hakikat">§1. Kemauan Menghadapi Absurditas</a>
+    <a href="#camus-kebebasan">§2. Kebebasan Tanpa Langit</a>
+    <a href="#camus-buku">§3. The Myth of Sisyphus</a>
+    <a href="#camus-balans">§3b. Sampar (La Peste) & Sang Pemberontak</a>
+    <a href="#camus-sejarah">§4. Titik Belok Sejarah Barat</a>
+    <a href="#camus-kompas">§5. Kompas Praktik Diri</a>
+  </div>
+
+  <a href="#nietzsche">5. Friedrich Nietzsche</a>
+  <div class="toc-sublist">
+    <a href="#nietzsche-hakikat">§1. Wille zur Macht & Mengatasi Diri</a>
+    <a href="#nietzsche-kebebasan">§2. Kritik Ilusi Kehendak Bebas</a>
+    <a href="#nietzsche-buku">§3. Thus Spoke Zarathustra</a>
+    <a href="#nietzsche-balans">§3b. Genealogi Moral & Individu Berdaulat</a>
+    <a href="#nietzsche-sejarah">§4. Titik Belok Sejarah Barat</a>
+    <a href="#nietzsche-kompas">§5. Kompas Praktik Diri</a>
+  </div>
+
+  <div class="toc-group-title i18n" data-id="Sintesis & Epilog" data-en="Synthesis & Epilogue">Sintesis & Epilog</div>
+  <a href="#dialektika" class="i18n" data-id="Dialektika & Cermin Zaman Modern" data-en="Dialectic & Modern Mirror">Dialektika & Cermin Zaman Modern</a>
+  <a href="#epilog" class="i18n" data-id="Epilog: Sang Navigator Sadar" data-en="Epilogue: The Conscious Navigator">Epilog: Sang Navigator Sadar</a>
+</nav>
+
+<section class="hero">
+  <div class="orb-wrap"><div class="orb-ring"></div><div class="orb"></div></div>
+  <span class="eyebrow i18n" data-id="Sejarah Pemikiran Barat tentang Kemauan & Kebebasan" data-en="History of Western Thought on Will & Freedom">Sejarah Pemikiran Barat tentang Kemauan & Kebebasan</span>
+  <h1 class="i18n" data-id='Lima Mercusuar<br><span class="accent">Kemauan & Kehendak Bebas</span>' data-en='Five Lighthouses<br><span class="accent">of Will & Free Agency</span>'>Lima Mercusuar<br><span class="accent">Kemauan & Kehendak Bebas</span></h1>
+  <p class="subtitle i18n" data-id="Menelusuri bagaimana Arthur Schopenhauer, Franz Kafka, Fyodor Dostoevsky, Albert Camus, dan Friedrich Nietzsche meletakkan dasar pemikiran tentang dorongan batin manusia, ilusi kemerdekaan, dan seni menentukan arah hidup." data-en="Tracing how Arthur Schopenhauer, Franz Kafka, Fyodor Dostoevsky, Albert Camus, and Friedrich Nietzsche laid the foundations of human drive, the illusion of liberty, and the art of self-direction.">Menelusuri bagaimana Arthur Schopenhauer, Franz Kafka, Fyodor Dostoevsky, Albert Camus, dan Friedrich Nietzsche meletakkan dasar pemikiran tentang dorongan batin manusia, ilusi kemerdekaan, dan seni menentukan arah hidup.</p>
+  <div class="meta-row">
+    <span class="i18n" data-id="5 Filsuf Peletak Dasar" data-en="5 Foundational Thinkers">5 Filsuf Peletak Dasar</span>
+    <span class="i18n" data-id="Navigasi Filosofis Mendalam" data-en="Deep Philosophical Navigation">Navigasi Filosofis Mendalam</span>
+    <span class="i18n" data-id="± 40 menit penelusuran" data-en="~40 min journey">± 40 menit penelusuran</span>
+    <span class="i18n" data-id="Oleh Sangoeroep" data-en="By Sangoeroep">Oleh Sangoeroep</span>
+  </div>
+  <div class="scroll-cue"><span class="line"></span><span class="i18n" data-id="gulir untuk memulai penjelajahan" data-en="scroll to begin exploring">gulir untuk memulai penjelajahan</span></div>
+</section>
+
+<section class="chapter" id="prolog">
+  <div class="chapter-head">
+    <div class="chapter-num-row"><span class="pulse-dot"></span><span class="eyebrow i18n" data-id="Pembukaan" data-en="Opening">Pembukaan</span></div>
+    <h2 class="chapter-title i18n" data-id="Mercusuar di Tengah Gelombang Kehendak" data-en="Lighthouses Amid the Tides of Will">Mercusuar di Tengah Gelombang Kehendak</h2>
+  </div>
+  <div class="chapter-body">
+    <p class="dropcap i18n" data-id="Apakah kita benar-benar penguasa atas kemauan kita sendiri? Atau kita hanyalah wayang yang ditarik oleh benang-benang tak terlihat: insting biologis purba, paksaan birokrasi, kecemasan moral, ketidakpastian semesta, dan hasrat berkuasa?" data-en="Are we truly masters of our own will? Or are we mere puppets pulled by invisible strings: ancient biological drives, bureaucratic coercion, moral anxiety, cosmic absurdity, and the hunger for power?">Apakah kita benar-benar penguasa atas kemauan kita sendiri? Atau kita hanyalah wayang yang ditarik oleh benang-benang tak terlihat: insting biologis purba, paksaan birokrasi, kecemasan moral, ketidakpastian semesta, dan hasrat berkuasa?</p>
+    <p class="i18n" data-id="Sepanjang sejarah filsafat Barat, pertanyaan tentang 'kehendak' (the will) dan 'kehendak bebas' (free will) telah mengalami pergeseran tektonik. Selama berabad-abad, Pencerahan Eropa membanggakan akal budi (rasio) sebagai komandan tertinggi: Descartes menegaskan 'Aku berpikir maka aku ada', dan kaum utilitarian percaya manusia dapat menghitung pilihan moral secara matematis. Namun di abad ke-19 dan ke-20, narasi agung itu dibongkar hingga ke akarnya." data-en="Throughout Western philosophy, the question of 'the will' and 'free will' underwent seismic shifts. For centuries, the Enlightenment praised reason as the sovereign captain: Descartes proclaimed 'I think, therefore I am', and utilitarians claimed humans calculate moral choices mathematically. But across the 19th and 20th centuries, this tidy narrative was stripped down to its foundations.">Sepanjang sejarah filsafat Barat, pertanyaan tentang "kehendak" (<em>the will</em>) dan "kehendak bebas" (<em>free will</em>) telah mengalami pergeseran tektonik. Selama berabad-abad, Pencerahan Eropa membanggakan akal budi (rasio) sebagai komandan tertinggi: Descartes menegaskan "Aku berpikir maka aku ada", dan kaum utilitarian percaya manusia dapat menghitung pilihan moral secara matematis. Namun di abad ke-19 dan ke-20, narasi agung itu dibongkar hingga ke akarnya.</p>
+    <p class="i18n" data-id="Buku ini membawa kita menziarahi lima mercusuar yang meletakkan dasar pemikiran modern tentang kemauan manusia. Masing-masing tokoh tidak hanya menawarkan konsep teoritis, melainkan menyelidiki anatomi kebebasan lewat mahakarya yang lahir dari pergulatan hidup nyata. Di setiap bab, kita akan menemukan Navigasi Filosofis terstruktur: dari hakikat kemauan, dilema kehendak bebas, penelusuran karya sastra, posisinya dalam sejarah Barat, hingga kompas praktis untuk mengarahkan arah hidup kita sendiri hari ini." data-en="This book invites us to pilgrimage across five lighthouses that laid the bedrock of modern thought on human will. Each thinker offered not dry doctrine, but an autopsy of freedom through masterworks forged in real turmoil. In every chapter, we discover a structured Philosophical Navigation: from the essence of will, the paradox of free choice, textual dissection, historical place in Western thought, to an actionable compass for directing our own life today.">Buku ini membawa kita menziarahi lima mercusuar yang meletakkan dasar pemikiran modern tentang kemauan manusia. Masing-masing tokoh tidak hanya menawarkan konsep teoritis, melainkan menyelidiki anatomi kebebasan lewat mahakarya yang lahir dari pergulatan hidup nyata. Di setiap bab, kita akan menemukan <strong>Navigasi Filosofis</strong> terstruktur: dari hakikat kemauan, dilema kehendak bebas, penelusuran karya sastra, posisinya dalam sejarah Barat, hingga kompas praktis untuk mengarahkan arah hidup kita sendiri hari ini.</p>
+
+    <div class="flow" id="peta-kompas">
+      <div class="flow-title i18n" data-id="Peta Matriks: Evolusi Konsep Kemauan dalam Pemikiran Barat" data-en="Matrix Map: Evolution of the Will in Western Thought">Peta Matriks: Evolusi Konsep Kemauan dalam Pemikiran Barat</div>
+      <div class="flow-row">
+        <div class="flow-box"><b>Schopenhauer</b><span class="i18n" data-id="Kemauan Metafisik: Dorongan buta tak sadar mendikte akal budi" data-en="Metaphysical Will: Blind unconscious drive dictates reason">Kemauan Metafisik: Dorongan buta tak sadar mendikte akal budi</span></div>
+        <div class="flow-arrow">→</div>
+        <div class="flow-box alt"><b>Kafka</b><span class="i18n" data-id="Kemauan yang Lumpuh: Individu berhadapan dengan labirin birokrasi" data-en="Paralyzed Will: Individual trapped in bureaucratic apparatus">Kemauan yang Lumpuh: Individu berhadapan dengan labirin birokrasi</span></div>
+        <div class="flow-arrow">→</div>
+        <div class="flow-box"><b>Dostoevsky</b><span class="i18n" data-id="Kehendak Bebas Radikal: Pilihan moral di hadapan jurang hati nurani" data-en="Radical Free Will: Moral agency facing the furnace of conscience">Kehendak Bebas Radikal: Pilihan moral di hadapan jurang hati nurani</span></div>
+        <div class="flow-arrow">→</div>
+        <div class="flow-box alt"><b>Camus</b><span class="i18n" data-id="Kehendak Absurd: Memberontak tanpa jaminan langit kosmik" data-en="Absurd Will: Lucid revolt without cosmic guarantees">Kehendak Absurd: Memberontak tanpa jaminan langit kosmik</span></div>
+        <div class="flow-arrow">→</div>
+        <div class="flow-box"><b>Nietzsche</b><span class="i18n" data-id="Kehendak Berkuasa: Melampaui diri, memahat nilai-nilai baru" data-en="Will to Power: Self-overcoming and crafting new values">Kehendak Berkuasa: Melampaui diri, memahat nilai-nilai baru</span></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<hr class="div">
+
+<!-- BAB 1: SCHOPENHAUER -->
+<section class="chapter" id="schopenhauer">
+  <div class="chapter-head">
+    <div class="chapter-num-row"><span class="pulse-dot"></span><span class="eyebrow">Bab 01</span></div>
+    <h2 class="chapter-title i18n" data-id="Sang Mesin di Dalam Diri" data-en="The Engine Within">Sang Mesin di Dalam Diri</h2>
+    <p class="chapter-sub i18n" data-id="Arthur Schopenhauer & Revolusi Kehendak Metafisik" data-en="Arthur Schopenhauer & the Metaphysical Will Revolution">Arthur Schopenhauer & Revolusi Kehendak Metafisik</p>
+    <div class="experts">Arthur Schopenhauer (1788–1860) · The World as Will & On the Freedom of the Will</div>
+  </div>
+
+  <!-- Philosophical Navigation Pills -->
+  <div class="phil-nav">
+    <div class="phil-nav-label"><span class="pulse-dot" style="width:6px;height:6px;"></span> <span class="i18n" data-id="Navigasi Filosofis Schopenhauer" data-en="Schopenhauer's Philosophical Navigation">Navigasi Filosofis Schopenhauer</span></div>
+    <div class="phil-nav-pills">
+      <a class="phil-nav-pill" href="#schopenhauer-hakikat">§1. Hakikat Kemauan</a>
+      <a class="phil-nav-pill" href="#schopenhauer-kebebasan">§2. Status Kehendak Bebas</a>
+      <a class="phil-nav-pill" href="#schopenhauer-buku">§3. The World as Will</a>
+      <a class="phil-nav-pill" href="#schopenhauer-balans">§3b. Dilema Landak</a>
+      <a class="phil-nav-pill" href="#schopenhauer-sejarah">§4. Sejarah Pemikiran Barat</a>
+      <a class="phil-nav-pill" href="#schopenhauer-kompas">§5. Kompas Hidup</a>
+    </div>
+  </div>
+
+  <div class="chapter-body">
+    <p class="dropcap i18n" data-id="Sebelum kita memutuskan untuk bangun pagi, memesan secangkir kopi, atau jatuh cinta pada seseorang, sesuatu di dalam diri kita telah memutuskan terlebih dahulu. Schopenhauer adalah pemikir Barat pertama yang berani menelanjangi ilusi kedaulatan rasio: ia menyatakan bahwa esensi terdalam manusia bukanlah akal pikiran, melainkan Kemauan (der Wille) — dorongan vital yang lapar, gelisah, dan tak pernah tuntas terpuaskan." data-en="Before we decide to wake up, order a coffee, or fall in love, something deep within us has already decided. Schopenhauer was the first Western thinker daring enough to strip the illusion of rational sovereignty: asserting that human essence is not reason, but the Will (der Wille) — a restless, hungry drive that never rests satisfied.">Sebelum kita memutuskan untuk bangun pagi, memesan secangkir kopi, atau jatuh cinta pada seseorang, sesuatu di dalam diri kita telah memutuskan terlebih dahulu. Schopenhauer adalah pemikir Barat pertama yang berani menelanjangi ilusi kedaulatan rasio: ia menyatakan bahwa esensi terdalam manusia bukanlah akal pikiran, melainkan Kemauan (<em>der Wille</em>) — dorongan vital yang lapar, gelisah, dan tak pernah tuntas terpuaskan.</p>
+
+    <div class="box bio">
+      <div class="box-header"><span class="box-title">Asal Muasal: Arthur Schopenhauer</span><span class="box-meta">Danzig 1788 – Frankfurt 1860</span></div>
+      <p class="i18n" data-id="Lahir dari keluarga saudagar kaya, Schopenhauer menyaksikan ayahnya bunuh diri di usia muda dan berkonflik sengit dengan ibunya, seorang novelis terpandang di Weimar. Mewarisi kemandirian finansial, ia menolak berkompromi dengan dunia akademis resmi. Di Universitas Berlin, ia sengaja menjadwalkan kuliahnya tepat di jam yang sama dengan Hegel — yang saat itu dipuja sebagai dewa filsafat Jerman. Kelas Hegel membludak; kelas Schopenhauer kosong melompong. Namun kesendirian itu membuahkan orisinalitas tanpa tanding: ia memadukan idealisme Kant dengan filsafat Upanishad dan Buddhisme yang baru pertama kali diterjemahkan ke Eropa." data-en="Born to a wealthy merchant, Schopenhauer witnessed his father's suicide as a youth and feuded with his mother, a prominent Weimar novelist. Financially independent, he refused compromise with academia. At the University of Berlin, he scheduled lectures at the exact hour as Hegel — then reigning idol of German thought. Hegel's hall was packed; Schopenhauer's was empty. Yet isolation bore unmatched originality: fusing Kantian idealism with freshly translated Upanishadic and Buddhist thought.">Lahir dari keluarga saudagar kaya, Schopenhauer menyaksikan ayahnya bunuh diri di usia muda dan berkonflik sengit dengan ibunya, seorang novelis terpandang di Weimar. Mewarisi kemandirian finansial, ia menolak berkompromi dengan dunia akademis resmi. Di Universitas Berlin, ia sengaja menjadwalkan kuliahnya tepat di jam yang sama dengan Hegel — yang saat itu dipuja sebagai dewa filsafat Jerman. Kelas Hegel membludak; kelas Schopenhauer kosong melompong. Namun kesendirian itu membuahkan orisinalitas tanpa tanding: ia memadukan idealisme Kant dengan filsafat Upanishad dan Buddhisme yang baru pertama kali diterjemahkan ke Eropa.</p>
+    </div>
+
+    <h3 id="schopenhauer-hakikat">§1. Hakikat Kemauan: Dorongan Kosmik Pra-Rasional</h3>
+    <p class="i18n" data-id="Bagi Schopenhauer, Kemauan bukanlah fungsi sadar psikologis belaka. Kemauan adalah 'benda pada dirinya sendiri' (Ding an sich) yang dicari Kant — substratum energi tunggal yang menggerakkan seluruh semesta: gaya tarik gravitasi, tumbuhan yang mendobrak aspal, insting serigala berburu, hingga nafsu dan ambisi manusia. Akal budi (intelek) kita tidak lebih dari laksana orang buta yang kuat dan kekar, menggendong orang lumpuh yang bisa melihat di pundaknya: akal hanya memberi panduan visual, tetapi energi yang melangkah sepenuhnya milik Kehendak." data-en="For Schopenhauer, the Will is not merely a conscious psychological faculty. It is Kant's 'thing-in-itself' (Ding an sich) — the single underlying energy animating all reality: gravity's pull, roots breaking asphalt, a wolf hunting, human lust and ambition. Our intellect is merely a sighted cripple riding on the shoulders of a blind giant: reason guides the flashlight, but the stride belongs entirely to the Will.">Bagi Schopenhauer, Kemauan bukanlah fungsi sadar psikologis belaka. Kemauan adalah "benda pada dirinya sendiri" (<em>Ding an sich</em>) yang dicari Kant — substratum energi tunggal yang menggerakkan seluruh semesta: gaya tarik gravitasi, tumbuhan yang mendobrak aspal, insting serigala berburu, hingga nafsu dan ambisi manusia. Akal budi (intelek) kita tidak lebih dari laksana orang buta yang kuat dan kekar, menggendong orang lumpuh yang bisa melihat di pundaknya: akal hanya memberi panduan visual, tetapi energi yang melangkah sepenuhnya milik Kehendak.</p>
+
+    <h3 id="schopenhauer-kebebasan">§2. Status Kehendak Bebas: Determinisme Ketat Karakter</h3>
+    <p class="i18n" data-id="Schopenhauer merumuskan diktum yang kelak dikutip oleh Albert Einstein: 'Manusia bisa melakukan apa yang ia mau, tetapi ia tidak bisa menghendaki apa yang ia kehendaki.' Pada tingkat empiris keseharian, kehendak bebas adalah ilusi. Setiap tindakan manusia ditentukan secara mutlak oleh dua hal: Karakter Bawaan (yang permanen dan tak berubah) serta Motif yang memicunya. Kita bebas melangkah membeli secangkir kopi, tetapi kita tidak bebas menentukan mengapa hasrat meminum kopi itu tiba-tiba meletup di dalam benak kita." data-en="Schopenhauer coined the famous dictum later prized by Albert Einstein: 'Man can do what he wills, but he cannot will what he wills.' At the everyday empirical level, free will is an illusion. Every action is strictly determined by two factors: innate character and the external motive triggering it. We are free to buy a coffee, but not free to decide why the thirst for coffee arose in our mind.">Schopenhauer merumuskan diktum yang kelak dikutip oleh Albert Einstein: <em>"Manusia bisa melakukan apa yang ia mau, tetapi ia tidak bisa menghendaki apa yang ia kehendaki."</em> Pada tingkat empiris keseharian, kehendak bebas adalah ilusi. Setiap tindakan manusia ditentukan secara mutlak oleh dua hal: Karakter Bawaan (yang permanen dan tak berubah) serta Motif yang memicunya. Kita bebas melangkah membeli secangkir kopi, tetapi kita tidak bebas menentukan mengapa hasrat meminum kopi itu tiba-tiba meletup di dalam benak kita.</p>
+    <p class="i18n" data-id="Namun, ada satu celah kebebasan sejati: bukan kebebasan memilih di dalam jeruji hasrat, melainkan kebebasan dari Kehendak itu sendiri melalui Askese dan Kontemplasi Seni murni (terutama musik), di mana untuk beberapa saat subjek yang berhasrat luruh menjadi kesadaran murni tanpa pamrih." data-en="Yet one loophole of authentic freedom remains: not freedom of choice within desire's cage, but freedom from the Will itself through ascetic self-denial and pure contemplation of art (especially music), where the desiring ego temporarily dissolves into selfless clarity.">Namun, ada satu celah kebebasan sejati: bukan kebebasan memilih di dalam jeruji hasrat, melainkan <strong>kebebasan dari Kehendak itu sendiri</strong> melalui Askese dan Kontemplasi Seni murni (terutama musik), di mana untuk beberapa saat subjek yang berhasrat luruh menjadi kesadaran murni tanpa pamrih.</p>
+
+    <div class="box book" id="schopenhauer-buku">
+      <div class="box-header"><span class="box-title"><em>The World as Will and Representation</em></span><span class="box-meta">Frankfurt 1818 · 4 Bagian Fundamental</span></div>
+      <div class="box-scene">"Dunia ini adalah kehendak yang tak henti-hentinya lapar; hidup manusia terombang-ambing bagaikan bandul jam antara derita kepedihan dan kehampaan yang menjemukan..."</div>
+      <p class="i18n" data-id="Ditulis pada usia 30 tahun, mahakarya ini membagi dunia ke dalam dua wajah: Dunia sebagai Representasi (apa yang kita amati lewat ruang, waktu, dan kausalitas) dan Dunia sebagai Kehendak (inti terdalam yang tak berwujud dan tak terbagi). Buku ini merumuskan Bandul Hasrat: hidup berayun abadi antara rasa sakit (ketegangan akibat kekurangan) dan kebosanan (kehampaan setelah keinginan terpenuhi). Kepuasan sejati tidak pernah ada karena setiap kepuasan melahirkan sepuluh rasa lapar baru." data-en="Written at age 30, this masterpiece divides the world into two aspects: Representation (what we perceive through space, time, causality) and Will (the undivided, boundless core). It establishes the Pendulum of Desire: existence swinging forever between pain (tension of lack) and boredom (emptiness after gratification). Enduring fulfillment is impossible because every satisfied want breeds ten new hungers.">Ditulis pada usia 30 tahun, mahakarya ini membagi dunia ke dalam dua wajah: Dunia sebagai Representasi (apa yang kita amati lewat ruang, waktu, dan kausalitas) dan Dunia sebagai Kehendak (inti terdalam yang tak berwujud dan tak terbagi). Buku ini merumuskan <strong>Bandul Hasrat</strong>: hidup berayun abadi antara rasa sakit (ketegangan akibat kekurangan) dan kebosanan (kehampaan setelah keinginan terpenuhi). Kepuasan sejati tidak pernah ada karena setiap kepuasan melahirkan sepuluh rasa lapar baru.</p>
+    </div>
+
+    <!-- JEMBATAN PENYEIMBANG INTERNAL -->
+    <p class="i18n" data-id="Jika drama metafisik The World as Will menyingkap dorongan semesta yang raksasa dan dingin, bagaimana kita menguji batas kebebasan itu dalam laboratorium kesadaran batin sehari-hari? Dan bagaimana seorang manusia yang menyadari jeratan kemauan ini dapat melangkah bersama sesamanya tanpa saling melukai? Schopenhauer merumuskannya secara tajam melalui pembuktian nalar dan perumpamaan yang tak lekang oleh waktu." data-en="If The World as Will portrays a cosmic metaphysical drama, how do we test the limits of freedom on the daily workbench of consciousness? And how can a human, aware of this craving trap, live alongside others without being stung? Schopenhauer answered with rigorous logic and an enduring parable.">Jika drama metafisik <em>The World as Will</em> menyingkap dorongan semesta yang raksasa dan dingin, bagaimana kita menguji batas kebebasan itu dalam laboratorium kesadaran batin sehari-hari? Dan bagaimana seorang manusia yang menyadari jeratan kemauan ini dapat melangkah bersama sesamanya tanpa saling melukai? Schopenhauer merumuskannya secara tajam melalui pembuktian nalar dan perumpamaan yang tak lekang oleh waktu.</p>
+
+    <div class="box work-alt" id="schopenhauer-balans">
+      <div class="box-header"><span class="box-title"><em>Dilema Landak</em> & <em>On the Freedom of the Will</em></span><span class="box-meta">1839 (Akademi Norwegia) & 1851 (Parerga)</span></div>
+      <div class="box-scene">"Di hari musim dingin yang beku, sekawanan landak saling merapat mencari kehangatan. Namun begitu duri mereka saling menusuk, mereka tersentak menjauh..."</div>
+      <p class="i18n" data-id="Dalam risalah ilmiah On the Freedom of the Will (Über die Freiheit des Willens, 1839), Schopenhauer menjawab sayembara Royal Norwegian Society dengan membongkar ilusi kesadaran diri: saat seseorang duduk di kamar dan berkata, 'Aku bebas keluar jalan-jalan, atau pergi ke teater, atau meloncat dari jendela sekarang juga', ia lupa bahwa semua itu hanyalah potensi pasif. Pada kenyataannya, ia hanya akan melakukan satu tindakan yang memiliki motif terkuat saat itu. Kesadaran diri membuktikan bahwa kita mampu berbuat sesuai kemauan, tetapi tidak mampu memilih apa yang kita maui." data-en="In On the Freedom of the Will (1839), awarded first prize by the Royal Norwegian Society, Schopenhauer dismantled the illusion of introspection: when someone sits in a room thinking 'I am free to take a walk, go to the opera, or jump out the window right now', he confuses passive potential with actual causation. In truth, he will only execute the single act pulled by the strongest motive. Consciousness proves we act according to our will, never that we choose our willing.">Dalam risalah ilmiah <em>On the Freedom of the Will</em> (1839), Schopenhauer menjawab sayembara Royal Norwegian Society dengan membongkar ilusi kesadaran diri: saat seseorang duduk di kamar dan berkata, <em>"Aku bebas keluar jalan-jalan, atau pergi ke teater, atau meloncat dari jendela sekarang juga"</em>, ia lupa bahwa semua itu hanyalah potensi pasif. Pada kenyataannya, ia hanya akan melakukan satu tindakan yang memiliki motif terkuat saat itu. Kesadaran diri membuktikan bahwa kita mampu berbuat sesuai kemauan, tetapi tidak mampu memilih apa yang kita maui.</p>
+      <p class="i18n" data-id="Sebagai keseimbangan praktis dalam Aphorisms on the Wisdom of Life (Aphorismen zur Lebensweisheit, 1851), ia memperkenalkan perumpamaan Dilema Landak (The Porcupine Dilemma): di hari musim dingin yang beku, sekawanan landak saling merapat mencari kehangatan. Namun begitu berdekatan, duri-duri tajam mereka saling melukai. Saat mereka menjauh karena kesakitan, mereka kembali menggigil beku. Begitulah kehendak manusia dalam pergaulan sosial. Kematangan hidup dicapai ketika manusia menemukan 'jarak moderat' — kesopanan yang ramah, batas yang jelas, dan kekayaan batin (autarkeia) sehingga tidak tergantung pada pengakuan orang lain." data-en="As a pragmatic counterweight in Aphorisms on the Wisdom of Life (1851), he introduced the famous Porcupine Dilemma: on a freezing winter day, porcupines huddle close for warmth. Yet too close, their quills sting one another. Pulling apart in pain, they shiver again. Such is the human will in society. Mature balance is found in 'moderate distance' — polite courtesy, firm boundaries, and inner self-sufficiency (autarkeia) immune to fickle social praise.">Sebagai keseimbangan praktis dalam <em>Aphorisms on the Wisdom of Life</em> (1851), ia memperkenalkan perumpamaan <strong>Dilema Landak (<em>The Porcupine Dilemma</em>)</strong>: di hari musim dingin yang beku, sekawanan landak saling merapat mencari kehangatan. Namun begitu berdekatan, duri-duri tajam mereka saling melukai. Saat mereka menjauh karena kesakitan, mereka kembali menggigil beku. Begitulah kehendak manusia dalam pergaulan sosial. Kematangan hidup dicapai ketika manusia menemukan "jarak moderat" — kesopanan yang ramah, batas yang jelas, dan kekayaan batin (<em>autarkeia</em>) sehingga tidak tergantung pada pengakuan orang lain.</p>
+    </div>
+
+    <h3 id="schopenhauer-sejarah">§4. Titik Belok dalam Sejarah Pemikiran Barat</h3>
+    <p class="i18n" data-id="Dengan menempatkan Kehendak di atas Rasio, Schopenhauer mematahkan tradisi Plato, Descartes, dan Pencerahan yang memuja akal budi sebagai pusat manusia. Gagasannya menjadi jembatan langsung yang melahirkan psikoanalisis Freud (konsep id dan alam bawah sadar), memicu revolusi estetika Richard Wagner, dan menjadi pemicu utama Nietzsche muda untuk merumuskan ulang konsep kehendak." data-en="By enthroning Will above Reason, Schopenhauer shattered the classical Platonic-Cartesian tradition that held reason as man's core. His thought served as the direct springboard for Freud's psychoanalysis (the unconscious and the id), inspired Wagner's operatic dramas, and supplied the young Nietzsche with the raw clay from which to sculpt his philosophy.">Dengan menempatkan Kehendak di atas Rasio, Schopenhauer mematahkan tradisi Plato, Descartes, dan Pencerahan yang memuja akal budi sebagai pusat manusia. Gagasannya menjadi jembatan langsung yang melahirkan psikoanalisis Freud (konsep <em>id</em> dan alam bawah sadar), memicu revolusi estetika Richard Wagner, dan menjadi pemicu utama Nietzsche muda untuk merumuskan ulang konsep kehendak.</p>
+
+    <h3 id="schopenhauer-kompas">§5. Kompas Praktik Diri: Menjinakkan Mesin Batin</h3>
+    <ul class="checklist">
+      <li class="i18n" data-id="<strong>Sadar Lonjakan Dopamin:</strong> kenali bahwa dorongan kita membeli barang baru atau larut dalam scrolling layar hanyalah 'mesin spesies' yang sedang bekerja, bukan kebutuhan sejati batin kita." data-en="<strong>Dopamine Awareness:</strong> recognize that our urge to buy or scroll is just the biological machine at work, not our authentic soul's need."><strong>Sadar Lonjakan Dopamin:</strong> kenali bahwa dorongan kita membeli barang baru atau larut dalam scrolling layar hanyalah "mesin spesies" yang sedang bekerja, bukan kebutuhan sejati batin kita.</li>
+      <li class="i18n" data-id="<strong>Hentikan Bandul:</strong> sediakan waktu hening tanpa stimulus target — nikmati musik atau alam sebagai subjek pengamat murni." data-en="<strong>Pause the Pendulum:</strong> reserve quiet time without goal-orientation — savor art or nature as a pure observer."><strong>Hentikan Bandul:</strong> sediakan waktu hening tanpa stimulus target — nikmati musik atau alam sebagai subjek pengamat murni.</li>
+      <li class="i18n" data-id="<strong>Belas Kasih Tanpa Syarat:</strong> orang yang menyakiti kita pun sesungguhnya sedang diperbudak oleh dorongan kehendak buta yang sama; amarah mereda saat kita memandang penderitaan universal itu." data-en="<strong>Radical Compassion:</strong> those who wrong us are trapped in the exact same blind will; anger dissolves when universal suffering is seen."><strong>Belas Kasih Tanpa Syarat:</strong> orang yang menyakiti kita pun sesungguhnya sedang diperbudak oleh dorongan kehendak buta yang sama; amarah mereda saat kita memandang penderitaan universal itu.</li>
+    </ul>
+
+    <!-- SOFT BRIDGE: SCHOPENHAUER TO KAFKA -->
+    <div class="soft-bridge">
+      <span class="bridge-tag i18n" data-id="Jembatan Transisi Filosofis" data-en="Philosophical Soft Bridge">Jembatan Transisi Filosofis</span>
+      <h4 class="i18n" data-id="Dari Mesin di Dalam Diri Menuju Labirin di Luar" data-en="From the Engine Within to the Labyrinth Without">Dari Mesin di Dalam Diri Menuju Labirin di Luar</h4>
+      <p class="i18n" data-id="Schopenhauer memperingatkan kita tentang mesin kehendak biologis yang bergolak di dalam batin. Namun apa yang terjadi ketika manusia modern, dengan segala dorongan hidupnya itu, melangkah keluar rumah dan berhadapan dengan peradaban abad ke-20? Ia mendapati bahwa kehendaknya tidak hanya diperbudak oleh alam, melainkan dibekukan oleh mesin baru yang lebih dingin: birokrasi, jam kerja pabrik, dan sistem tanpa wajah. Di sinilah Franz Kafka menyambut kita." data-en="Schopenhauer warned us of the blind biological engine roiling within. But what happens when modern humans, with all their vitality, step out into 20th-century civilization? They find their will frozen by a new, colder machine: bureaucracy, clock-time, and faceless systems. Here Franz Kafka meets us.">Schopenhauer memperingatkan kita tentang mesin kehendak biologis yang bergolak di dalam batin. Namun apa yang terjadi ketika manusia modern, dengan segala dorongan hidupnya itu, melangkah keluar rumah dan berhadapan dengan peradaban abad ke-20? Ia mendapati bahwa kehendaknya tidak hanya diperbudak oleh alam, melainkan dibekukan oleh mesin baru yang lebih dingin: birokrasi, jam kerja pabrik, dan sistem tanpa wajah. Di sinilah Franz Kafka menyambut kita.</p>
+    </div>
+  </div>
+</section>
+
+<hr class="div">
+
+<!-- BAB 2: KAFKA -->
+<section class="chapter" id="kafka">
+  <div class="chapter-head">
+    <div class="chapter-num-row"><span class="pulse-dot"></span><span class="eyebrow">Bab 02</span></div>
+    <h2 class="chapter-title i18n" data-id="Labirin Tanpa Wajah" data-en="The Faceless Labyrinth">Labirin Tanpa Wajah</h2>
+    <p class="chapter-sub i18n" data-id="Franz Kafka & Kelumpuhan Agensi Modern" data-en="Franz Kafka & the Paralysis of Modern Agency">Franz Kafka & Kelumpuhan Agensi Modern</p>
+    <div class="experts">Franz Kafka (1883–1924) · The Metamorphosis & The Trial</div>
+  </div>
+
+  <div class="phil-nav">
+    <div class="phil-nav-label"><span class="pulse-dot" style="width:6px;height:6px;"></span> <span class="i18n" data-id="Navigasi Filosofis Kafka" data-en="Kafka's Philosophical Navigation">Navigasi Filosofis Kafka</span></div>
+    <div class="phil-nav-pills">
+      <a class="phil-nav-pill" href="#kafka-hakikat">§1. Hakikat Kemauan Terasing</a>
+      <a class="phil-nav-pill" href="#kafka-kebebasan">§2. Ilusi Agensi & Labirin</a>
+      <a class="phil-nav-pill" href="#kafka-buku">§3. The Metamorphosis</a>
+      <a class="phil-nav-pill" href="#kafka-balans">§3b. Di Hadapan Hukum</a>
+      <a class="phil-nav-pill" href="#kafka-sejarah">§4. Sejarah Pemikiran Barat</a>
+      <a class="phil-nav-pill" href="#kafka-kompas">§5. Kompas Hidup</a>
+    </div>
+  </div>
+
+  <div class="chapter-body">
+    <p class="dropcap i18n" data-id="Jika Schopenhauer membedah kemauan dari dalam tubuh biologis, Franz Kafka melukiskan apa yang terjadi ketika kemauan itu ditelan oleh aparatus masyarakat modern. Kita ingin menentukan nasib kita sendiri, kita ingin bersuara membela hak kita — tetapi lawan bicara kita bukanlah tiran berdarah daging yang bisa diajak berdialog, melainkan loket kaca, formulir digital, dan algoritma yang menolak permohonan kita tanpa tatap muka manusiawi." data-en="If Schopenhauer dissected will inside the biological body, Franz Kafka painted what occurs when that will is devoured by the apparatus of modern society. We want to steer our destiny, we want to voice our plea — but our adversary is no flesh-and-blood tyrant to reason with, but frosted glass windows, automated forms, and algorithms denying our appeal without human eyes.">Jika Schopenhauer membedah kemauan dari dalam tubuh biologis, Franz Kafka melukiskan apa yang terjadi ketika kemauan itu ditelan oleh aparatus masyarakat modern. Kita ingin menentukan nasib kita sendiri, kita ingin bersuara membela hak kita — tetapi lawan bicara kita bukanlah tiran berdarah daging yang bisa diajak berdialog, melainkan loket kaca, formulir digital, dan algoritma yang menolak permohonan kita tanpa tatap muka manusiawi.</p>
+
+    <div class="box bio">
+      <div class="box-header"><span class="box-title">Asal Muasal: Franz Kafka</span><span class="box-meta">Praha 1883 – Kierling 1924</span></div>
+      <p class="i18n" data-id="Kafka hidup di Praha dalam ketegangan identitas tripartit: seorang Yahudi berbahasa Jerman di kota mayoritas Ceko di bawah Kekaisaran Austro-Hungaria. Siang hari ia bekerja cermat di Lembaga Asuransi Kecelakaan Kerja Buruh Bohemia — mencatat jari-jari buruh yang putus oleh mesin pabrik dan menyaksikan birokrasi berbelit. Malam hari, di bawah bayang-bayang ayahnya yang otoriter, ia menulis fiksi yang menelanjangi kegelisahan eksistensial. Menjelang wafat akibat TBC, ia meminta naskahnya dibakar; Max Brod melanggar wasiat itu demi peradaban dunia." data-en="Kafka lived in Prague amid a threefold identity tension: a German-speaking Jew in a Czech city under the Austro-Hungarian Empire. By day, he worked methodically at the Workers' Accident Insurance Institute — recording severed fingers in factory presses and negotiating bureaucratic mazes. By night, under the shadow of an overbearing father, he penned tales exposing existential anxiety. Dying of tuberculosis at 41, he ordered his manuscripts burned; Max Brod defied the wish for the sake of world literature.">Kafka hidup di Praha dalam ketegangan identitas tripartit: seorang Yahudi berbahasa Jerman di kota mayoritas Ceko di bawah Kekaisaran Austro-Hungaria. Siang hari ia bekerja cermat di Lembaga Asuransi Kecelakaan Kerja Buruh Bohemia — mencatat jari-jari buruh yang putus oleh mesin pabrik dan menyaksikan birokrasi berbelit. Malam hari, di bawah bayang-bayang ayahnya yang otoriter, ia menulis fiksi yang menelanjangi kegelisahan eksistensial. Menjelang wafat akibat TBC, ia meminta naskahnya dibakar; Max Brod melanggar wasiat itu demi peradaban dunia.</p>
+    </div>
+
+    <h3 id="kafka-hakikat">§1. Hakikat Kemauan: Agensi yang Dikebiri Nilai-Guna</h3>
+    <p class="i18n" data-id="Dalam dunia Kafka, kemauan manusia mengalami mutilasi psikologis. Manusia modern tidak lagi menghendaki apa yang sejati bagi jiwanya, melainkan menginternalisasi tuntutan sistem: menjadi karyawan teladan, membayar utang keluarga, dan tidak pernah terlambat naik kereta. Kemauan pribadi terbelah menjadi dua: kehendak fungsional (menjadi roda gigi produktif) dan kehendak eksistensial yang tertindas (kebutuhan akan cinta, istirahat, dan makna)." data-en="In Kafka's world, human will undergoes psychological mutilation. Modern individuals no longer desire what is authentic to their soul, but internalize the system's dictates: punctuality, paying off familial debt, serving as a docile cog. Personal will splits in two: functional will (economic utility) and repressed existential will (the hunger for rest, love, and humanity).">Dalam dunia Kafka, kemauan manusia mengalami mutilasi psikologis. Manusia modern tidak lagi menghendaki apa yang sejati bagi jiwanya, melainkan menginternalisasi tuntutan sistem: menjadi karyawan teladan, membayar utang keluarga, dan tidak pernah terlambat naik kereta. Kemauan pribadi terbelah menjadi dua: kehendak fungsional (menjadi roda gigi produktif) dan kehendak eksistensial yang tertindas (kebutuhan akan cinta, istirahat, dan makna).</p>
+
+    <h3 id="kafka-kebebasan">§2. Status Kehendak Bebas: Terpenjara dalam Labirin Prosedur</h3>
+    <p class="i18n" data-id="Apakah Josef K. dalam The Trial punya kehendak bebas? Di atas kertas, ia bebas berjalan ke mana pun di kota Praha; ia tidak diborgol. Namun seluruh kebebasannya semu, karena ia diadili oleh hukum yang tidak pernah ia ketahui dan tidak bisa ia tembus. Kebebasan dalam kondisi Kafkaesque adalah kebebasan berputar-putar di dalam koridor tanpa pintu keluar. Pilihan manusia direduksi menjadi formalitas administratif tanpa substansi." data-en="Does Josef K. in The Trial possess free will? On paper, he walks Prague unhandcuffed. Yet his freedom is illusory: accused by an unseen tribunal under rules he can never verify. Freedom in the Kafkaesque condition is the liberty to wander endlessly within corridors lacking an exit. Human choice shrinks into mere administrative formality.">Apakah Josef K. dalam <em>The Trial</em> punya kehendak bebas? Di atas kertas, ia bebas berjalan ke mana pun di kota Praha; ia tidak diborgol. Namun seluruh kebebasannya semu, karena ia diadili oleh hukum yang tidak pernah ia ketahui dan tidak bisa ia tembus. Kebebasan dalam kondisi Kafkaesque adalah kebebasan berputar-putar di dalam koridor tanpa pintu keluar. Pilihan manusia direduksi menjadi formalitas administratif tanpa substansi.</p>
+
+    <div class="box book" id="kafka-buku">
+      <div class="box-header"><span class="box-title"><em>The Metamorphosis</em> (Die Verwandlung)</span><span class="box-meta">Terbit 1915 · Ditulis akhir 1912</span></div>
+      <div class="box-scene">"Ketika Gregor Samsa terbangun di suatu pagi dari mimpi-mimpi yang gelisah, ia mendapati dirinya telah berubah di atas tempat tidurnya menjadi seekor serangga raksasa yang mengerikan..."</div>
+      <p class="i18n" data-id="Saat Gregor Samsa terbangun menjadi serangga raksasa, pikiran pertamanya bukan rasa ngeri terhadap tubuhnya, melainkan ketakutan ketinggalan kereta jam tujuh pagi dan dimarahi atasannya. Nilai kemanusiaannya ternyata semata bertumpu pada kemampuannya menyetorkan uang belanja. Begitu nilai-guna itu sirna, keluarganya perlahan memperlakukannya sebagai aib dan kotoran. Kematian Gregor disambut dengan napas lega dan jalan-jalan piknik keluarga. Inilah pembedahan paling dingin atas kemauan manusia yang disandera oleh logika kapitalistik." data-en="When Gregor Samsa awakens as an insect, his primary terror is not bodily mutation, but missing the 7 a.m. train and displeasing his boss. His human worth hinged strictly on his monthly remittances. Once that economic utility evaporated, his family discarded him into a dusty closet. His death brings a collective sigh of relief and a Sunday picnic. It remains the most chilling dissection of human agency held hostage by commodification.">Saat Gregor Samsa terbangun menjadi serangga raksasa, pikiran pertamanya bukan rasa ngeri terhadap tubuhnya, melainkan ketakutan ketinggalan kereta jam tujuh pagi dan dimarahi atasannya. Nilai kemanusiaannya ternyata semata bertumpu pada kemampuannya menyetorkan uang belanja. Begitu nilai-guna itu sirna, keluarganya perlahan memperlakukannya sebagai aib dan kotoran. Kematian Gregor disambut dengan napas lega dan jalan-jalan piknik keluarga. Inilah pembedahan paling dingin atas kemauan manusia yang disandera oleh logika kapitalistik.</p>
+    </div>
+
+    <!-- JEMBATAN PENYEIMBANG KAFKA -->
+    <p class="i18n" data-id="Jika The Metamorphosis memperlihatkan agensi yang remuk di kamar sempit dan lingkaran keluarga, ke manakah manusia melangkah ketika ia mencoba menuntut keadilan di panggung masyarakat publik? Melalui mahakarya The Trial, Kafka membawa tragedi kelumpuhan kehendak ini langsung ke lorong-lorong peradilan impersonal dan kepatuhan sukarela batin manusia itu sendiri." data-en="If The Metamorphosis exhibits agency shattered inside the private bedroom and household, where does one turn when demanding justice in the public arena? In The Trial, Kafka expands the tragedy of paralyzed will directly into the corridors of impersonal justice and humanity's voluntary inner compliance.">Jika <em>The Metamorphosis</em> memperlihatkan agensi yang remuk di kamar sempit dan lingkaran keluarga, ke manakah manusia melangkah ketika ia mencoba menuntut keadilan di panggung masyarakat publik? Melalui mahakarya <em>The Trial</em>, Kafka membawa tragedi kelumpuhan kehendak ini langsung ke lorong-lorong peradilan impersonal dan kepatuhan sukarela batin manusia itu sendiri.</p>
+
+    <div class="box work-alt" id="kafka-balans">
+      <div class="box-header"><span class="box-title"><em>The Trial</em> & <em>Di Hadapan Hukum</em> (Vor dem Gesetz)</span><span class="box-meta">Terbit 1925 · Ditulis 1914–1915</span></div>
+      <div class="box-scene">"Di hadapan pintu Hukum berdiri seorang penjaga gerbang. Kepada gerbang yang terbuka lebar ini, seorang pengelana desa datang memohon izin masuk seumur hidupnya..."</div>
+      <p class="i18n" data-id="Dalam The Trial (Der Process), Josef K. ditangkap di pagi hari ulang tahunnya yang ke-30 tanpa pernah diberitahu apa dakwaannya. Selama berbulan-bulan, kehendaknya disiksa bukan oleh siksaan fisik, melainkan oleh peradilan tak terlihat di loteng-loteng kumuh Praha. Josef K. tidak diborgol; ia bebas berjalan ke mana pun. Namun ia tak mampu meloloskan diri karena ia terus memohon pengakuan dari sistem yang sejak awal dirancang untuk mengisap energinya." data-en="In The Trial (Der Process), bank official Josef K. is arrested on the morning of his 30th birthday without ever being told his charge. For months, his agency is tormented not by physical chains, but by an invisible tribunal operating in suffocating tenement attics. Josef K. is unhandcuffed and free to walk away, yet unable to flee because he perpetually seeks validation from an apparatus designed to drain his vitality.">Dalam <em>The Trial</em> (<em>Der Process</em>), Josef K. ditangkap di pagi hari ulang tahunnya yang ke-30 tanpa pernah diberitahu apa dakwaannya. Selama berbulan-bulan, kehendaknya disiksa bukan oleh siksaan fisik, melainkan oleh peradilan tak terlihat di loteng-loteng kumuh Praha. Josef K. tidak diborgol; ia bebas berjalan ke mana pun. Namun ia tak mampu meloloskan diri karena ia terus memohon pengakuan dari sistem yang sejak awal dirancang untuk mengisap energinya.</p>
+      <p class="i18n" data-id="Inti filosofis terdalam novel ini terpahat dalam perumpamaan Di Hadapan Hukum (Vor dem Gesetz): seorang pria dari desa datang memohon izin masuk ke pintu Hukum. Pintu gerbang itu terbuka lebar seperti biasa, tetapi penjaga gerbang memperingatkan bahwa ia belum boleh masuk sekarang, dan ada penjaga-penjaga berikutnya yang jauh lebih berkuasa di dalam. Pria itu duduk di bangku kayu menanti izin sepanjang sisa hidupnya hingga rambutnya memutih dan matanya meredup. Sesaat sebelum napas terakhirnya, ia bertanya: 'Semua orang mendambakan Hukum, mengapa selama puluhan tahun ini tak ada orang lain yang datang memohon masuk selain aku?' Sang penjaga berseru lantang ke telinganya yang mulai tuli: 'Pintu gerbang ini dibuat khusus hanya untukmu. Sekarang, aku akan pergi dan menutupnya!' Tragedi kehendak manusia di sini bukan karena pintu digembok besi, melainkan karena kehendak kita sendiri lumpuh sukarela di hadapan ilusi otoritas." data-en="The novel's philosophical core shines in the parable Before the Law (Vor dem Gesetz): a man from the country begs entry to the Law. The gate stands open as always, yet the doorkeeper warns he cannot enter now, hinting of more terrible keepers within. The man sits on a stool waiting decade after decade until his hair turns silver and vision fails. At his dying breath, he asks: 'Everyone strives for the Law; why has no one else asked for admittance all these years?' The keeper roars into his deafening ear: 'No one else could gain admittance here, for this entrance was meant for you alone. I am now going to shut it!' The tragedy of human will is not an iron lock, but our voluntary paralysis before the illusion of external permission.">Inti filosofis terdalam novel ini terpahat dalam perumpamaan <strong>Di Hadapan Hukum (<em>Vor dem Gesetz</em>)</strong>: seorang pria dari desa datang memohon izin masuk ke pintu Hukum. Pintu gerbang itu terbuka lebar seperti biasa, tetapi penjaga gerbang memperingatkan bahwa ia belum boleh masuk sekarang, dan ada penjaga-penjaga berikutnya yang jauh lebih berkuasa di dalam. Pria itu duduk di bangku kayu menanti izin sepanjang sisa hidupnya hingga rambutnya memutih dan matanya meredup. Sesaat sebelum napas terakhirnya, ia bertanya: <em>"Semua orang mendambakan Hukum, mengapa selama puluhan tahun ini tak ada orang lain yang datang memohon masuk selain aku?"</em> Sang penjaga berseru lantang ke telinganya yang mulai tuli: <em>"Pintu gerbang ini dibuat khusus hanya untukmu. Sekarang, aku akan pergi dan menutupnya!"</em> Tragedi kehendak manusia di sini bukan karena pintu digembok besi, melainkan karena <strong>kehendak kita sendiri lumpuh sukarela di hadapan ilusi otoritas</strong>.</p>
+    </div>
+
+    <h3 id="kafka-sejarah">§4. Titik Belok dalam Sejarah Pemikiran Barat</h3>
+    <p class="i18n" data-id="Kafka adalah juru bicara kecemasan modern yang mendahului zamannya. Ketika sosiolog Max Weber berbicara tentang 'Kandang Besi' (Iron Cage) rasionalitas birokrasi, Kafka memberinya daging, darah, dan mimpi buruk. Ia meramalkan lahirnya negara totaliter, dehumanisasi teknologi, dan masyarakat tekno-birokratis di mana kekuasaan beroperasi tanpa seorang pun yang merasa bertanggung jawab secara pribadi." data-en="Kafka was the prophet of modern anxiety. Where sociologist Max Weber analyzed the 'Iron Cage' of bureaucratic rationalization, Kafka gave it blood, bone, and nightmare. He anticipated totalitarian states, technological dehumanization, and technocratic societies where power operates without any single person assuming moral responsibility.">Kafka adalah juru bicara kecemasan modern yang mendahului zamannya. Ketika sosiolog Max Weber berbicara tentang "Kandang Besi" (<em>Iron Cage</em>) rasionalitas birokrasi, Kafka memberinya daging, darah, dan mimpi buruk. Ia meramalkan lahirnya negara totaliter, dehumanisasi teknologi, dan masyarakat tekno-birokratis di mana kekuasaan beroperasi tanpa seorang pun yang merasa bertanggung jawab secara pribadi.</p>
+
+    <h3 id="kafka-kompas">§5. Kompas Praktik Diri: Menjaga Kemanusiaan dari Mesin</h3>
+    <ul class="checklist">
+      <li class="i18n" data-id="<strong>Pisahkan Nilai Diri dari Nilai Guna:</strong> kita bukan sekadar job title kita, bukan metrik target kerja, dan bukan angka saldo rekening kita." data-en="<strong>Decouple Worth from Utility:</strong> we are not merely our job title, not our performance metric, and not our bank balance."><strong>Pisahkan Nilai Diri dari Nilai Guna:</strong> kita bukan sekadar job title kita, bukan metrik target kerja, dan bukan angka saldo rekening kita.</li>
+      <li class="i18n" data-id="<strong>Tolak Rasa Bersalah Palsu:</strong> jangan biarkan algoritma atau sistem impersonal membuat kita merasa diadili setiap saat tanpa dasar." data-en="<strong>Reject Phantom Guilt:</strong> do not allow algorithms or impersonal systems to make us feel perpetually on trial without cause."><strong>Tolak Rasa Bersalah Palsu:</strong> jangan biarkan algoritma atau sistem impersonal membuat kita merasa diadili setiap saat tanpa dasar.</li>
+      <li class="i18n" data-id="<strong>Pertahankan Ruang Liar Pribadi:</strong> luangkan waktu melakukan hal yang 'tidak produktif' namun menghidupkan jiwa — menulis, merenung, bercakap dari hati ke hati." data-en="<strong>Guard Unproductive Sanctuary:</strong> protect time for activities that produce zero economic yield but feed the human soul."><strong>Pertahankan Ruang Liar Pribadi:</strong> luangkan waktu melakukan hal yang "tidak produktif" namun menghidupkan jiwa — menulis, merenung, bercakap dari hati ke hati.</li>
+    </ul>
+
+    <!-- SOFT BRIDGE: KAFKA TO DOSTOEVSKY -->
+    <div class="soft-bridge">
+      <span class="bridge-tag i18n" data-id="Jembatan Transisi Filosofis" data-en="Philosophical Soft Bridge">Jembatan Transisi Filosofis</span>
+      <h4 class="i18n" data-id="Dari Kelumpuhan Pasrah Menuju Api Kehendak Bebas Radikal" data-en="From Passive Paralysis to the Fire of Radical Free Will">Dari Kelumpuhan Pasrah Menuju Api Kehendak Bebas Radikal</h4>
+      <p class="i18n" data-id="Kafka memperlihatkan bahaya ketika manusia menyerah menjadi serangga di sudut kamar, membiarkan sistem meremukkan agensinya. Tetapi apakah manusia ditakdirkan pasrah begitu saja? Dari Saint Petersburg yang dingin dan bergolak, Fyodor Dostoevsky berteriak lantang: tidak! Manusia bukan tuts piano yang bisa dimainkan seenaknya oleh logika rasional atau sistem utopia. Manusia memiliki kehendak bebas yang liar — dan ia bersedia membakar dunia sekalipun hanya untuk membuktikan kemerdekaannya." data-en="Kafka exposed the horror of yielding to becoming an insect in the room corner, crushed under external apparatus. But is humanity condemned to passive surrender? From cold, turbulent Saint Petersburg, Fyodor Dostoevsky roared back: No! Humans are no piano keys to be played by cold logic or utopian blueprints. Man possesses a wild free will — willing to burn down comfort just to prove his freedom.">Kafka memperlihatkan bahaya ketika manusia menyerah menjadi serangga di sudut kamar, membiarkan sistem meremukkan agensinya. Tetapi apakah manusia ditakdirkan pasrah begitu saja? Dari Saint Petersburg yang dingin dan bergolak, Fyodor Dostoevsky berteriak lantang: tidak! Manusia bukan tuts piano yang bisa dimainkan seenaknya oleh logika rasional atau sistem utopia. Manusia memiliki kehendak bebas yang liar — dan ia bersedia membakar dunia sekalipun hanya untuk membuktikan kemerdekaannya.</p>
+    </div>
+  </div>
+</section>
+
+<hr class="div">
+
+<!-- BAB 3: DOSTOEVSKY -->
+<section class="chapter" id="dostoevsky">
+  <div class="chapter-head">
+    <div class="chapter-num-row"><span class="pulse-dot"></span><span class="eyebrow">Bab 03</span></div>
+    <h2 class="chapter-title i18n" data-id="Tungku Pembakaran Jiwa" data-en="The Furnace of the Soul">Tungku Pembakaran Jiwa</h2>
+    <p class="chapter-sub i18n" data-id="Fyodor Dostoevsky & Beban Ngeri Kehendak Bebas" data-en="Fyodor Dostoevsky & the Terrifying Weight of Free Agency">Fyodor Dostoevsky & Beban Ngeri Kehendak Bebas</p>
+    <div class="experts">Fyodor Dostoevsky (1821–1881) · Crime and Punishment & White Nights</div>
+  </div>
+
+  <div class="phil-nav">
+    <div class="phil-nav-label"><span class="pulse-dot" style="width:6px;height:6px;"></span> <span class="i18n" data-id="Navigasi Filosofis Dostoevsky" data-en="Dostoevsky's Philosophical Navigation">Navigasi Filosofis Dostoevsky</span></div>
+    <div class="phil-nav-pills">
+      <a class="phil-nav-pill" href="#dostoevsky-hakikat">§1. Hakikat Svoevolye</a>
+      <a class="phil-nav-pill" href="#dostoevsky-kebebasan">§2. Beban Kehendak Bebas</a>
+      <a class="phil-nav-pill" href="#dostoevsky-buku">§3. Crime and Punishment</a>
+      <a class="phil-nav-pill" href="#dostoevsky-balans">§3b. White Nights</a>
+      <a class="phil-nav-pill" href="#dostoevsky-sejarah">§4. Sejarah Pemikiran Barat</a>
+      <a class="phil-nav-pill" href="#dostoevsky-kompas">§5. Kompas Hidup</a>
+    </div>
+  </div>
+
+  <div class="chapter-body">
+    <p class="dropcap i18n" data-id="Jika kita disodori sebuah pil ajaib yang menjamin seluruh masa depan kita sukses, nyaman, dan tanpa kegagalan — asalkan kita meminumnya dan menyerahkan seluruh hak kita untuk memilih secara spontan — maukah kita meminumnya? Dostoevsky menjawab: manusia sejati akan meludahi pil itu, lalu memecahkan piring, hanya untuk menegaskan bahwa batinnya bukan kalkulator." data-en="If offered a magic pill guaranteeing our future is prosperous, safe, and free from error — provided we take it and surrender our right to spontaneous choice — would we take it? Dostoevsky replies: a true human would spit on that pill and shatter the plate, just to prove the inner soul is no calculating automaton.">Jika kita disodori sebuah pil ajaib yang menjamin seluruh masa depan kita sukses, nyaman, dan tanpa kegagalan — asalkan kita meminumnya dan menyerahkan seluruh hak kita untuk memilih secara spontan — maukah kita meminumnya? Dostoevsky menjawab: manusia sejati akan meludahi pil itu, lalu memecahkan piring, hanya untuk menegaskan bahwa batinnya bukan kalkulator.</p>
+
+    <div class="box bio">
+      <div class="box-header"><span class="box-title">Asal Muasal: Fyodor Dostoevsky</span><span class="box-meta">Moskow 1821 – Saint Petersburg 1881</span></div>
+      <p class="i18n" data-id="Tumbuh di lingkungan rumah sakit amal bagi orang miskin di Moskow tempat ayahnya menjadi dokter, Dostoevsky akrab dengan kesengsaraan sejak dini. Pada usia 28 tahun, karena menghadiri lingkaran diskusi politik Petrashevsky, ia ditangkap Tsar dan dibawa ke lapangan salju untuk dieksekusi tembak. Kain kafan telah dipasang; di detik terakhir sebelum peluru melesat, pengampunan tiba: hukuman diganti kerja paksa di Siberia. Pengalaman berhadapan langsung dengan maut dan pergaulannya dengan narapidana kejam menanamkan keyakinan mutlak bahwa akal budi rasional tidak akan pernah cukup memahami kedalaman jiwa manusia." data-en="Raised in a Moscow charity hospital where his father was physician, Dostoevsky befriended wretchedness early. At 28, for attending the Petrashevsky discussion circle, he was condemned to face a Tsarist firing squad. White shrouds were tied; at the final second before fire, a reprieve arrived commuting execution to Siberian hard labor. Standing eye-to-eye with death alongside murderers rooted his unshakable conviction that dry reason can never measure the human soul.">Tumbuh di lingkungan rumah sakit amal bagi orang miskin di Moskow tempat ayahnya menjadi dokter, Dostoevsky akrab dengan kesengsaraan sejak dini. Pada usia 28 tahun, karena menghadiri lingkaran diskusi politik Petrashevsky, ia ditangkap Tsar dan dibawa ke lapangan salju untuk dieksekusi tembak. Kain kafan telah dipasang; di detik terakhir sebelum peluru melesat, pengampunan tiba: hukuman diganti kerja paksa di Siberia. Pengalaman berhadapan langsung dengan maut dan pergaulannya dengan narapidana kejam menanamkan keyakinan mutlak bahwa akal budi rasional tidak akan pernah cukup memahami kedalaman jiwa manusia.</p>
+    </div>
+
+    <h3 id="dostoevsky-hakikat">§1. Hakikat Kemauan: Svoevolye (Kehendak Liar Diri)</h3>
+    <p class="i18n" data-id="Dalam Notes from Underground (1864), Dostoevsky melontarkan konsep penting: Svoevolye — kemauan-sendiri yang keras kepala. Kaum positivis Barat mengklaim bahwa jika sains memetakan hukum alam secara sempurna ('2 × 2 = 4'), manusia akan selalu memilih apa yang logis dan menguntungkan. Dostoevsky menolak mentah-mentah: manusia sering kali sengaja memilih yang merugikan, yang gila, dan yang menyakitkan, semata-mata demi membuktikan bahwa kehendaknya masih miliknya sendiri, bukan formula matematika." data-en="In Notes from Underground (1864), Dostoevsky introduced the seminal Russian concept: Svoevolye — stubborn self-will. Western positivists claimed that once science mapped human nature ('2 × 2 = 4'), mankind would automatically choose what is beneficial. Dostoevsky shot back: humanity will deliberately choose suffering, caprice, and ruin purely to preserve its own wild will over mathematical certainty.">Dalam <em>Notes from Underground</em> (1864), Dostoevsky melontarkan konsep penting: <em>Svoevolye</em> — kemauan-sendiri yang keras kepala. Kaum positivis Barat mengklaim bahwa jika sains memetakan hukum alam secara sempurna ("2 × 2 = 4"), manusia akan selalu memilih apa yang logis dan menguntungkan. Dostoevsky menolak mentah-mentah: manusia sering kali sengaja memilih yang merugikan, yang gila, dan yang menyakitkan, semata-mata demi membuktikan bahwa kehendaknya masih miliknya sendiri, bukan formula matematika.</p>
+
+    <h3 id="dostoevsky-kebebasan">§2. Status Kehendak Bebas: Anugerah Mengerikan & Medan Uji Moral</h3>
+    <p class="i18n" data-id="Bagi Dostoevsky, kehendak bebas adalah kebenaran paling mutlak dari martabat manusia, sekaligus ujian paling menantang bagi batin kita. Kebebasan bukanlah sekadar hak tanpa batas untuk menuruti dorongan egois, melainkan medan pertempuran batin antara cinta yang rela berkorban demi sesama atau keangkuhan diri yang menghancurkan kemanusiaan. Menyerahkan kebebasan demi jaminan kepastian rasa aman palsu berarti melucuti esensi martabat jiwa kita sendiri." data-en="For Dostoevsky, free will is humanity's highest glory and steepest inner trial. Freedom is never mere license for unchecked selfishness, but a spiritual arena between sacrificial love and ruinous vanity. Surrendering agency in exchange for mechanical security strips away our very soul.">Bagi Dostoevsky, kehendak bebas adalah kebenaran paling mutlak dari martabat manusia, sekaligus ujian paling menantang bagi batin kita. Kebebasan bukanlah sekadar hak tanpa batas untuk menuruti dorongan egois, melainkan medan pertempuran batin antara cinta yang rela berkorban demi sesama atau keangkuhan diri yang menghancurkan kemanusiaan. Menyerahkan kebebasan demi jaminan kepastian rasa aman palsu berarti melucuti esensi martabat jiwa kita sendiri.</p>
+
+    <div class="box book" id="dostoevsky-buku">
+      <div class="box-header"><span class="box-title"><em>Crime and Punishment</em> (Prestupleniye i Nakazaniye)</span><span class="box-meta">Saint Petersburg 1866</span></div>
+      <div class="box-scene">"Di loteng sempitnya yang pengap, Raskolnikov mengira ia bisa melangkahi hukum nurani demi membuktikan keunggulan kehendaknya — namun darah yang tertumpah meruntuhkan seluruh arogansi logikanya..."</div>
+      <p class="i18n" data-id="Raskolnikov membunuh rentenir tua bukan karena dendam pribadi, melainkan demi menguji sebuah teori intelektual: apakah ia seorang 'Napoleon' yang berhak melangkahi hukum moral biasa demi tujuan luhur? Namun begitu darah tumpah, teori rasionalnya ambruk seketika. Hati nuraninya memberontak secara psikosomatis: demam, mimpi buruk, dan kegelisahan yang tak terbendung. Dostoevsky membuktikan bahwa kehendak manusia tidak berdiri bebas di ruang hampa; ia terikat secara organik pada tatanan moral terdalam. Penebusan hanya datang ketika Raskolnikov berani memikul tanggung jawab atas pilihannya di Siberia bersama Sonya." data-en="Raskolnikov axed an old pawnbroker not from petty malice, but to test an intellectual theory: was he an 'extraordinary man' entitled to step over moral boundaries for a higher good? Yet blood on the floor collapsed his logic. His conscience rebelled psychosomatically: fever, delirium, agony. Dostoevsky demonstrates that human will is no detached calculating chip; it is bound to deep moral reality. Redemption begins only when he willingly embraces responsibility beside Sonya in Siberia.">Raskolnikov membunuh rentenir tua bukan karena dendam pribadi, melainkan demi menguji sebuah teori intelektual: apakah ia seorang "Napoleon" yang berhak melangkahi hukum moral biasa demi tujuan luhur? Namun begitu darah tumpah, teori rasionalnya ambruk seketika. Hati nuraninya memberontak secara psikosomatis: demam, mimpi buruk, dan kegelisahan yang tak terbendung. Dostoevsky membuktikan bahwa kehendak manusia tidak berdiri bebas di ruang hampa; ia terikat secara organik pada tatanan moral terdalam. Penebusan hanya datang ketika Raskolnikov berani memikul tanggung jawab atas pilihannya di Siberia bersama Sonya.</p>
+    </div>
+
+    <!-- JEMBATAN PENYEIMBANG DOSTOEVSKY: MENUJU WHITE NIGHTS -->
+    <p class="i18n" data-id="Jika Crime and Punishment menelusuri krisis kehendak yang tersesat dalam keangkuhan intelektual dan rasa bersalah yang mencekik, bagaimana kehendak bebas itu menemukan wujudnya yang paling hening, rapuh, dan bercahaya? Melalui kisah White Nights di tepi kanal Saint Petersburg yang sunyi, Dostoevsky memperlihatkan wajah kehendak yang memilih ketulusan cinta di atas hasrat kepemilikan." data-en="If Crime and Punishment charts the crisis of will lost in intellectual arrogance and suffocating guilt, how does free agency discover its most tender, fragile, and luminous form? In White Nights along the quiet canals of Saint Petersburg, Dostoevsky reveals the face of will choosing selfless love over the urge of possession.">Jika <em>Crime and Punishment</em> menelusuri krisis kehendak yang tersesat dalam keangkuhan intelektual dan rasa bersalah yang mencekik, bagaimana kehendak bebas itu menemukan wujudnya yang paling hening, rapuh, dan bercahaya? Melalui kisah <em>White Nights</em> di tepi kanal Saint Petersburg yang sunyi, Dostoevsky memperlihatkan wajah kehendak yang memilih ketulusan cinta di atas hasrat kepemilikan.</p>
+
+    <div class="box work-alt" id="dostoevsky-balans">
+      <div class="box-header"><span class="box-title"><em>White Nights</em> (Belye Nochi): Romantika di Tepi Kanal</span><span class="box-meta">Saint Petersburg 1848 · Kisah Empat Malam Putih</span></div>
+      <div class="box-scene">"Di bawah remang malam musim panas yang tak kunjung gelap, seorang gadis berdiri sendirian menyandarkan dadanya ke pagar besi kanal, menatap riak air sambil terisak menunggu sebuah janji..."</div>
+      <p class="i18n" data-id="Di tepi kanal kota Saint Petersburg saat fenomena 'Malam-Malam Putih' — malam musim panas di mana langit tak pernah benar-benar gelap — seorang pemuda pemimpi yang kesepian melihat seorang wanita muda bernama Nastenka. Nastenka berdiri terisak di pagar jembatan kanal, menanti kepulangan pria yang ia cintai. Tepat setahun sebelumnya di jembatan itu, sang kekasih berjanji akan kembali menemuinya malam itu juga." data-en="Along the embankments of Saint Petersburg during the 'White Nights' — summer twilights when the heavens never truly darken — a lonely dreamer encounters a young woman named Nastenka weeping against the canal railing. Exactly one year prior, her lover had promised to meet her on that bridge that very night.">Di tepi kanal kota Saint Petersburg saat fenomena "Malam-Malam Putih" — malam musim panas di mana langit tak pernah benar-benar gelap — seorang pemuda pemimpi yang kesepian melihat seorang wanita muda bernama Nastenka. Nastenka berdiri terisak di pagar jembatan kanal, menanti kepulangan pria yang ia cintai. Tepat setahun sebelumnya di jembatan itu, sang kekasih berjanji akan kembali menemuinya malam itu juga.</p>
+      <p class="i18n" data-id="Selama empat malam putih berturut-turut di tepi air kanal, mereka berjalan beriringan, membagi rahasia batin, luka, dan harapan. Hati sang narator berdegup kencang oleh gelombang cinta yang murni kepada Nastenka. Ketika malam demi malam berlalu tanpa kepastian dan Nastenka nyaris putus asa, kehendak sang pemuda diuji hingga ke titik terdalam: apakah ia akan memanfaatkan kerapuhan Nastenka demi memilikinya bagi dirinya sendiri?" data-en="Over four consecutive white nights beside the waters, they pace arm in arm, sharing secrets, grief, and longings. The narrator's heart swells with boundless, pure love for Nastenka. As nights pass without her lover's arrival and Nastenka verges on heartbreak, the young man's will is tried to its foundation: will he manipulate her vulnerability to claim her for himself?">Selama empat malam putih berturut-turut di tepi air kanal, mereka berjalan beriringan, membagi rahasia batin, luka, dan harapan. Hati sang narator berdegup kencang oleh gelombang cinta yang murni kepada Nastenka. Ketika malam demi malam berlalu tanpa kepastian dan Nastenka nyaris putus asa, kehendak sang pemuda diuji hingga ke titik terdalam: apakah ia akan memanfaatkan kerapuhan Nastenka demi memilikinya bagi dirinya sendiri?</p>
+      <p class="i18n" data-id="Sang pemimpi memilih kehendak yang jauh lebih luhur: ia menjaga, menemani, dan bahkan membantunya mengantarkan surat kepada sang kekasih. Pada malam keempat, ketika mereka hampir saja melangkah bersama, sosok pria yang dinanti tiba-tiba muncul dari balik kabut jembatan. Nastenka tersentak, melepaskan genggamannya, dan berlari memeluk kekasihnya — lalu kembali sejenak untuk mengecup sang pemuda dengan air mata terima kasih sebelum pergi selamanya. Alih-alih tenggelam dalam kebencian atau kepahitan, sang pemuda menatap punggung mereka yang menjauh dan membisikkan doa tulus: 'Tuhan memberkatimu untuk saat-saat sukacita yang kau anugerahkan kepada hati yang sepi ini... Satu saat kebahagiaan sejati — bukankah itu sudah cukup untuk seluruh masa hidup seorang manusia?' Di sinilah Dostoevsky memancarkan intisari kehendak manusia: kebebasan tertinggi bukan berada dalam nafsu menguasai, melainkan dalam keberanian memilih cinta tanpa pamrih yang membebaskan orang lain." data-en="The dreamer chooses a far nobler will: protecting her, comforting her, even conveying her letter to the lover. On the fourth night, as hope fades and they begin to embrace a shared tomorrow, the awaited lover suddenly steps from the mist. Nastenka gasps, frees her hand, and rushes into his arms — turning once to press a tearful kiss of gratitude upon the dreamer's lips before departing into the dawn. Instead of sliding into malice or spite, the solitary dreamer gazes at their silhouettes and whispers: 'May thy sky be clear, may thy sweet smile be bright and untroubled... Good God, a whole moment of happiness! Is that not enough for a whole human life?' Here Dostoevsky captures the crown of human will: authentic freedom is not the urge to possess, but the courage of selfless love setting another free.">Sang pemimpi memilih kehendak yang jauh lebih luhur: ia menjaga, menemani, dan bahkan membantunya mengantarkan surat kepada sang kekasih. Pada malam keempat, ketika mereka hampir saja melangkah bersama, sosok pria yang dinanti tiba-tiba muncul dari balik kabut jembatan. Nastenka tersentak, melepaskan genggamannya, dan berlari memeluk kekasihnya — lalu kembali sejenak untuk mengecup sang pemuda dengan air mata terima kasih sebelum pergi selamanya. Alih-alih tenggelam dalam kebencian atau kepahitan, sang pemuda menatap punggung mereka yang menjauh dan membisikkan doa tulus: <em>"Tuhan memberkatimu untuk saat-saat sukacita yang kau anugerahkan kepada hati yang sepi ini... Satu saat kebahagiaan sejati — bukankah itu sudah cukup untuk seluruh masa hidup seorang manusia?"</em> Di sinilah Dostoevsky memancarkan intisari kehendak manusia: <strong>kebebasan tertinggi bukan berada dalam nafsu menguasai, melainkan dalam keberanian memilih cinta tanpa pamrih yang membebaskan orang lain</strong>.</p>
+    </div>
+
+    <h3 id="dostoevsky-sejarah">§4. Titik Belok dalam Sejarah Pemikiran Barat</h3>
+    <p class="i18n" data-id="Dostoevsky menghantam telak jantung utilitarianisme Jeremy Bentham dan John Stuart Mill yang mereduksi etika menjadi kalkulasi keuntungan terbesar bagi jumlah terbanyak. Ia mendahului psikologi modern dalam memetakan kompleksitas rasa bersalah, bawah sadar yang mendidih, dan dorongan destruktif diri (thanatos). Pemikirannya menjadi fondasi tak tergantikan bagi seluruh aliran eksistensialisme abad ke-20." data-en="Dostoevsky struck directly at the heart of British utilitarianism (Bentham and Mill) which reduced morality to pleasure-pain spreadsheets. He anticipated depth psychology in exposing subconscious guilt, boiling paradoxes, and self-destructive drives. His crucible became the indispensable foundation for all 20th-century existentialism.">Dostoevsky menghantam telak jantung utilitarianisme Jeremy Bentham dan John Stuart Mill yang mereduksi etika menjadi kalkulasi keuntungan terbesar bagi jumlah terbanyak. Ia mendahului psikologi modern dalam memetakan kompleksitas rasa bersalah, bawah sadar yang mendidih, dan dorongan destruktif diri (<em>thanatos</em>). Pemikirannya menjadi fondasi tak tergantikan bagi seluruh aliran eksistensialisme abad ke-20.</p>
+
+    <h3 id="dostoevsky-kompas">§5. Kompas Praktik Diri: Memeluk Tanggung Jawab Moral</h3>
+    <ul class="checklist">
+      <li class="i18n" data-id="<strong>Jangan Korbankan Nurani demi Teori Indah:</strong> gagasan yang tampak brilian di atas kertas bisa menjadi racun bila menginjak martabat satu orang konkret di hadapan kita." data-en="<strong>Never Sacrifice Conscience for Theory:</strong> ideas sounding brilliant on spreadsheets turn toxic if they step on the dignity of a living person before us."><strong>Jangan Korbankan Nurani demi Teori Indah:</strong> gagasan yang tampak brilian di atas kertas bisa menjadi racun bila menginjak martabat satu orang konkret di hadapan kita.</li>
+      <li class="i18n" data-id="<strong>Miliki Pilihan Kita Sepenuhnya:</strong> berhenti menyalahkan masa lalu, sistem, atau orang lain; kemerdekaan sejati dimulai saat kita berkata: 'Ini pilihanku, dan aku bertanggung jawab atas akibatnya.'" data-en="<strong>Own Our Choices Completely:</strong> cease blaming childhood, systems, or others; true sovereignty starts when we say: 'This was my choice, and I own its fruit.'"><strong>Miliki Pilihan Kita Sepenuhnya:</strong> berhenti menyalahkan masa lalu, sistem, atau orang lain; kemerdekaan sejati dimulai saat kita berkata: "Ini pilihanku, dan aku bertanggung jawab atas akibatnya."</li>
+      <li class="i18n" data-id="<strong>Penebusan Selalu Terbuka:</strong> kekeliruan tergelap sekalipun dapat diubah menjadi kebijaksanaan mendalam melalui keberanian menatap kebenaran batin tanpa topeng." data-en="<strong>Redemption is Never Closed:</strong> the darkest error can convert into profound wisdom through courage to face inner truth unmasked."><strong>Penebusan Selalu Terbuka:</strong> kekeliruan tergelap sekalipun dapat diubah menjadi kebijaksanaan mendalam melalui keberanian menatap kebenaran batin tanpa topeng.</li>
+    </ul>
+
+    <!-- SOFT BRIDGE: DOSTOEVSKY TO CAMUS -->
+    <div class="soft-bridge">
+      <span class="bridge-tag i18n" data-id="Jembatan Transisi Filosofis" data-en="Philosophical Soft Bridge">Jembatan Transisi Filosofis</span>
+      <h4 class="i18n" data-id="Dari Pertarungan Nurani Menuju Senyum di Hadapan Semesta yang Hening" data-en="From Conscience's Agony to a Smile Before the Silent Heavens">Dari Pertarungan Nurani Menuju Senyum di Hadapan Semesta yang Hening</h4>
+      <p class="i18n" data-id="Dostoevsky menunjukkan betapa agungnya kehendak bebas manusia, tetapi ia menopangnya pada jangkar iman dan penebusan spiritual. Namun bagaimana jika manusia hidup di abad ke-20, di mana dua perang dunia meratakan peradaban, dan langit di atas tampak benar-benar sunyi tanpa bisikan mukjizat? Ketika tidak ada lagi jaminan kosmik, apakah kehendak manusia harus hancur oleh nihilisme? Albert Camus melangkah maju: ia menolak keputusasaan, memegang erat batunya, dan mengajarkan kita cara memberontak dengan senyum riang." data-en="Dostoevsky proved the supreme dignity of human free will, anchored in spiritual redemption. But what if we find ourselves in the 20th century, where world wars flattened cities and the sky remains completely mute? When cosmic guarantees vanish, must human agency crumble into despair? Albert Camus steps forth: refusing despair, gripping his boulder, teaching us how to revolt with a defiant smile.">Dostoevsky menunjukkan betapa agungnya kehendak bebas manusia, tetapi ia menopangnya pada jangkar iman dan penebusan spiritual. Namun bagaimana jika manusia hidup di abad ke-20, di mana dua perang dunia meratakan peradaban, dan langit di atas tampak benar-benar sunyi tanpa bisikan mukjizat? Ketika tidak ada lagi jaminan kosmik, apakah kehendak manusia harus hancur oleh nihilisme? Albert Camus melangkah maju: ia menolak keputusasaan, memegang erat batunya, dan mengajarkan kita cara memberontak dengan senyum riang.</p>
+    </div>
+  </div>
+</section>
+
+<hr class="div">
+
+<!-- BAB 4: CAMUS -->
+<section class="chapter" id="camus">
+  <div class="chapter-head">
+    <div class="chapter-num-row"><span class="pulse-dot"></span><span class="eyebrow">Bab 04</span></div>
+    <h2 class="chapter-title i18n" data-id="Senyum yang Menantang" data-en="A Defiant Smile">Senyum yang Menantang</h2>
+    <p class="chapter-sub i18n" data-id="Albert Camus & Kehendak Memberontak Tanpa Jaminan Langit" data-en="Albert Camus & the Will to Revolt Without Cosmic Shelter">Albert Camus & Kehendak Memberontak Tanpa Jaminan Langit</p>
+    <div class="experts">Albert Camus (1913–1960) · The Myth of Sisyphus & The Plague (La Peste)</div>
+  </div>
+
+  <div class="phil-nav">
+    <div class="phil-nav-label"><span class="pulse-dot" style="width:6px;height:6px;"></span> <span class="i18n" data-id="Navigasi Filosofis Camus" data-en="Camus's Philosophical Navigation">Navigasi Filosofis Camus</span></div>
+    <div class="phil-nav-pills">
+      <a class="phil-nav-pill" href="#camus-hakikat">§1. Hakikat Kemauan Absurd</a>
+      <a class="phil-nav-pill" href="#camus-kebebasan">§2. Kebebasan Tanpa Langit</a>
+      <a class="phil-nav-pill" href="#camus-buku">§3. The Myth of Sisyphus</a>
+      <a class="phil-nav-pill" href="#camus-balans">§3b. The Plague & The Rebel</a>
+      <a class="phil-nav-pill" href="#camus-sejarah">§4. Sejarah Pemikiran Barat</a>
+      <a class="phil-nav-pill" href="#camus-kompas">§5. Kompas Hidup</a>
+    </div>
+  </div>
+
+  <div class="chapter-body">
+    <p class="dropcap i18n" data-id="Kondisi manusia ibarat seorang perantau yang berteriak bertanya ke tebing ngarai: 'Apakah arti hidupku?' Dan yang terdengar kembali hanyalah gema suaranya sendiri. Tabrakan antara kerinduan hati manusia akan kepastian makna dengan keheningan alam semesta yang dingin adalah apa yang disebut Camus sebagai Yang Absurd. Menghadapi kenyataan ini, kehendak manusia diuji pada tingkat paling radikal: akankah kita lari, menyerah kalah, atau memilih merengkuh hidup dengan segenap gairah?" data-en="The human condition resembles an exile crying out into a canyon: 'What does my life mean?' The only reply returned is his own hollow echo. The clash between human longing for meaning and the indifferent silence of the universe is what Camus termed The Absurd. Faced with this, human will is tested at its rawest: will we flee, surrender, or choose to embrace life with fierce passion?">Kondisi manusia ibarat seorang perantau yang berteriak bertanya ke tebing ngarai: "Apakah arti hidupku?" Dan yang terdengar kembali hanyalah gema suaranya sendiri. Tabrakan antara kerinduan hati manusia akan kepastian makna dengan keheningan alam semesta yang dingin adalah apa yang disebut Camus sebagai <strong>Yang Absurd</strong>. Menghadapi kenyataan ini, kehendak manusia diuji pada tingkat paling radikal: akankah kita lari, menyerah kalah, atau memilih merengkuh hidup dengan segenap gairah?</p>
+
+    <div class="box bio">
+      <div class="box-header"><span class="box-title">Asal Muasal: Albert Camus</span><span class="box-meta">Aljazair 1913 – Prancis 1960</span></div>
+      <p class="i18n" data-id="Lahir di Aljazair dari keluarga buruh miskin miskin pied-noir; ayahnya gugur dalam Perang Dunia I saat ia berusia satu tahun, dan ibunya seorang tunarungu buta huruf. Mengidap TBC sejak remaja yang meremukkan mimpinya menjadi atlet, Camus akrab dengan kerapuhan tubuh. Di masa pendudukan Nazi, ia memimpin koran bawah tanah Combat di Paris. Ia memenangkan Hadiah Nobel Sastra pada usia 44 tahun, menolak membenarkan kejahatan ideologi Stalinis demi utopia masa depan — integritas moral yang membuatnya dikucilkan oleh sahabatnya Sartre. Ia tewas dalam kecelakaan mobil mendadak di usia 46 tahun." data-en="Born in Algeria to impoverished working-class settlers; his father fell in WWI when he was one, his mother a deaf illiterate cleaner. Stricken by tuberculosis at 17, ending his athletic dreams, mortality became a constant companion. In occupied France, he edited the underground paper Combat. Winning the Nobel Prize at 44, he refused to justify totalitarian atrocities for utopian ends — costing his friendship with Sartre. He died in a sudden car crash at 46.">Lahir di Aljazair dari keluarga buruh miskin miskin pied-noir; ayahnya gugur dalam Perang Dunia I saat ia berusia satu tahun, dan ibunya seorang tunarungu buta huruf. Mengidap TBC sejak remaja yang meremukkan mimpinya menjadi atlet, Camus akrab dengan kerapuhan tubuh. Di masa pendudukan Nazi, ia memimpin koran bawah tanah <em>Combat</em> di Paris. Ia memenangkan Hadiah Nobel Sastra pada usia 44 tahun, menolak membenarkan kejahatan ideologi Stalinis demi utopia masa depan — integritas moral yang membuatnya dikucilkan oleh sahabatnya Sartre. Ia tewas dalam kecelakaan mobil mendadak di usia 46 tahun.</p>
+    </div>
+
+    <h3 id="camus-hakikat">§1. Hakikat Kemauan: Pemberontakan Sadar (La Révolte)</h3>
+    <p class="i18n" data-id="Bagi Camus, kemauan tertinggi manusia bukan kepatuhan dan bukan pula kepasrahan fatalistik. Kemauan sejati termanifestasi dalam Pemberontakan (Revolt): penolakan sadar untuk bunuh diri secara fisik, dan penolakan untuk melakukan 'bunuh diri filosofis' (yaitu melarikan diri ke dalam ilusi dogma agama atau ideologi politik yang menjanjikan surga khayalan). Kemauan absurd adalah kemauan untuk menatap langsung kekosongan langit tanpa berkedip, dan tetap memilih untuk mencintai bumi, matahari, dan sesama manusia hari ini." data-en="For Camus, supreme human will is neither submissive piety nor fatalistic despair. True will manifests in Revolt: refusing physical suicide, and refusing 'philosophical suicide' (escaping into ideological dogmas promising illusory paradises). The absurd will is the resolve to gaze unblinkingly into the silent sky, yet fiercely love the earth, the sun, and fellow mortals today.">Bagi Camus, kemauan tertinggi manusia bukan kepatuhan dan bukan pula kepasrahan fatalistik. Kemauan sejati termanifestasi dalam <strong>Pemberontakan (<em>Revolt</em>)</strong>: penolakan sadar untuk bunuh diri secara fisik, dan penolakan untuk melakukan "bunuh diri filosofis" (yaitu melarikan diri ke dalam ilusi dogma agama atau ideologi politik yang menjanjikan surga khayalan). Kemauan absurd adalah kemauan untuk menatap langsung kekosongan langit tanpa berkedip, dan tetap memilih untuk mencintai bumi, matahari, dan sesama manusia hari ini.</p>
+
+    <h3 id="camus-kebebasan">§2. Status Kehendak Bebas: La Liberté Absurde</h3>
+    <p class="i18n" data-id="Sebelum menyadari absurditas, manusia merasa terikat oleh 'tujuan hidup' eksternal: mengejar karier, pensiun, surga abadi. Tetapi begitu absurditas dipahami, seluruh ilusi masa depan itu gugur. Yang tersisa adalah Kebebasan Absurd: kebebasan orang yang terpidana mati, yang justru menyadari betapa berharganya setiap detik yang tersisa. Karena tidak ada makna baku yang ditentukan dari luar, kita bebas sepenuhnya menjadi pencipta makna bagi langkah tindakan kita sendiri di sini dan saat ini." data-en="Before confronting the absurd, humans feel shackled to teleological tracks: building careers, accumulating pensions, buying eternity. Once absurdity strikes, future-illusions fall. What remains is Absurd Freedom: the liberty of the condemned man awakening to the infinite value of each breathing second. Because no cosmic script is pre-written, we are entirely free to craft meaning for our actions here and now.">Sebelum menyadari absurditas, manusia merasa terikat oleh "tujuan hidup" eksternal: mengejar karier, pensiun, surga abadi. Tetapi begitu absurditas dipahami, seluruh ilusi masa depan itu gugur. Yang tersisa adalah <strong>Kebebasan Absurd (<em>La Liberté Absurde</em>)</strong>: kebebasan orang yang terpidana mati, yang justru menyadari betapa berharganya setiap detik yang tersisa. Karena tidak ada makna baku yang ditentukan dari luar, kita bebas sepenuhnya menjadi pencipta makna bagi langkah tindakan kita sendiri di sini dan saat ini.</p>
+
+    <div class="box book" id="camus-buku">
+      <div class="box-header"><span class="box-title"><em>The Myth of Sisyphus</em> (Le Mythe de Sisyphe)</span><span class="box-meta">Terbit 1942 · Ditulis di tengah Perang Dunia II</span></div>
+      <div class="box-scene">"Batu itu menggelinding kembali ke kaki bukit. Namun saat Sisifus melangkah turun menjemput batunya dengan langkah tenang, ia menyadari bahwa nasib itu sepenuhnya miliknya..."</div>
+      <p class="i18n" data-id="Buku ini dibuka dengan kalimat yang mengguncang: 'Hanya ada satu masalah filosofis yang sungguh-sungguh serius, dan itu adalah bunuh diri.' Camus meneliti Sisifus, pahlawan mitologi Yunani yang dikutuk para dewa mendorong sebongkah batu besar ke puncak bukit, hanya untuk menyaksikan batu itu menggelinding kembali ke bawah selamanya. Namun Camus mengamati momen krusial saat Sisifus berjalan turun kembali menyusul batunya: di saat itulah ia sadar penuh atas nasibnya. Dengan sadar dan menolak mengeluh, ia menguasai batunya sendiri. 'Perjuangan menuju puncak itu sendiri sudah cukup untuk mengisi hati manusia. Kita harus membayangkan Sisifus berbahagia.'" data-en="The essay opens bluntly: 'There is but one truly serious philosophical problem, and that is suicide.' Camus meditates on Sisyphus, cursed by gods to roll a rock uphill only to see it tumble down forever. Yet Camus observes the crucial descent: the moment Sisyphus walks down to retrieve his stone. In that silent pause, he is fully conscious. Denying self-pity, he masters his destiny. 'The struggle itself toward the heights is enough to fill a man's heart. One must imagine Sisyphus happy.'">Buku ini dibuka dengan kalimat yang mengguncang: <em>"Hanya ada satu masalah filosofis yang sungguh-sungguh serius, dan itu adalah bunuh diri."</em> Camus meneliti Sisifus, pahlawan mitologi Yunani yang dikutuk para dewa mendorong sebongkah batu besar ke puncak bukit, hanya untuk menyaksikan batu itu menggelinding kembali ke bawah selamanya. Namun Camus mengamati momen krusial saat Sisifus berjalan turun kembali menyusul batunya: di saat itulah ia sadar penuh atas nasibnya. Dengan sadar dan menolak mengeluh, ia menguasai batunya sendiri. <em>"Perjuangan menuju puncak itu sendiri sudah cukup untuk mengisi hati manusia. Kita harus membayangkan Sisifus berbahagia."</em></p>
+    </div>
+
+    <!-- JEMBATAN PENYEIMBANG CAMUS -->
+    <p class="i18n" data-id="Namun, jika Sisifus adalah pahlawan absurd yang bertarung sendirian di lereng bukitnya yang sepi, bukankah pemberontakan itu terancam menjadi kesombongan egoistik yang terisolasi dari jeritan sesama? Di sinilah Camus mempertemukan kita dengan karya penyeimbang monumentalnya: menggeser lokus kehendak dari Sisifus yang soliter menuju gelanggang persaudaraan manusia yang bertarung melawan penderitaan bersama." data-en="Yet if Sisyphus is the heroic absurd solitary standing alone on his mountain, doesn't such revolt risk descending into egotistical isolation, deaf to the cries of others? Here Camus introduces his monumental counterweight: shifting the locus of will from the solitary rebel to communal solidarity against shared suffering.">Namun, jika Sisifus adalah pahlawan absurd yang bertarung sendirian di lereng bukitnya yang sepi, bukankah pemberontakan itu terancam menjadi kesombongan egoistik yang terisolasi dari jeritan sesama? Di sinilah Camus mempertemukan kita dengan karya penyeimbang monumentalnya: menggeser lokus kehendak dari Sisifus yang soliter menuju gelanggang persaudaraan manusia yang bertarung melawan penderitaan bersama.</p>
+
+    <div class="box work-alt" id="camus-balans">
+      <div class="box-header"><span class="box-title"><em>The Plague</em> (La Peste) & <em>The Rebel</em></span><span class="box-meta">Terbit 1947 & 1951 · Dari Soliter ke Solidaritas</span></div>
+      <div class="box-scene">"Di tengah kota yang terkunci oleh wabah kematian, Dr. Rieux menolak kepasrahan dogmatis maupun heroisme teatrikal — ia memilih bertindak merawat orang sakit demi martabat kemanusiaan..."</div>
+      <p class="i18n" data-id="Dalam novel The Plague (La Peste, 1947), kota Oran di pesisir Aljazair tiba-tiba diserang wabah pes mematikan dan dikarantina total dari dunia luar. Di tengah kepanikan, ketakutan, dan kematian massal, tokoh utama Dr. Bernard Rieux tidak berkhotbah tentang mukjizat surga atau kepahlawanan teatrikal. Ia memilih bertindak: bekerja tanpa henti mengobati korban, mencatat data, dan mengorganisir tim sanitasi sukarela bersama Tarrou dan Rambert. Ketika ditanya apakah tindakannya bukan kesia-siaan karena wabah terus membunuh, Rieux menjawab dengan dingin dan jernih: ini bukan soal heroisme, melainkan kesopanan dan kejujuran biasa (l'honnêteté) — melakukan apa yang harus dilakukan di hadapan derita nyata." data-en="In The Plague (La Peste, 1947), the Algerian city of Oran is locked down by a lethal pestilence. Amid panic, despair, and quarantine, Dr. Bernard Rieux offers no pious sermons or grandiose heroics. He simply acts: laboring tirelessly to treat the stricken and organize sanitary teams alongside Tarrou and Rambert. When challenged that his resistance cannot stop death, Rieux answers simply: it is no matter of heroism, but common decency (l'honnêteté) — doing one's duty before living agony.">Dalam novel <em>The Plague</em> (<em>La Peste</em>, 1947), kota Oran di pesisir Aljazair tiba-tiba diserang wabah pes mematikan dan dikarantina total dari dunia luar. Di tengah kepanikan, ketakutan, dan kematian massal, tokoh utama Dr. Bernard Rieux tidak berkhotbah tentang mukjizat surga atau kepahlawanan teatrikal. Ia memilih bertindak: bekerja tanpa henti mengobati korban, mencatat data, dan mengorganisir tim sanitasi sukarela bersama Tarrou dan Rambert. Ketika ditanya apakah tindakannya bukan kesia-siaan karena wabah terus membunuh, Rieux menjawab dengan dingin dan jernih: ini bukan soal heroisme, melainkan <strong>kesopanan dan kejujuran biasa (<em>l'honnêteté</em>)</strong> — melakukan apa yang harus dilakukan di hadapan derita nyata.</p>
+      <p class="i18n" data-id="Balans ini disempurnakan dalam risalah etika The Rebel (L'Homme révolté, 1951) melalui maksim legendarisnya: 'Je me révolte, donc nous sommes' (Aku memberontak, maka kita ada). Camus membuktikan bahwa pemberontakan absurd tidak berujung pada anarki amoral atau nihilisme destruktif, melainkan melahirkan batas etis mutlak: kebebasan kita tidak pernah boleh membeli utopia dengan menumpahkan darah sesama. Kehendak bebas yang matang adalah kehendak yang menolak tiran, menolak kepasrahan, dan saling berpegangan tangan merawat kehidupan di bumi." data-en="This essential balance culminated in the ethical treatise The Rebel (1951) through his iconic maxim: 'Je me révolte, donc nous sommes' (I rebel, therefore we exist). Camus proved that absurd revolt does not plunge into amoral chaos or violent nihilism, but erects an unconditional ethical boundary: our freedom can never legitimately murder others to buy an ideological paradise. Mature free will rejects both despots and despair, joining hands in humble solidarity to protect life on earth.">Balans ini disempurnakan dalam risalah etika <em>The Rebel</em> (<em>L'Homme révolté</em>, 1951) melalui maksim legendarisnya: <em>"Je me révolte, donc nous sommes"</em> (<strong>Aku memberontak, maka kita ada</strong>). Camus membuktikan bahwa pemberontakan absurd tidak berujung pada anarki amoral atau nihilisme destruktif, melainkan melahirkan <strong>batas etis mutlak</strong>: kebebasan kita tidak pernah boleh membeli utopia dengan menumpahkan darah sesama. Kehendak bebas yang matang adalah kehendak yang menolak tiran, menolak kepasrahan, dan saling berpegangan tangan merawat kehidupan di bumi.</p>
+    </div>
+
+    <h3 id="camus-sejarah">§4. Titik Belok dalam Sejarah Pemikiran Barat</h3>
+    <p class="i18n" data-id="Camus membedakan dirinya tajam dari kaum nihilis pesimis maupun eksistensialis ortodoks (seperti Sartre). Ia menolak konsep bahwa 'tujuan menghalalkan cara' dan menentang perbudakan manusia demi utopia politik masa depan. Lewat esai The Rebel (1951), ia merumuskan batas etika pemberontakan: 'Aku memberontak, maka kita ada' — kemauan bebas tidak boleh digunakan untuk menindas kebebasan orang lain." data-en="Camus cleanly severed himself from bleak nihilists and orthodox political existentialists like Sartre. In The Rebel (1951), he grounded the ethical limit of revolt: 'I rebel, therefore we exist' — free will can never legitimately destroy the liberty of another human being.">Camus membedakan dirinya tajam dari kaum nihilis pesimis maupun eksistensialis ortodoks (seperti Sartre). Ia menolak konsep bahwa "tujuan menghalalkan cara" dan menentang perbudakan manusia demi utopia politik masa depan. Lewat esai <em>The Rebel</em> (1951), ia merumuskan batas etika pemberontakan: <em>"Aku memberontak, maka kita ada"</em> — kemauan bebas tidak boleh digunakan untuk menindas kebebasan orang lain.</p>
+
+    <h3 id="camus-kompas">§5. Kompas Praktik Diri: Menemukan Gairah Sisifus</h3>
+    <ul class="checklist">
+      <li class="i18n" data-id="<strong>Miliki Batu Kita Sendiri:</strong> rutinitas harian atau beban tanggung jawab kita bukanlah kutukan bila kita merengkuhnya dengan kepala tegak dan kepemilikan penuh." data-en="<strong>Own Our Boulder:</strong> daily routine and duty cease being punishment the moment we shoulder them with pride."><strong>Miliki Batu Kita Sendiri:</strong> rutinitas harian atau beban tanggung jawab kita bukanlah kutukan bila kita merengkuhnya dengan kepala tegak dan kepemilikan penuh.</li>
+      <li class="i18n" data-id="<strong>Gairah Kuantitas Pengalaman:</strong> jangan menunda hidup demi janji masa depan; serap udara, nikmati secangkir teh, dan rasakan kehadiran tubuh kita hari ini." data-en="<strong>Drink the Present:</strong> stop mortgaging life for distant promises; breathe, sip tea, and inhabit our physical existence right now."><strong>Gairah Kuantitas Pengalaman:</strong> jangan menunda hidup demi janji masa depan; serap udara, nikmati secangkir teh, dan rasakan kehadiran tubuh kita hari ini.</li>
+      <li class="i18n" data-id="<strong>Tersenyum Menantang:</strong> kegembiraan batin adalah bentuk pembangkangan paling anggun di hadapan dunia yang mencoba membuat kita bertekuk lutut." data-en="<strong>Defiant Joy:</strong> genuine celebration is the most elegant defiance against a world attempting to make us kneel."><strong>Tersenyum Menantang:</strong> kegembiraan batin adalah bentuk pembangkangan paling anggun di hadapan dunia yang mencoba membuat kita bertekuk lutut.</li>
+    </ul>
+
+    <!-- SOFT BRIDGE: CAMUS TO NIETZSCHE -->
+    <div class="soft-bridge">
+      <span class="bridge-tag i18n" data-id="Jembatan Transisi Filosofis" data-en="Philosophical Soft Bridge">Jembatan Transisi Filosofis</span>
+      <h4 class="i18n" data-id="Dari Menolak Menyerah Menuju Menciptakan Mahakarya Diri" data-en="From Defiant Endurance to Sculpting the Masterpiece of Self">Dari Menolak Menyerah Menuju Menciptakan Mahakarya Diri</h4>
+      <p class="i18n" data-id="Camus memberi kita kehormatan untuk berdiri tegak mendorong batu tanpa mengeluh. Namun manusia tidak hanya dilahirkan untuk menahan beban selamanya. Bisakah batu itu diubah menjadi sesuatu yang lebih agung? Friedrich Nietzsche melangkah masuk membawa palu pemahat. Bagi Nietzsche, beban hidup bukan hanya untuk dipikul dengan senyum ketabahan, melainkan sebongkah marmer mentah yang harus kita pahat dengan segenap Kehendak untuk Berkuasa menjadi mahakarya nilai-nilai baru." data-en="Camus restored our nobility to shoulder the boulder without whining. But human agency is not made merely to bear weights forever. Can that stone be transformed? Friedrich Nietzsche enters carrying a sculptor's hammer. To Nietzsche, hardship is no mere burden to endure, but raw marble waiting to be carved by the Will to Power into new values.">Camus memberi kita kehormatan untuk berdiri tegak mendorong batu tanpa mengeluh. Namun manusia tidak hanya dilahirkan untuk menahan beban selamanya. Bisakah batu itu diubah menjadi sesuatu yang lebih agung? Friedrich Nietzsche melangkah masuk membawa palu pemahat. Bagi Nietzsche, beban hidup bukan hanya untuk dipikul dengan senyum ketabahan, melainkan sebongkah marmer mentah yang harus kita pahat dengan segenap Kehendak untuk Berkuasa menjadi mahakarya nilai-nilai baru.</p>
+    </div>
+  </div>
+</section>
+
+<hr class="div">
+
+<!-- BAB 5: NIETZSCHE -->
+<section class="chapter" id="nietzsche">
+  <div class="chapter-head">
+    <div class="chapter-num-row"><span class="pulse-dot"></span><span class="eyebrow">Bab 05</span></div>
+    <h2 class="chapter-title i18n" data-id="Sang Pemahat" data-en="The Sculptor">Sang Pemahat</h2>
+    <p class="chapter-sub i18n" data-id="Friedrich Nietzsche & Seni Mengatasi Diri" data-en="Friedrich Nietzsche & the Art of Self-Overcoming">Friedrich Nietzsche & Seni Mengatasi Diri</p>
+    <div class="experts">Friedrich Nietzsche (1844–1900) · Thus Spoke Zarathustra & On the Genealogy of Morals</div>
+  </div>
+
+  <div class="phil-nav">
+    <div class="phil-nav-label"><span class="pulse-dot" style="width:6px;height:6px;"></span> <span class="i18n" data-id="Navigasi Filosofis Nietzsche" data-en="Nietzsche's Philosophical Navigation">Navigasi Filosofis Nietzsche</span></div>
+    <div class="phil-nav-pills">
+      <a class="phil-nav-pill" href="#nietzsche-hakikat">§1. Hakikat Wille zur Macht</a>
+      <a class="phil-nav-pill" href="#nietzsche-kebebasan">§2. Kritik Ilusi Kehendak Bebas</a>
+      <a class="phil-nav-pill" href="#nietzsche-buku">§3. Thus Spoke Zarathustra</a>
+      <a class="phil-nav-pill" href="#nietzsche-balans">§3b. On the Genealogy of Morals</a>
+      <a class="phil-nav-pill" href="#nietzsche-sejarah">§4. Sejarah Pemikiran Barat</a>
+      <a class="phil-nav-pill" href="#nietzsche-kompas">§5. Kompas Hidup</a>
+    </div>
+  </div>
+
+  <div class="chapter-body">
+    <p class="dropcap i18n" data-id="Apakah penderitaan dan luka hidup kita adalah kutukan yang harus disesali, atau bahan bakar terbaik untuk menciptakan versi diri kita yang paling kuat? Friedrich Nietzsche tidak menawarkan penghiburan bagi mereka yang ingin hidup santai. Baginya, kehidupan bukanlah tentang mempertahankan diri (seperti kata Schopenhauer), melainkan tentang melampaui diri: Kehendak untuk Berkuasa (Wille zur Macht)." data-en="Are our wounds and hardships a curse to regret, or the supreme fuel to forge our strongest self? Friedrich Nietzsche offered no soft balm for those seeking cozy mediocrity. For him, life is not mere survival (as Schopenhauer thought), but perpetual self-overcoming: the Will to Power (Wille zur Macht).">Apakah penderitaan dan luka hidup kita adalah kutukan yang harus disesali, atau bahan bakar terbaik untuk menciptakan versi diri kita yang paling kuat? Friedrich Nietzsche tidak menawarkan penghiburan bagi mereka yang ingin hidup santai. Baginya, kehidupan bukanlah tentang mempertahankan diri (seperti kata Schopenhauer), melainkan tentang melampaui diri: <strong>Kehendak untuk Berkuasa (<em>Wille zur Macht</em>)</strong>.</p>
+
+    <div class="box bio">
+      <div class="box-header"><span class="box-title">Asal Muasal: Friedrich Nietzsche</span><span class="box-meta">Prusia 1844 – Weimar 1900</span></div>
+      <p class="i18n" data-id="Anak seorang pendeta Lutheran yang wafat saat Friedrich baru berusia empat tahun. Pada usia 24 tahun, ia menjadi profesor filologi klasik termuda di Universitas Basel. Namun sakit migrain kronis, mata nyaris buta, dan gangguan pencernaan parah memaksanya mengundurkan diri. Ia menghabiskan dekade berikutnya menyendiri di pegunungan Alpen Swiss (Sils-Maria) dan pesisir Italia, hidup sederhana dengan uang pensiun kecil dan menulis karya-karya revolusioner. Pada 1889 di Turin, ia mengalami keruntuhan mental total setelah merangkul seekor kuda yang dicambuk kusir di jalanan." data-en="Son of a Lutheran pastor who passed away when Friedrich was four. At 24, he became the youngest professor of classical philology at Basel. But agonizing migraines, failing eyesight, and digestive disease compelled early retirement. He roamed the Swiss Alps (Sils-Maria) and Italian coasts, living frugally on a meager pension, authoring volcanic prose. In 1889 in Turin, he collapsed weeping with his arms around a flogged horse, spending his final decade in twilight silence.">Anak seorang pendeta Lutheran yang wafat saat Friedrich baru berusia empat tahun. Pada usia 24 tahun, ia menjadi profesor filologi klasik termuda di Universitas Basel. Namun sakit migrain kronis, mata nyaris buta, dan gangguan pencernaan parah memaksanya mengundurkan diri. Ia menghabiskan dekade berikutnya menyendiri di pegunungan Alpen Swiss (Sils-Maria) dan pesisir Italia, hidup sederhana dengan uang pensiun kecil dan menulis karya-karya revolusioner. Pada 1889 di Turin, ia mengalami keruntuhan mental total setelah merangkul seekor kuda yang dicambuk kusir di jalanan.</p>
+    </div>
+
+    <h3 id="nietzsche-hakikat">§1. Hakikat Kemauan: Wille zur Macht & Mengatasi Diri (Selbstüberwindung)</h3>
+    <p class="i18n" data-id="Banyak orang salah kaprah mengartikan Kehendak untuk Berkuasa sebagai nafsu tiran militer atau politisi menindas orang lain. Bagi Nietzsche, itu adalah distorsi kelas teri. Kehendak untuk Berkuasa yang paling murni adalah penguasaan atas diri sendiri (self-mastery): dorongan dinamis kehidupan untuk menundukkan kelemahan sendiri, mengubah dorongan hewani menjadi sublimasi seni, dan terus-menerus melahirkan diri yang lebih tinggi." data-en="Many mistakenly reduce the Will to Power to vulgar political tyrants crushing others. For Nietzsche, that is petty degeneracy. The purest Will to Power is internal self-mastery: life's instinctual impulse to conquer one's own laziness, sublimate instinct into creative genius, and constantly give birth to a higher version of oneself.">Banyak orang salah kaprah mengartikan Kehendak untuk Berkuasa sebagai nafsu tiran militer atau politisi menindas orang lain. Bagi Nietzsche, itu adalah distorsi kelas teri. Kehendak untuk Berkuasa yang paling murni adalah <strong>penguasaan atas diri sendiri (<em>self-mastery</em>)</strong>: dorongan dinamis kehidupan untuk menundukkan kelemahan sendiri, mengubah dorongan hewani menjadi sublimasi seni, dan terus-menerus melahirkan diri yang lebih tinggi.</p>
+
+    <h3 id="nietzsche-kebebasan">§2. Status Kehendak Bebas: Kritik atas Ilusi Moralitas Tradisional</h3>
+    <p class="i18n" data-id="Nietzsche membongkar konsep doktrin 'kehendak bebas' warisan teologi tradisional sebagai tipu muslihat psikologis: institusi moral menciptakan konsep kehendak bebas agar manusia bisa 'dipersalahkan, dihakimi, dan dihukum'. Manusia sesungguhnya adalah simfoni dorongan naluriah yang kompleks. Namun, Nietzsche menawarkan konsep Kedaulatan Individu: individu yang kuat mampu menyatukan dorongan-dorongan naluri yang saling bertentangan di bawah satu gaya terpadu (one unifying style), sehingga ia mampu bertanggung jawab atas nilainya sendiri tanpa bersembunyi di balik aturan massa (herd morality)." data-en="Nietzsche exposed traditional 'free will' doctrine as an ecclesiastical sleight-of-hand: designed so people could be held guilty, judged, and punished. In truth, man is an ecosystem of competing drives. Yet he championing the Sovereign Individual: one who organizes internal chaos into a commanding style, taking responsibility for his chosen values without sheltering behind herd morality.">Nietzsche membongkar konsep doktrin "kehendak bebas" warisan teologi tradisional sebagai tipu muslihat psikologis: institusi moral menciptakan konsep kehendak bebas agar manusia bisa "dipersalahkan, dihakimi, dan dihukum". Manusia sesungguhnya adalah simfoni dorongan naluriah yang kompleks. Namun, Nietzsche menawarkan konsep <strong>Kedaulatan Individu</strong>: individu yang kuat mampu menyatukan dorongan-dorongan naluri yang saling bertentangan di bawah satu gaya terpadu (<em>one unifying style</em>), sehingga ia mampu bertanggung jawab atas nilainya sendiri tanpa bersembunyi di balik aturan massa (<em>herd morality</em>).</p>
+
+    <div class="box book" id="nietzsche-buku">
+      <div class="box-header"><span class="box-title"><em>Thus Spoke Zarathustra</em> (Also sprach Zarathustra)</span><span class="box-meta">Terbit 1883–1885 · 4 Bagian Masterpiece</span></div>
+      <div class="box-scene">"Dari ketinggian puncak gunung yang diselimuti salju dan angin dingin, Zarathustra berseru memanggil jiwa-jiwa yang lelah untuk bangkit menanggalkan beban kepasrahan..."</div>
+      <p class="i18n" data-id="Dalam kitab puitis ini, Zarathustra mengajarkan Tiga Metamorfosis Jiwa: pertama Unta (jiwa yang memikul beban tradisi, rasa bersalah, dan keharusan moral dogma 'Engkau Harus'); kedua Singa (jiwa pemberontak yang meraung 'Aku Mau!' meremukkan nilai lama); dan ketiga Sang Anak (jiwa yang bermain riang, sebuah 'Roda yang berputar sendiri', awal baru yang menciptakan nilai-nilainya sendiri). Buku ini juga menguji jiwa dengan doktrin Pengulangan Abadi (Eternal Recurrence): sanggupkah kita menjalani seluruh hidup kita sekali lagi, dengan segala air mata dan tawanya, berulang-ulang tanpa akhir?" data-en="In this prophetic work, Zarathustra teaches the Three Metamorphoses: the Camel (bearing duty and 'Thou Shalt'); the Lion (roaring 'I Will!' breaking ancient tablets); and the Child (a wheel rolling from its own center, innocence, playful creation of new values). It poses the supreme test of Eternal Recurrence: could we embrace our exact life, with every joy and agony, repeated endlessly?">Dalam kitab puitis ini, Zarathustra mengajarkan <strong>Tiga Metamorfosis Jiwa</strong>: pertama <strong>Unta</strong> (jiwa yang memikul beban tradisi, rasa bersalah, dan keharusan moral dogma "Engkau Harus"); kedua <strong>Singa</strong> (jiwa pemberontak yang meraung "Aku Mau!" meremukkan nilai lama); dan ketiga <strong>Sang Anak</strong> (jiwa yang bermain riang, sebuah "Roda yang berputar sendiri", awal baru yang menciptakan nilai-nilainya sendiri). Buku ini juga menguji jiwa dengan doktrin <strong>Pengulangan Abadi (<em>Eternal Recurrence</em>)</strong>: sanggupkah kita menjalani seluruh hidup kita sekali lagi, dengan segala air mata dan tawanya, berulang-ulang tanpa akhir?</p>
+    </div>
+
+    <!-- JEMBATAN PENYEIMBANG NIETZSCHE -->
+    <p class="i18n" data-id="Tetapi jika Zarathustra berbicara dari puncak gunung yang sunyi dengan bahasa nubuat dan metafora mistis, bagaimanakah kehendak yang berdaulat itu ditempa dalam realitas sejarah manusia yang nyata? Bagaimana makhluk hewani yang pelupa dan rapuh bisa memiliki 'kemauan untuk berjanji' dan mempertanggungjawabkan perbuatannya? Melalui On the Genealogy of Morals, Nietzsche membedah proses penempaan ini secara historis dan psikologis." data-en="Yet if Zarathustra speaks from isolated alpine peaks in prophetic riddles, how was this sovereign will actually forged in real human history? How did a forgetful, fragile animal acquire the capacity to promise and stand accountable? In On the Genealogy of Morals, Nietzsche anatomizes this historical and psychological forging.">Tetapi jika Zarathustra berbicara dari puncak gunung yang sunyi dengan bahasa nubuat dan metafora mistis, bagaimanakah kehendak yang berdaulat itu ditempa dalam realitas sejarah manusia yang nyata? Bagaimana makhluk hewani yang pelupa dan rapuh bisa memiliki "kemauan untuk berjanji" dan mempertanggungjawabkan perbuatannya? Melalui <em>On the Genealogy of Morals</em>, Nietzsche membedah proses penempaan ini secara historis dan psikologis.</p>
+
+    <div class="box work-alt" id="nietzsche-balans">
+      <div class="box-header"><span class="box-title"><em>On the Genealogy of Morals</em> (Zur Genealogie der Moral)</span><span class="box-meta">Terbit 1887 · Genealogi & Janji Berdaulat</span></div>
+      <div class="box-scene">"Di bawah tatapan tajam sang filolog, nurani dan kehendak bukanlah mukjizat langit yang jatuh begitu saja, melainkan karya seni yang ditempa melalui penderitaan dan ingatan..."</div>
+      <p class="i18n" data-id="Dalam On the Genealogy of Morals (Zur Genealogie der Moral, 1887), Nietzsche menanggalkan jubah metafora puitis dan menggunakan ketajaman filologi serta psikologi untuk menelusuri asal-usul rasa bersalah, nurani, dan konsep kehendak bebas. Pada Esai Kedua, Nietzsche mengajukan teka-teki: 'Bagaimana cara alam membentuk seekor hewan yang diizinkan untuk membuat janji?' Menepati janji menuntut ingatan yang kokoh, disiplin atas dorongan instingtual sesaat, dan kehendak yang mampu mengikat masa depan melintasi ketidakpastian waktu." data-en="In On the Genealogy of Morals (1887), Nietzsche casts aside poetic prose and employs rigorous philological and psychological analysis to excavate guilt, conscience, and the free will concept. In the Second Essay, he poses the riddle: 'To breed an animal with the right to make promises — is not this the paradoxical task nature set herself regarding man?' Keeping a promise requires an unbreakable memory, mastery over volatile impulses, and a will capable of binding the future across temporal chaos.">Dalam <em>On the Genealogy of Morals</em> (<em>Zur Genealogie der Moral</em>, 1887), Nietzsche menanggalkan jubah metafora puitis dan menggunakan ketajaman filologi serta psikologi untuk menelusuri asal-usul rasa bersalah, nurani, dan konsep kehendak bebas. Pada Esai Kedua, Nietzsche mengajukan teka-teki: <em>"Bagaimana cara alam membentuk seekor hewan yang diizinkan untuk membuat janji?"</em> Menepati janji menuntut ingatan yang kokoh, disiplin atas dorongan instingtual sesaat, dan kehendak yang mampu mengikat masa depan melintasi ketidakpastian waktu.</p>
+      <p class="i18n" data-id="Hasil akhir dari proses pendisiplinan sejarah yang keras ini adalah apa yang disebut Nietzsche sebagai buah pohon sejarah yang paling matang: Individu yang Berdaulat (das souveräne Individuum). Individu ini berdiri sejajar hanya dengan dirinya sendiri, telah membebaskan diri dari moralitas kawanan yang reaktif, dan memiliki kebanggaan sejati atas tanggung jawabnya. Kehendak bebas sejati bagi Nietzsche bukanlah status bawaan lahir yang murah, melainkan sebuah pencapaian agung (achievement) — mahakarya penguasaan diri di mana seluruh dorongan naluri yang liar telah ditundukkan dan disatukan di bawah satu komando estetis yang berdaulat." data-en="The culmination of this grueling historical disciplining is what Nietzsche terms the ripest fruit on the tree: the Sovereign Individual (das souveräne Individuum). Equal only to himself, emancipated from reactive herd morality, he possesses genuine pride in his responsibility. Genuine free agency for Nietzsche is no cheap inborn gift from the heavens, but a rare artistic achievement — the mastery where conflicting passions are unified under one commanding sovereign style.">Hasil akhir dari proses pendisiplinan sejarah yang keras ini adalah apa yang disebut Nietzsche sebagai buah pohon sejarah yang paling matang: <strong>Individu yang Berdaulat (<em>das souveräne Individuum</em>)</strong>. Individu ini berdiri sejajar hanya dengan dirinya sendiri, telah membebaskan diri dari moralitas kawanan yang reaktif, dan memiliki kebanggaan sejati atas tanggung jawabnya. Kehendak bebas sejati bagi Nietzsche bukanlah status bawaan lahir yang murah, melainkan sebuah <strong>pencapaian agung (<em>achievement</em>)</strong> — mahakarya penguasaan diri di mana seluruh dorongan naluri yang liar telah ditundukkan dan disatukan di bawah satu komando estetis yang berdaulat.</p>
+    </div>
+
+    <h3 id="nietzsche-sejarah">§4. Titik Belok dalam Sejarah Pemikiran Barat</h3>
+    <p class="i18n" data-id="Diagnosis Nietzsche bahwa 'Tuhan telah mati' bukanlah perayaan ateistik murahan, melainkan peringatan gempar: peradaban Barat telah kehilangan fondasi nilai metafisik dasarnya. Jika manusia tidak belajar mencipta nilai baru (Übermensch), abad berikutnya akan tenggelam dalam Nihilisme Terburuk dan perang ideologi berdarah — ramalan yang terbukti dengan mengerikan dalam Perang Dunia abad ke-20. Nietzsche membuka pintu bagi eksistensialisme, psikologi Adler dan Jung, hingga dekonstruksi posmodern." data-en="Nietzsche's proclamation 'God is dead' was no trivial celebration, but an alarm: Western civilization had severed its foundational moral anchor. Unless humanity learned to forge values (the Übermensch), the ensuing century would face devastating nihilism and catastrophic wars — a prophecy fulfilled across the 20th century. He laid groundwork for existentialism, Adlerian/Jungian psychology, and postmodern thought.">Diagnosis Nietzsche bahwa "Tuhan telah mati" bukanlah perayaan ateistik murahan, melainkan peringatan gempar: peradaban Barat telah kehilangan fondasi nilai metafisik dasarnya. Jika manusia tidak belajar mencipta nilai baru (<em>Übermensch</em>), abad berikutnya akan tenggelam dalam Nihilisme Terburuk dan perang ideologi berdarah — ramalan yang terbukti dengan mengerikan dalam Perang Dunia abad ke-20. Nietzsche membuka pintu bagi eksistensialisme, psikologi Adler dan Jung, hingga dekonstruksi posmodern.</p>
+
+    <h3 id="nietzsche-kompas">§5. Kompas Praktik Diri: Mengamalkan Amor Fati</h3>
+    <ul class="checklist">
+      <li class="i18n" data-id="<strong>Amor Fati (Cintai Takdir Kita):</strong> jangan hanya menoleransi kemalangan; cintai ia sebagai marmer mentah yang mutlak diperlukan untuk membentuk kekuatan jiwa kita." data-en="<strong>Amor Fati (Love Our Fate):</strong> do not merely tolerate adversity; love it as the essential raw marble forging our spirit."><strong>Amor Fati (Cintai Takdir Kita):</strong> jangan hanya menoleransi kemalangan; cintai ia sebagai marmer mentah yang mutlak diperlukan untuk membentuk kekuatan jiwa kita.</li>
+      <li class="i18n" data-id="<strong>Jadilah Sang Anak:</strong> lepaskan kepahitan Singa yang hanya tahu membantah; mulailah bermain dan mencipta karya, cinta, dan nilai luhur dengan riang." data-en="<strong>Become the Child:</strong> move beyond the Lion's reactive anger; play and invent our own craft, love, and ideals with spontaneous joy."><strong>Jadilah Sang Anak:</strong> lepaskan kepahitan Singa yang hanya tahu membantah; mulailah bermain dan mencipta karya, cinta, dan nilai luhur dengan riang.</li>
+      <li class="i18n" data-id="<strong>Ujian Pengulangan Abadi:</strong> sebelum membuat keputusan besar hari ini, tanyakan: 'Apakah aku rela memilih hal ini jika pilihan ini harus terulang selamanya?'" data-en="<strong>The Recurrence Test:</strong> before deciding, ask: 'Would I choose this action if I had to live its consequence endlessly?'"><strong>Ujian Pengulangan Abadi:</strong> sebelum membuat keputusan besar hari ini, tanyakan: "Apakah aku rela memilih hal ini jika pilihan ini harus terulang selamanya?"</li>
+    </ul>
+
+    <div class="soft-bridge">
+      <span class="bridge-tag i18n" data-id="Jembatan Sintesis Filosofis" data-en="Synthesis Soft Bridge">Jembatan Sintesis Filosofis</span>
+      <h4 class="i18n" data-id="Simfoni Lima Mercusuar Menghadapi Cermin Zaman" data-en="Symphony of the Five Lighthouses Before the Modern Mirror">Simfoni Lima Mercusuar Menghadapi Cermin Zaman</h4>
+      <p class="i18n" data-id="Kelima pemikir ini telah membentangkan peta perjalanan kehendak: dari mengenali mesin hasrat di dalam batin (Schopenhauer), mewaspadai labirin birokrasi di luar (Kafka), berani memikul tanggung jawab moral kehendak bebas (Dostoevsky), tersenyum memberontak di hadapan absurditas (Camus), hingga memahat kehendak menjadi penciptaan nilai mandiri (Nietzsche). Kini saatnya kita menatap bagaimana kelima mercusuar ini saling berbenturan dan menerangi dilema hidup kita hari ini." data-en="These five thinkers mapped the full trajectory of human agency: from discerning inner biological drives (Schopenhauer), detecting the outer bureaucratic maze (Kafka), shouldering moral responsibility (Dostoevsky), smiling defiantly before absurdity (Camus), to sculpting autonomous value (Nietzsche). Let us now examine their dialetical clash and how they illuminate our world today.">Kelima pemikir ini telah membentangkan peta perjalanan kehendak: dari mengenali mesin hasrat di dalam batin (Schopenhauer), mewaspadai labirin birokrasi di luar (Kafka), berani memikul tanggung jawab moral kehendak bebas (Dostoevsky), tersenyum memberontak di hadapan absurditas (Camus), hingga memahat kehendak menjadi penciptaan nilai mandiri (Nietzsche). Kini saatnya kita menatap bagaimana kelima mercusuar ini saling berbenturan dan menerangi dilema hidup kita hari ini.</p>
+    </div>
+  </div>
+</section>
+
+<hr class="div">
+
+<!-- DIALEKTIKA & CERMIN ZAMAN -->
+<section class="chapter" id="dialektika">
+  <div class="chapter-head">
+    <div class="chapter-num-row"><span class="pulse-dot"></span><span class="eyebrow i18n" data-id="Dialektika" data-en="Dialectic">Dialektika</span></div>
+    <h2 class="chapter-title i18n" data-id="Cermin Zaman & Perbenturan Gagasan" data-en="Mirror of the Age & Clashing Ideas">Cermin Zaman & Perbenturan Gagasan</h2>
+    <p class="chapter-sub i18n" data-id="Tabel Komparasi & Percakapan Filosofis Abad ke-21" data-en="Comparative Table & 21st-Century Philosophical Dialogue">Tabel Komparasi & Percakapan Filosofis Abad ke-21</p>
+  </div>
+  <div class="chapter-body">
+    <p class="i18n" data-id="Kelima pemikir ini tidak duduk tenang bersulang teh dalam harmoni; mereka saling berdebat melintasi waktu. Nietzsche membantah pesimisme Schopenhauer; Camus menyerap kedalaman Dostoevsky namun menolak lompatan imannya; Kafka menelanjangi sistem yang coba dilawan oleh kaum eksistensialis. Untuk memperjelas peta kompas pemikiran kita, berikut adalah tabel perbandingan langsung kelima filosofi kehendak:" data-en="These five thinkers do not sit gently in passive harmony; they wrestle across eras. Nietzsche challenged Schopenhauer's retreat; Camus absorbed Dostoevsky's depth while rejecting leaps of faith; Kafka anatomized the machinery existentialists wrestled with. To clarify our philosophical compass, here is a direct comparative matrix:">Kelima pemikir ini tidak duduk tenang bersulang teh dalam harmoni; mereka saling berdebat melintasi waktu. Nietzsche membantah pesimisme Schopenhauer; Camus menyerap kedalaman Dostoevsky namun menolak lompatan imannya; Kafka menelanjangi sistem yang coba dilawan oleh kaum eksistensialis. Untuk memperjelas peta kompas pemikiran kita, berikut adalah tabel perbandingan langsung kelima filosofi kehendak:</p>
+
+    <div class="matrix-wrap">
+      <table class="matrix">
+        <thead>
+          <tr>
+            <th class="i18n" data-id="Filsuf" data-en="Thinker">Filsuf</th>
+            <th class="i18n" data-id="Hakikat Kemauan" data-en="Nature of Will">Hakikat Kemauan</th>
+            <th class="i18n" data-id="Status Kehendak Bebas" data-en="Free Will Status">Status Kehendak Bebas</th>
+            <th class="i18n" data-id="Karya Utama & Balans Penguat" data-en="Primary & Balancing Works">Karya Utama & Balans Penguat</th>
+            <th class="i18n" data-id="Ancaman Terbesar" data-en="Greatest Threat">Ancaman Terbesar</th>
+            <th class="i18n" data-id="Jalan Pembebasan" data-en="Path to Liberation">Jalan Pembebasan</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><strong>Schopenhauer</strong></td>
+            <td class="i18n" data-id="Dorongan buta kosmik pra-rasional (der Wille)" data-en="Blind cosmic pre-rational drive (der Wille)">Dorongan buta kosmik pra-rasional (<em>der Wille</em>)</td>
+            <td class="i18n" data-id="Ilusi pada ranah empiris; watak terdeterminasi" data-en="Empirical illusion; character is determined">Ilusi pada ranah empiris; watak terdeterminasi</td>
+            <td class="i18n" data-id="<em>The World as Will</em> & <em>Dilema Landak (Parerga)</em>" data-en="<em>The World as Will</em> & <em>Porcupine Dilemma (Parerga)</em>"><em>The World as Will</em> & <em>Dilema Landak (Parerga)</em></td>
+            <td class="i18n" data-id="Perbudakan nafsu & ayunan penderitaan" data-en="Enslavement to craving & endless pendulum">Perbudakan nafsu & ayunan penderitaan</td>
+            <td class="i18n" data-id="Askese diri & kontemplasi seni murni" data-en="Asceticism & pure aesthetic contemplation">Askese diri & kontemplasi seni murni</td>
+          </tr>
+          <tr>
+            <td><strong>Kafka</strong></td>
+            <td class="i18n" data-id="Agensi batin yang terhimpit nilai-guna ekonomi" data-en="Inner agency stifled by economic utility">Agensi batin yang terhimpit nilai-guna ekonomi</td>
+            <td class="i18n" data-id="Semu; terperangkap dalam prosedur tanpa wajah" data-en="Illusory; trapped in faceless procedures">Semu; terperangkap dalam prosedur tanpa wajah</td>
+            <td class="i18n" data-id="<em>The Metamorphosis</em> & <em>The Trial (Di Hadapan Hukum)</em>" data-en="<em>The Metamorphosis</em> & <em>The Trial (Before the Law)</em>"><em>The Metamorphosis</em> & <em>The Trial (Di Hadapan Hukum)</em></td>
+            <td class="i18n" data-id="Dehumanisasi birokrasi & rasa bersalah laten" data-en="Bureaucratic dehumanization & latent guilt">Dehumanisasi birokrasi & rasa bersalah laten</td>
+            <td class="i18n" data-id="Kesadaran jernih & menjaga batas kemanusiaan" data-en="Lucid awareness & guarding human boundaries">Kesadaran jernih & menjaga batas kemanusiaan</td>
+          </tr>
+          <tr>
+            <td><strong>Dostoevsky</strong></td>
+            <td class="i18n" data-id="Svoevolye: dorongan bebas menolak rumus logika" data-en="Svoevolye: wild drive defying formulas"><em>Svoevolye</em>: dorongan bebas menolak rumus logika</td>
+            <td class="i18n" data-id="Nyata & mutlak; anugerah sekaligus beban ngeri" data-en="Real & absolute; divine gift and terrifying weight">Nyata & mutlak; anugerah sekaligus beban ngeri</td>
+            <td class="i18n" data-id="<em>Crime and Punishment</em> & <em>White Nights</em>" data-en="<em>Crime and Punishment</em> & <em>White Nights</em>"><em>Crime and Punishment</em> & <em>White Nights</em></td>
+            <td class="i18n" data-id="Rasionalisme dingin & kesepian batin yang beku" data-en="Cold utilitarianism & frozen inner isolation">Rasionalisme dingin & kesepian batin yang beku</td>
+            <td class="i18n" data-id="Kepemilikan tanggung jawab & cinta tulus" data-en="Owning moral duty & genuine love">Kepemilikan tanggung jawab & cinta tulus</td>
+          </tr>
+          <tr>
+            <td><strong>Camus</strong></td>
+            <td class="i18n" data-id="Kemauan absurd: hasrat makna di semesta sunyi" data-en="Absurd will: thirst for meaning in a silent void">Kemauan absurd: hasrat makna di semesta sunyi</td>
+            <td class="i18n" data-id="Kebebasan praktis di sini-kini (tanpa akhirat)" data-en="Practical liberty in the here-and-now">Kebebasan praktis di sini-kini (tanpa akhirat)</td>
+            <td class="i18n" data-id="<em>The Myth of Sisyphus</em> & <em>The Plague (La Peste)</em>" data-en="<em>The Myth of Sisyphus</em> & <em>The Plague (La Peste)</em>"><em>The Myth of Sisyphus</em> & <em>The Plague (La Peste)</em></td>
+            <td class="i18n" data-id="Bunuh diri fisik & bunuh diri filosofis (dogma)" data-en="Physical and philosophical suicide (dogma)">Bunuh diri fisik & bunuh diri filosofis (dogma)</td>
+            <td class="i18n" data-id="Pemberontakan sadar & kegembiraan Sisifus" data-en="Lucid revolt & Sisyphus's defiant joy">Pemberontakan sadar & kegembiraan Sisifus</td>
+          </tr>
+          <tr>
+            <td><strong>Nietzsche</strong></td>
+            <td class="i18n" data-id="Wille zur Macht: dorongan melampaui diri" data-en="Will to Power: drive toward self-overcoming"><em>Wille zur Macht</em>: dorongan melampaui diri</td>
+            <td class="i18n" data-id="Kedaulatan otonom menata kekacauan naluri" data-en="Autonomous sovereignty orchestrating instinct">Kedaulatan otonom menata kekacauan naluri</td>
+            <td class="i18n" data-id="<em>Thus Spoke Zarathustra</em> & <em>Genealogi Moral</em>" data-en="<em>Thus Spoke Zarathustra</em> & <em>Genealogy of Morals</em>"><em>Thus Spoke Zarathustra</em> & <em>Genealogi Moral</em></td>
+            <td class="i18n" data-id="Nihilisme pasif, konformisme massa, ressentiment" data-en="Passive nihilism, herd conformity, ressentiment">Nihilisme pasif, konformisme massa, <em>ressentiment</em></td>
+            <td class="i18n" data-id="Amor Fati, Tiga Metamorfosis (Sang Anak)" data-en="Amor Fati, Three Metamorphoses (The Child)"><em>Amor Fati</em>, Tiga Metamorfosis (Sang Anak)</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="dialectic-pair">
+      <div class="dialectic-side">
+        <span class="who">Schopenhauer</span>
+        <span class="i18n" data-id="Kehendak adalah kutukan penderitaan; jalan bijak adalah meredam dan menyangkalnya." data-en="The Will is suffering's engine; wisdom lies in quieting and denying it.">Kehendak adalah kutukan penderitaan; jalan bijak adalah meredam dan menyangkalnya.</span>
+      </div>
+      <div class="dialectic-vs">vs</div>
+      <div class="dialectic-side">
+        <span class="who">Nietzsche</span>
+        <span class="i18n" data-id="Kehendak adalah nyala kehidupan; jalan agung adalah menegaskan, melatih, dan memahatnya menjadi mahakarya." data-en="The Will is the flame of existence; greatness lies in affirming and sculpting it into a masterpiece.">Kehendak adalah nyala kehidupan; jalan agung adalah menegaskan, melatih, dan memahatnya menjadi mahakarya.</span>
+      </div>
+    </div>
+
+    <div class="dialectic-pair">
+      <div class="dialectic-side">
+        <span class="who">Dostoevsky</span>
+        <span class="i18n" data-id="Kebebasan tanpa tambatan nurani batin dan cinta tulus akan melahirkan arogansi destruktif Raskolnikov atau kesepian beku di tepi kanal." data-en="Freedom untethered from conscience and genuine love spawns Raskolnikov's destruction or frozen solitary isolation by the canal.">Kebebasan tanpa tambatan nurani batin dan cinta tulus akan melahirkan arogansi destruktif Raskolnikov atau kesepian beku di tepi kanal.</span>
+      </div>
+      <div class="dialectic-vs">vs</div>
+      <div class="dialectic-side">
+        <span class="who">Camus</span>
+        <span class="i18n" data-id="Manusia harus cukup dewasa untuk hidup bermoral murni atas nama solidaritas sesama manusia, tanpa imbalan surga." data-en="Humanity must mature enough to live morally solely for solidarity with mortals, without celestial bribes.">Manusia harus cukup dewasa untuk hidup bermoral murni atas nama solidaritas sesama manusia, tanpa imbalan surga.</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<hr class="div">
+
+<!-- EPILOG -->
+<section class="epilog" id="epilog">
+  <div class="orb-wrap" style="width:100px;height:100px;margin:0 auto 24px;">
+    <div class="orb-ring"></div><div class="orb"></div>
+  </div>
+  <span class="eyebrow i18n" data-id="Penutup" data-en="Closing">Penutup</span>
+  <h2 class="i18n" data-id="Sang Navigator Sadar" data-en="The Conscious Navigator">Sang Navigator Sadar</h2>
+  <p class="i18n" data-id="Kita memulai perjalanan ini di tengah laut lepas yang gelap. Kini, kelima mercusuar berdiri tegak memancarkan berkas cahayanya masing-masing. Mereka tidak menyajikan peta jalan tol yang datar, melainkan mengajarkan kita seni mengemudikan kapal hidup di tengah badai:" data-en="We embarked across dark uncharted seas. Now five lighthouses beam their distinctive lights. They hand us no effortless toll-road, but impart the maritime art of steering through life's turbulence:">Kita memulai perjalanan ini di tengah laut lepas yang gelap. Kini, kelima mercusuar berdiri tegak memancarkan berkas cahayanya masing-masing. Mereka tidak menyajikan peta jalan tol yang datar, melainkan mengajarkan kita seni mengemudikan kapal hidup di tengah badai:</p>
+  <ol>
+    <li class="i18n" data-id="<strong>Pahami Mesin Batin Kita (Schopenhauer):</strong> jangan tertipu oleh ilusi bahwa kepuasan materi berikutnya akan menuntaskan dahaga kita. Berilah jeda, tenangkan ego lewat keindahan seni dan empati belas kasih." data-en="<strong>Know Our Inner Engine (Schopenhauer):</strong> do not fall for the illusion that the next acquisition will quench our thirst. Pause, quiet the ego through art and empathy."><strong>Pahami Mesin Batin Kita (Schopenhauer):</strong> jangan tertipu oleh ilusi bahwa kepuasan materi berikutnya akan menuntaskan dahaga kita. Berilah jeda, tenangkan ego lewat keindahan seni dan empati belas kasih.</li>
+    <li class="i18n" data-id="<strong>Ketahui Batas Mesin di Luar Kita (Kafka):</strong> jangan pernah menukar kehormatan manusiawi kita demi menjadi sekadar roda gigi yang patuh dalam birokrasi tanpa wajah." data-en="<strong>Check the External Machine (Kafka):</strong> never trade our human dignity just to remain an obedient cog in faceless bureaucracies."><strong>Ketahui Batas Mesin di Luar Kita (Kafka):</strong> jangan pernah menukar kehormatan manusiawi kita demi menjadi sekadar roda gigi yang patuh dalam birokrasi tanpa wajah.</li>
+    <li class="i18n" data-id="<strong>Pikul Tanggung Jawab Kebebasan Kita (Dostoevsky):</strong> jangan takut pada kehendak bebas kita. Hadapi jurang batin kita, tolak pembenaran palsu, dan miliki setiap konsekuensi moral dengan ketulusan cinta." data-en="<strong>Shoulder Our Freedom (Dostoevsky):</strong> do not fear our free agency. Face our depths, reject hollow rationalizations, and own moral consequences through sincere love."><strong>Pikul Tanggung Jawab Kebebasan Kita (Dostoevsky):</strong> jangan takut pada kehendak bebas kita. Hadapi jurang batin kita, tolak pembenaran palsu, dan miliki setiap konsekuensi moral dengan ketulusan cinta.</li>
+    <li class="i18n" data-id="<strong>Tersenyumlah di Hadapan Absurditas (Camus):</strong> jangan menunda hidup demi janji langit yang jauh. Peluk batu tanggung jawab kita hari ini, berontaklah terhadap keputusasaan, dan hiduplah dengan gairah solidaritas yang penuh." data-en="<strong>Smile in the Absurd (Camus):</strong> stop deferring life for distant promises. Embrace our boulder today, revolt against despair, and inhabit life with deep solidarity."><strong>Tersenyumlah di Hadapan Absurditas (Camus):</strong> jangan menunda hidup demi janji langit yang jauh. Peluk batu tanggung jawab kita hari ini, berontaklah terhadap keputusasaan, dan hiduplah dengan gairah solidaritas yang penuh.</li>
+    <li class="i18n" data-id="<strong>Pahatlah Hidup Menjadi Karya (Nietzsche):</strong> terimalah segala derita sebagai marmer mentah lewat Amor Fati. Lewatilah fase Unta dan Singa, dan jadilah Sang Anak yang bermain riang mencipta nilai-nilai baru." data-en="<strong>Sculpt Life as Art (Nietzsche):</strong> welcome struggle as raw marble through Amor Fati. Graduate from Camel and Lion into the Child who joyfully crafts new values."><strong>Pahatlah Hidup Menjadi Karya (Nietzsche):</strong> terimalah segala derita sebagai marmer mentah lewat Amor Fati. Lewatilah fase Unta dan Singa, dan jadilah Sang Anak yang bermain riang mencipta nilai-nilai baru.</li>
+  </ol>
+  <blockquote class="pull i18n" data-id="Kemauan kita adalah kemudi; kebebasan kita adalah lautannya; dan marmer masa depan kita sudah ada di dalam genggaman tangan kita sendiri." data-en="Our will is the helm; our freedom is the sea; and the marble of our tomorrow is already held within our own hands.">Kemauan kita adalah kemudi; kebebasan kita adalah lautannya; dan marmer masa depan kita sudah ada di dalam genggaman tangan kita sendiri.</blockquote>
+  <p class="sign">— Sangoeroep</p>
+</section>
+
+<footer>
+  <span class="i18n" data-id="Ruang Baca · Lima Mercusuar Diri: Filosofi Kemauan & Kehendak Bebas" data-en="Reading Room · Five Lighthouses of the Self: Philosophy of Will & Free Agency">Ruang Baca · Lima Mercusuar Diri: Filosofi Kemauan & Kehendak Bebas</span>
+  <span>Jakarta, Indonesia</span>
+</footer>
+
+<script>
+  // Reading progress bar
+  const bar = document.getElementById('progress');
+  function updateProgress(){
+    const h = document.documentElement;
+    const scrolled = (h.scrollTop) / (h.scrollHeight - h.clientHeight) * 100;
+    bar.style.width = (isFinite(scrolled) ? scrolled : 0) + '%';
+  }
+  document.addEventListener('scroll', updateProgress, {passive:true});
+  updateProgress();
+
+  // TOC drawer toggle
+  const tocBtn = document.getElementById('toc-toggle');
+  const tocPanel = document.getElementById('toc-panel');
+  tocBtn.addEventListener('click', () => {
+    const open = tocPanel.classList.toggle('open');
+    tocBtn.setAttribute('aria-expanded', open);
+  });
+  document.querySelectorAll('#toc-panel a').forEach(a => {
+    a.addEventListener('click', () => {
+      tocPanel.classList.remove('open');
+      tocBtn.setAttribute('aria-expanded', 'false');
+    });
+  });
+  document.addEventListener('click', (e) => {
+    if (!tocPanel.contains(e.target) && !tocBtn.contains(e.target)) {
+      tocPanel.classList.remove('open');
+      tocBtn.setAttribute('aria-expanded', 'false');
+    }
+  });
+
+  // Language toggle (Bilingual ID / EN)
+  const langBtn = document.getElementById('lang-toggle');
+  let currentLang = 'id';
+  langBtn.addEventListener('click', () => {
+    currentLang = currentLang === 'id' ? 'en' : 'id';
+    langBtn.textContent = currentLang === 'id' ? 'EN' : 'ID';
+    document.documentElement.setAttribute('lang', currentLang);
+    document.querySelectorAll('.i18n').forEach(el => {
+      const val = el.getAttribute('data-' + currentLang);
+      if (val !== null) { el.innerHTML = val; }
+    });
+  });
+</script>
+
+</body>
+</html>
